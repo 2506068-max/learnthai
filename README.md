@@ -48,6 +48,33 @@ Simulasi dialog interaktif dengan **Nong Mali (มะลิ)** di berbagai konte
 * Dilengkapi kuis pilihan ganda, mencocokkan kartu (*matching pairs*), dan penyusunan kalimat (*sentence builder*).
 * Status kemajuan (*progress*, XP, streak, dan modul terbuka) tersimpan otomatis di `localStorage`.
 
+### 7. 🤖 Pusat AI Cerdas Thailand (AI Thailand Hub: Searching, Translating & Culture Q&A)
+Pusat kecerdasan buatan lengkap yang mengintegrasikan tiga kapabilitas utama dalam satu tab interaktif:
+* **🌐 Penerjemah Pintar Real-Time (Live Translator)**:
+  * Terjemahan instan dua arah: **Indonesia ⇄ Thailand**.
+  * Dilengkapi **Transliterasi Fonetik Latin** untuk membantu membaca nada dan vokal.
+  * **Audio Penutur Asli 1-Klik**: Dengarkan langsung hasil terjemahan dalam suara asli penutur Bangkok beresolusi tinggi.
+  * Tombol mikrofon untuk mendiktekan kalimat secara langsung (*Speech-to-Text*) dan tombol salin teks ke clipboard.
+  * *Preset Chips* frasa populer wisatawan (menawar harga, minta jangan pedas, arah toilet, pesan makanan).
+  * Redundansi ganda: terhubung ke jaringan saraf terjemahan publik dengan pengamanan *kamus cerdas offline bawaan*.
+* **🔍 Ensiklopedia & Wisata Thailand (Smart Search)**:
+  * Mesin pencari instan untuk destinasi wisata, kuil, etika, kuliner jalanan, dan transportasi.
+  * Dilengkapi 20+ artikel kurasi mendalam (Wat Arun, Grand Palace, Wat Pho, Chatuchak, Yaowarat Chinatown, Pad Thai, Tom Yum, Mango Sticky Rice, BTS Skytrain, Tuk-Tuk).
+  * **Pencarian Real-Time Tanpa Batas**: Otomatis melakukan *query* ke **Wikipedia REST API** jika pengguna mencari topik tambahan di luar database lokal, lengkap dengan ringkasan artikel dan foto.
+  * Filter kategori praktis (*Semua, Destinasi & Kuil, Kuliner & Street Food, Budaya & Etika, Transportasi*).
+* **💬 Tanya Jawab Budaya & Wisata (Q&A with Nong Mali AI)**:
+  * Asisten AI cerdas berbasis pengetahuan mendalam seputar Thailand.
+  * Menjawab pertanyaan seputar:
+    * Aturan pakaian dan etika sakral berkunjung ke kuil Buddha.
+    * 3 tingkatan salam Wai dan cara membalasnya.
+    * Frasa memesan makanan tidak pedas (*Mai Phet*) dan panduan kuliner halal di Bangkok.
+    * Estimasi biaya makan harian dan kurs mata uang Baht.
+    * Panduan transportasi bebas macet (BTS, MRT, perahu sungai, taksi berargo).
+    * Makna 5 nada bahasa Thai beserta contoh kasusnya.
+    * Etika menghormati institusi kerajaan dan aturan lagu kebangsaan.
+    * Waspada trik penipuan (*scam*) supir tuk-tuk umum.
+  * Setiap respon dilengkapi **tombol audio penutur asli** untuk mendengarkan lafal kata/frasa Thai yang relevan.
+
 ---
 
 ## 🎨 Desain & Tema Studio Ghibli

@@ -1474,6 +1474,237 @@
       border-color: var(--emerald) !important;
     }
 
+    /* AI THAILAND HUB & ASSISTANT STYLES */
+    .ai-hub-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .ai-tool-view {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .ai-tool-view.active {
+      display: flex;
+    }
+
+    /* Translator Box */
+    .translator-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .trans-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .trans-lang-select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lang-pill-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .lang-pill-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .trans-swap-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .trans-swap-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: rotate(180deg);
+    }
+
+    .trans-input-wrap {
+      position: relative;
+    }
+    .trans-textarea {
+      width: 100%;
+      min-height: 110px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 56px 16px 16px;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text);
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .trans-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .trans-input-actions {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .trans-result-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 120px;
+      position: relative;
+    }
+    .trans-result-thai {
+      font-family: var(--font-thai);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .trans-result-roman {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Encyclopedia Search Styles */
+    .encyclo-search-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .encyclo-input {
+      flex: 1;
+      padding: 14px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      font-size: 15px;
+      color: var(--text);
+    }
+    .encyclo-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .encyclo-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .encyclo-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: all 0.15s;
+    }
+    .encyclo-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .encyclo-category-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+      width: fit-content;
+    }
+    .cat-wisata { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .cat-kuliner { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+    .cat-budaya { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .cat-transport { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+
+    /* Q&A Chat Assistant Styles */
+    .qa-chat-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .qa-chat-messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .qa-chat-input-row {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .qa-input-field {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      color: var(--text);
+    }
+    .qa-input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .qa-prompt-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 20px 0 20px;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 960px) {
       .stimuler-nav-rail { width: 80px; padding: 16px 8px; }
@@ -1556,8 +1787,14 @@
           <span>Analitik Kelancaran</span>
         </button>
 
+        <div class="nav-section-title">Asisten Cerdas</div>
+        <button class="nav-item-btn" data-tab="ai-hub" onclick="switchNavTab('ai-hub')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg>
+          <span>AI Thailand Hub</span>
+        </button>
+
         <!-- AI Coach Card Pill -->
-        <div class="ai-coach-pill" onclick="triggerCoachGreeting()">
+        <div class="ai-coach-pill" onclick="switchNavTab('ai-hub'); triggerCoachGreeting();" title="Buka Asisten AI Nong Mali">
           <div class="ai-avatar" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);">
             🍃
             <div class="ai-online-dot"></div>
@@ -1993,6 +2230,163 @@
                 </li>
               </ul>
             </div>
+          </div>
+        </section>
+
+        <!-- 6. AI THAILAND HUB: SEARCH, TRANSLATE & Q&A -->
+        <section id="panel-ai-hub" class="section-tab-panel">
+          <div class="ai-hub-container">
+            <!-- Header & Mode Switcher -->
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+              <div>
+                <div style="display:inline-flex; align-items:center; gap:8px; padding:4px 12px; border-radius:var(--radius-pill); background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; font-family:var(--font-mono); margin-bottom:8px;">
+                  ✨ NONG MALI AI HUB
+                </div>
+                <h2 style="font-size:26px; font-weight:800; margin-bottom:6px; letter-spacing:-0.02em;">Pusat AI Cerdas Thailand</h2>
+                <p style="font-size:14px; color:var(--text-muted);">Penerjemah Suara Real-Time, Pencarian Ensiklopedia & Panduan Budaya Thailand.</p>
+              </div>
+
+              <div class="filter-pills" id="aiHubModePills">
+                <button class="pill-filter active" onclick="switchAiHubMode('translate', this)">🌐 Penerjemah Pintar</button>
+                <button class="pill-filter" onclick="switchAiHubMode('search', this)">🔍 Ensiklopedia & Wisata</button>
+                <button class="pill-filter" onclick="switchAiHubMode('chat', this)">💬 Tanya Seputar Thailand</button>
+              </div>
+            </div>
+
+            <!-- SUB-VIEW 1: TRANSLATOR -->
+            <div id="aiTool-translate" class="ai-tool-view active">
+              <div class="translator-card">
+                <div class="trans-header-bar">
+                  <div class="trans-lang-select">
+                    <button class="lang-pill-btn active" id="transSourceLabel">🇮🇩 Indonesia</button>
+                    <button class="trans-swap-btn" onclick="swapTranslationDirection()" title="Tukar Arah Bahasa">⇄</button>
+                    <button class="lang-pill-btn active" id="transTargetLabel">🇹🇭 Thailand</button>
+                  </div>
+                  <div style="display:flex; gap:8px;">
+                    <button class="btn-audio-listen" onclick="clearTranslatorInput()">✕ Bersihkan</button>
+                  </div>
+                </div>
+
+                <div class="trans-input-wrap">
+                  <textarea id="translatorInput" class="trans-textarea" placeholder="Ketik kata atau kalimat yang ingin diterjemahkan (contoh: Tolong jangan pedas ya, berapa harga ini?)..."></textarea>
+                  <div class="trans-input-actions">
+                    <button class="icon-btn" onclick="triggerTranslatorMic()" style="background:var(--primary); color:#fff; border:none;" title="Diktekan dengan Suara">
+                      🎙️
+                    </button>
+                  </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                  <div style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);" id="transStatusInfo">
+                    Didukung Neural Translation & Penutur Asli Bangkok
+                  </div>
+                  <button class="btn-stimuler-primary" onclick="performLiveTranslation()" id="translateSubmitBtn">
+                    Terjemahkan Sekarang ➔
+                  </button>
+                </div>
+
+                <!-- Result Box -->
+                <div class="trans-result-box" id="translatorResultBox">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:11px; font-weight:700; color:var(--emerald); font-family:var(--font-mono); text-transform:uppercase;">
+                      ✓ Terjemahan Thai Resmi & Audio Penutur Asli
+                    </span>
+                    <button class="btn-audio-listen" style="padding:4px 10px; font-size:11px;" onclick="copyTranslationResult()">
+                      📋 Salin Teks
+                    </button>
+                  </div>
+                  <div class="trans-result-thai" id="transResultThai">สวัสดีครับ ยินดีที่ได้รู้จักครับ</div>
+                  <div class="trans-result-roman" id="transResultRoman">sà-wàt-dii khráp, yin-dii thîi dâi rúu-jàk khráp</div>
+                  <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+                    <button class="btn-audio-listen" style="background:var(--primary); color:#fff; border-color:var(--primary);" onclick="playTranslatedAudio()">
+                      🔊 Dengarkan Suara Asli Bangkok
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Preset Travel Chips -->
+                <div>
+                  <div style="font-size:13px; font-weight:700; margin-bottom:8px; color:var(--text-muted);">Frasa Populer Wisatawan (Klik untuk Terjemah & Dengarkan):</div>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <button class="speech-chip" onclick="quickTranslatePreset('Berapa harganya yang ini?')">Berapa harganya yang ini?</button>
+                    <button class="speech-chip" onclick="quickTranslatePreset('Tolong jangan pedas sama sekali')">Tolong jangan pedas</button>
+                    <button class="speech-chip" onclick="quickTranslatePreset('Bisa diskon sedikit tidak?')">Bisa diskon sedikit?</button>
+                    <button class="speech-chip" onclick="quickTranslatePreset('Di mana kamar kecil terdekat?')">Di mana toilet?</button>
+                    <button class="speech-chip" onclick="quickTranslatePreset('Tolong antarkan saya ke kuil Wat Arun')">Antar ke Wat Arun</button>
+                    <button class="speech-chip" onclick="quickTranslatePreset('Minta satu piring Pad Thai dan air putih')">Pesan Pad Thai</button>
+                    <button class="speech-chip" onclick="quickTranslatePreset('Minta bon tagihan meja ini')">Minta bon tagihan</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUB-VIEW 2: ENCYCLOPEDIA & SEARCH -->
+            <div id="aiTool-search" class="ai-tool-view">
+              <div class="encyclo-search-bar">
+                <input type="text" id="encycloSearchInput" class="encyclo-input" placeholder="🔍 Cari destinasi, kuliner, etika kuil, festival, BTS, belanja di Thailand..." onkeyup="if(event.key==='Enter') executeEncyclopediaSearch()">
+                <button class="btn-stimuler-primary" onclick="executeEncyclopediaSearch()">Cari</button>
+              </div>
+
+              <!-- Quick category filters -->
+              <div class="filter-pills" id="encycloFilterPills">
+                <button class="pill-filter active" onclick="filterEncyclopediaCategory('all', this)">Semua</button>
+                <button class="pill-filter" onclick="filterEncyclopediaCategory('wisata', this)">Destinasi & Kuil</button>
+                <button class="pill-filter" onclick="filterEncyclopediaCategory('kuliner', this)">Kuliner & Street Food</button>
+                <button class="pill-filter" onclick="filterEncyclopediaCategory('budaya', this)">Budaya & Etika</button>
+                <button class="pill-filter" onclick="filterEncyclopediaCategory('transport', this)">Transportasi</button>
+              </div>
+
+              <!-- Search Status Banner -->
+              <div id="encycloLiveStatus" style="display:none; font-size:13px; color:var(--primary); font-family:var(--font-mono);">
+                Sedang mencari ensiklopedia Thailand...
+              </div>
+
+              <!-- Cards Grid -->
+              <div class="encyclo-cards-grid" id="encycloCardsGrid">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- SUB-VIEW 3: Q&A CHAT WITH NONG MALI -->
+            <div id="aiTool-chat" class="ai-tool-view">
+              <div class="qa-chat-box">
+                <!-- Prompt suggestion chips -->
+                <div class="qa-prompt-chips">
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Bagaimana etika berpakaian saat ke kuil di Bangkok?')">
+                    🏛️ Aturan Pakaian di Kuil
+                  </button>
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Cara memberi salam Wai yang benar dan artinya?')">
+                    🙏 Makna Salam Wai
+                  </button>
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Berapa estimasi biaya makan street food sehari di Thailand?')">
+                    🍜 Biaya Kuliner Sehari
+                  </button>
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Kenapa bahasa Thai punya 5 nada dan bagaimana melatihnya?')">
+                    🎵 Tips Melatih 5 Nada
+                  </button>
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Apa transportasi terbaik keliling Bangkok agar tidak macet?')">
+                    🚝 Transportasi Bebas Macet
+                  </button>
+                </div>
+
+                <!-- Chat messages container -->
+                <div class="qa-chat-messages" id="qaChatMessages">
+                  <!-- Messages rendered dynamically -->
+                </div>
+
+                <!-- Chat input row -->
+                <div class="qa-chat-input-row">
+                  <input type="text" id="qaInputField" class="qa-input-field" placeholder="Tanyakan apa saja seputar budaya, wisata, bahasa, atau kuliner Thailand..." onkeyup="if(event.key==='Enter') sendQaMessage()">
+                  <button class="icon-btn" onclick="triggerQaMic()" style="background:var(--bg-elevated);" title="Bicara Pertanyaan">
+                    🎙️
+                  </button>
+                  <button class="btn-stimuler-primary" style="padding:10px 20px;" onclick="sendQaMessage()">
+                    Kirim
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -3279,6 +3673,830 @@
       requestAnimationFrame(animateGhibli);
     }
 
+    /* ==========================================================================
+       AI THAILAND HUB: TRANSLATOR, ENCYCLOPEDIA & CULTURE Q&A ENGINE
+       ========================================================================== */
+
+    let transDirection = 'id-to-th';
+    let latestTranslatedThai = 'สวัสดีครับ ยินดีที่ได้รู้จักครับ';
+
+    function switchAiHubMode(mode, btn) {
+      document.querySelectorAll('#aiHubModePills .pill-filter').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('.ai-tool-view').forEach(view => view.classList.remove('active'));
+      const target = document.getElementById('aiTool-' + mode);
+      if (target) target.classList.add('active');
+    }
+
+    /* 1. LIVE TRANSLATOR */
+    function swapTranslationDirection() {
+      const src = document.getElementById('transSourceLabel');
+      const tgt = document.getElementById('transTargetLabel');
+      const input = document.getElementById('translatorInput');
+      if (transDirection === 'id-to-th') {
+        transDirection = 'th-to-id';
+        src.textContent = '🇹🇭 Thailand';
+        tgt.textContent = '🇮🇩 Indonesia';
+        input.placeholder = 'Ketik atau tempel teks bahasa Thai (contoh: ขอบคุณมากครับ, สบายดีไหม)...';
+      } else {
+        transDirection = 'id-to-th';
+        src.textContent = '🇮🇩 Indonesia';
+        tgt.textContent = '🇹🇭 Thailand';
+        input.placeholder = 'Ketik kata atau kalimat yang ingin diterjemahkan (contoh: Tolong jangan pedas ya, berapa harga ini?)...';
+      }
+    }
+
+    function clearTranslatorInput() {
+      document.getElementById('translatorInput').value = '';
+      document.getElementById('translatorResultBox').style.display = 'none';
+      document.getElementById('transStatusInfo').textContent = 'Didukung Neural Translation & Penutur Asli Bangkok';
+    }
+
+    function quickTranslatePreset(text) {
+      if (transDirection !== 'id-to-th') {
+        swapTranslationDirection();
+      }
+      document.getElementById('translatorInput').value = text;
+      performLiveTranslation();
+    }
+
+    function copyTranslationResult() {
+      const text = document.getElementById('transResultThai').textContent;
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('✓ Teks terjemahan berhasil disalin!');
+        }).catch(() => {
+          showToast('Disalin: ' + text);
+        });
+      } else {
+        showToast('✓ Teks: ' + text);
+      }
+    }
+
+    function playTranslatedAudio() {
+      if (transDirection === 'id-to-th') {
+        speakThai(latestTranslatedThai || document.getElementById('transResultThai').textContent);
+      } else {
+        const inputVal = document.getElementById('translatorInput').value;
+        speakThai(inputVal);
+      }
+    }
+
+    function triggerTranslatorMic() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Browser belum mendukung Speech Recognition. Silakan ketik langsung.');
+        return;
+      }
+      try {
+        const recog = new SpeechRecognition();
+        recog.lang = transDirection === 'id-to-th' ? 'id-ID' : 'th-TH';
+        recog.interimResults = false;
+        showToast('🎙️ Mendengarkan... Silakan berbicara sekarang');
+        recog.onresult = (evt) => {
+          const spoken = evt.results[0][0].transcript;
+          document.getElementById('translatorInput').value = spoken;
+          performLiveTranslation();
+        };
+        recog.onerror = () => {
+          showToast('Tidak ada suara terdeteksi.');
+        };
+        recog.start();
+      } catch (err) {
+        showToast('Mikrofon tidak dapat diakses.');
+      }
+    }
+
+    /* Offline quick translations dictionary fallback */
+    const OFFLINE_THAI_DICT = {
+      'halo': { thai: 'สวัสดีครับ', roman: 'sà-wàt-dii khráp', ind: 'Halo / Selamat sejahtera' },
+      'terima kasih': { thai: 'ขอบคุณมากครับ', roman: 'khɔ̀ɔp-khun mâak khráp', ind: 'Terima kasih banyak' },
+      'berapa harga': { thai: 'อันนี้ราคาเท่าไหร่ครับ', roman: 'an-níi raa-khaa thâo-rài khráp', ind: 'Ini berapa harganya?' },
+      'jangan pedas': { thai: 'ไม่เผ็ดเลยนะครับ', roman: 'mâi phèt loei ná khráp', ind: 'Jangan pedas sama sekali ya' },
+      'sedikit pedas': { thai: 'เผ็ดนิดหน่อยครับ', roman: 'phèt nít-nɔ̀ɔi khráp', ind: 'Sedikit pedas saja' },
+      'toilet': { thai: 'ห้องน้ำอยู่ที่ไหนครับ', roman: 'hɔ̂ng-náam yùu thîi-nǎi khráp', ind: 'Di mana toilet?' },
+      'enak': { thai: 'อร่อยมากครับ', roman: 'à-rɔ̀ɔi mâak khráp', ind: 'Sangat enak' },
+      'diskon': { thai: 'ลดราคาหน่อยได้ไหมครับ', roman: 'lót raa-khaa nɔ̀ɔi dâi mǎi khráp', ind: 'Bisa diskon sedikit tidak?' },
+      'bon': { thai: 'เช็คบิลด้วยครับ', roman: 'chék bin dûay khráp', ind: 'Minta bon / hitung tagihan' }
+    };
+
+    async function performLiveTranslation() {
+      const inputEl = document.getElementById('translatorInput');
+      const query = inputEl.value.trim();
+      if (!query) {
+        showToast('Ketik kalimat terlebih dahulu!');
+        return;
+      }
+
+      const submitBtn = document.getElementById('translateSubmitBtn');
+      const statusInfo = document.getElementById('transStatusInfo');
+      const resultBox = document.getElementById('translatorResultBox');
+      const resThai = document.getElementById('transResultThai');
+      const resRoman = document.getElementById('transResultRoman');
+
+      submitBtn.textContent = 'Menerjemahkan...';
+      submitBtn.disabled = true;
+      statusInfo.textContent = '⚡ Menghubungkan ke Neural Translation Service...';
+
+      const sl = transDirection === 'id-to-th' ? 'auto' : 'th';
+      const tl = transDirection === 'id-to-th' ? 'th' : 'id';
+
+      try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&dt=rm&q=${encodeURIComponent(query)}`;
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error('API Response Error ' + resp.status);
+
+        const data = await resp.json();
+        let translatedText = '';
+        let romanization = '';
+
+        if (data && data[0] && Array.isArray(data[0])) {
+          translatedText = data[0].map(segment => segment[0] || '').join('');
+          // Check for transliteration / romanization segment
+          if (data[0].length > 1 && data[0][data[0].length - 1] && typeof data[0][data[0].length - 1][3] === 'string') {
+            romanization = data[0][data[0].length - 1][3];
+          } else if (data[0][0] && data[0][0][3]) {
+            romanization = data[0][0][3];
+          }
+        }
+
+        if (!translatedText) {
+          throw new Error('Empty response');
+        }
+
+        resultBox.style.display = 'block';
+
+        if (transDirection === 'id-to-th') {
+          latestTranslatedThai = translatedText;
+          resThai.textContent = translatedText;
+          resRoman.textContent = romanization 
+            ? `Transliterasi: ${romanization}` 
+            : 'Aksen Resmi Bangkok • Klik tombol dengarkan untuk mendengar nada asli';
+          speakThai(translatedText);
+        } else {
+          latestTranslatedThai = query;
+          resThai.textContent = translatedText;
+          resRoman.textContent = `Teks Asli Thai: ${query}`;
+          speakThai(query);
+        }
+
+        statusInfo.textContent = `✓ Berhasil diterjemahkan (${query.length} karakter) • Audio Penutur Asli Siap`;
+      } catch (err) {
+        console.warn('Live translate network fallback:', err);
+        // Fallback offline dictionary
+        let foundOffline = null;
+        const lowerQ = query.toLowerCase();
+        for (const [k, v] of Object.entries(OFFLINE_THAI_DICT)) {
+          if (lowerQ.includes(k)) {
+            foundOffline = v;
+            break;
+          }
+        }
+
+        resultBox.style.display = 'block';
+        if (foundOffline) {
+          latestTranslatedThai = foundOffline.thai;
+          resThai.textContent = foundOffline.thai;
+          resRoman.textContent = `${foundOffline.roman} (${foundOffline.ind})`;
+          statusInfo.textContent = '✓ Diterjemahkan melalui Kamus Cerdas Bawaan (Offline)';
+          speakThai(foundOffline.thai);
+        } else {
+          resThai.textContent = transDirection === 'id-to-th' ? query : 'ข้อความแปล';
+          resRoman.textContent = 'Gagal terhubung ke server penerjemah. Periksa koneksi internet.';
+          statusInfo.textContent = '⚠️ Layanan daring tidak dapat dihubungi. Menampilkan mode cadangan.';
+        }
+      } finally {
+        submitBtn.textContent = 'Terjemahkan Sekarang ➔';
+        submitBtn.disabled = false;
+      }
+    }
+
+    /* 2. THAILAND ENCYCLOPEDIA & SEARCH ENGINE */
+    const THAILAND_ENCYCLOPEDIA = [
+      {
+        id: 'wat-arun',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Kuil',
+        title: 'Wat Arun (วัดอรุณ) - Kuil Fajar Megah',
+        thai: 'วัดอรุณราชวราราม',
+        phonetic: 'wát à-run râat-chá-wá-raam',
+        icon: '🏛️',
+        summary: 'Salah satu kuil paling ikonik di Bangkok yang berdiri megah di tepi barat Sungai Chao Phraya. Menara utamanya (prang) setinggi lebih dari 70 meter dihiasi keramik porselen Tiongkok yang memancarkan kilau indah saat terkena cahaya.',
+        tips: '💡 Tips Berkunjung: Datang sore hari sebelum matahari terbenam untuk siluet spektakuler. Di sekitar kuil banyak gerai penyewaan busana tradisional Thai (Chut Thai) seharga ~200 Baht.',
+        tags: ['wat arun', 'kuil fajar', 'chao phraya', 'bangkok', 'chut thai', 'spot foto']
+      },
+      {
+        id: 'grand-palace',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Kuil',
+        title: 'The Grand Palace & Wat Phra Kaew (พระบรมมหาราชวัง)',
+        thai: 'พระบรมมหาราชวัง และ วัดพระแก้ว',
+        phonetic: 'phrá bɔɔ-rom-má-hǎa-râat-chá-wang láe wát phrá kâew',
+        icon: '👑',
+        summary: 'Kompleks istana kerajaan yang didirikan tahun 1782 pada masa Raja Rama I. Di dalamnya terdapat Wat Phra Kaew yang menyimpan arca suci Buddha Zamrud (Emerald Buddha), pusaka paling disucikan di seluruh Thailand.',
+        tips: '💡 Aturan Ketat: Wajib memakai pakaian berlengan dan celana/rok panjang di bawah lutut. Dilarang memakai celana sobek, legging ketat, atau sandal terbuka tanpa tali belakang.',
+        tags: ['grand palace', 'wat phra kaew', 'emerald buddha', 'istana raja', 'bangkok']
+      },
+      {
+        id: 'wat-pho',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Kuil',
+        title: 'Wat Pho (วัดโพธิ์) - Buddha Berbaring Emas',
+        thai: 'วัดพระเชตุพนวิมลมังคลาราม',
+        phonetic: 'wát phrá chêet-tù-phon',
+        icon: '🛕',
+        summary: 'Kuil tertua dan terbesar di Bangkok yang menyimpan patung Buddha Berbaring berlapis emas sepanjang 46 meter dan tinggi 15 meter. Telapak kakinya dihiasi 108 simbol keberuntungan bertatahkan mutiara. Wat Pho juga diakui UNESCO sebagai tempat lahirnya pijat tradisional Thai.',
+        tips: '💡 Pengalaman Menarik: Beli mangkuk berisi 108 koin perunggu seharga 20 Baht dan masukkan satu per satu ke dalam deretan pot tembaga untuk doa keberuntungan.',
+        tags: ['wat pho', 'reclining buddha', 'buddha tidur', 'pijat thai', 'massage school']
+      },
+      {
+        id: 'chatuchak',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Belanja',
+        title: 'Pasar Akhir Pekan Chatuchak (ตลาดนัดจตุจักร)',
+        thai: 'ตลาดนัดจตุจักร',
+        phonetic: 'tà-làat nát jà-tù-jàk',
+        icon: '🛍️',
+        summary: 'Pasar akhir pekan terbesar di dunia dengan lebih dari 15.000 kios yang terbagi dalam 27 bagian, menjual busana, kerajinan tangan, suvenir, keramik, rempah-rempah, hingga karya seni kontemporer.',
+        tips: '💡 Tips Belanja: Buka Sabtu & Minggu (09.00 - 18.00). Bawa uang tunai Baht secukupnya, kenakan pakaian adem, dan gunakan frasa "Lot noi dai mai krap?" untuk menawar.',
+        tags: ['chatuchak', 'pasar jjt', 'weekend market', 'belanja suvenir', 'bangkok shopping']
+      },
+      {
+        id: 'yaowarat',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Street Food',
+        title: 'Yaowarat Chinatown (เยาวราช) - Surga Street Food Malam',
+        thai: 'เยาวราช',
+        phonetic: 'yao-wá-râat',
+        icon: '🏮',
+        summary: 'Jantung pecinan tertua di Bangkok yang berubah menjadi festival kuliner kaki lima raksasa setelah matahari terbenam. Penuh dengan papan reklame neon bernuansa klasik, toko emas bersejarah, dan aroma masakan wajan panas (wok hei).',
+        tips: '💡 Waktu Terbaik: Datang mulai jam 18.30 Selasa-Minggu (Senin sebagian besar pedagang libur). Wajib coba roti bakar isi pandan mentega (Nai Ek Roll Noodles) dan seafood panggang.',
+        tags: ['yaowarat', 'chinatown', 'street food malam', 'kuliner bangkok', 'roti bakar']
+      },
+      {
+        id: 'chiang-mai',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Budaya',
+        title: 'Chiang Mai & Wat Phra That Doi Suthep (เชียงใหม่)',
+        thai: 'เชียงใหม่ และ วัดพระธาตุดอยสุเทพ',
+        phonetic: 'chiang-mài láe wát phrá thâat dɔɔi sù-thêep',
+        icon: '⛰️',
+        summary: 'Ibukota kerajaan Lanna di utara Thailand yang dikelilingi pegunungan berkabut, kuil kayu berukir jati kuno, dan kafe artistik. Di puncak gunung Doi Suthep berdiri chedi emas suci yang menghadap langsung ke seluruh lembah kota Chiang Mai.',
+        tips: '💡 Suasana: Udara di Chiang Mai jauh lebih sejuk dari Bangkok, terutama antara November hingga Februari. Sangat cocok bagi pecinta alam, budaya kuno, dan meditasi.',
+        tags: ['chiang mai', 'doi suthep', 'lanna', 'utara thailand', 'gunung']
+      },
+      {
+        id: 'phi-phi',
+        category: 'wisata',
+        categoryLabel: 'Destinasi & Alam',
+        title: 'Kepulauan Phi Phi & Maya Bay (หมู่เกาะพีพี)',
+        thai: 'หมู่เกาะพีพี และ อ่าวมาหยา',
+        phonetic: 'mùu kɔ̀ phii-phii láe àao maa-hǎa',
+        icon: '🏝️',
+        summary: 'Gugusan pulau karang kapur spektakuler di Laut Andaman (provinsi Krabi) dengan air laut biru toska sebening kristal dan pasir putih halus. Maya Bay terkenal di dunia internasional lewat film "The Beach".',
+        tips: '💡 Transportasi: Naik speedboat dari Phuket (1 jam) atau dari Krabi (45 menit). Periode terbaik adalah November-April saat ombak tenang dan sinar matahari cerah.',
+        tags: ['phi phi island', 'maya bay', 'krabi', 'phuket', 'pantai andaman']
+      },
+      {
+        id: 'pad-thai',
+        category: 'kuliner',
+        categoryLabel: 'Kuliner & Makanan',
+        title: 'Pad Thai (ผัดไทย) - Mie Goreng Khas Kebanggaan Bangsa',
+        thai: 'ผัดไทยกุ้งสด',
+        phonetic: 'phàt-thai kûng sòt',
+        icon: '🍜',
+        summary: 'Hidangan mie beras tumis legendaris dengan udang segar, telur, tahu kuning, tauge renyah, daun kucai, dan kacang tanah sangrai tumbuk. Cita rasanya seimbang antara asam manis asam jawa (tamarind), gurih kecap ikan, dan pedas cabai bubuk.',
+        tips: '💡 Cara Makan: Selalu peras jeruk nipis segar di atasnya dan aduk bersama bubuk cabai dan kacang tanah sesuai selera sebelum dinikmati.',
+        tags: ['pad thai', 'mie goreng thai', 'street food', 'tamarind', 'kuliner']
+      },
+      {
+        id: 'tom-yum',
+        category: 'kuliner',
+        categoryLabel: 'Kuliner & Makanan',
+        title: 'Tom Yum Goong (ต้มยำกุ้ง) - Sup Pedas Asam Rempah',
+        thai: 'ต้มยำกุ้ง',
+        phonetic: 'tôm yam kûng',
+        icon: '🍲',
+        summary: 'Sup berkuah merah aromatik berisi udang galah sungai, jamur tiram, serai, daun jeruk purut, lengkuas, dan cabai rawit merah. Terdapat dua jenis kuah: Tom Yum Nam Sai (kuah bening) dan Tom Yum Nam Khon (kuah kental bersantan atau susu evaporasi).',
+        tips: '💡 Kosakata Pemesanan: Katakan "Ao Tom Yum Goong Nam Khon krap" untuk memesan versi kuah kental yang kaya rasa dan lezat.',
+        tags: ['tom yum', 'sup udang', 'kuah pedas', 'nam khon', 'rempah thai']
+      },
+      {
+        id: 'som-tum',
+        category: 'kuliner',
+        categoryLabel: 'Kuliner & Makanan',
+        title: 'Som Tum Thai (ส้มตำไทย) - Salad Pepaya Muda Segar',
+        thai: 'ส้มตำไทย',
+        phonetic: 'sôm tam thai',
+        icon: '🥗',
+        summary: 'Salad pepaya muda serut yang ditumbuk segar di dalam cobek tanah liat khas wilayah Isan. Dicampur tomat ceri, kacang panjang, kacang tanah sangrai, gula kelapa, perasan jeruk nipis, dan udang kering.',
+        tips: '💡 Peringatan Pedas: Som Tum asli sangat pedas (bisa memakai 5-10 cabai rawit). Jika tidak kuat pedas, wajib bilang: "Som Tum Thai, mai phet ná khráp".',
+        tags: ['som tum', 'salad pepaya', 'isan', 'pedas asam', 'makanan sehat']
+      },
+      {
+        id: 'mango-sticky-rice',
+        category: 'kuliner',
+        categoryLabel: 'Kuliner & Dessert',
+        title: 'Khao Niew Mamuang (ข้าวเหนียวมะม่วง) - Mango Sticky Rice',
+        thai: 'ข้าวเหนียวมะม่วง',
+        phonetic: 'khâao-nǐaw má-mûang',
+        icon: '🥭',
+        summary: 'Dessert paling dicintai turis di Thailand! Kombinasi ketan pulen yang dimasak dengan santan kental wangi daun pandan, disajikan bersama irisan mangga manis jenis Nam Dok Mai (mangga nektar bunga) dan taburan kacang hijau kupas renyah.',
+        tips: '💡 Musim Terbaik: Musim puncak mangga manis kualitas terbaik jatuh pada bulan Maret hingga Mei.',
+        tags: ['mango sticky rice', 'khao niew mamuang', 'ketan mangga', 'dessert thai', 'nam dok mai']
+      },
+      {
+        id: 'cha-yen',
+        category: 'kuliner',
+        categoryLabel: 'Kuliner & Minuman',
+        title: 'Cha Yen (ชาเย็น) - Thai Milk Tea Orisinal Bangkok',
+        thai: 'ชาเย็น',
+        phonetic: 'chaa-yen',
+        icon: '🧋',
+        summary: 'Teh susu dingin khas Thailand yang diseduh dari daun teh hitam beraroma bunga lawang (star anise), kapulaga, dan biji asam jawa, menghasilkan warna oranye tua yang khas. Disajikan dengan susu kental manis dan susu evaporasi di atas es batu serut.',
+        tips: '💡 Atur Tingkat Manis: Thai Tea standar cenderung sangat manis. Jika ingin tingkat manis sedang, ucapkan: "Waan noi khráp" (หวานน้อย - manis sedikit saja).',
+        tags: ['cha yen', 'thai tea', 'thai milk tea', 'minuman manis', 'es teh']
+      },
+      {
+        id: 'salam-wai',
+        category: 'budaya',
+        categoryLabel: 'Budaya & Etika',
+        title: 'Salam Wai (การไหว้) - Etika Menghormati Orang Lain',
+        thai: 'การไหว้',
+        phonetic: 'kaan-wâai',
+        icon: '🙏',
+        summary: 'Sikap tubuh merapatkan kedua telapak tangan di depan tubuh disertai sedikit menundukkan kepala. Tingkatan Wai terbagi tiga: (1) Sejajar dada untuk teman sebaya, (2) Ujung ibu jari menyentuh ujung hidung untuk orang tua, guru, dan senior, (3) Ujung ibu jari di antara kedua alis untuk biksu dan keluarga kerajaan.',
+        tips: '💡 Aturan Wai: Orang yang lebih muda memberi Wai terlebih dahulu. Jangan memberi Wai kepada anak kecil atau staf layanan/pelayan (cukup tersenyum ramah dan ucapkan Khop Khun Krap/Kha).',
+        tags: ['salam wai', 'etika bersalaman', 'budaya thai', 'sopan santun', 'penghormatan']
+      },
+      {
+        id: 'etika-kuil',
+        category: 'budaya',
+        categoryLabel: 'Budaya & Etika',
+        title: 'Etika Berkunjung ke Kuil Buddha (วัด)',
+        thai: 'มารยาทในการเข้าวัด',
+        phonetic: 'maa-rá-yâat nai kaan khâo wát',
+        icon: '🛕',
+        summary: 'Kuil adalah tempat peribadatan suci bagi warga Thailand. Aturan pokok meliputi: selalu melepas alas kaki sebelum masuk aula utama (Ubosot/Vihara), tidak mengarahkan telapak kaki ke arah patung Buddha atau biksu (duduk bersila atau bertumpu ke samping / phap phiap), dan wanita dilarang menyentuh fisik biksu.',
+        tips: '💡 Foto Selfie: Jangan berfoto membelakangi patung Buddha dengan pose selfie yang tidak pantas, dan dilarang memanjat altar atau stupa.',
+        tags: ['etika kuil', 'aturan wat', 'lepas sepatu', 'biksu', 'buddha']
+      },
+      {
+        id: 'monarki',
+        category: 'budaya',
+        categoryLabel: 'Budaya & Hukum',
+        title: 'Penghormatan Keluarga Kerajaan & Lagu Kebangsaan',
+        thai: 'การเคารพสถาบันพระมหากษัตริย์',
+        phonetic: 'kaan khao-róp sà-thǎa-ban phrá má-hǎa-kà-sàt',
+        icon: '🇹🇭',
+        summary: 'Institusi kerajaan sangat dihormati oleh masyarakat Thailand dan dilindungi oleh hukum Lèse-majesté yang tegas. Setiap jam 08.00 pagi dan 18.00 sore, lagu kebangsaan diputar di stasiun kereta, taman umum, dan gedung pemerintah, di mana semua orang akan berhenti berjalan dan berdiri tegak.',
+        tips: '💡 Hal Tabu: Jangan pernah menginjak koin atau uang kertas Baht yang terjatuh karena terdapat gambar Raja. Di bioskop, semua penonton wajib berdiri saat lagu penghormatan kerajaan diputar sebelum film dimulai.',
+        tags: ['raja thailand', 'lagu kebangsaan', 'uang baht', 'lese majeste', 'etika monarki']
+      },
+      {
+        id: 'songkran',
+        category: 'budaya',
+        categoryLabel: 'Festival Budaya',
+        title: 'Festival Songkran (วันสงกรานต์) - Tahun Baru Air Thai',
+        thai: 'วันสงกรานต์',
+        phonetic: 'wan sǒng-kraan',
+        icon: '💦',
+        summary: 'Perayaan tahun baru tradisional Thailand yang jatuh setiap tanggal 13-15 April. Air melambangkan pembersihan dosa, nasib buruk, dan penyegaran jiwa. Perayaan bertransformasi menjadi pesta perang air massal terbesar di dunia di jalanan Silom, Khao San Road, dan parit kota tua Chiang Mai.',
+        tips: '💡 Perlengkapan Wajib: Beli tas tahan air (waterproof pouch) untuk ponsel dan paspor, kenakan kacamata renang/goggles, dan jangan menyiram air ke biksu, lansia, atau pengendara motor yang melaju kencang.',
+        tags: ['songkran', 'festival air', 'tahun baru thai', 'khao san road', 'april']
+      },
+      {
+        id: 'loy-krathong',
+        category: 'budaya',
+        categoryLabel: 'Festival Budaya',
+        title: 'Loy Krathong (วันลอยกระทง) - Festival Lentera Sungai',
+        thai: 'วันลอยกระทง',
+        phonetic: 'wan lɔɔi krà-thong',
+        icon: '🪷',
+        summary: 'Festival lentera terapung yang dirayakan pada malam bulan purnama ke-12 penanggalan Thai (biasanya bulan November). Masyarakat melarungkan "krathong" (perahu kecil dari batang dan daun pisang berhias bunga teratai, dupa, dan lilin) ke sungai untuk menghormati Dewi Air (Phra Mae Khongkha) dan melepaskan dendam serta energi negatif.',
+        tips: '💡 Rekomendasi Lokasi: Tepi Sungai Chao Phraya (Asiatique & ICONSIAM) di Bangkok, atau festival lentera terbang Yi Peng di Chiang Mai.',
+        tags: ['loy krathong', 'lentera apung', 'yi peng', 'dewi air', 'november festival']
+      },
+      {
+        id: 'bts-mrt',
+        category: 'transport',
+        categoryLabel: 'Transportasi Bangkok',
+        title: 'BTS Skytrain & MRT Bangkok - Bebas Macet Total',
+        thai: 'รถไฟฟ้าบีทีเอส และ รถไฟใต้ดินเอ็มอาร์ที',
+        phonetic: 'rót-fai-fáa bee-tee-èet láe rót-fai-tâi-din em-aar-tee',
+        icon: '🚝',
+        summary: 'Sistem kereta layang (BTS) dan kereta bawah tanah (MRT) ber-AC dingin yang menjangkau seluruh pusat perbelanjaan, kawasan bisnis Sukhumvit, Silom, dan Chatuchak. Ini adalah moda transportasi tercepat dan paling efisien untuk menghindari kemacetan Bangkok yang legendaris.',
+        tips: '💡 Kartu Pembayaran: MRT menerima kartu kredit/debit contactless (Visa/Mastercard). Untuk BTS Skytrain, Anda bisa membeli tiket koin satuan di mesin atau membeli Rabbit Card yang bisa diisi ulang.',
+        tags: ['bts skytrain', 'mrt bangkok', 'rabbit card', 'kereta bangkok', 'bebas macet']
+      },
+      {
+        id: 'tuktuk',
+        category: 'transport',
+        categoryLabel: 'Transportasi Unik',
+        title: 'Tuk-Tuk Bangkok & Tips Tawar Menawar Tarif',
+        thai: 'รถตุ๊กตุ๊ก',
+        phonetic: 'rót túk-túk',
+        icon: '🛺',
+        summary: 'Kendaraan roda tiga bertenaga gas dengan suara knalpot khas yang menjadi simbol wisata Bangkok. Sensasi melaju di antara celah jalanan kota memberi pengalaman seru yang tak terlupakan.',
+        tips: '💡 Waspada Scam: Tuk-Tuk tidak memakai argo meter. SELALU sepakati tarif sebelum naik. Waspadai supir yang menawarkan tarif murah (misal 20 Baht) dengan alasan mengantar ke toko perhiasan atau penjahit sutra, atau yang mengatakan "Grand Palace sedang tutup hari ini".',
+        tags: ['tuk tuk', 'kendaraan roda tiga', 'tawar tarif', 'tips scam', 'wisata bangkok']
+      },
+      {
+        id: 'chao-phraya-boat',
+        category: 'transport',
+        categoryLabel: 'Transportasi Air',
+        title: 'Chao Phraya Express Boat - Berlayar Menyusuri Sejarah',
+        thai: 'เรือด่วนเจ้าพระยา',
+        phonetic: 'ruea-dùan jâo phrá-yaa',
+        icon: '⛴️',
+        summary: 'Perahu sungai penumpang yang melintasi dermaga-dermaga utama dari Sathorn (stasiun BTS Saphan Taksin) menuju Iconsiam, Wat Arun, Wat Pho, dan Grand Palace dengan tarif sangat terjangkau (16-30 Baht).',
+        tips: '💡 Pilihan Bendera: Perahu berbendera oranye (Orange Flag) beroperasi setiap hari dengan tarif tetap 16 Baht ke semua dermaga penting. Ada juga Tourist Boat bendera biru dengan dek atas terbuka.',
+        tags: ['chao phraya express', 'perahu sungai', 'dermaga sathorn', 'iconsiam', 'wat arun']
+      }
+    ];
+
+    function renderEncyclopediaCards(items) {
+      const container = document.getElementById('encycloCardsGrid');
+      if (!container) return;
+
+      if (!items || items.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding:40px 20px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px dashed var(--border-color);">
+            <div style="font-size:36px; margin-bottom:12px;">🔍</div>
+            <div style="font-size:16px; font-weight:700; margin-bottom:6px;">Topik Tidak Ditemukan di Database Lokal</div>
+            <p style="font-size:13px; color:var(--text-muted);">Sistem secara otomatis mencoba melakukan pencarian daring melalui Wikipedia REST API.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <article class="encyclo-card" id="ecard-${item.id}">
+          <div class="encyclo-card-header">
+            <span class="encyclo-category-badge">${item.icon || '📌'} ${item.categoryLabel || item.category}</span>
+            <button class="btn-audio-listen" onclick="speakThai('${item.thai}')" title="Dengarkan pengucapan penutur asli Bangkok">
+              🔊 Lafal Thai
+            </button>
+          </div>
+          <h3 class="encyclo-card-title">${item.title}</h3>
+          <div class="encyclo-card-thai" onclick="speakThai('${item.thai}')" title="Klik untuk mendengar suara asli" style="cursor:pointer;">
+            ${item.thai}
+          </div>
+          <div class="encyclo-card-roman">${item.phonetic}</div>
+          <p class="encyclo-card-desc">${item.summary}</p>
+          ${item.tips ? `<div class="encyclo-card-tips">${item.tips}</div>` : ''}
+        </article>
+      `).join('');
+    }
+
+    function filterEncyclopediaCategory(cat, btn) {
+      document.querySelectorAll('#encycloFilterPills .pill-filter').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      if (cat === 'all') {
+        renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
+      } else {
+        const filtered = THAILAND_ENCYCLOPEDIA.filter(item => item.category === cat);
+        renderEncyclopediaCards(filtered);
+      }
+    }
+
+    async function executeEncyclopediaSearch() {
+      const input = document.getElementById('encycloSearchInput');
+      const query = input.value.trim().toLowerCase();
+      const statusBanner = document.getElementById('encycloLiveStatus');
+      const container = document.getElementById('encycloCardsGrid');
+
+      if (!query) {
+        statusBanner.style.display = 'none';
+        renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
+        return;
+      }
+
+      // 1. Local Search Filter
+      const matchedLocal = THAILAND_ENCYCLOPEDIA.filter(item => {
+        return item.title.toLowerCase().includes(query) ||
+               item.thai.includes(query) ||
+               item.summary.toLowerCase().includes(query) ||
+               (item.tips && item.tips.toLowerCase().includes(query)) ||
+               (item.tags && item.tags.some(t => t.includes(query)));
+      });
+
+      renderEncyclopediaCards(matchedLocal);
+
+      // 2. Fetch live extra details from Indonesian Wikipedia REST API
+      statusBanner.style.display = 'block';
+      statusBanner.textContent = `🔍 Sedang mencari informasi tambahan seputar "${query}" di Wikipedia Internasional...`;
+
+      try {
+        const wikiSearchUrl = `https://id.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query + ' thailand')}&utf8=&format=json&origin=*`;
+        const resp = await fetch(wikiSearchUrl);
+        const searchData = await resp.json();
+
+        if (searchData && searchData.query && searchData.query.search && searchData.query.search.length > 0) {
+          const topHits = searchData.query.search.slice(0, 3);
+          const wikiArticles = [];
+
+          for (const hit of topHits) {
+            // Avoid duplicate if title resembles matched local card
+            const pageTitle = hit.title;
+            try {
+              const summaryUrl = `https://id.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`;
+              const sumResp = await fetch(summaryUrl);
+              if (sumResp.ok) {
+                const sumData = await sumResp.json();
+                if (sumData.extract && sumData.extract.length > 40) {
+                  wikiArticles.push({
+                    title: sumData.title,
+                    extract: sumData.extract,
+                    thumbnail: sumData.thumbnail ? sumData.thumbnail.source : null,
+                    pageUrl: sumData.content_urls ? sumData.content_urls.desktop.page : `https://id.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}`
+                  });
+                }
+              }
+            } catch (sumErr) {
+              console.warn('Wiki summary fetch error:', sumErr);
+            }
+          }
+
+          if (wikiArticles.length > 0) {
+            statusBanner.textContent = `✓ Ditemukan ${matchedLocal.length} artikel lokal & ${wikiArticles.length} artikel ensiklopedia langsung.`;
+            
+            // Append Wiki Cards to container
+            wikiArticles.forEach(wiki => {
+              const card = document.createElement('article');
+              card.className = 'encyclo-card';
+              card.style.borderLeft = '4px solid var(--accent-gold)';
+              card.innerHTML = `
+                <div class="encyclo-card-header">
+                  <span class="encyclo-category-badge" style="background:var(--accent-gold-light); color:var(--text);">🌐 Live Ensiklopedia Wikipedia</span>
+                  <a href="${wiki.pageUrl}" target="_blank" rel="noopener" class="btn-audio-listen" style="text-decoration:none;">
+                    Buka Artikel ↗
+                  </a>
+                </div>
+                <h3 class="encyclo-card-title">${wiki.title}</h3>
+                ${wiki.thumbnail ? `<img src="${wiki.thumbnail}" alt="${wiki.title}" style="width:100%; height:160px; object-fit:cover; border-radius:var(--radius-md); margin:8px 0;">` : ''}
+                <p class="encyclo-card-desc">${wiki.extract}</p>
+                <div class="encyclo-card-tips">
+                  💡 Tip Pencarian: Kata kunci ini diambil langsung dari basis data terbuka ensiklopedia Thailand.
+                </div>
+              `;
+              container.appendChild(card);
+            });
+          } else {
+            statusBanner.textContent = `✓ Menampilkan ${matchedLocal.length} hasil dari koleksi kurasi Nong Mali.`;
+          }
+        } else {
+          statusBanner.textContent = matchedLocal.length > 0 
+            ? `✓ Menampilkan ${matchedLocal.length} hasil kurasi.` 
+            : `Tidak ditemukan artikel tambahan di Wikipedia.`;
+        }
+      } catch (err) {
+        console.warn('Wikipedia search fetch error:', err);
+        statusBanner.textContent = `Menampilkan ${matchedLocal.length} hasil kurasi Nong Mali.`;
+      }
+    }
+
+    /* 3. THAILAND CULTURE & TRAVEL Q&A CHAT ENGINE (NONG MALI) */
+    const QA_KNOWLEDGE_BASE = [
+      {
+        patterns: ['kuil', 'pakaian', 'baju', 'celana', 'rok', 'berpakaian', 'sopan', 'temple', 'wat'],
+        title: 'Aturan Pakaian & Etika Mengunjungi Kuil di Thailand',
+        thaiKey: 'การแต่งกายไปวัด',
+        thaiPhonetic: 'kaan tàeng-kaai pai wát',
+        response: `Berikut adalah aturan berpakaian wajib saat mengunjungi kuil Buddha di Thailand:\n\n1. **Pundak & Lengan:** Baju wajib berlengan (kaos oblong/kemeja berkerah). Tank top, sleeveless, atau baju terbuka tidak diizinkan.\n2. **Bawahan:** Celana atau rok wajib menutupi lutut (hindari celana pendek, legging ketat, atau celana jeans sobek).\n3. **Alas Kaki:** Selalu lepas sepatu dan sandal sebelum melangkah ke lantai aula suci (Ubosot). Kaus kaki diperbolehkan.\n4. **Posisi Duduk:** Saat duduk di hadapan patung Buddha atau biksu, jangan pernah menjulurkan telapak kaki ke arah mereka. Duduklah bersila atau bertumpu ke samping (posisi Phap Phiap).\n5. **Interaksi dengan Biksu:** Biksu sangat dihormati. Perempuan dilarang menyentuh fisik biksu atau menyerahkan barang langsung ke tangan biksu (taruh barang di kain penampung).`,
+        tips: 'Kuil seperti Grand Palace dan Wat Phra Kaew memiliki pemeriksaan pakaian paling ketat di Bangkok. Sedia selendang atau sarung cadangan!'
+      },
+      {
+        patterns: ['wai', 'salam', 'hormat', 'sapaan', 'tangan', 'menyapa'],
+        title: 'Cara Melakukan Salam Wai (การไหว้) dan Maknanya',
+        thaiKey: 'สวัสดีครับ การไหว้',
+        thaiPhonetic: 'sà-wàt-dii khráp, kaan-wâai',
+        response: `Salam Wai adalah gestur merapatkan kedua telapak tangan di depan dada disertai sedikit membungkuk. Maknanya adalah ungkapan hormat, salam, terima kasih, sekaligus permohonan maaf.\n\n**3 Tingkatan Salam Wai:**\n• **Tingkat 1 (Teman & Sebaya):** Telapak tangan sejajar dada, ujung jari menyentuh dagu. Ucapkan *"Sawatdee krap/kha"*.\n• **Tingkat 2 (Orang Tua, Guru, Senior):** Ujung ibu jari menyentuh ujung hidung, telunjuk di antara kedua alis, kepala membungkuk lebih dalam.\n• **Tingkat 3 (Biksu & Bangsawan):** Ujung ibu jari menyentuh dahi di antara kedua alis, tundukan kepala paling hormat.\n\n*Catatan:* Anda tidak perlu membalas Wai kepada staf hotel/pelayan restoran atau anak kecil; cukup berikan senyuman ramah dan anggukan kepala.`,
+        tips: 'Orang Thailand sangat mengapresiasi wisatawan asing yang mencoba memberi salam Wai dengan tulus dan sopan.'
+      },
+      {
+        patterns: ['pedas', 'tidak pedas', 'makan', 'cabai', 'kuliner', 'sambal', 'phet'],
+        title: 'Cara Memesan Makanan Tidak Pedas di Thailand',
+        thaiKey: 'ไม่เผ็ดเลยนะครับ อร่อยมาก',
+        thaiPhonetic: 'mâi phèt loei ná khráp, à-rɔ̀ɔi mâak',
+        response: `Masakan Thailand terkenal dengan bumbu cabai rawit (phrik khi nu) yang sangat pedas! Untuk memesan sesuai toleransi Anda, gunakan frasa sakti ini:\n\n• **"Mai Phet khráp/kha"** (ไม่เผ็ด) = Jangan pedas sama sekali.\n• **"Phet nit noi khráp/kha"** (เผ็ดนิดหน่อย) = Sedikit pedas saja (biasanya diberi 1 cabai).\n• **"Mai sai phrik khráp/kha"** (ไม่ใส่พริก) = Jangan diberi cabai sama sekali.\n• **"Mai sai phong chu-rot"** (ไม่ใส่ผงชูรส) = Tanpa MSG/micin.\n• **"Aroi maak khráp/kha"** (อร่อยมาก) = Enak sekali! (puji juru masak setelah selesai).`,
+        tips: 'Ingat tambahkan partikel sopan "khráp" untuk pria dan "kha" untuk wanita di akhir kalimat.'
+      },
+      {
+        patterns: ['biaya', 'uang', 'baht', 'harga', 'budget', 'pengeluaran', 'kurs', 'rupiah', 'makan berapa'],
+        title: 'Estimasi Biaya Makan & Pengeluaran Harian di Thailand',
+        thaiKey: 'อันนี้กี่บาทครับ',
+        thaiPhonetic: 'an-níi kìi bàat khráp',
+        response: `Estimasi budget harian wisata di Bangkok (1 THB ≈ Rp 440 - Rp 460):\n\n• **Street Food Kaki Lima:** 50 - 80 Baht (Rp 22.000 - Rp 36.000) per porsi (Pad Thai, Khao Pad, Noodle Soup).\n• **Restoran Santai / Food Court Mall (Terminal 21 Pier 21):** 40 - 100 Baht per hidangan.\n• **Minuman & Kopi 7-Eleven:** 15 - 35 Baht (Thai Tea, jus kelapa, kopi).\n• **Transportasi BTS/MRT:** 17 - 62 Baht per perjalanan tergantung jarak stasiun.\n• **Pijat Tradisional Thai (1 Jam):** 250 - 350 Baht di gerai lokal terpercaya.\n• **Rekomendasi Budget Harian Backpacker/Santai:** 500 - 800 Baht/hari di luar akomodasi hotel.`,
+        tips: 'Food court "Pier 21" di mall Terminal 21 Asok terkenal sebagai food court mall termurah dan terlezat di Bangkok dengan standar higienis tinggi.'
+      },
+      {
+        patterns: ['bts', 'mrt', 'transportasi', 'tuktuk', 'taksi', 'taxis', 'grab', 'bolt', 'macet', 'kereta'],
+        title: 'Panduan Transportasi Keliling Bangkok Bebas Macet',
+        thaiKey: 'ไปสถานีรถไฟฟ้าครับ',
+        thaiPhonetic: 'pai sà-thǎa-nii rót-fai-fáa khráp',
+        response: `Lalu lintas Bangkok pada jam sibuk (07.30-09.30 & 17.00-20.00) sangat padat. Berikut opsi terbaik:\n\n1. **BTS Skytrain & MRT Subway:** Pilihan nomor satu! Cepat, dingin, tepat waktu, dan langsung menghubungkan pusat perbelanjaan (Siam, Asok, Chatuchak, Silom).\n2. **Chao Phraya Express Boat:** Hanya 16 Baht untuk menyeberang dan berlayar ke Wat Arun, Wat Pho, dan Grand Palace tanpa tersendat lampu merah.\n3. **Grab & Bolt:** Sangat praktis untuk memesan mobil atau motor ojek online dengan tarif pasti tanpa perlu tawar-menawar.\n4. **Taksi Konvensional:** Selalu pastikan supir menyalakan argo dengan mengucapkan: *"Meter na khráp/kha?"*. Jika supir menolak dan meminta tarif borongan, turun dan cari taksi lain.\n5. **Tuk-Tuk:** Naiklah untuk hiburan atau rute pendek, dan SELALU sepakati harga di awal sebelum masuk kendaraan.`,
+        tips: 'Unduh aplikasi Moovit atau Google Maps untuk melihat peta rute transit BTS dan MRT secara real-time.'
+      },
+      {
+        patterns: ['nada', '5 nada', 'tonal', 'suara', 'pelafalan', 'pengucapan', 'aksen', 'bicara'],
+        title: 'Memahami Rahasia 5 Nada dalam Bahasa Thailand',
+        thaiKey: 'วรรณยุกต์ไทย 5 เสียง',
+        thaiPhonetic: 'wan-ná-yúk thai hâa sǐang',
+        response: `Bahasa Thai adalah bahasa bernada (tonal language). Perubahan tinggi-rendahnya nada suara mengubah total arti kata!\n\n**5 Nada Tersebut:**\n1. **Nada Datar (Mid Tone):** Suara sedang alami datar tanpa naik-turun. Contoh: มา (Maa = datang).\n2. **Nada Rendah (Low Tone):** Suara ditekan rendah di dada. Contoh: ใหม่ (Mài = baru).\n3. **Nada Jatuh (Falling Tone):** Suara dimulai tinggi lalu jatuh tegas ke bawah, seperti memanggil tegas. Contoh: ไม่ (Mâi = tidak).\n4. **Nada Tinggi (High Tone):** Suara diucapkan melengking tinggi di tenggorokan atas. Contoh: ม้า (Máa = kuda).\n5. **Nada Naik (Rising Tone):** Suara dimulai rendah lalu meliuk naik seperti nada bertanya dalam bahasa Indonesia *"Hah?!"*. Contoh: หมา (Mǎa = anjing).\n\n*Contoh Terkenal:* "Mai mai mai mai mai" bisa berarti kalimat utuh: *"Kayu baru tidak terbakar, kan?"*`,
+        tips: 'Gunakan fitur Studio Audio Penutur Asli di tab sebelah untuk mendengarkan kontur nada asli Bangkok berkali-kali!'
+      },
+      {
+        patterns: ['monarki', 'raja', 'king', 'ratu', 'lagu kerajaan', 'uang jatuh', 'lese majeste'],
+        title: 'Etika & Hukum Menghormati Keluarga Kerajaan di Thailand',
+        thaiKey: 'การเคารพพระมหากษัตริย์',
+        thaiPhonetic: 'kaan khao-róp phrá má-hǎa-kà-sàt',
+        response: `Di Thailand, keluarga kerajaan sangat dihormati oleh rakyat dan dilindungi oleh hukum pidana yang sangat tegas (Pasal 112 / Lèse-majesté).\n\n**Hal Penting yang Wajib Diingat Wisatawan:**\n1. **Lagu Kebangsaan (08.00 & 18.00):** Jika Anda berada di stasiun BTS, taman umum, atau terminal saat lagu diputar, berhentilah melangkah dan berdirilah tegak dengan tenang sampai lagu selesai.\n2. **Di Bioskop:** Sebelum film diputar, lagu pujian kerajaan (Phleng Sansoen Phra Barami) akan diperdengarkan bersama video kenegaraan. Semua penonton wajib berdiri dengan khidmat.\n3. **Uang Kertas & Koin Baht:** Gambar Raja tercetak di semua mata uang Baht. Jangan pernah menginjak koin atau uang kertas yang jatuh tertiup angin untuk menghentikannya, meremas dengan kasar, atau mencoretnya.`,
+        tips: 'Sikap tenang dan menghormati norma setempat akan membuat perjalanan Anda aman dan disambut hangat.'
+      },
+      {
+        patterns: ['halal', 'muslim', 'masjid', 'islam', 'halal food'],
+        title: 'Panduan Wisatawan Muslim & Kuliner Halal di Bangkok',
+        thaiKey: 'ร้านอาหารฮาลาลมีไหมครับ',
+        thaiPhonetic: 'ráan aa-hǎan haa-laan mii mǎi khráp',
+        response: `Thailand sangat ramah bagi wisatawan Muslim. Terdapat banyak komunitas Muslim lokal dan ribuan restoran bersertifikat Halal resmi dari The Central Islamic Council of Thailand (CICOT).\n\n**Kawasan Kuliner Halal Populer di Bangkok:**\n1. **Phaya Thai (Kawasan Phetchaburi Soi 7):** Penuh deretan kedai masakan Thai Muslim, Tom Yum halal, roti canai kari, dan nasi biryani Thai (Khao Mok Gai).\n2. **Chinatown Yaowarat:** Terdapat area muslim di jalan Charoen Krung dengan kedai bebek panggang halal legendaris.\n3. **Bang Rak & Silom:** Dekat Masjid Haroon (salah satu masjid tertua di Bangkok), banyak warung makanan halal autentik.\n4. **Mall ICONSIAM & MBK Center:** Memiliki mushola resmi yang bersih serta food court khusus halal.\n\n*Kosakata Penting:* *"Ahan Halal mii mai khráp?"* (Ada makanan halal tidak?)`,
+        tips: 'Gerai 7-Eleven juga menyediakan makanan kemasan dengan logo Halal resmi, seperti sosis ayam, nasi kotak CP Halal, dan roti manis.'
+      },
+      {
+        patterns: ['musim', 'cuaca', 'kapan ke thailand', 'bulan terbaik', 'hujan', 'panas'],
+        title: 'Waktu & Musim Terbaik untuk Berlibur ke Thailand',
+        thaiKey: 'ฤดูกาลในประเทศไทย',
+        thaiPhonetic: 'rúe-duu-kaan nai phrà-thêet thai',
+        response: `Thailand memiliki 3 musim utama:\n\n1. **Musim Sejuk/Dingin (November - Februari):** *WAKTU TERBAIK!* Suhu berkisar 22°C - 31°C dengan kelembapan rendah dan langit cerah. Sangat nyaman untuk jalan kaki di Bangkok, menjelajah kuil, dan mendaki di Chiang Mai.\n2. **Musim Panas (Maret - Mei):** Suhu bisa mencapai 36°C - 40°C. Cocok untuk liburan pulau di Krabi/Phuket dan bertepatan dengan festival perang air Songkran (13-15 April).\n3. **Musim Hujan/Monsoon (Juni - Oktober):** Hujan sering turun dalam bentuk guyuran lebat sore hari selama 1-2 jam. Keuntungannya harga hotel dan tiket pesawat jauh lebih murah serta alam pegunungan sangat hijau subur.`,
+        tips: 'Bawalah payung lipat kecil dan tabir surya (sunscreen) ke mana pun Anda pergi.'
+      },
+      {
+        patterns: ['sim card', 'internet', 'esim', 'kuota', 'sinyal', 'ais', 'truemove'],
+        title: 'Rekomendasi Tourist SIM Card & Paket Internet di Thailand',
+        thaiKey: 'ซื้อซิมการ์ดอินเทอร์เน็ต',
+        thaiPhonetic: 'súue sim-gáat in-thəə-nèt',
+        response: `Tiga operator telekomunikasi terbesar dengan sinyal 5G kencang di Thailand adalah **AIS, TrueMove H, dan DTAC**.\n\n• **Beli di Bandara (Suvarnabhumi / Don Mueang):** Konter resmi tersedia 24 jam di aula kedatangan. Tersedia Tourist SIM paket 8 hari / 15 hari / 30 hari kuota unlimited mulai ~199 - 299 Baht.\n• **eSIM Instan:** Bisa dibeli secara online sebelum berangkat via aplikasi perjalanan.\n• **Syarat Pendaftaran:** Wajib menunjukkan paspor fisik asli saat registrasi kartu SIM di Thailand sesuai regulasi pemerintah.`,
+        tips: 'SIM card lokal juga bisa dibeli di gerai 7-Eleven terdekat dengan menunjukkan paspor fisik Anda.'
+      },
+      {
+        patterns: ['scam', 'penipuan', 'waspada', 'aman', 'keamanan', 'tutup', 'permata'],
+        title: 'Waspada Penipuan Wisatawan (Scam) Umum di Bangkok',
+        thaiKey: 'ระวังการหลอกลวง',
+        thaiPhonetic: 'rá-wang kaan lɔ̀ɔk-luang',
+        response: `Secara umum Thailand adalah negara yang sangat aman dan ramah bagi wisatawan, namun kenali beberapa tipu daya klasik berikut:\n\n1. **Scam "Kuil Sedang Tutup Hari Ini":** Orang asing atau supir tuk-tuk di dekat Grand Palace/Wat Pho mendekati Anda dan berkata kuil sedang ditutup untuk upacara doa, lalu menawarkan tur perahu atau toko perhiasan murah. *Faktanya:* Kuil buka normal setiap hari! Jangan percaya dan berjalanlah langsung ke loket resmi.\n2. **Toko Permata / Penjahit Jas Sutra:** Tawaran tiket perahu/tuk-tuk murah (20 Baht) dengan syarat mampir ke toko perhiasan pemerintah bohong. Tolak dengan sopan.\n3. **Taksi Tanpa Argo:** Di depan bandara atau tempat wisata, supir meminta tarif flat mahal. Selalu mintalah argo *"Use meter please"*.`,
+        tips: 'Simpan nomor Polisi Turis Thailand di ponsel Anda: 1155 (layanan telepon gratis dan berbicara bahasa Inggris).'
+      }
+    ];
+
+    let qaChatHistory = [
+      {
+        sender: 'bot',
+        text: 'Halo! Saya Nong Mali (น้องมะลิ), asisten AI budaya & perjalanan Thailand Anda. 🙏\n\nSilakan tanyakan apa saja tentang etika kuil, rekomendasi street food, transportasi Bangkok, arti salam Wai, aturan monarki, tawar-menawar harga, atau cara pelafalan kata bahasa Thai!',
+        thaiAudioText: 'สวัสดีค่ะ ยินดีต้อนรับสู่ไทยแลนด์ค่ะ'
+      }
+    ];
+
+    function initQaChat() {
+      renderQaChatMessages();
+    }
+
+    function renderQaChatMessages() {
+      const container = document.getElementById('qaChatMessages');
+      if (!container) return;
+
+      container.innerHTML = qaChatHistory.map(msg => `
+        <div class="qa-msg-bubble ${msg.sender}">
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">
+            ${msg.sender === 'user' ? '👤 Anda' : '🍃 Nong Mali AI'}
+          </div>
+          <div style="white-space:pre-line;">${msg.text}</div>
+          ${msg.thaiAudioText ? `
+            <div style="margin-top:10px;">
+              <button class="btn-audio-listen" onclick="speakThai('${msg.thaiAudioText}')" title="Dengarkan pengucapan penutur asli Bangkok">
+                🔊 Dengarkan Suara Asli: "${msg.thaiAudioText}"
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function sendQuickQaPrompt(promptText) {
+      document.getElementById('qaInputField').value = promptText;
+      sendQaMessage();
+    }
+
+    function triggerQaMic() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Browser belum mendukung Speech Recognition.');
+        return;
+      }
+      try {
+        const recog = new SpeechRecognition();
+        recog.lang = 'id-ID';
+        recog.interimResults = false;
+        showToast('🎙️ Mendengarkan pertanyaan Anda...');
+        recog.onresult = (evt) => {
+          const spoken = evt.results[0][0].transcript;
+          document.getElementById('qaInputField').value = spoken;
+          sendQaMessage();
+        };
+        recog.onerror = () => {
+          showToast('Suara tidak terdengar.');
+        };
+        recog.start();
+      } catch (err) {
+        showToast('Mikrofon tidak dapat diakses.');
+      }
+    }
+
+    async function sendQaMessage() {
+      const input = document.getElementById('qaInputField');
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Add user message
+      qaChatHistory.push({
+        sender: 'user',
+        text: text
+      });
+      input.value = '';
+      renderQaChatMessages();
+
+      // Show typing indicator
+      const container = document.getElementById('qaChatMessages');
+      const typingEl = document.createElement('div');
+      typingEl.className = 'qa-msg-bubble bot';
+      typingEl.id = 'qaTypingIndicator';
+      typingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">🍃 Nong Mali sedang berpikir & menyiapkan jawaban...</span>`;
+      container.appendChild(typingEl);
+      container.scrollTop = container.scrollHeight;
+
+      // Process query
+      setTimeout(async () => {
+        const indicator = document.getElementById('qaTypingIndicator');
+        if (indicator) indicator.remove();
+
+        const lowerText = text.toLowerCase();
+        let bestMatch = null;
+        let highestScore = 0;
+
+        for (const item of QA_KNOWLEDGE_BASE) {
+          let score = 0;
+          for (const pattern of item.patterns) {
+            if (lowerText.includes(pattern)) {
+              score += 2;
+            }
+          }
+          if (score > highestScore) {
+            highestScore = score;
+            bestMatch = item;
+          }
+        }
+
+        if (bestMatch && highestScore > 0) {
+          qaChatHistory.push({
+            sender: 'bot',
+            text: `### ${bestMatch.title}\n\n${bestMatch.response}\n\n*${bestMatch.tips}*`,
+            thaiAudioText: bestMatch.thaiKey
+          });
+          renderQaChatMessages();
+          if (bestMatch.thaiKey) {
+            speakThai(bestMatch.thaiKey);
+          }
+        } else {
+          // If inquiry looks like translation query or arbitrary Thailand question:
+          // Try live answering via translation assistance
+          try {
+            const transUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=th&dt=t&q=${encodeURIComponent(text)}`;
+            const tResp = await fetch(transUrl);
+            const tData = await tResp.json();
+            const thaiVer = tData && tData[0] ? tData[0].map(s => s[0]).join('') : '';
+
+            qaChatHistory.push({
+              sender: 'bot',
+              text: `Terima kasih atas pertanyaannya seputar: **"${text}"**!\n\nUntuk pertanyaan spesifik ini, Anda dapat menjelajahi tab **🔍 Ensiklopedia & Wisata** atau menggunakan frasa penutur asli berikut untuk bertanya langsung di Thailand:\n\n🇹🇭 **Bahasa Thai:** ${thaiVer || 'ขอข้อมูลเพิ่มเติมเกี่ยวกับเรื่องนี้ครับ'}\n\nJika Anda ingin bertanya tentang etika kuil, rekomendasi makanan tidak pedas, transportasi BTS, salam Wai, atau penukaran uang Baht, silakan pilih salah satu tombol saran di atas!`,
+              thaiAudioText: thaiVer || 'ขอบคุณครับ'
+            });
+            renderQaChatMessages();
+            if (thaiVer) speakThai(thaiVer);
+          } catch (e) {
+            qaChatHistory.push({
+              sender: 'bot',
+              text: `Pertanyaan yang bagus mengenai **"${text}"**! 🍃\n\nUntuk mendapatkan panduan lengkap seputar etika pakaian di kuil, rekomendasi makanan tidak pedas, transportasi BTS, makna salam Wai, atau festival Songkran, coba klik salah satu tombol saran topik di atas atau gunakan fitur pencarian ensiklopedia kami.`,
+              thaiAudioText: 'ขอบคุณมากครับ'
+            });
+            renderQaChatMessages();
+          }
+        }
+      }, 400);
+    }
+
     /* INITIALIZE APP */
     document.documentElement.setAttribute('data-theme', appState.theme || 'dark');
     document.getElementById('audioToggleBtn').textContent = appState.soundEnabled ? '🔊' : '🔇';
@@ -3289,6 +4507,8 @@
     renderAlphabetMatrix('all');
     renderPhrasebook('all');
     renderCurriculumNodes();
+    renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
+    initQaChat();
   </script>
 </body>
 </html>
