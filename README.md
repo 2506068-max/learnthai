@@ -26,8 +26,8 @@
 ### 2. ⚡ 60-Second Speaking Challenge
 Tantangan spontan khas Stimuler untuk melatih keberanian berbicara tanpa jeda ragu. Jawab pertanyaan pemantik dalam 60 detik penuh untuk menguji ketangkasan fonetik Anda.
 
-### 3. 💬 Simulasi Percakapan Roleplay (12 Skenario Nyata Bangkok)
-Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai konteks kehidupan dan perjalanan nyata di Bangkok, lengkap dengan filter kategori (`🍜 Kuliner`, `🛍️ Belanja`, `🛺 Transport`, `🏨 Wisata`, `💆 Layanan`) dan pencarian cepat:
+### 3. 💬 Simulasi Percakapan Roleplay (20 Skenario Nyata Bangkok)
+Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai konteks kehidupan dan perjalanan nyata di Bangkok, lengkap dengan filter kategori (`Semua (20)`, `🍜 Kuliner`, `🛍️ Belanja`, `🛺 Transport`, `🏨 Wisata`, `💆 Layanan`) dan pencarian instan:
 * 🍜 **Pesan Makanan di Kafe Sukhumvit** *(Pelayan Kafe Khun Da 👩)*: Memesan Pad Thai udang segar, minta air es, menu rekomendasi, dan bayar tagihan via QR.
 * 🛍️ **Tawar-Menawar di Pasar Chatuchak** *(Penjual Pasar Pii Somchai 👨)*: Menanyakan harga baju (*thâo-rài*), menawar diskon ramah, dan cek ketersediaan warna.
 * 🛺 **Naik Tuk-Tuk Keliling Kota** *(Sopir Tuk-Tuk Bang Somrak 👨)*: Sepakat tarif ke Wat Arun, mengarahkan belok kiri/kanan, dan minta berhenti.
@@ -40,7 +40,15 @@ Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai 
 * 🚊 **Stasiun Kereta BTS Skytrain** *(Petugas Loket Khun Nat 👨)*: Membeli tiket ke stasiun Siam, top up kartu Rabbit, dan petunjuk stasiun transit.
 * 🥭 **Beli Buah Tropis di Pasar Malam** *(Penjual Buah Mae Somjit 👩)*: Beli mangga manis Nam Dok Mai, minta dipotongkan dalam boks, dan kelapa muda wangi.
 * 📸 **Kenalan & Minta Tolong Foto di Wat Arun** *(Mahasiswa Lokal Nong Chai 👨)*: Minta tolong foto di depan pagoda kuil, bertukar asal negara, dan rekomendasi wisata lokal.
-* **Fitur Percakapan Interaktif**: *Quick-response speech chips*, respon balasan AI yang kontekstual dan natural, tombol dengarkan sebelum kirim, dan tombol suara asli ganda di setiap balon obrolan.
+* 🚕 **Naik Taksi Meter Bangkok** *(Sopir Taksi Lung Wichai 👨)*: Minta nyalakan argo meter (*bpə̀ət mí-dtə̂ə*), tolak jalan tol macet, dan turun di halte bus.
+* 🚤 **Perahu Cepat Chao Phraya Express** *(Petugas Dermaga Pii Orn 👩)*: Tiket perahu bendera oranye ke Grand Palace Tha Chang (16 Baht), kapal Iconsiam, jam operasional.
+* 📱 **Beli Tourist SIM Card 5G** *(Staf AIS Nong May 👩)*: Beli paket internet 5G unlimited 8 hari (299 Baht), registrasi paspor asli, dan aktivasi langsung.
+* 🛒 **Belanja Oleh-Oleh di Big C Rajdamri** *(Staf Big C Khun Keng 👨)*: Beli Cha Yen bubuk & rumput laut, fasilitas packing kardus pesawat, dan dokumen Tax Refund.
+* 🛕 **Masuk Kuil Wat Pho & Sewa Sarung** *(Petugas Kuil Mae Buppha 👩)*: Tiket masuk patung Buddha tidur (200 Baht), sewa kain sarung penutup kaki sopan, dan aturan foto.
+* 🧺 **Cuci Pakaian Kiloan di Laundry** *(Pemilik Laundry Pii Wan 👩)*: Cuci dan keringkan pakaian harian (50 Baht/kg), jam pengambilan sore, dan wangi pelembut melati.
+* 💱 **Tukar Uang di SuperRich Exchange** *(Teller SuperRich Khun Thanat 👨)*: Tukar mata uang Rupiah ke Baht, cek kurs harian, serahkan paspor, dan minta pecahan kecil.
+* 🎬 **Nonton Bioskop di Paragon Cineplex** *(Staf Tiket Nong Praew 👩)*: Pesan kursi bioskop baris tengah, cek subtitle bahasa Inggris, dan etika lagu penghormatan kerajaan.
+* **Fitur Percakapan Interaktif**: *Quick-response speech chips*, respon balasan AI kontekstual bercabang, tombol dengarkan sebelum kirim, dan tombol suara asli ganda di setiap balon obrolan.
 
 ### 4. 🔊 100% Penutur Asli Bangkok (Universal Native Thai Audio Engine)
 * **Seluruh Kata Berpenutur Asli**: Setiap kata, frasa, konsonan, vokal, pilihan jawaban kuis, dan token kalimat disuarakan langsung oleh penutur asli (*Bangkok Central Standard Thai*).

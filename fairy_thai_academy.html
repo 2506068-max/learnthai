@@ -2081,13 +2081,13 @@
             <div class="scenario-sidebar">
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h3 style="font-size:15px; font-weight:800; margin:0;">Pilih Skenario Percakapan</h3>
-                <span class="scenario-badge" id="roleplayCountBadge" style="background:var(--primary-light); color:var(--primary); font-weight:800;">12 Topik</span>
+                <span class="scenario-badge" id="roleplayCountBadge" style="background:var(--primary-light); color:var(--primary); font-weight:800;">20 Topik</span>
               </div>
               <p style="font-size:12px; color:var(--text-muted); margin:0;">Simulasi nyata percakapan jalanan, restoran, pasar, & kehidupan Bangkok:</p>
               
               <!-- Filter Bar -->
               <div class="scenario-filter-bar" id="roleplayCategoryBar">
-                <button class="scenario-filter-btn active" onclick="filterRoleplayScenarios('all', this)">Semua (12)</button>
+                <button class="scenario-filter-btn active" onclick="filterRoleplayScenarios('all', this)">Semua (20)</button>
                 <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('kuliner', this)">🍜 Kuliner</button>
                 <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('belanja', this)">🛍️ Belanja</button>
                 <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('transport', this)">🛺 Transport</button>
@@ -3763,6 +3763,302 @@
             roman: 'grung-thêep sǔay láe khɔ̌ɔng-gin a-rɔ̀ɔy mâak khráp',
             ind: 'Bangkok sangat indah dan makanannya enak-enak',
             reply: { thai: 'ขอบคุณครับ! อย่าลืมไปลองผัดไทยกับล่องเรือแม่น้ำเจ้าพระยานะครับ', roman: 'khɔ̀ɔp-khun khráp! yàa luum bpai lɔɔng phàt-thai gàp lɔ̂ng-ruea mâae-náam jâao-phrá-yaa ná khráp', ind: 'Terima kasih! Jangan lupa coba Pad Thai dan naik kapal susur sungai Chao Phraya ya!' }
+          }
+        ]
+      },
+      taxi: {
+        id: 'taxi',
+        category: 'transport',
+        categoryLabel: '🛺 Transport',
+        title: 'Naik Taksi Meter Bangkok',
+        desc: 'Minta nyalakan argo meter, pilih jalan biasa tanpa tol, dan turun di halte.',
+        icon: '🚕',
+        level: 'A1 Dasar',
+        partnerName: 'Sopir Taksi (Lung Wichai)',
+        partnerAvatar: '🚕',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • Bangkok Meter Taxi',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีครับ ไปที่ไหนครับ?', roman: 'sà-wàt-dii khráp, pai thîi nǎi khráp?', ind: 'Halo, mau pergi ke mana?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ไปสยามพารากอนครับ เปิดมิเตอร์ด้วยนะครับ',
+            roman: 'pai sà-yǎam phaa-raa-gɔɔn khráp, bpə̀ət mí-dtə̂ə dûay ná khráp',
+            ind: 'Pergi ke Siam Paragon, tolong nyalakan argo meter ya',
+            reply: { thai: 'ได้ครับ เปิดมิเตอร์เรียบร้อยแล้วครับ ขึ้นทางด่วนไหม?', roman: 'dâi khráp, bpə̀ət mí-dtə̂ə rîap-rɔ́ɔy láew khráp, khêun thaang-dùan mǎi?', ind: 'Baik, argo sudah dinyalakan. Mau lewat jalan tol tidak?' }
+          },
+          {
+            thai: 'ไม่ขึ้นทางด่วนครับ ไปทางธรรมดา',
+            roman: 'mâi khêun thaang-dùan khráp, pai thaang tham-má-daa',
+            ind: 'Tidak lewat tol, lewat jalan biasa saja',
+            reply: { thai: 'โอเคครับ ถ้าทางธรรมดาอาจจะรถติดนิดหน่อยนะ', roman: 'oo-kee khráp, thâa thaang tham-má-daa àat jà rót dtìt nít-nɔ̀ɔy ná', ind: 'Oke, kalau jalan biasa mungkin agak macet sedikit ya' }
+          },
+          {
+            thai: 'จอดตรงป้ายรถเมล์ข้างหน้าครับ',
+            roman: 'jɔ̀ɔt dtrong bpâai rót-mee khâang-nâa khráp',
+            ind: 'Tolong berhenti di dekat halte bus depan itu',
+            reply: { thai: 'ได้เลยครับ ทั้งหมด 95 บาทครับ', roman: 'dâi loei khráp, tháng-mòt gâao-sìp-hâa bàat khráp', ind: 'Bisa, totalnya 95 Baht ya' }
+          }
+        ]
+      },
+      boat: {
+        id: 'boat',
+        category: 'transport',
+        categoryLabel: '🛺 Transport',
+        title: 'Perahu Cepat Chao Phraya Express',
+        desc: 'Naik perahu bendera oranye ke Grand Palace, cek rute Iconsiam, dan jam operasional.',
+        icon: '🚤',
+        level: 'A1 Dasar',
+        partnerName: 'Petugas Dermaga (Pii Orn)',
+        partnerAvatar: '🚤',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Chao Phraya Pier',
+        initialMessages: [
+          { sender: 'ai', thai: 'เรือด่วนเจ้าพระยาจ้า จะไปท่าเรือไหนคะ?', roman: 'ruea-dùan jâao-phrá-yaa jâa, jà pai thâa-ruea nǎi khá?', ind: 'Perahu cepat Chao Phraya! Mau ke dermaga mana?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ไปท่าช้าง พระบรมมหาราชวังครับ',
+            roman: 'pai thâa-cháang, phrá bɔɔ-rom-má-hǎa-râat-chá-wang khráp',
+            ind: 'Pergi ke dermaga Tha Chang, Grand Palace',
+            reply: { thai: 'นั่งเรือธงส้มได้เลยค่ะ ค่าโดยสาร 16 บาทตลอดสาย!', roman: 'nâng ruea thong sôm dâi loei khâ, khâa dooy-sǎan sìp-hòk bàat dtà-lɔ̀ɔt sǎai!', ind: 'Bisa naik kapal bendera oranye, tarif 16 Baht flat!' }
+          },
+          {
+            thai: 'เรือลำนี้จอดไอคอนสยามไหมครับ',
+            roman: 'ruea lam níi jɔ̀ɔt ai-khɔ̂ɔn sà-yǎam mǎi khráp',
+            ind: 'Apakah perahu ini berhenti di dermaga Iconsiam?',
+            reply: { thai: 'ลำนี้ไม่จอดค่ะ ต้องข้ามไปขึ้นเรือข้ามฟากท่าเรือตรงข้ามนะคะ', roman: 'lam níi mâi jɔ̀ɔt khâ, dtɔ̂ng khâam bpai khêun ruea khâam-fâak thâa-ruea dtrong-khâam ná khá', ind: 'Yang ini tidak berhenti, harus seberang naik kapal penyeberangan di dermaga seberang ya' }
+          },
+          {
+            thai: 'เรือหมดกี่โมงครับ',
+            roman: 'ruea mòt gìi moong khráp',
+            ind: 'Perahu terakhir habis jam berapa?',
+            reply: { thai: 'เรือเที่ยวสุดท้ายหมดหนึ่งทุ่มตรงค่ะ อย่ากลับดึกนะ!', roman: 'ruea thîao sùt-tháai mòt nèung thûm dtrong khâ, yàa glàp dèuk ná!', ind: 'Perahu terakhir habis jam 7 malam tepat, jangan pulang kemalaman ya!' }
+          }
+        ]
+      },
+      simcard: {
+        id: 'simcard',
+        category: 'layanan',
+        categoryLabel: '💆 Layanan',
+        title: 'Beli SIM Card Wisatawan AIS / True',
+        desc: 'Beli paket internet 5G unlimited 8 hari, registrasi paspor, dan aktivasi langsung.',
+        icon: '📱',
+        level: 'A1 Dasar',
+        partnerName: 'Staf Operator (Nong May)',
+        partnerAvatar: '📱',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • AIS Telecom Airport',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ สนใจซิมการ์ดท่องเที่ยวสำหรับเล่นเน็ตไหมคะ?', roman: 'sà-wàt-dii khâ, sǒn-jai sim-gàat thɔ̂ng-thîao sǎm-ràp lên nét mǎi khá?', ind: 'Halo! Berminat SIM card wisata untuk internetan?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ขอซิมเน็ตไม่อั้น 8 วันครับ',
+            roman: 'khɔ̌ɔ sim nét mâi-ân bpàaet wan khráp',
+            ind: 'Minta paket SIM internet unlimited 8 hari',
+            reply: { thai: 'แนะนำแพ็กเกจ 8 วัน เน็ต 5G ไม่จำกัด 299 บาทค่ะ!', roman: 'náe-nam pháaek-gèet bpàaet wan, nét hâa-jii mâi jam-gàt sɔ̌ɔng-rɔ́ɔi gâao-sìp-gâao bàat khâ!', ind: 'Rekomendasi paket 8 hari, internet 5G unlimited 299 Baht!' }
+          },
+          {
+            thai: 'ต้องลงทะเบียนพาสปอร์ตไหมครับ',
+            roman: 'dtɔ̂ng long-thá-biian phâat-sà-bpɔ̀ɔt mǎi khráp',
+            ind: 'Apakah wajib registrasi paspor?',
+            reply: { thai: 'ต้องใช้พาสปอร์ตตัวจริงลงทะเบียนตามกฎหมายค่ะ', roman: 'dtɔ̂ng chái phâat-sà-bpɔ̀ɔt dtua jing long-thá-biian dtaam gòt-mǎai khâ', ind: 'Wajib pakai paspor asli untuk registrasi sesuai undang-undang ya' }
+          },
+          {
+            thai: 'ช่วยเปลี่ยนซิมและตั้งค่าให้ด้วยครับ',
+            roman: 'chûay bplìian sim láe dtâng-khâa hâi dûay khráp',
+            ind: 'Tolong bantu ganti SIM card dan setting ya',
+            reply: { thai: 'ยินดีค่ะ ใส่ซิมให้แล้ว เปิดใช้งานเน็ตได้ทันทีเลยค่ะ!', roman: 'yin-dii khâ, sài sim hâi láew, bpə̀ət chái-ngaan nét dâi than-thii loei khâ!', ind: 'Dengan senang hati, SIM sudah dipasang, internet langsung aktif!' }
+          }
+        ]
+      },
+      supermarket: {
+        id: 'supermarket',
+        category: 'belanja',
+        categoryLabel: '🛍️ Belanja',
+        title: 'Belanja Oleh-Oleh di Big C Rajdamri',
+        desc: 'Cari teh bubuk & rumput laut, fasilitas packing kardus pesawat, dan Tax Refund.',
+        icon: '🛒',
+        level: 'A1 Dasar',
+        partnerName: 'Staf Big C (Khun Keng)',
+        partnerAvatar: '🛒',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • Big C Supercenter',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีครับ ได้ของฝากครบหรือยังครับ มีอะไรให้ช่วยไหม?', roman: 'sà-wàt-dii khráp, dâi khɔ̌ɔng-fàak khróp rǔue yang khráp? mii a-rai hâi chûay mǎi?', ind: 'Halo! Oleh-olehnya sudah lengkap? Ada yang bisa dibantu?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ชาไทยผงกับสาหร่ายเถ้าแก่น้อยอยู่ล็อกไหนครับ',
+            roman: 'chaa-thai phǒng gàp sǎa-râai thâo-gàae-nɔ́ɔy yùu lók nǎi khráp',
+            ind: 'Bubuk teh Thai dan snack rumput laut ada di lorong mana?',
+            reply: { thai: 'อยู่ล็อก 4 ตรงกลางห้างเลยครับ มีโปรโมชั่นซื้อ 2 แถม 1 ด้วย!', roman: 'yùu lók sìi dtrong glaang hâang loei khráp, mii bproo-moo-chân súue sɔ̌ɔng thǎaem nèung dûay!', ind: 'Ada di lorong 4 tengah toko, sedang ada promo beli 2 gratis 1!' }
+          },
+          {
+            thai: 'มีบริการกล่องแพ็คของสำหรับโหลดขึ้นเครื่องไหมครับ',
+            roman: 'mii bɔɔ-rí-gaan glɔ̀ɔng pháaek khɔ̌ɔng sǎm-ràp lòot khêun khrûeang mǎi khráp',
+            ind: 'Apakah ada kardus untuk packing bagasi pesawat?',
+            reply: { thai: 'มีจุดแพ็คกล่องฟรีอยู่หลังเคาน์เตอร์แคชเชียร์ครับ', roman: 'mii jùt pháaek glɔ̀ɔng frii yùu lǎng khao-dtə̂ə khâaet-chia khráp', ind: 'Ada konter packing kardus gratis di belakang kasir' }
+          },
+          {
+            thai: 'ขอเอกสารทำ Tax Refund ด้วยครับ',
+            roman: 'khɔ̌ɔ èek-gà-sǎan tham tháaek-rii-fân dûay khráp',
+            ind: 'Minta dokumen formulir untuk Tax Refund (bebas pajak turis)',
+            reply: { thai: 'ยอดเกิน 2,000 บาท นำใบเสร็จไปยื่นที่เคาน์เตอร์ได้เลยครับ', roman: 'yɔ̂ɔt goen sɔ̌ɔng phan bàat, nam bai-sèt bpai yêun thîi khao-dtə̂ə dâi loei khráp', ind: 'Total belanja di atas 2,000 Baht, bawa struk ke loket Tax Refund lantai 2 ya' }
+          }
+        ]
+      },
+      temple: {
+        id: 'temple',
+        category: 'wisata',
+        categoryLabel: '🏨 Wisata',
+        title: 'Masuk Kuil Wat Pho & Sewa Sarung',
+        desc: 'Beli tiket masuk patung Buddha tidur, sewa kain sarung penutup, dan aturan foto.',
+        icon: '🛕',
+        level: 'A1 Dasar',
+        partnerName: 'Petugas Kuil (Mae Buppha)',
+        partnerAvatar: '🛕',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Wat Pho Temple Staff',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีจ้า จะเข้าไปไหว้พระนอนด้านในใช่ไหมจ๊ะ?', roman: 'sà-wàt-dii jâa, jà khâo bpai wâi phrá nɔɔn dâan-nai châi mǎi jǎ?', ind: 'Halo! Mau masuk beribadah ke patung Buddha tidur di dalam kan?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ตั๋วเข้าชมราคาเท่าไหร่ครับ',
+            roman: 'dtǔa khâo chom raa-khaa thâo-rài khráp',
+            ind: 'Tiket masuk harganya berapa?',
+            reply: { thai: 'ตั๋วคนละ 200 บาทจ้า ได้รับน้ำดื่มฟรีหนึ่งขวดด้วยนะ!', roman: 'dtǔa khon lá sɔ̌ɔng-rɔ́ɔi bàat jâa, dâi ráp náam dèum frii nèung khùat dûay ná!', ind: 'Tiket 200 Baht per orang, dapat gratis sebotol air minum juga!' }
+          },
+          {
+            thai: 'ใส่กางเกงขาสั้นเข้าได้ไหมครับ',
+            roman: 'sài gaang-geeng khǎa-sân khâo dâi mǎi khráp',
+            ind: 'Boleh pakai celana pendek masuk?',
+            reply: { thai: 'กางเกงขาสั้นเข้าไม่ได้จ้ะ ต้องเช่าผ้าถุงตรงนี้ 20 บาทนะ', roman: 'gaang-geeng khǎa-sân khâo mâi dâi jà, dtɔ̂ng chao phâa-thǔng dtrong níi yîi-sìp bàat ná', ind: 'Celana pendek tidak boleh, harus sewa kain sarung di sini 20 Baht ya' }
+          },
+          {
+            thai: 'ข้างในถ่ายรูปได้ไหมครับ',
+            roman: 'khâang-nai thàai-rûup dâi mǎi khráp',
+            ind: 'Di dalam kuil boleh ambil foto?',
+            reply: { thai: 'ถ่ายรูปได้จ้า แต่กรุณาถอดรองเท้าและสำรวมกิริยาด้วยนะจ๊ะ', roman: 'thàai-rûup dâi jâa, dtàae gà-rú-naa thɔ̀ɔt rɔɔng-tháo láe sǎm-ruam gì-rí-yaa dûay ná jǎ', ind: 'Boleh foto, tapi tolong lepas alas kaki dan bersikap sopan ya!' }
+          }
+        ]
+      },
+      laundry: {
+        id: 'laundry',
+        category: 'layanan',
+        categoryLabel: '💆 Layanan',
+        title: 'Cuci Pakaian Kiloan di Laundry',
+        desc: 'Cuci kering pakaian harian, tanya jam pengambilan, dan minta pewangi melati.',
+        icon: '🧺',
+        level: 'A1 Dasar',
+        partnerName: 'Pemilik Laundry (Pii Wan)',
+        partnerAvatar: '🧺',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Bangkok Clean Laundry',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ มีผ้ามาส่งซักกี่กิโลคะ?', roman: 'sà-wàt-dii khâ, mii phâa maa sòng sák gìi gì-loo khá?', ind: 'Halo! Bawa pakaian untuk dicuci berapa kilo?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ซักและอบแห้งด้วยครับ ทั้งหมดสามกิโล',
+            roman: 'sák láe òp-hâaeng dûay khráp, tháng-mòt sǎam gì-loo',
+            ind: 'Cuci dan keringkan sekalian, total 3 kilogram',
+            reply: { thai: 'ซักอบแห้งกิโลละ 50 บาท ทั้งหมด 150 บาทค่ะ!', roman: 'sák òp-hâaeng gì-loo lá hâa-sìp bàat, tháng-mòt nèung-rɔ́ɔi hâa-sìp bàat khâ!', ind: 'Cuci kering 50 Baht per kilo, totalnya 150 Baht ya!' }
+          },
+          {
+            thai: 'มารับผ้าได้กี่โมงครับ',
+            roman: 'maa ráp phâa dâi gìi moong khráp',
+            ind: 'Bisa ambil pakaiannya jam berapa?',
+            reply: { thai: 'ซักเสร็จพร้อมพับเรียบร้อยตอนหกโมงเย็นวันนี้ค่ะ', roman: 'sák sèt phrɔ́ɔm pháp rîap-rɔ́ɔy dtɔɔn hòk moong yen wan-níi khâ', ind: 'Selesai dan terlipat rapi jam 6 sore hari ini ya' }
+          },
+          {
+            thai: 'ขอเพิ่มน้ำยาปรับผ้านุ่มหอมๆ ด้วยครับ',
+            roman: 'khɔ̌ɔ phêem náam-yaa bpràp phâa-nûm hɔ̌ɔm-hɔ̌ɔm dûay khráp',
+            ind: 'Minta tambah pelembut pewangi pakaian yang harum',
+            reply: { thai: 'จัดให้ค่ะ ใช้น้ำยาปรับผ้านุ่มกลิ่นดอกมะลิหอมฟุ้งแน่นอนค่ะ!', roman: 'jàt hâi khâ, chái náam-yaa bpràp phâa-nûm glìn dɔ̀ɔk má-lí hɔ̌ɔm fúng nâae-nɔɔn khâ!', ind: 'Siap! Pakai pewangi aroma melati wangi semerbak pasti harum!' }
+          }
+        ]
+      },
+      money: {
+        id: 'money',
+        category: 'layanan',
+        categoryLabel: '💆 Layanan',
+        title: 'Tukar Uang di SuperRich Exchange',
+        desc: 'Tukar Rupiah ke Baht, cek kurs harian, serahkan paspor, dan minta pecahan kecil.',
+        icon: '💱',
+        level: 'A2 Menengah',
+        partnerName: 'Teller SuperRich (Khun Thanat)',
+        partnerAvatar: '💱',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • SuperRich Green Exchange',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีครับ ต้องการแลกเปลี่ยนเงินสกุลอะไรครับ?', roman: 'sà-wàt-dii khráp, dtɔ̂ng-gaan lâaek-bplìian ngoen sà-gun a-rai khráp?', ind: 'Halo, ingin tukar mata uang apa hari ini?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'อยากแลกเงินรูเปียห์เป็นเงินบาทครับ',
+            roman: 'yàak lâaek ngoen ruu-bpiia pen ngoen bàat khráp',
+            ind: 'Mau tukar uang Rupiah Indonesia ke uang Baht Thai',
+            reply: { thai: 'ได้ครับ วันนี้เรท 1,000 รูเปียห์เท่ากับ 2.2 บาทครับ', roman: 'dâi khráp, wan-níi rêet nèung phan ruu-bpiia thâo gàp sɔ̌ɔng jùt sɔ̌ɔng bàat khráp', ind: 'Bisa, kurs hari ini 1.000 Rupiah = 2.2 Baht ya' }
+          },
+          {
+            thai: 'นี่เงินและพาสปอร์ตครับ',
+            roman: 'nîi ngoen láe phâat-sà-bpɔ̀ɔt khráp',
+            ind: 'Ini uang dan paspor asli saya',
+            reply: { thai: 'รับเงินมาแล้วครับ ตรวจนับเงินบาทและใบเสร็จตรงนี้ด้วยนะครับ', roman: 'ráp ngoen maa láew khráp, dtrùat náp ngoen bàat láe bai-sèt dtrong níi dûay ná khráp', ind: 'Uang sudah diterima, tolong hitung uang Baht dan cek struk di depan ini ya' }
+          },
+          {
+            thai: 'ขอธนบัตรใบละหนึ่งร้อยกับยี่สิบบาทด้วยครับ',
+            roman: 'khɔ̌ɔ thá-ná-bàt bai lá nèung-rɔ́ɔi gàp yîi-sìp bàat dûay khráp',
+            ind: 'Minta uang kertas pecahan 100 dan 20 Baht juga',
+            reply: { thai: 'จัดให้ครับ มีแบงก์ร้อย 5 ใบ และแบงก์ยี่สิบ 10 ใบครับ', roman: 'jàt hâi khráp, mii báeng rɔ́ɔi hâa bai, láe báeng yîi-sìp sìp bai khráp', ind: 'Siap, ini uang kertas 100 ada 5 lembar dan pecahan 20 ada 10 lembar ya' }
+          }
+        ]
+      },
+      cinema: {
+        id: 'cinema',
+        category: 'wisata',
+        categoryLabel: '🏨 Wisata',
+        title: 'Nonton Bioskop di Paragon Cineplex',
+        desc: 'Pesan kursi bioskop, tanya ketersediaan subtitle bahasa Inggris, dan etika lagu kerajaan.',
+        icon: '🎬',
+        level: 'A2 Menengah',
+        partnerName: 'Staf Tiket Bioskop (Nong Praew)',
+        partnerAvatar: '🎬',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Paragon Cineplex',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ รับตั๋วหนังเรื่องอะไรดีคะ รอบกี่โมงดีคะ?', roman: 'sà-wàt-dii khâ, ráp dtǔa nǎng rûeang a-rai dii khá? rɔ̂ɔp gìi moong dii khá?', ind: 'Halo! Mau pesan tiket film apa dan jam tayang berapa?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ขอตั๋วสองที่นั่ง แถวตรงกลางครับ',
+            roman: 'khɔ̌ɔ dtǔa sɔ̌ɔng thîi-nâng, thǎaeo dtrong glaang khráp',
+            ind: 'Minta dua tiket film di baris tengah',
+            reply: { thai: 'ที่นั่งแถว G ตรงกลางว่างค่ะ บัตรใบละ 260 บาทค่ะ', roman: 'thîi-nâng thǎaeo jii dtrong glaang wâang khâ, bàt bai lá sɔ̌ɔng-rɔ́ɔi hòk-sìp bàat khâ', ind: 'Kursi baris G di tengah masih kosong, tiket 260 Baht per kursi ya' }
+          },
+          {
+            thai: 'มีซับไตเติลภาษาอังกฤษไหมครับ',
+            roman: 'mii sáp-dtai-dtə̂n phaa-sǎa ang-grìt mǎi khráp',
+            ind: 'Apakah ada subtitle bahasa Inggris?',
+            reply: { thai: 'เรื่องนี้เสียงไทยและมีซับไตเติลภาษาอังกฤษชัดเจนค่ะ', roman: 'rûeang níi sǐang thai láe mii sáp-dtai-dtə̂n phaa-sǎa ang-grìt chát-jeen khâ', ind: 'Film ini audio bahasa Thai dengan subtitle bahasa Inggris jelas ya' }
+          },
+          {
+            thai: 'ก่อนหนังฉายต้องยืนทำความเคารพเพลงสรรเสริญพระบารมีไหมครับ',
+            roman: 'gɔ̀ɔn nǎng chǎai dtɔ̂ng yuun tham khwaam khao-róp phleeng sǎn-sə̌ən phrá-baa-rá-mii mǎi khráp',
+            ind: 'Sebelum film mulai apakah harus berdiri menghormati lagu kerajaan?',
+            reply: { thai: 'ใช่ค่ะ เมื่อได้ยินเสียงเพลงบรรเลง กรุณายืนตรงเพื่อแสดงความเคารพนะคะ', roman: 'châi khâ, mûea dâi-yin sǐang phleeng ban-leeng, gà-rú-naa yuun dtrong phûea sà-daeng khwaam khao-róp ná khá', ind: 'Benar, saat lagu penghormatan dimainkan, mohon berdiri tegak untuk menghormati ya' }
           }
         ]
       }
