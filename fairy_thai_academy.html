@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>Mali's Thai Garden — Ghibli AI Speaking Coach</title>
   <meta name="description" content="Taman belajar dan latihan berbicara bahasa Thailand dengan AI Coach bertema Studio Ghibli, evaluasi suara asli, dan simulasi percakapan.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2736,10 +2737,43 @@
     };
 
     let currentThaiAudio = null;
+    const audioUrlCache = new Map();
+    let loadedVoices = [];
+
+    // Pre-cache voices when speech synthesis is available
+    if ('speechSynthesis' in window) {
+      const updateVoices = () => {
+        try {
+          loadedVoices = window.speechSynthesis.getVoices() || [];
+        } catch (e) {}
+      };
+      updateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = updateVoices;
+      }
+    }
+
+    // Unmute audio context on first user interaction
+    window.addEventListener('click', () => {
+      try {
+        if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      } catch (e) {}
+    }, { once: true });
 
     /* UNIVERSAL NATIVE THAI AUDIO ENGINE (DUAL MALE & FEMALE VOICE PROFILES) */
     function speakThai(text, gender) {
-      if (!text || !appState.soundEnabled) return;
+      if (!text) return;
+
+      // Auto-unmute if sound was toggled off when user explicitly clicks an audio button
+      if (!appState.soundEnabled) {
+        appState.soundEnabled = true;
+        const btn = document.getElementById('audioToggleBtn');
+        if (btn) btn.textContent = '🔊';
+        showToast('🔊 Suara diaktifkan');
+      }
+
       const targetGender = gender || appState.speakerGender || 'female';
 
       // Automatically format Thai text to match targetGender if it contains gendered particles
@@ -2782,94 +2816,128 @@
         currentThaiAudio = null;
       };
 
-      // Dual High-Fidelity Native Bangkok Thai Audio Endpoints
       const encoded = encodeURIComponent(targetText);
-      const audioEndpoints = [
-        `https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=th&q=${encoded}`,
-        `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`
-      ];
 
-      let endpointIdx = 0;
-      function tryStreamNativeAudio() {
-        if (endpointIdx >= audioEndpoints.length) {
-          fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
-          return;
-        }
+      // Tier 1: Direct Google TTS streaming with no-referrer
+      const googleTtsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`;
 
-        const audio = new Audio();
-        currentThaiAudio = audio;
-
-        // Acoustic gender pitch modulation
+      function playAudioUrl(url, onFail) {
         try {
-          if ('preservesPitch' in audio) {
-            audio.preservesPitch = false;
+          const audio = new Audio();
+          currentThaiAudio = audio;
+          audio.referrerPolicy = 'no-referrer';
+
+          const baseRate = appState.speechRate || 1.0;
+          if (targetGender === 'male') {
+            audio.playbackRate = baseRate * 0.90;
+          } else {
+            audio.playbackRate = baseRate * 1.03;
           }
-        } catch (e) {}
 
-        const baseRate = appState.speechRate || 1.0;
-        if (targetGender === 'male') {
-          // Deeper resonance, masculine pitch & cadence
-          audio.playbackRate = baseRate * 0.90;
-        } else {
-          // Melodic, feminine pitch & cadence
-          audio.playbackRate = baseRate * 1.03;
-        }
+          audio.onended = finishAudio;
+          audio.onerror = () => {
+            if (onFail) onFail();
+          };
 
-        audio.onended = finishAudio;
-        audio.onerror = () => {
-          endpointIdx++;
-          tryStreamNativeAudio();
-        };
-
-        audio.src = audioEndpoints[endpointIdx];
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            endpointIdx++;
-            tryStreamNativeAudio();
-          });
+          audio.src = url;
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch((err) => {
+              console.warn("Audio play failed, proceeding to fallback:", err);
+              if (onFail) onFail();
+            });
+          }
+        } catch (err) {
+          console.warn("Audio instantiation error:", err);
+          if (onFail) onFail();
         }
       }
 
-      tryStreamNativeAudio();
+      // Tier 2: SoundOfText Cloudflare API Fallback
+      async function trySoundOfTextFallback() {
+        const cacheKey = 'sot_' + targetText;
+        if (audioUrlCache.has(cacheKey)) {
+          playAudioUrl(audioUrlCache.get(cacheKey), () => {
+            fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
+          });
+          return;
+        }
+
+        try {
+          const res = await fetch('https://api.soundoftext.com/sounds', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              engine: 'Google',
+              data: { text: targetText, voice: 'th-TH' }
+            })
+          });
+          const data = await res.json();
+          if (data && data.success && data.id) {
+            const sotUrl = `https://files.soundoftext.com/${data.id}.mp3`;
+            audioUrlCache.set(cacheKey, sotUrl);
+            playAudioUrl(sotUrl, () => {
+              fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
+            });
+            return;
+          }
+        } catch (e) {
+          console.warn("SoundOfText fallback failed:", e);
+        }
+
+        // Tier 3: SpeechSynthesis
+        fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
+      }
+
+      // Start with Tier 1 (Google TTS direct), fallback to Tier 2, then Tier 3
+      playAudioUrl(googleTtsUrl, trySoundOfTextFallback);
     }
 
+    /* TIER 3: WEB SPEECH SYNTHESIS ENGINE (FAIL-SAFE) */
     function fallbackSpeechSynthesis(text, onDone, targetGender = 'female') {
       if (!('speechSynthesis' in window)) {
         if (onDone) onDone();
         return;
       }
-      const voices = speechSynthesis.getVoices();
-      const thaiVoices = voices.filter(v => 
-        v.lang === 'th-TH' || 
-        v.lang === 'th_TH' || 
-        v.lang.toLowerCase().startsWith('th') ||
-        v.name.toLowerCase().includes('thai')
-      );
+      try {
+        speechSynthesis.cancel();
+        const voices = loadedVoices.length > 0 ? loadedVoices : (speechSynthesis.getVoices() || []);
+        const thaiVoices = voices.filter(v => 
+          (v.lang && (v.lang === 'th-TH' || v.lang === 'th_TH' || v.lang.toLowerCase().startsWith('th'))) ||
+          (v.name && v.name.toLowerCase().includes('thai'))
+        );
 
-      if (thaiVoices.length === 0) {
+        let selectedVoice = null;
+        if (thaiVoices.length > 0) {
+          selectedVoice = thaiVoices[0];
+          if (targetGender === 'male') {
+            const maleVoice = thaiVoices.find(v => /male|man|niwat|pattara/i.test(v.name));
+            if (maleVoice) selectedVoice = maleVoice;
+          } else {
+            const femaleVoice = thaiVoices.find(v => /female|woman|narisa|premwadee|kanya/i.test(v.name));
+            if (femaleVoice) selectedVoice = femaleVoice;
+          }
+        }
+
+        const u = new SpeechSynthesisUtterance(text);
+        if (selectedVoice) {
+          u.voice = selectedVoice;
+        }
+        u.lang = 'th-TH';
+        u.rate = (appState.speechRate || 1.0) * (targetGender === 'male' ? 0.88 : 0.98);
+        u.pitch = targetGender === 'male' ? 0.80 : 1.18;
+
+        u.onend = () => { if (onDone) onDone(); };
+        u.onerror = (e) => {
+          console.warn("speechSynthesis error:", e);
+          if (onDone) onDone();
+        };
+
+        speechSynthesis.speak(u);
+      } catch (err) {
+        console.warn("fallbackSpeechSynthesis critical error:", err);
         if (onDone) onDone();
-        return;
       }
-
-      let selectedVoice = thaiVoices[0];
-      if (targetGender === 'male') {
-        const maleVoice = thaiVoices.find(v => /male|man|niwat|pattara/i.test(v.name));
-        if (maleVoice) selectedVoice = maleVoice;
-      } else {
-        const femaleVoice = thaiVoices.find(v => /female|woman|narisa|premwadee|kanya/i.test(v.name));
-        if (femaleVoice) selectedVoice = femaleVoice;
-      }
-
-      const u = new SpeechSynthesisUtterance(text);
-      u.voice = selectedVoice;
-      u.lang = 'th-TH';
-      u.rate = (appState.speechRate || 1.0) * (targetGender === 'male' ? 0.88 : 0.96);
-      u.pitch = targetGender === 'male' ? 0.80 : 1.18;
-
-      u.onend = () => { if (onDone) onDone(); };
-      u.onerror = () => { if (onDone) onDone(); };
-      speechSynthesis.speak(u);
     }
 
     /* 3. LIVE AUDIO WAVEFORM VISUALIZER */
