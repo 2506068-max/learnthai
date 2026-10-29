@@ -32,13 +32,16 @@ Simulasi dialog interaktif dengan **Nong Mali (มะลิ)** di berbagai konte
 * 🛍️ **Tawar-menawar di Pasar Chatuchak**: Menanyakan harga barang (*thâo-rài*), meminta diskon, dan memilih warna/ukuran.
 * 🛺 **Petualangan Tuk-Tuk Keliling Kota**: Mengarahkan navigasi (*lurus, belok kiri, belok kanan*) hingga berhenti di kuil Wat Arun.
 
-### 4. 🔊 Logat Asli Penutur Bangkok (Authentic Neural Thai Audio)
-* Menghilangkan suara robotik TTS berbahasa Inggris dengan menyematkan **High-Fidelity Neural Thai Audio Stream** resmi penutur asli Bangkok.
-* Menghasilkan intonasi tonal yang lentur, ritme alami, dan pelafalan partikel santun (*ครับ / khráp* dan *ค่ะ / khâ*) yang tepat.
+### 4. 🔊 100% Penutur Asli Bangkok (Universal Native Thai Audio Engine)
+* **Seluruh Kata Berpenutur Asli**: Setiap kata, frasa, konsonan, vokal, pilihan jawaban kuis, dan token kalimat disuarakan langsung oleh penutur asli (*Bangkok Central Standard Thai*).
+* **Dual-Source Neural Audio Streaming**: Menggunakan redundansi ganda streaming audio beresolusi tinggi dengan nol jeda *buffering* dan pengamanan *fallback* ketat (tidak akan pernah beralih ke aksen bahasa Inggris kaku).
+* **Kontrol Kecepatan Bicara (Speed Toggle)**: Pilihan kecepatan **1.0x (Alami Percakapan Bangkok)** atau **0.8x (Santai & Artikulasi Jelas untuk Pemula)**.
+* **Nomenklatur Resmi Huruf**: Pengucapan konsonan tunggal otomatis melafalkan nama tradisional lengkapnya (misal: `ก` dilafalkan *กอ ไก่ / Ko Kai*, `ข` dilafalkan *ขอ ไข่ / Kho Khai*).
 
-### 5. 🔬 Laboratorium 5 Nada & 44 Aksara Thai
-* **Uji 5 Nada Tonal**: Visualisasi kurva kontur SVG untuk *Mid, Low, Falling, High,* dan *Rising Tone*, dilengkapi tombol uji frekuensi audio (*Web Audio API Oscillator*) dan contoh kata penutur asli (`กา`, `ไข่`, `ข้าว`, `ม้า`, `หมา`).
-* **Matriks 44 Konsonan & Vokal**: Pelafalan konsonan formal sesuai standar sekolah Thailand (misal: `ก` = *กอ ไก่ / Ko Kai*, `ข` = *ขอ ไข่ / Kho Khai*, dst.).
+### 5. 🔬 Laboratorium 5 Nada, Aksara & Buku Frasa Audio
+* **Uji 5 Nada Tonal**: Visualisasi kontur SVG untuk *Mid, Low, Falling, High,* dan *Rising Tone*, dilengkapi tombol uji frekuensi sintetis dan 3 variasi kata contoh penutur asli di setiap nada.
+* **Matriks 44 Konsonan & 14 Vokal Lengkap**: Seluruh 44 huruf abjad Thailand terbagi rapi ke kelas Tengah, Tinggi, dan Rendah, masing-masing dengan audio asli interaktif.
+* **🍃 Buku Frasa Audio Real-Life (Phrasebook)**: Koleksi 25+ frasa penting Thailand (Salam, Restoran & Kafe, Tawar-menawar Pasar, Arah & Taksi) yang siap didengarkan dan dilatih kapan saja.
 
 ### 6. 🗺️ Roadmap Kurikulum Berjenjang
 * 4 Unit Pembelajaran terstruktur dari pemula (Salam & Huruf Dasar) hingga percakapan tingkat lanjut.

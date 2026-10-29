@@ -885,10 +885,41 @@
       font-weight: 700;
       white-space: nowrap;
       color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
     }
     .speech-chip:hover {
       border-color: var(--primary);
       background: var(--primary-light);
+      color: var(--primary);
+    }
+    .chip-speaker-tag {
+      font-size: 11px;
+      opacity: 0.65;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: opacity 0.15s;
+    }
+    .chip-speaker-tag:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .opt-audio-icon {
+      font-size: 12px;
+      opacity: 0.75;
+      padding: 3px 6px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .opt-audio-icon:hover {
+      opacity: 1;
+      border-color: var(--primary);
       color: var(--primary);
     }
 
@@ -1041,13 +1072,29 @@
     }
     .tone-example-tag {
       font-family: var(--font-thai);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--primary);
       background: var(--primary-light);
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      display: inline-block;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      transition: all 0.15s;
+    }
+    .tone-example-tag:hover {
+      background: var(--primary);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .tone-examples-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
     }
 
     /* Consonants Filter Matrix */
@@ -1365,6 +1412,68 @@
       opacity: 1;
     }
 
+    /* Native Audio Phrasebook Styles */
+    .phrasebook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .phrasebook-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.15s;
+    }
+    .phrasebook-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    .phrase-thai {
+      font-family: var(--font-thai);
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .phrase-thai:hover {
+      color: var(--primary);
+    }
+    .phrase-roman {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .phrase-meaning {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .metric-native-badge {
+      background: rgba(45, 106, 79, 0.2) !important;
+      border: 1px solid rgba(82, 183, 136, 0.45) !important;
+      color: var(--text) !important;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .metric-native-badge:hover {
+      background: rgba(45, 106, 79, 0.35) !important;
+      border-color: var(--emerald) !important;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 960px) {
       .stimuler-nav-rail { width: 80px; padding: 16px 8px; }
@@ -1392,6 +1501,9 @@
       </div>
 
       <div class="header-actions">
+        <div class="metric-badge metric-native-badge" onclick="triggerCoachGreeting()" title="Penutur Asli: Bangkok Central Thai • Klik untuk mendengar sapaan Nong Mali">
+          <span>🇹🇭 Penutur Asli Bangkok</span>
+        </div>
         <div class="metric-badge metric-cefr" title="Tingkat Kelancaran CEFR Thai">
           <span>🍃 CEFR A1.2</span>
         </div>
@@ -1401,6 +1513,9 @@
         <div class="metric-badge metric-xp" title="Total XP Berbicara">
           <span>⚡</span> <span id="headerXp">65</span> XP
         </div>
+        <button class="icon-btn" onclick="toggleSpeechRate()" id="rateToggleBtn" title="Kecepatan Bicara Penutur Asli (1.0x Normal / 0.8x Lambat)">
+          ⚡ 1.0x
+        </button>
         <button class="icon-btn" onclick="toggleAudioEngine()" id="audioToggleBtn" title="Toggle Efek Suara">
           🔊
         </button>
@@ -1469,7 +1584,9 @@
 
               <!-- Active Prompt -->
               <div class="prompt-box">
-                <div class="prompt-thai" id="studioPromptThai">สวัสดีครับ</div>
+                <div class="prompt-thai" id="studioPromptThai" onclick="playNativePromptAudio()" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
+                  สวัสดีครับ
+                </div>
                 <div class="prompt-roman" id="studioPromptRoman">sà-wàt-dii khráp</div>
                 <div class="prompt-meaning" id="studioPromptMeaning">Halo / Salam (penutur pria)</div>
 
@@ -1504,6 +1621,9 @@
               <div class="live-transcript-box">
                 <span style="font-size:12px; font-weight:700; color:var(--text-dim); text-transform:uppercase;">Terdeteksi:</span>
                 <span class="live-transcript-text" id="liveTranscriptDisplay">Belum ada suara terdeteksi...</span>
+                <button class="btn-audio-listen" style="padding:4px 10px; font-size:11px;" onclick="playNativePromptAudio()" title="Dengarkan lafal penutur asli Bangkok">
+                  🔊 Lafal Asli
+                </button>
                 <button class="btn-audio-listen" style="padding:4px 10px; font-size:11px;" onclick="simulateInstantSpeechTest()">
                   ⚡ Uji Cepat
                 </button>
@@ -1800,6 +1920,27 @@
           <div class="alphabet-cards-matrix" id="alphabetMatrix">
             <!-- Alphabet cards rendered dynamically -->
           </div>
+
+          <!-- NATIVE AUDIO PHRASEBOOK (BUKU FRASA PENUTUR ASLI) -->
+          <div class="phrasebook-section" style="margin-top:48px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 style="font-size:20px; font-weight:800; margin-bottom:4px;">🍃 Buku Frasa Audio Penutur Asli Bangkok</h3>
+                <span style="font-size:13px; color:var(--text-muted);">Dengarkan contoh asli penutur Bangkok untuk berbagai situasi nyata di Thailand.</span>
+              </div>
+              <div class="filter-pills" id="phrasebookCategoryPills">
+                <button class="pill-filter active" onclick="filterPhrasebook('all', this)">Semua</button>
+                <button class="pill-filter" onclick="filterPhrasebook('salam', this)">Salam & Sapaan</button>
+                <button class="pill-filter" onclick="filterPhrasebook('makan', this)">Kuliner & Kafe</button>
+                <button class="pill-filter" onclick="filterPhrasebook('pasar', this)">Pasar & Belanja</button>
+                <button class="pill-filter" onclick="filterPhrasebook('jalan', this)">Arah & Taksi</button>
+              </div>
+            </div>
+
+            <div class="phrasebook-grid" id="phrasebookContainer">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
         </section>
 
         <!-- 5. ANALITIK KELANCARAN TAB -->
@@ -1908,12 +2049,16 @@
       completedLessons: ['u1_l1'],
       unlockedLessons: ['u1_l1', 'u1_l2'],
       soundEnabled: true,
+      speechRate: 1.0,
       theme: 'dark'
     };
 
     let appState = JSON.parse(localStorage.getItem('stimuler_thai_state') || JSON.stringify(DEFAULT_STATE));
     if (!Array.isArray(appState.unlockedLessons) || appState.unlockedLessons.length === 0) {
       appState.unlockedLessons = ['u1_l1', 'u1_l2'];
+    }
+    if (typeof appState.speechRate !== 'number') {
+      appState.speechRate = 1.0;
     }
 
     function saveState() {
@@ -1925,6 +2070,21 @@
     function updateTopMetrics() {
       document.getElementById('headerStreak').textContent = appState.streak;
       document.getElementById('headerXp').textContent = appState.xp;
+      const rateBtn = document.getElementById('rateToggleBtn');
+      if (rateBtn) {
+        rateBtn.textContent = (appState.speechRate === 0.82) ? '🐢 0.8x' : '⚡ 1.0x';
+      }
+    }
+
+    function toggleSpeechRate() {
+      playSynthSound('click');
+      appState.speechRate = (appState.speechRate === 0.82) ? 1.0 : 0.82;
+      const rateBtn = document.getElementById('rateToggleBtn');
+      if (rateBtn) {
+        rateBtn.textContent = (appState.speechRate === 0.82) ? '🐢 0.8x' : '⚡ 1.0x';
+      }
+      saveState();
+      showToast(appState.speechRate === 0.82 ? 'Kecepatan Penutur Asli: 0.8x (Santai & Jelas untuk Pemula)' : 'Kecepatan Penutur Asli: 1.0x (Alami Percakapan Bangkok)');
     }
 
     /* 2. AUDIO SYNTHESIZER (WEB AUDIO API) */
@@ -1987,12 +2147,47 @@
       }
     }
 
+    /* 44 AUTHENTIC TRADITIONAL THAI CONSONANT NAMES (NOMENKLATUR RESMI BANGKOK) */
+    const THAI_LETTER_NAMES = {
+      'ก': 'กอ ไก่', 'ข': 'ขอ ไข่', 'ฃ': 'ฃอ ขวด', 'ค': 'คอ ควาย', 'ฅ': 'ฅอ คน',
+      'ฆ': 'ฆอ ระฆัง', 'ง': 'งอ งู', 'จ': 'จอ จาน', 'ฉ': 'ฉอ ฉิ่ง', 'ช': 'ชอ ช้าง',
+      'ซ': 'ซอ โซ่', 'ฌ': 'ฌอ เฌอ', 'ญ': 'ญอ หญิง', 'ฎ': 'ฎอ ชฎา', 'ฏ': 'ฏอ ปฏัก',
+      'ฐ': 'ฐอ ฐาน', 'ฑ': 'ฑอ มณโฑ', 'ฒ': 'ฒอ ผู้เฒ่า', 'ณ': 'ณอ เณร', 'ด': 'ดอ เด็ก',
+      'ต': 'ตอ เต่า', 'ถ': 'ถอ ถุง', 'ท': 'ทอ ทหาร', 'ธ': 'ธอ ธง', 'น': 'นอ หนู',
+      'บ': 'บอ ใบไม้', 'ป': 'ปอ ปลา', 'ผ': 'ผอ ผึ้ง', 'ฝ': 'ฝอ ฝา', 'พ': 'พอ พาน',
+      'ฟ': 'ฟอ ฟัน', 'ภ': 'ภอ สำเภา', 'ม': 'มอ ม้า', 'ย': 'ยอ ยักษ์', 'ร': 'รอ เรือ',
+      'ล': 'ลอ ลิง', 'ว': 'วอ แหวน', 'ศ': 'ศอ ศาลา', 'ษ': 'ษอ ฤๅษี', 'ส': 'สอ เสือ',
+      'ห': 'หอ หีบ', 'ฬ': 'ฬอ จุฬา', 'อ': 'ออ อ่าง', 'ฮ': 'ฮอ นกฮูก'
+    };
+
+    /* AUTHENTIC THAI VOWEL SPOKEN NAMES */
+    const THAI_VOWEL_NAMES = {
+      '-ะ': 'สระอะ', 'ะ': 'สระอะ', '-า': 'สระอา', 'า': 'สระอา',
+      '-ิ': 'สระอิ', 'ิ': 'สระอิ', '-ี': 'สระอี', 'ี': 'สระอี',
+      '-ึ': 'สระอึ', 'ึ': 'สระอึ', '-ื': 'สระอือ', 'ื': 'สระอือ',
+      '-ุ': 'สระอุ', 'ุ': 'สระอุ', '-ู': 'สระอู', 'ู': 'สระอู',
+      'เ-': 'สระเอ', 'เ': 'สระเอ', 'แ-': 'สระแอ', 'แ': 'สระแอ',
+      'โ-': 'สระโอ', 'โ': 'สระโอ', 'เ-าะ': 'สระเอาะ', 'เ-ีย': 'สระเอีย',
+      'เ-ือ': 'สระเอือ', 'ใ-': 'สระใบลไม้ม้วน', 'ไ-': 'สระไม้มลาย'
+    };
+
     let currentThaiAudio = null;
 
+    /* UNIVERSAL NATIVE THAI AUDIO ENGINE (100% BANGKOK ACCENT & TONAL CONTOURS) */
     function speakThai(text) {
-      if (!text) return;
-      const cleanText = text.replace(/<[^>]*>/g, '').trim();
-      if (!cleanText) return;
+      if (!text || !appState.soundEnabled) return;
+
+      // Extract Thai characters if text contains mixed romanization, parentheses, or translations
+      const thaiMatches = text.match(/[\u0E00-\u0E7F\s]+/g);
+      let targetText = thaiMatches ? thaiMatches.join('').trim() : text.replace(/<[^>]*>/g, '').trim();
+      if (!targetText) return;
+
+      // Check letter / vowel nomenclature for single glyphs
+      if (THAI_LETTER_NAMES[targetText]) {
+        targetText = THAI_LETTER_NAMES[targetText];
+      } else if (THAI_VOWEL_NAMES[targetText]) {
+        targetText = THAI_VOWEL_NAMES[targetText];
+      }
 
       // Stop any active audio
       if (currentThaiAudio) {
@@ -2000,6 +2195,7 @@
           currentThaiAudio.pause();
           currentThaiAudio.currentTime = 0;
         } catch (e) {}
+        currentThaiAudio = null;
       }
       if ('speechSynthesis' in window) {
         try { speechSynthesis.cancel(); } catch (e) {}
@@ -2010,13 +2206,6 @@
       const waveHint = document.getElementById('waveformHintText');
       if (waveHint) waveHint.style.display = 'none';
 
-      // 1. PRIMARY: High-Fidelity Native Bangkok Thai Audio (Real Native Accent & Tonal Contours)
-      const encoded = encodeURIComponent(cleanText);
-      const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`;
-
-      const audio = new Audio();
-      currentThaiAudio = audio;
-
       let ended = false;
       const finishAudio = () => {
         if (ended) return;
@@ -2025,19 +2214,42 @@
         currentThaiAudio = null;
       };
 
-      audio.onended = finishAudio;
-      audio.onerror = () => {
-        // Fallback: Web Speech API with strict Thai voice matching
-        fallbackSpeechSynthesis(cleanText, finishAudio);
-      };
+      // Dual High-Fidelity Native Bangkok Thai Audio Endpoints
+      const encoded = encodeURIComponent(targetText);
+      const audioEndpoints = [
+        `https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=th&q=${encoded}`,
+        `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`
+      ];
 
-      audio.src = audioUrl;
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          fallbackSpeechSynthesis(cleanText, finishAudio);
-        });
+      let endpointIdx = 0;
+      function tryStreamNativeAudio() {
+        if (endpointIdx >= audioEndpoints.length) {
+          // Strictly fallback only if client has genuine Thai voice pack
+          fallbackSpeechSynthesis(targetText, finishAudio);
+          return;
+        }
+
+        const audio = new Audio();
+        currentThaiAudio = audio;
+        audio.playbackRate = appState.speechRate || 1.0;
+
+        audio.onended = finishAudio;
+        audio.onerror = () => {
+          endpointIdx++;
+          tryStreamNativeAudio();
+        };
+
+        audio.src = audioEndpoints[endpointIdx];
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            endpointIdx++;
+            tryStreamNativeAudio();
+          });
+        }
       }
+
+      tryStreamNativeAudio();
     }
 
     function fallbackSpeechSynthesis(text, onDone) {
@@ -2045,11 +2257,7 @@
         if (onDone) onDone();
         return;
       }
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'th-TH';
-      u.rate = 0.82; // slightly slower for authentic Thai articulation
-
-      // Prioritize genuine Thai native voices
+      // CRITICAL: NEVER allow generic non-Thai fallback voices (English, etc.)
       const voices = speechSynthesis.getVoices();
       const thaiVoice = voices.find(v => 
         v.lang === 'th-TH' || 
@@ -2057,9 +2265,17 @@
         v.lang.toLowerCase().startsWith('th') ||
         v.name.toLowerCase().includes('thai')
       );
-      if (thaiVoice) {
-        u.voice = thaiVoice;
+
+      if (!thaiVoice) {
+        // No local Thai voice pack installed on client OS - do NOT speak with English accent!
+        if (onDone) onDone();
+        return;
       }
+
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = thaiVoice;
+      u.lang = 'th-TH';
+      u.rate = (appState.speechRate || 1.0) * 0.85;
 
       u.onend = () => { if (onDone) onDone(); };
       u.onerror = () => { if (onDone) onDone(); };
@@ -2233,9 +2449,11 @@
 
     function start60SecondChallenge() {
       playSynthSound('click');
-      showToast('⚡ 60-Second Challenge dimulai! Ucapkan kalimat prompt sebanyak mungkin!');
+      showToast('⚡ 60-Second Challenge dimulai! Dengarkan & tirukan penutur asli!');
       nextStudioPrompt();
-      toggleMicrophone();
+      const p = STUDIO_PROMPTS[studioIndex];
+      speakThai(p.thai);
+      setTimeout(() => toggleMicrophone(), 1800);
     }
 
     /* 5. ROLEPLAY CONVERSATIONAL SIMULATOR */
@@ -2283,17 +2501,22 @@
       const container = document.getElementById('roleplayChatMessages');
       container.innerHTML = data.messages.map(m => `
         <div class="chat-bubble ${m.sender === 'ai' ? 'bubble-ai' : 'bubble-user'}">
-          <span class="bubble-thai">${m.thai}</span>
+          <span class="bubble-thai" onclick="speakThai('${m.thai}')" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
+            ${m.thai} <span style="font-size:13px; opacity:0.8; vertical-align:middle;">🔊</span>
+          </span>
           <div style="font-size:12px; opacity:0.85; font-family:var(--font-mono);">${m.roman}</div>
           <div style="font-size:12px; margin-top:2px;">${m.ind}</div>
-          ${m.sender === 'ai' ? `<button class="bubble-audio-btn" onclick="speakThai('${m.thai}')">🔊 Dengar Suara</button>` : ''}
+          <button class="bubble-audio-btn" onclick="speakThai('${m.thai}')" style="${m.sender === 'user' ? 'color:#ffffff; opacity:0.95;' : ''}">
+            🔊 Dengar Suara Asli
+          </button>
         </div>
       `).join('');
 
       const chipsContainer = document.getElementById('roleplayQuickChips');
       chipsContainer.innerHTML = data.chips.map(c => `
-        <button class="speech-chip" onclick="userSendRoleplayMessage('${c.thai}', '${c.roman}', '${c.ind}')">
-          ${c.thai}
+        <button class="speech-chip" onclick="userSendRoleplayMessage('${c.thai}', '${c.roman}', '${c.ind}')" title="Kirim & Dengarkan lafal asli: ${c.roman}">
+          <span>${c.thai}</span>
+          <span class="chip-speaker-tag" onclick="event.stopPropagation(); speakThai('${c.thai}');" title="Dengarkan sebelum kirim">🔊</span>
         </button>
       `).join('');
 
@@ -2306,12 +2529,20 @@
       document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
       event.currentTarget.classList.add('active');
       renderRoleplayChat();
+      const firstMsg = ROLEPLAY_SCENARIOS[key]?.messages[0];
+      if (firstMsg) {
+        speakThai(firstMsg.thai);
+      }
     }
 
     function resetRoleplay() {
       playSynthSound('click');
       renderRoleplayChat();
       showToast('Skenario berhasil diatur ulang.');
+      const firstMsg = ROLEPLAY_SCENARIOS[activeRoleplayKey]?.messages[0];
+      if (firstMsg) {
+        speakThai(firstMsg.thai);
+      }
     }
 
     function userSendRoleplayMessage(thai, roman, ind) {
@@ -2319,8 +2550,10 @@
       const data = ROLEPLAY_SCENARIOS[activeRoleplayKey];
       data.messages.push({ sender: 'user', thai, roman, ind });
       renderRoleplayChat();
+      // Speak user sentence in native Thai immediately
+      speakThai(thai);
 
-      // AI Response
+      // AI Partner Response
       setTimeout(() => {
         playSynthSound('correct');
         const replyMap = {
@@ -2332,7 +2565,7 @@
         data.messages.push({ sender: 'ai', ...r });
         renderRoleplayChat();
         speakThai(r.thai);
-      }, 1000);
+      }, 1600);
     }
 
     function triggerRoleplayMic() {
@@ -2345,13 +2578,70 @@
       }
     }
 
-    /* 6. 5 TONES & CONSONANTS DATA (WITH AUTHENTIC THAI NOMENCLATURE) */
+    /* 6. 5 TONES & PHONETICS DATA (AUTHENTIC BANGKOK NOMENCLATURE & CONTOURS) */
     const THAI_TONES = [
-      { name: 'Nada Tengah (Mid)', thai: 'สามัญ', desc: 'Datar netral tanpa naik/turun intonasi.', freq: 'M 5 25 L 95 25', word: 'กา', example: 'กา (Gaa = gagak)', pitch: 260 },
-      { name: 'Nada Rendah (Low)', thai: 'เอก ( ่ )', desc: 'Suara dada rendah mendatar stabil.', freq: 'M 5 40 L 95 40', word: 'ไข่', example: 'ไข่ (Khai = telur)', pitch: 190 },
-      { name: 'Nada Jatuh (Falling)', thai: 'โท ( ้ )', desc: 'Mulai tinggi lalu meluncur curam.', freq: 'M 5 10 Q 30 8 95 45', word: 'ข้าว', example: 'ข้าว (Khao = nasi)', pitch: 320, endPitch: 180 },
-      { name: 'Nada Tinggi (High)', thai: 'ตรี ( ๊ )', desc: 'Melengking tinggi nada heran.', freq: 'M 5 12 L 95 12', word: 'ม้า', example: 'ม้า (Maa = kuda)', pitch: 340 },
-      { name: 'Nada Naik (Rising)', thai: 'จัตวา ( ๋ )', desc: 'Mulai bawah lalu meliuk naik tinggi.', freq: 'M 5 45 Q 35 48 95 12', word: 'หมา', example: 'หมา (Maa = anjing)', pitch: 200, endPitch: 330 }
+      { 
+        name: 'Nada Tengah (Mid)', 
+        thai: 'สามัญ', 
+        desc: 'Datar netral tanpa naik/turun intonasi (Pitch datar stabil).', 
+        freq: 'M 5 25 L 95 25', 
+        examples: [
+          { word: 'กา', roman: 'gaa (gagak)' },
+          { word: 'ตา', roman: 'dtaa (mata)' },
+          { word: 'มา', roman: 'maa (datang)' }
+        ],
+        pitch: 260 
+      },
+      { 
+        name: 'Nada Rendah (Low)', 
+        thai: 'เอก ( ่ )', 
+        desc: 'Suara dada rendah mendatar stabil di register bawah.', 
+        freq: 'M 5 40 L 95 40', 
+        examples: [
+          { word: 'ไข่', roman: 'khài (telur)' },
+          { word: 'ไก่', roman: 'gài (ayam)' },
+          { word: 'ป่า', roman: 'bpàa (hutan)' }
+        ],
+        pitch: 190 
+      },
+      { 
+        name: 'Nada Jatuh (Falling)', 
+        thai: 'โท ( ้ )', 
+        desc: 'Mulai tinggi lalu meluncur curam ke bawah seperti menegur.', 
+        freq: 'M 5 10 Q 30 8 95 45', 
+        examples: [
+          { word: 'ข้าว', roman: 'khâao (nasi)' },
+          { word: 'บ้าน', roman: 'bâan (rumah)' },
+          { word: 'น้ำ', roman: 'náam (air)' }
+        ],
+        pitch: 320, 
+        endPitch: 180 
+      },
+      { 
+        name: 'Nada Tinggi (High)', 
+        thai: 'ตรี ( ๊ )', 
+        desc: 'Melengking tinggi di register atas seperti nada heran.', 
+        freq: 'M 5 12 L 95 12', 
+        examples: [
+          { word: 'ม้า', roman: 'máa (kuda)' },
+          { word: 'โต๊ะ', roman: 'dó (meja)' },
+          { word: 'ร้อน', roman: 'rɔ́ɔn (panas)' }
+        ],
+        pitch: 340 
+      },
+      { 
+        name: 'Nada Naik (Rising)', 
+        thai: 'จัตวา ( ๋ )', 
+        desc: 'Mulai bawah lalu meliuk naik tinggi seperti terkejut.', 
+        freq: 'M 5 45 Q 35 48 95 12', 
+        examples: [
+          { word: 'หมา', roman: 'mǎa (anjing)' },
+          { word: 'สวย', roman: 'sǔay (cantik)' },
+          { word: 'ขาว', roman: 'khǎao (putih)' }
+        ],
+        pitch: 200, 
+        endPitch: 330 
+      }
     ];
 
     function renderTonesGrid() {
@@ -2364,15 +2654,21 @@
             </svg>
           </div>
           <div>
-            <h4>${t.name} <span style="font-size:12px; color:var(--text-muted); font-family:var(--font-thai);">(${t.thai})</span></h4>
+            <h4 onclick="speakThai('${t.thai.split(' ')[0]}')" style="cursor:pointer;" title="Klik dengar nama nada asli: ${t.thai}">
+              ${t.name} <span style="font-size:13px; color:var(--primary); font-family:var(--font-thai);">(${t.thai}) 🔊</span>
+            </h4>
             <p>${t.desc}</p>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-            <button class="tone-example-tag" onclick="speakThai('${t.word}')" title="Klik untuk mendengar contoh asli penutur Thai">
-              🔊 ${t.example}
-            </button>
-            <button class="btn-audio-listen" onclick="playTonePitchAudio(${t.pitch}, ${t.endPitch || t.pitch})">
-              ▶ Uji Pitch
+          <div class="tone-examples-wrap">
+            ${t.examples.map(ex => `
+              <button class="tone-example-tag" onclick="speakThai('${ex.word}')" title="Klik dengar penutur asli Thai: ${ex.word}">
+                🔊 ${ex.word} <span style="font-size:11px; font-weight:normal; opacity:0.85;">(${ex.roman})</span>
+              </button>
+            `).join('')}
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button class="btn-audio-listen" style="font-size:11px; padding:4px 10px;" onclick="playTonePitchAudio(${t.pitch}, ${t.endPitch || t.pitch})">
+              ▶ Uji Pitch Synth
             </button>
           </div>
         </div>
@@ -2403,45 +2699,75 @@
       }
     }
 
-    /* Consonants Matrix with Authentic Native Spoken Names */
+    /* FULL 44 THAI CONSONANTS MATRIX WITH TRADITIONAL SPOKEN NAMES */
     const THAI_CONSONANTS = [
+      // Kelas Tengah (Mid Class - 9 Konsonan)
       { thai: 'ก', spoken: 'กอ ไก่', roman: 'ko kai', meaning: 'ayam', class: 'mid' },
       { thai: 'จ', spoken: 'จอ จาน', roman: 'cho chan', meaning: 'piring', class: 'mid' },
+      { thai: 'ฎ', spoken: 'ฎอ ชฎา', roman: 'do chada', meaning: 'mahkota', class: 'mid' },
+      { thai: 'ฏ', spoken: 'ฏอ ปฏัก', roman: 'to patak', meaning: 'tombak', class: 'mid' },
       { thai: 'ด', spoken: 'ดอ เด็ก', roman: 'do dek', meaning: 'anak', class: 'mid' },
       { thai: 'ต', spoken: 'ตอ เต่า', roman: 'to tao', meaning: 'kura-kura', class: 'mid' },
       { thai: 'บ', spoken: 'บอ ใบไม้', roman: 'bo baimai', meaning: 'daun', class: 'mid' },
       { thai: 'ป', spoken: 'ปอ ปลา', roman: 'po pla', meaning: 'ikan', class: 'mid' },
       { thai: 'อ', spoken: 'ออ อ่าง', roman: 'o ang', meaning: 'baskom', class: 'mid' },
 
+      // Kelas Tinggi (High Class - 11 Konsonan)
       { thai: 'ข', spoken: 'ขอ ไข่', roman: 'kho khai', meaning: 'telur', class: 'high' },
+      { thai: 'ฃ', spoken: 'ฃอ ขวด', roman: 'kho khuat', meaning: 'botol', class: 'high' },
       { thai: 'ฉ', spoken: 'ฉอ ฉิ่ง', roman: 'cho ching', meaning: 'simbal', class: 'high' },
+      { thai: 'ฐ', spoken: 'ฐอ ฐาน', roman: 'tho than', meaning: 'alas/tatakan', class: 'high' },
       { thai: 'ถ', spoken: 'ถอ ถุง', roman: 'tho thung', meaning: 'karung/tas', class: 'high' },
       { thai: 'ผ', spoken: 'ผอ ผึ้ง', roman: 'pho phueng', meaning: 'lebah', class: 'high' },
       { thai: 'ฝ', spoken: 'ฝอ ฝา', roman: 'fo fa', meaning: 'tutup wadah', class: 'high' },
+      { thai: 'ศ', spoken: 'ศอ ศาลา', roman: 'so sala', meaning: 'pendopo', class: 'high' },
+      { thai: 'ษ', spoken: 'ษอ ฤๅษี', roman: 'so ruesi', meaning: 'pertapa', class: 'high' },
       { thai: 'ส', spoken: 'สอ เสือ', roman: 'so suea', meaning: 'harimau', class: 'high' },
-      { thai: 'ห', spoken: 'หอ หีบ', roman: 'ho hip', meaning: 'peti', class: 'high' },
+      { thai: 'ห', spoken: 'หอ หีบ', roman: 'ho hip', meaning: 'peti simpanan', class: 'high' },
 
+      // Kelas Rendah (Low Class - 24 Konsonan)
       { thai: 'ค', spoken: 'คอ ควาย', roman: 'kho khwai', meaning: 'kerbau', class: 'low' },
+      { thai: 'ฅ', spoken: 'ฅอ คน', roman: 'kho khon', meaning: 'orang', class: 'low' },
+      { thai: 'ฆ', spoken: 'ฆอ ระฆัง', roman: 'kho rakhang', meaning: 'lonceng kuil', class: 'low' },
       { thai: 'ง', spoken: 'งอ งู', roman: 'ngo ngu', meaning: 'ular', class: 'low' },
       { thai: 'ช', spoken: 'ชอ ช้าง', roman: 'cho chang', meaning: 'gajah', class: 'low' },
       { thai: 'ซ', spoken: 'ซอ โซ่', roman: 'so so', meaning: 'rantai', class: 'low' },
+      { thai: 'ฌ', spoken: 'ฌอ เฌอ', roman: 'cho choe', meaning: 'pepohonan', class: 'low' },
+      { thai: 'ญ', spoken: 'ญอ หญิง', roman: 'yo ying', meaning: 'wanita', class: 'low' },
+      { thai: 'ฑ', spoken: 'ฑอ มณโฑ', roman: 'tho montho', meaning: 'Ratu Montho', class: 'low' },
+      { thai: 'ฒ', spoken: 'ฒอ ผู้เฒ่า', roman: 'tho phuthao', meaning: 'orang tua', class: 'low' },
+      { thai: 'ณ', spoken: 'ณอ เณร', roman: 'no nen', meaning: 'biksu cilik', class: 'low' },
       { thai: 'ท', spoken: 'ทอ ทหาร', roman: 'tho thahan', meaning: 'tentara', class: 'low' },
+      { thai: 'ธ', spoken: 'ธอ ธง', roman: 'tho thong', meaning: 'bendera', class: 'low' },
       { thai: 'น', spoken: 'นอ หนู', roman: 'no nu', meaning: 'tikus', class: 'low' },
+      { thai: 'พ', spoken: 'พอ พาน', roman: 'pho phan', meaning: 'nampan sesaji', class: 'low' },
+      { thai: 'ฟ', spoken: 'ฟอ ฟัน', roman: 'fo fan', meaning: 'gigi', class: 'low' },
+      { thai: 'ภ', spoken: 'ภอ สำเภา', roman: 'pho samphao', meaning: 'kapal layar', class: 'low' },
       { thai: 'ม', spoken: 'มอ ม้า', roman: 'mo ma', meaning: 'kuda', class: 'low' },
       { thai: 'ย', spoken: 'ยอ ยักษ์', roman: 'yo yak', meaning: 'raksasa', class: 'low' },
       { thai: 'ร', spoken: 'รอ เรือ', roman: 'ro ruea', meaning: 'perahu', class: 'low' },
       { thai: 'ล', spoken: 'ลอ ลิง', roman: 'lo ling', meaning: 'monyet', class: 'low' },
-      { thai: 'ว', spoken: 'วอ แหวน', roman: 'wo waen', meaning: 'cincin', class: 'low' },
+      { thai: 'ว', spoken: 'วอ แหวน', roman: 'wo waen', meaning: 'cincin emas', class: 'low' },
+      { thai: 'ฬ', spoken: 'ฬอ จุฬา', roman: 'lo chula', meaning: 'layang-layang', class: 'low' },
       { thai: 'ฮ', spoken: 'ฮอ นกฮูก', roman: 'ho nok-huk', meaning: 'burung hantu', class: 'low' }
     ];
 
+    /* ESSENTIAL THAI VOWELS MATRIX */
     const THAI_VOWELS = [
       { thai: '-ะ', spoken: 'สระอะ', roman: 'sara a (pendek)', meaning: 'vokal a pendek', class: 'vowel' },
       { thai: '-า', spoken: 'สระอา', roman: 'sara aa (panjang)', meaning: 'vokal aa panjang', class: 'vowel' },
       { thai: '-ิ', spoken: 'สระอิ', roman: 'sara i (pendek)', meaning: 'vokal i pendek', class: 'vowel' },
       { thai: '-ี', spoken: 'สระอี', roman: 'sara ii (panjang)', meaning: 'vokal ii panjang', class: 'vowel' },
+      { thai: '-ึ', spoken: 'สระอึ', roman: 'sara ue (pendek)', meaning: 'vokal ue pendek', class: 'vowel' },
+      { thai: '-ื', spoken: 'สระอือ', roman: 'sara uee (panjang)', meaning: 'vokal uee panjang', class: 'vowel' },
       { thai: '-ุ', spoken: 'สระอุ', roman: 'sara u (pendek)', meaning: 'vokal u pendek', class: 'vowel' },
-      { thai: '-ู', spoken: 'สระอู', roman: 'sara uu (panjang)', meaning: 'vokal uu panjang', class: 'vowel' }
+      { thai: '-ู', spoken: 'สระอู', roman: 'sara uu (panjang)', meaning: 'vokal uu panjang', class: 'vowel' },
+      { thai: 'เ-', spoken: 'สระเอ', roman: 'sara e (panjang)', meaning: 'vokal e panjang', class: 'vowel' },
+      { thai: 'แ-', spoken: 'สระแอ', roman: 'sara ae (panjang)', meaning: 'vokal ae panjang', class: 'vowel' },
+      { thai: 'โ-', spoken: 'สระโอ', roman: 'sara o (panjang)', meaning: 'vokal o panjang', class: 'vowel' },
+      { thai: 'เ-าะ', spoken: 'สระเอาะ', roman: 'sara aw (pendek)', meaning: 'vokal aw pendek', class: 'vowel' },
+      { thai: 'เ-ีย', spoken: 'สระเอีย', roman: 'sara ia (diftong)', meaning: 'diftong ia', class: 'vowel' },
+      { thai: 'เ-ือ', spoken: 'สระเอือ', roman: 'sara uea (diftong)', meaning: 'diftong uea', class: 'vowel' }
     ];
 
     function renderAlphabetMatrix(filter = 'all') {
@@ -2449,7 +2775,7 @@
       let items = (filter === 'vowel') ? THAI_VOWELS : THAI_CONSONANTS.filter(c => filter === 'all' || c.class === filter);
 
       container.innerHTML = items.map(c => `
-        <div class="glyph-card" onclick="speakThai('${c.spoken || c.thai.replace('-', '')}')" title="Klik untuk mendengar lafal Thai asli: ${c.spoken || c.thai}">
+        <div class="glyph-card" onclick="speakThai('${c.spoken || c.thai.replace('-', '')}')" title="Klik dengar suara asli penutur Bangkok: ${c.spoken || c.thai}">
           <div class="glyph-thai">${c.thai}</div>
           <div class="glyph-roman">${c.roman}</div>
           <div class="glyph-meaning">${c.meaning}</div>
@@ -2462,6 +2788,73 @@
       document.querySelectorAll('.filter-pills .pill-filter').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       renderAlphabetMatrix(type);
+    }
+
+    /* 7. NATIVE AUDIO PHRASEBOOK DATASET & ENGINE */
+    const NATIVE_PHRASEBOOK = [
+      // Salam & Sapaan
+      { category: 'salam', thai: 'สวัสดีครับ', roman: 'sà-wàt-dii khráp', meaning: 'Halo / Salam sopan (pria)' },
+      { category: 'salam', thai: 'สวัสดีค่ะ', roman: 'sà-wàt-dii khâ', meaning: 'Halo / Salam sopan (wanita)' },
+      { category: 'salam', thai: 'สบายดีไหมครับ', roman: 'sà-baai dii mǎi khráp', meaning: 'Apa kabar? Sehat-sehat?' },
+      { category: 'salam', thai: 'ยินดีที่ได้รู้จักครับ', roman: 'yin-dii thîi dâi rúu-jàk khráp', meaning: 'Senang berkenalan dengan Anda' },
+      { category: 'salam', thai: 'แล้วพบกันใหม่ครับ', roman: 'láew phóp gan mài khráp', meaning: 'Sampai jumpa lagi!' },
+      { category: 'salam', thai: 'โชคดีนะครับ', roman: 'chôok-dii ná khráp', meaning: 'Semoga beruntung / sukses' },
+
+      // Kuliner & Kafe
+      { category: 'makan', thai: 'ขอเมนูหน่อยครับ', roman: 'khɔ̌ɔ mee-nuu nɔ̀ɔy khráp', meaning: 'Bisa minta buku menu?' },
+      { category: 'makan', thai: 'ขอผัดไทยหนึ่งจานครับ', roman: 'khɔ̌ɔ phàt-thai nèung jaan khráp', meaning: 'Minta satu porsi Pad Thai' },
+      { category: 'makan', thai: 'ไม่ใส่พริกครับ', roman: 'mâi sài phrík khráp', meaning: 'Tolong jangan pakai cabe (tidak pedas)' },
+      { category: 'makan', thai: 'อร่อยมากครับ', roman: 'a-rɔ̀y mâak khráp', meaning: 'Rasanya enak sekali!' },
+      { category: 'makan', thai: 'เก็บเงินด้วยครับ', roman: 'gèp ngoen dûay khráp', meaning: 'Minta tagihan / bon meja' },
+      { category: 'makan', thai: 'ขอน้ำเปล่าหนึ่งแก้วครับ', roman: 'khɔ̌ɔ náam-plào nèung gâew khráp', meaning: 'Minta satu gelas air putih' },
+
+      // Pasar & Belanja
+      { category: 'pasar', thai: 'อันนี้เท่าไหร่ครับ', roman: 'an-níi thâo-rài khráp', meaning: 'Berapa harga barang yang ini?' },
+      { category: 'pasar', thai: 'ลดหน่อยได้ไหมครับ', roman: 'lót nɔ̀ɔy dâi mǎi khráp', meaning: 'Bisa minta diskon sedikit?' },
+      { category: 'pasar', thai: 'แพงเกินไปครับ', roman: 'phaeng goen pai khráp', meaning: 'Terlalu mahal harganya' },
+      { category: 'pasar', thai: 'มีสีอื่นไหมครับ', roman: 'mii sǐi ùen mǎi khráp', meaning: 'Apakah ada pilihan warna lain?' },
+      { category: 'pasar', thai: 'เอาตัวนี้ครับ', roman: 'ao dtua níi khráp', meaning: 'Saya ambil yang ini ya' },
+
+      // Arah & Transportasi
+      { category: 'jalan', thai: 'ไปสนามบินเท่าไหร่ครับ', roman: 'pai sà-nǎam-bin thâo-rài khráp', meaning: 'Berapa ongkos ke bandara Suvarnabhumi?' },
+      { category: 'jalan', thai: 'ตรงไปแล้วเลี้ยวซ้ายครับ', roman: 'dtrong pai láew líao sáai khráp', meaning: 'Lurus ke depan lalu belok kiri' },
+      { category: 'jalan', thai: 'จอดที่นี่ด้วยครับ', roman: 'jɔ̀ɔt thîi nîi dûay khráp', meaning: 'Tolong berhenti di sini' },
+      { category: 'jalan', thai: 'ห้องน้ำอยู่ที่ไหนครับ', roman: 'hɔ̂ng-náam yùu thîi nǎi khráp', meaning: 'Kamar kecil / toilet di sebelah mana?' },
+      { category: 'jalan', thai: 'ไปสถานีรถไฟฟ้าครับ', roman: 'pai sà-thǎa-nii rót-fai-fáa khráp', meaning: 'Pergi ke stasiun BTS Skytrain' },
+
+      // Kesopanan Penting
+      { category: 'salam', thai: 'ขอบคุณมากครับ', roman: 'khɔ̀ɔp-khun mâak khráp', meaning: 'Terima kasih banyak (pria)' },
+      { category: 'salam', thai: 'ขอโทษครับ', roman: 'khɔ̌ɔ-thôot khráp', meaning: 'Mohon maaf / permisi' },
+      { category: 'salam', thai: 'ไม่เป็นไรครับ', roman: 'mâi pen rai khráp', meaning: 'Sama-sama / tidak apa-apa (santai)' }
+    ];
+
+    function renderPhrasebook(cat = 'all') {
+      const container = document.getElementById('phrasebookContainer');
+      if (!container) return;
+      const list = (cat === 'all') ? NATIVE_PHRASEBOOK : NATIVE_PHRASEBOOK.filter(p => p.category === cat);
+
+      container.innerHTML = list.map(p => `
+        <div class="phrasebook-card">
+          <div>
+            <div class="phrase-thai" onclick="speakThai('${p.thai}')" title="Klik dengar suara asli penutur Bangkok: ${p.thai}">
+              <span>${p.thai}</span>
+              <span style="font-size:14px; opacity:0.8;">🔊</span>
+            </div>
+            <div class="phrase-roman">${p.roman}</div>
+            <div class="phrase-meaning">${p.meaning}</div>
+          </div>
+          <button class="btn-audio-listen" onclick="speakThai('${p.thai}')" title="Dengar lafal penutur asli Bangkok">
+            <span>🔊 Dengar Suara Asli</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function filterPhrasebook(cat, btn) {
+      playSynthSound('click');
+      document.querySelectorAll('#phrasebookCategoryPills .pill-filter').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderPhrasebook(cat);
     }
 
     /* 7. LESSONS DATABASE & ARENA RUNNER */
@@ -2589,18 +2982,26 @@
           <h2 class="quiz-title-h2">${q.prompt}</h2>
           ${q.thai ? `
             <div class="prompt-box">
-              <div class="prompt-thai">${q.thai}</div>
+              <div class="prompt-thai" onclick="speakThai('${q.thai}')" title="Klik dengar lafal penutur asli" style="cursor:pointer;">
+                ${q.thai} <span style="font-size:18px; opacity:0.8; vertical-align:middle;">🔊</span>
+              </div>
               <div class="prompt-roman">${q.roman}</div>
               <button class="btn-audio-listen" style="margin-top:10px;" onclick="speakThai('${q.thai}')">🔊 Dengarkan</button>
             </div>
           ` : ''}
           <div class="choices-grid-stimuler">
-            ${q.options.map((opt, i) => `
-              <button class="choice-card-stimuler" onclick="selectChoice(${i}, this)">
-                <span>${opt}</span>
-                <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim);">[${i+1}]</span>
-              </button>
-            `).join('')}
+            ${q.options.map((opt, i) => {
+              const hasThai = /[\u0E00-\u0E7F]/.test(opt);
+              return `
+                <button class="choice-card-stimuler" onclick="selectChoice(${i}, this)">
+                  <span style="display:flex; align-items:center; gap:8px;">
+                    ${opt}
+                    ${hasThai ? `<span class="opt-audio-icon" onclick="event.stopPropagation(); speakThai('${opt.replace(/'/g, "\\'")}');" title="Dengarkan lafal penutur asli">🔊</span>` : ''}
+                  </span>
+                  <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim);">[${i+1}]</span>
+                </button>
+              `;
+            }).join('')}
           </div>
         `;
       } else if (q.type === 'matching') {
@@ -2612,7 +3013,7 @@
           <h2 class="quiz-title-h2">${q.prompt}</h2>
           <div class="matching-grid-stimuler" id="matchingGrid">
             ${allCards.map(c => `
-              <div class="matching-chip ${c.isThai ? 'thai-glyph' : ''}" data-id="${c.id}" onclick="handleMatchingCard(this)">
+              <div class="matching-chip ${c.isThai ? 'thai-glyph' : ''}" data-id="${c.id}" onclick="handleMatchingCard(this)" title="Klik untuk memilih & mendengar audio">
                 ${c.text}
               </div>
             `).join('')}
@@ -2621,10 +3022,10 @@
       } else if (q.type === 'builder') {
         container.innerHTML = `
           <h2 class="quiz-title-h2">${q.prompt}</h2>
-          <div class="builder-area" id="builderSlots"></div>
+          <div class="builder-area" id="builderSlots" title="Klik kata untuk mendengar lafalnya"></div>
           <div class="builder-options">
             ${q.options.map(word => `
-              <button class="word-token" data-word="${word}" onclick="handleWordToken(this)">
+              <button class="word-token" data-word="${word}" onclick="handleWordToken(this)" title="Klik dengar lafal penutur asli: ${word}">
                 ${word}
               </button>
             `).join('')}
@@ -2640,11 +3041,23 @@
       document.querySelectorAll('.choice-card-stimuler').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       document.getElementById('arenaActionBtn').disabled = false;
+
+      // Automatically speak Thai option if it contains Thai script
+      const optText = currentSession.questions[currentSession.currentIndex].options[index];
+      if (/[\u0E00-\u0E7F]/.test(optText)) {
+        speakThai(optText);
+      }
     }
 
     function handleMatchingCard(el) {
       if (el.classList.contains('matched')) return;
       playSynthSound('click');
+
+      // Speak native Thai if card contains Thai script
+      const cardText = el.textContent.trim();
+      if (/[\u0E00-\u0E7F]/.test(cardText)) {
+        speakThai(cardText);
+      }
 
       if (!currentSession.activeMatchingCard) {
         currentSession.activeMatchingCard = el;
@@ -2682,6 +3095,7 @@
       playSynthSound('click');
       const word = btn.getAttribute('data-word');
       btn.classList.add('used');
+      speakThai(word);
 
       currentSession.builderSlots.push(word);
       const slotContainer = document.getElementById('builderSlots');
@@ -2689,6 +3103,7 @@
       token.className = 'word-token';
       token.textContent = word;
       token.onclick = () => {
+        speakThai(word);
         token.remove();
         btn.classList.remove('used');
         const idx = currentSession.builderSlots.indexOf(word);
@@ -2728,6 +3143,9 @@
           document.getElementById('arenaFeedbackExplain').textContent = q.explain || 'Luar biasa! Lanjutkan konsistensi Anda.';
           actionBtn.textContent = 'LANJUTKAN';
           appState.xp += 10;
+          if (q.type === 'builder') {
+            speakThai(q.correctSentence.join(''));
+          }
         } else {
           playSynthSound('wrong');
           document.getElementById('arenaFeedbackTitle').innerHTML = '❌ Belum Tepat';
@@ -2794,10 +3212,20 @@
       saveState();
     }
 
+    const COACH_GREETINGS = [
+      { thai: 'ยินดีต้อนรับสู่สวนภาษาไทยนะคะ มะลิพร้อมช่วยฝึกพูดค่ะ', ind: 'Selamat datang di taman bahasa Thai! Mali siap melatih Anda bicara ✨' },
+      { thai: 'สวัสดีค่ะ วันนี้พร้อมฝึกพูดภาษาไทยให้คล่องหรือยังคะ', ind: 'Sawat-dii kha! Siap melatih kelancaran lidah Anda hari ini?' },
+      { thai: 'เก่งมากเลยค่ะ ฝึกพูดทุกวันแบบนี้จะพูดคล่องเหมือนคนไทยแน่นอนค่ะ', ind: 'Luar biasa! Konsisten bicara setiap hari akan membuat aksen Anda seperti orang Thailand asli!' },
+      { thai: 'อย่าลืมออกเสียงวรรณยุกต์ให้ชัดเจนนะคะ สู้ๆ ค่ะ', ind: 'Jangan lupa perhatikan intonasi 5 nada ya. Semangat selalu!' }
+    ];
+    let coachGreetIdx = 0;
+
     function triggerCoachGreeting() {
       playSynthSound('click');
-      speakThai('ยินดีต้อนรับสู่สวนภาษาไทยนะคะ มะลิพร้อมช่วยค่ะ');
-      showToast('🍃 Nong Mali: "Sawat-dii kha! Selamat datang di taman bahasa Thai kami ✨"');
+      const g = COACH_GREETINGS[coachGreetIdx];
+      coachGreetIdx = (coachGreetIdx + 1) % COACH_GREETINGS.length;
+      speakThai(g.thai);
+      showToast(`🍃 Nong Mali: "${g.ind}"`);
     }
 
     /* GHIBLI AMBIENT FIREFLY PARTICLES ANIMATION */
@@ -2859,6 +3287,7 @@
     renderRoleplayChat();
     renderTonesGrid();
     renderAlphabetMatrix('all');
+    renderPhrasebook('all');
     renderCurriculumNodes();
   </script>
 </body>
