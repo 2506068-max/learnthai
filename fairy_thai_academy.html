@@ -1744,6 +1744,9 @@
         <div class="metric-badge metric-xp" title="Total XP Berbicara">
           <span>⚡</span> <span id="headerXp">65</span> XP
         </div>
+        <button class="icon-btn" onclick="toggleSpeakerGender()" id="genderToggleBtn" style="width:auto; padding:0 12px; gap:6px; font-weight:700; font-size:12px; font-family:var(--font-mono);" title="Ganti Gaya Bicara: Perempuan (ค่ะ) / Laki-laki (ครับ)">
+          👩 Wanita (ค่ะ)
+        </button>
         <button class="icon-btn" onclick="toggleSpeechRate()" id="rateToggleBtn" title="Kecepatan Bicara Penutur Asli (1.0x Normal / 0.8x Lambat)">
           ⚡ 1.0x
         </button>
@@ -1821,15 +1824,28 @@
 
               <!-- Active Prompt -->
               <div class="prompt-box">
-                <div class="prompt-thai" id="studioPromptThai" onclick="playNativePromptAudio()" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
-                  สวัสดีครับ
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                  <span style="font-size:11px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono); text-transform:uppercase;">
+                    GAYA BICARA PENUTUR:
+                  </span>
+                  <div class="filter-pills" style="margin:0;">
+                    <button class="pill-filter" id="promptGenderMale" onclick="setStudioPromptGender('male')">👨 Pria (ครับ)</button>
+                    <button class="pill-filter active" id="promptGenderFemale" onclick="setStudioPromptGender('female')">👩 Wanita (ค่ะ)</button>
+                  </div>
                 </div>
-                <div class="prompt-roman" id="studioPromptRoman">sà-wàt-dii khráp</div>
-                <div class="prompt-meaning" id="studioPromptMeaning">Halo / Salam (penutur pria)</div>
+
+                <div class="prompt-thai" id="studioPromptThai" onclick="playNativePromptAudio()" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
+                  สวัสดีค่ะ
+                </div>
+                <div class="prompt-roman" id="studioPromptRoman">sà-wàt-dii khà</div>
+                <div class="prompt-meaning" id="studioPromptMeaning">Halo / Salam (penutur wanita)</div>
 
                 <div class="prompt-actions-row">
-                  <button class="btn-audio-listen" onclick="playNativePromptAudio()">
-                    <span>🔊 Dengarkan Contoh</span>
+                  <button class="btn-audio-listen" onclick="playNativePromptAudio('female')" title="Dengarkan pelafalan wanita (ค่ะ)">
+                    <span>👩 Suara Wanita (ค่ะ)</span>
+                  </button>
+                  <button class="btn-audio-listen" onclick="playNativePromptAudio('male')" title="Dengarkan pelafalan pria (ครับ)">
+                    <span>👨 Suara Pria (ครับ)</span>
                   </button>
                   <button class="btn-audio-listen" onclick="nextStudioPrompt()">
                     <span>Selanjutnya ➔</span>
@@ -1964,7 +1980,13 @@
                     <span>● Online • AI Audio Aktif</span>
                   </div>
                 </div>
-                <button class="btn-audio-listen" onclick="resetRoleplay()">Reset Skenario</button>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div class="filter-pills" style="margin:0;">
+                    <button class="pill-filter" id="roleplayGenderMale" onclick="setRoleplayGender('male')" style="padding:4px 8px; font-size:11px;">👨 Pria</button>
+                    <button class="pill-filter active" id="roleplayGenderFemale" onclick="setRoleplayGender('female')" style="padding:4px 8px; font-size:11px;">👩 Wanita</button>
+                  </div>
+                  <button class="btn-audio-listen" onclick="resetRoleplay()">Reset Skenario</button>
+                </div>
               </div>
 
               <div class="chat-messages-area" id="roleplayChatMessages">
@@ -2285,22 +2307,59 @@
                   </button>
                 </div>
 
-                <!-- Result Box -->
+                <!-- Result Box (Dual Male & Female Speaking Modes) -->
                 <div class="trans-result-box" id="translatorResultBox">
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
                     <span style="font-size:11px; font-weight:700; color:var(--emerald); font-family:var(--font-mono); text-transform:uppercase;">
-                      ✓ Terjemahan Thai Resmi & Audio Penutur Asli
+                      ✓ Terjemahan 2 Versi Penutur (Laki-laki & Perempuan)
                     </span>
-                    <button class="btn-audio-listen" style="padding:4px 10px; font-size:11px;" onclick="copyTranslationResult()">
-                      📋 Salin Teks
-                    </button>
+                    <span style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">
+                      Penutur Asli Bangkok
+                    </span>
                   </div>
-                  <div class="trans-result-thai" id="transResultThai">สวัสดีครับ ยินดีที่ได้รู้จักครับ</div>
-                  <div class="trans-result-roman" id="transResultRoman">sà-wàt-dii khráp, yin-dii thîi dâi rúu-jàk khráp</div>
-                  <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
-                    <button class="btn-audio-listen" style="background:var(--primary); color:#fff; border-color:var(--primary);" onclick="playTranslatedAudio()">
-                      🔊 Dengarkan Suara Asli Bangkok
-                    </button>
+
+                  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px;">
+                    <!-- Versi Perempuan -->
+                    <div style="padding:14px; border-radius:var(--radius-md); background:var(--bg-card); border:1px solid var(--border-color); border-left:4px solid var(--accent-gold);">
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="font-size:12px; font-weight:800; color:var(--accent-gold); font-family:var(--font-mono);">
+                          👩 Versi Perempuan (ค่ะ / คะ / ฉัน)
+                        </span>
+                        <button class="btn-audio-listen" style="padding:3px 8px; font-size:11px;" onclick="copyTranslationGender('female')">
+                          📋 Salin
+                        </button>
+                      </div>
+                      <div class="trans-result-thai" id="transFemaleThai" style="font-size:20px; font-weight:700; margin-bottom:4px; cursor:pointer;" onclick="playTranslatedGenderAudio('female')">
+                        สวัสดีค่ะ
+                      </div>
+                      <div class="trans-result-roman" id="transFemaleRoman" style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+                        sà-wàt-dii khà
+                      </div>
+                      <button class="btn-audio-listen" style="width:100%; justify-content:center; background:var(--accent-gold); color:#1a1a1a; font-weight:700; border-color:var(--accent-gold);" onclick="playTranslatedGenderAudio('female')">
+                        🔊 Dengarkan Suara Wanita
+                      </button>
+                    </div>
+
+                    <!-- Versi Laki-laki -->
+                    <div style="padding:14px; border-radius:var(--radius-md); background:var(--bg-card); border:1px solid var(--border-color); border-left:4px solid var(--primary);">
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="font-size:12px; font-weight:800; color:var(--primary); font-family:var(--font-mono);">
+                          👨 Versi Laki-laki (ครับ / ผม)
+                        </span>
+                        <button class="btn-audio-listen" style="padding:3px 8px; font-size:11px;" onclick="copyTranslationGender('male')">
+                          📋 Salin
+                        </button>
+                      </div>
+                      <div class="trans-result-thai" id="transMaleThai" style="font-size:20px; font-weight:700; margin-bottom:4px; cursor:pointer;" onclick="playTranslatedGenderAudio('male')">
+                        สวัสดีครับ
+                      </div>
+                      <div class="trans-result-roman" id="transMaleRoman" style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+                        sà-wàt-dii khráp
+                      </div>
+                      <button class="btn-audio-listen" style="width:100%; justify-content:center; background:var(--primary); color:#fff; border-color:var(--primary);" onclick="playTranslatedGenderAudio('male')">
+                        🔊 Dengarkan Suara Pria
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -2352,6 +2411,9 @@
               <div class="qa-chat-box">
                 <!-- Prompt suggestion chips -->
                 <div class="qa-prompt-chips">
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Apa perbedaan cara bicara perempuan dan laki-laki dalam bahasa Thai?')">
+                    👫 Beda Cara Bicara Pria & Wanita
+                  </button>
                   <button class="speech-chip" onclick="sendQuickQaPrompt('Bagaimana etika berpakaian saat ke kuil di Bangkok?')">
                     🏛️ Aturan Pakaian di Kuil
                   </button>
@@ -2444,6 +2506,7 @@
       unlockedLessons: ['u1_l1', 'u1_l2'],
       soundEnabled: true,
       speechRate: 1.0,
+      speakerGender: 'female',
       theme: 'dark'
     };
 
@@ -2453,6 +2516,9 @@
     }
     if (typeof appState.speechRate !== 'number') {
       appState.speechRate = 1.0;
+    }
+    if (!appState.speakerGender) {
+      appState.speakerGender = 'female';
     }
 
     function saveState() {
@@ -2468,6 +2534,7 @@
       if (rateBtn) {
         rateBtn.textContent = (appState.speechRate === 0.82) ? '🐢 0.8x' : '⚡ 1.0x';
       }
+      updateGenderControls();
     }
 
     function toggleSpeechRate() {
@@ -2479,6 +2546,109 @@
       }
       saveState();
       showToast(appState.speechRate === 0.82 ? 'Kecepatan Penutur Asli: 0.8x (Santai & Jelas untuk Pemula)' : 'Kecepatan Penutur Asli: 1.0x (Alami Percakapan Bangkok)');
+    }
+
+    /* GENDER SPEAKER SWITCHER & THAI GENDER GRAMMAR ENGINE */
+    function toggleSpeakerGender() {
+      playSynthSound('click');
+      appState.speakerGender = (appState.speakerGender === 'male') ? 'female' : 'male';
+      saveState();
+      updateGenderControls();
+      renderStudioPrompt();
+      renderPhrasebook();
+      renderRoleplayChat();
+      showToast(appState.speakerGender === 'male' 
+        ? '👨 Gaya Bicara: Laki-laki (ครับ / ผม)' 
+        : '👩 Gaya Bicara: Perempuan (ค่ะ / คะ / ฉัน)');
+    }
+
+    function setStudioPromptGender(gender) {
+      playSynthSound('click');
+      appState.speakerGender = gender;
+      saveState();
+      updateGenderControls();
+      renderStudioPrompt();
+    }
+
+    function setRoleplayGender(gender) {
+      playSynthSound('click');
+      appState.speakerGender = gender;
+      saveState();
+      updateGenderControls();
+      renderRoleplayChat();
+    }
+
+    function updateGenderControls() {
+      const isMale = appState.speakerGender === 'male';
+      const btn = document.getElementById('genderToggleBtn');
+      if (btn) {
+        btn.innerHTML = isMale ? '👨 Pria (ครับ)' : '👩 Wanita (ค่ะ)';
+        btn.style.borderColor = isMale ? 'var(--primary)' : 'var(--accent-gold)';
+      }
+      const studioMaleBtn = document.getElementById('promptGenderMale');
+      const studioFemaleBtn = document.getElementById('promptGenderFemale');
+      if (studioMaleBtn && studioFemaleBtn) {
+        studioMaleBtn.classList.toggle('active', isMale);
+        studioFemaleBtn.classList.toggle('active', !isMale);
+      }
+      const roleMaleBtn = document.getElementById('roleplayGenderMale');
+      const roleFemaleBtn = document.getElementById('roleplayGenderFemale');
+      if (roleMaleBtn && roleFemaleBtn) {
+        roleMaleBtn.classList.toggle('active', isMale);
+        roleFemaleBtn.classList.toggle('active', !isMale);
+      }
+    }
+
+    function formatThaiForGender(text, gender) {
+      if (!text) return text;
+      let str = text.trim();
+      const isQuestion = /[?？]|ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม|หรือเปล่า|ใช่ไหม|เหรอ|หรอ/.test(str);
+
+      if (gender === 'male') {
+        str = str.replace(/ดิฉัน|ฉัน/g, 'ผม');
+        str = str.replace(/นะคะ/g, 'นะครับ');
+        str = str.replace(/ค่ะ|คะ/g, 'ครับ');
+        if (!/(ครับ|นะครับ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
+          str = str.replace(/[\s.!?]+$/, '') + 'ครับ';
+        }
+      } else {
+        str = str.replace(/ผม/g, 'ฉัน');
+        str = str.replace(/นะครับ/g, 'นะคะ');
+        if (isQuestion) {
+          str = str.replace(/ครับ/g, 'คะ');
+          if (!/(คะ|นะคะ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
+            str = str.replace(/[\s.!?]+$/, '') + 'คะ';
+          }
+        } else {
+          str = str.replace(/ครับ/g, 'ค่ะ');
+          if (!/(ค่ะ|นะคะ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
+            str = str.replace(/[\s.!?]+$/, '') + 'ค่ะ';
+          }
+        }
+      }
+      return str;
+    }
+
+    function formatRomanForGender(roman, gender, isQuestion) {
+      if (!roman) return '';
+      let str = roman.trim();
+      if (gender === 'male') {
+        str = str.replace(/\b(dichan|chan|dì-chǎn|chǎn)\b/gi, 'phǒm');
+        str = str.replace(/ná\s*(khà|khá|kha)/gi, 'ná khráp');
+        str = str.replace(/(khà|khá|kha|ka)/gi, 'khráp');
+        if (!/(khráp|khrap)/i.test(str)) {
+          str += ' khráp';
+        }
+      } else {
+        str = str.replace(/\b(phom|phǒm)\b/gi, 'chǎn');
+        str = str.replace(/ná\s*(khráp|khrap)/gi, 'ná khá');
+        const femP = isQuestion ? 'khá' : 'khà';
+        str = str.replace(/(khráp|khrap)/gi, femP);
+        if (!/(khà|khá|kha)/i.test(str)) {
+          str += ' ' + femP;
+        }
+      }
+      return str;
     }
 
     /* 2. AUDIO SYNTHESIZER (WEB AUDIO API) */
@@ -2567,13 +2737,17 @@
 
     let currentThaiAudio = null;
 
-    /* UNIVERSAL NATIVE THAI AUDIO ENGINE (100% BANGKOK ACCENT & TONAL CONTOURS) */
-    function speakThai(text) {
+    /* UNIVERSAL NATIVE THAI AUDIO ENGINE (DUAL MALE & FEMALE VOICE PROFILES) */
+    function speakThai(text, gender) {
       if (!text || !appState.soundEnabled) return;
+      const targetGender = gender || appState.speakerGender || 'female';
+
+      // Automatically format Thai text to match targetGender if it contains gendered particles
+      let formattedText = formatThaiForGender(text, targetGender);
 
       // Extract Thai characters if text contains mixed romanization, parentheses, or translations
-      const thaiMatches = text.match(/[\u0E00-\u0E7F\s]+/g);
-      let targetText = thaiMatches ? thaiMatches.join('').trim() : text.replace(/<[^>]*>/g, '').trim();
+      const thaiMatches = formattedText.match(/[\u0E00-\u0E7F\s]+/g);
+      let targetText = thaiMatches ? thaiMatches.join('').trim() : formattedText.replace(/<[^>]*>/g, '').trim();
       if (!targetText) return;
 
       // Check letter / vowel nomenclature for single glyphs
@@ -2618,14 +2792,28 @@
       let endpointIdx = 0;
       function tryStreamNativeAudio() {
         if (endpointIdx >= audioEndpoints.length) {
-          // Strictly fallback only if client has genuine Thai voice pack
-          fallbackSpeechSynthesis(targetText, finishAudio);
+          fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
           return;
         }
 
         const audio = new Audio();
         currentThaiAudio = audio;
-        audio.playbackRate = appState.speechRate || 1.0;
+
+        // Acoustic gender pitch modulation
+        try {
+          if ('preservesPitch' in audio) {
+            audio.preservesPitch = false;
+          }
+        } catch (e) {}
+
+        const baseRate = appState.speechRate || 1.0;
+        if (targetGender === 'male') {
+          // Deeper resonance, masculine pitch & cadence
+          audio.playbackRate = baseRate * 0.90;
+        } else {
+          // Melodic, feminine pitch & cadence
+          audio.playbackRate = baseRate * 1.03;
+        }
 
         audio.onended = finishAudio;
         audio.onerror = () => {
@@ -2646,30 +2834,38 @@
       tryStreamNativeAudio();
     }
 
-    function fallbackSpeechSynthesis(text, onDone) {
+    function fallbackSpeechSynthesis(text, onDone, targetGender = 'female') {
       if (!('speechSynthesis' in window)) {
         if (onDone) onDone();
         return;
       }
-      // CRITICAL: NEVER allow generic non-Thai fallback voices (English, etc.)
       const voices = speechSynthesis.getVoices();
-      const thaiVoice = voices.find(v => 
+      const thaiVoices = voices.filter(v => 
         v.lang === 'th-TH' || 
         v.lang === 'th_TH' || 
         v.lang.toLowerCase().startsWith('th') ||
         v.name.toLowerCase().includes('thai')
       );
 
-      if (!thaiVoice) {
-        // No local Thai voice pack installed on client OS - do NOT speak with English accent!
+      if (thaiVoices.length === 0) {
         if (onDone) onDone();
         return;
       }
 
+      let selectedVoice = thaiVoices[0];
+      if (targetGender === 'male') {
+        const maleVoice = thaiVoices.find(v => /male|man|niwat|pattara/i.test(v.name));
+        if (maleVoice) selectedVoice = maleVoice;
+      } else {
+        const femaleVoice = thaiVoices.find(v => /female|woman|narisa|premwadee|kanya/i.test(v.name));
+        if (femaleVoice) selectedVoice = femaleVoice;
+      }
+
       const u = new SpeechSynthesisUtterance(text);
-      u.voice = thaiVoice;
+      u.voice = selectedVoice;
       u.lang = 'th-TH';
-      u.rate = (appState.speechRate || 1.0) * 0.85;
+      u.rate = (appState.speechRate || 1.0) * (targetGender === 'male' ? 0.88 : 0.96);
+      u.pitch = targetGender === 'male' ? 0.80 : 1.18;
 
       u.onend = () => { if (onDone) onDone(); };
       u.onerror = () => { if (onDone) onDone(); };
@@ -2730,18 +2926,29 @@
 
     function renderStudioPrompt() {
       const p = STUDIO_PROMPTS[studioIndex];
-      document.getElementById('studioPromptThai').textContent = p.thai;
-      document.getElementById('studioPromptRoman').textContent = p.roman;
-      document.getElementById('studioPromptMeaning').textContent = p.meaning;
+      const gender = appState.speakerGender || 'female';
+      const isQuestion = p.isQuestion || /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(p.thai);
+      const thai = formatThaiForGender(p.thai, gender);
+      const roman = formatRomanForGender(p.roman, gender, isQuestion);
+      const meaning = p.meaning.replace(/\s*\((pria|wanita)\)/gi, '') + (gender === 'male' ? ' (penutur pria)' : ' (penutur wanita)');
+
+      document.getElementById('studioPromptThai').textContent = thai;
+      document.getElementById('studioPromptRoman').textContent = roman;
+      document.getElementById('studioPromptMeaning').textContent = meaning;
       document.getElementById('currentPromptIndex').textContent = `Tantangan #${studioIndex + 1} dari ${STUDIO_PROMPTS.length}`;
       document.getElementById('liveTranscriptDisplay').textContent = 'Belum ada suara terdeteksi...';
       document.getElementById('liveTranscriptDisplay').classList.remove('has-text');
+
+      updateGenderControls();
     }
 
-    function playNativePromptAudio() {
+    function playNativePromptAudio(overrideGender) {
       playSynthSound('click');
       const p = STUDIO_PROMPTS[studioIndex];
-      speakThai(p.thai);
+      const targetGender = overrideGender || appState.speakerGender || 'female';
+      const isQuestion = p.isQuestion || /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(p.thai);
+      const targetThai = formatThaiForGender(p.thai, targetGender);
+      speakThai(targetThai, targetGender);
     }
 
     function nextStudioPrompt() {
@@ -2892,29 +3099,39 @@
       const data = ROLEPLAY_SCENARIOS[activeRoleplayKey];
       document.getElementById('roleplayPartnerName').textContent = data.partnerName;
 
+      const userGender = appState.speakerGender || 'female';
       const container = document.getElementById('roleplayChatMessages');
-      container.innerHTML = data.messages.map(m => `
+      container.innerHTML = data.messages.map(m => {
+        const msgGender = m.sender === 'user' ? userGender : '';
+        return `
         <div class="chat-bubble ${m.sender === 'ai' ? 'bubble-ai' : 'bubble-user'}">
-          <span class="bubble-thai" onclick="speakThai('${m.thai}')" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
+          <span class="bubble-thai" onclick="speakThai('${m.thai}', '${msgGender}')" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
             ${m.thai} <span style="font-size:13px; opacity:0.8; vertical-align:middle;">🔊</span>
           </span>
           <div style="font-size:12px; opacity:0.85; font-family:var(--font-mono);">${m.roman}</div>
           <div style="font-size:12px; margin-top:2px;">${m.ind}</div>
-          <button class="bubble-audio-btn" onclick="speakThai('${m.thai}')" style="${m.sender === 'user' ? 'color:#ffffff; opacity:0.95;' : ''}">
+          <button class="bubble-audio-btn" onclick="speakThai('${m.thai}', '${msgGender}')" style="${m.sender === 'user' ? 'color:#ffffff; opacity:0.95;' : ''}">
             🔊 Dengar Suara Asli
           </button>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       const chipsContainer = document.getElementById('roleplayQuickChips');
-      chipsContainer.innerHTML = data.chips.map(c => `
-        <button class="speech-chip" onclick="userSendRoleplayMessage('${c.thai}', '${c.roman}', '${c.ind}')" title="Kirim & Dengarkan lafal asli: ${c.roman}">
-          <span>${c.thai}</span>
-          <span class="chip-speaker-tag" onclick="event.stopPropagation(); speakThai('${c.thai}');" title="Dengarkan sebelum kirim">🔊</span>
+      chipsContainer.innerHTML = data.chips.map(c => {
+        const isQuestion = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(c.thai);
+        const fThai = formatThaiForGender(c.thai, userGender);
+        const fRoman = formatRomanForGender(c.roman, userGender, isQuestion);
+        return `
+        <button class="speech-chip" onclick="userSendRoleplayMessage('${fThai}', '${fRoman}', '${c.ind}')" title="Kirim & Dengarkan lafal asli: ${fRoman}">
+          <span>${fThai}</span>
+          <span class="chip-speaker-tag" onclick="event.stopPropagation(); speakThai('${fThai}', '${userGender}');" title="Dengarkan sebelum kirim">🔊</span>
         </button>
-      `).join('');
+      `;
+      }).join('');
 
       container.scrollTop = container.scrollHeight;
+      updateGenderControls();
     }
 
     function selectRoleplayScenario(key) {
@@ -2945,7 +3162,7 @@
       data.messages.push({ sender: 'user', thai, roman, ind });
       renderRoleplayChat();
       // Speak user sentence in native Thai immediately
-      speakThai(thai);
+      speakThai(thai, appState.speakerGender);
 
       // AI Partner Response
       setTimeout(() => {
@@ -3227,21 +3444,54 @@
       if (!container) return;
       const list = (cat === 'all') ? NATIVE_PHRASEBOOK : NATIVE_PHRASEBOOK.filter(p => p.category === cat);
 
-      container.innerHTML = list.map(p => `
-        <div class="phrasebook-card">
-          <div>
-            <div class="phrase-thai" onclick="speakThai('${p.thai}')" title="Klik dengar suara asli penutur Bangkok: ${p.thai}">
-              <span>${p.thai}</span>
-              <span style="font-size:14px; opacity:0.8;">🔊</span>
+      container.innerHTML = list.map(p => {
+        const isQuestion = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(p.thai);
+        const femThai = formatThaiForGender(p.thai, 'female');
+        const femRoman = formatRomanForGender(p.roman, 'female', isQuestion);
+        const maleThai = formatThaiForGender(p.thai, 'male');
+        const maleRoman = formatRomanForGender(p.roman, 'male', isQuestion);
+        const cleanMeaning = p.meaning.replace(/\s*\((pria|wanita)\)/gi, '');
+
+        return `
+          <div class="phrasebook-card">
+            <div style="width:100%;">
+              <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:8px; font-family:var(--font-mono); text-transform:uppercase;">
+                ${p.category.toUpperCase()} • 2 GAYA PENUTUR
+              </div>
+
+              <!-- Female Version -->
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed var(--border-color); gap:8px;">
+                <div>
+                  <div style="font-size:18px; font-weight:700; color:var(--text); cursor:pointer;" onclick="speakThai('${femThai}', 'female')" title="Klik dengar suara penutur wanita">
+                    <span style="font-size:11px; color:var(--accent-gold); font-weight:800; margin-right:4px;">👩 WANITA:</span>
+                    ${femThai}
+                  </div>
+                  <div style="font-size:12px; color:var(--text-muted);">${femRoman}</div>
+                </div>
+                <button class="btn-audio-listen" style="padding:4px 10px; font-size:11px; flex-shrink:0;" onclick="speakThai('${femThai}', 'female')" title="Dengar suara wanita (ค่ะ/คะ)">
+                  🔊 Suara Wanita
+                </button>
+              </div>
+
+              <!-- Male Version -->
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; margin-top:4px; gap:8px;">
+                <div>
+                  <div style="font-size:18px; font-weight:700; color:var(--text); cursor:pointer;" onclick="speakThai('${maleThai}', 'male')" title="Klik dengar suara penutur pria">
+                    <span style="font-size:11px; color:var(--primary); font-weight:800; margin-right:4px;">👨 PRIA:</span>
+                    ${maleThai}
+                  </div>
+                  <div style="font-size:12px; color:var(--text-muted);">${maleRoman}</div>
+                </div>
+                <button class="btn-audio-listen" style="padding:4px 10px; font-size:11px; flex-shrink:0;" onclick="speakThai('${maleThai}', 'male')" title="Dengar suara pria (ครับ)">
+                  🔊 Suara Pria
+                </button>
+              </div>
+
+              <div class="phrase-meaning" style="margin-top:10px;">${cleanMeaning}</div>
             </div>
-            <div class="phrase-roman">${p.roman}</div>
-            <div class="phrase-meaning">${p.meaning}</div>
           </div>
-          <button class="btn-audio-listen" onclick="speakThai('${p.thai}')" title="Dengar lafal penutur asli Bangkok">
-            <span>🔊 Dengar Suara Asli</span>
-          </button>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function filterPhrasebook(cat, btn) {
@@ -3706,10 +3956,15 @@
       }
     }
 
+    let latestFemaleThai = 'สวัสดีค่ะ ยินดีที่ได้รู้จักค่ะ';
+    let latestFemaleRoman = 'sà-wàt-dii khà, yin-dii thîi dâi rúu-jàk khà';
+    let latestMaleThai = 'สวัสดีครับ ยินดีที่ได้รู้จักครับ';
+    let latestMaleRoman = 'sà-wàt-dii khráp, yin-dii thîi dâi rúu-jàk khráp';
+
     function clearTranslatorInput() {
       document.getElementById('translatorInput').value = '';
       document.getElementById('translatorResultBox').style.display = 'none';
-      document.getElementById('transStatusInfo').textContent = 'Didukung Neural Translation & Penutur Asli Bangkok';
+      document.getElementById('transStatusInfo').textContent = 'Didukung Neural Translation & Penutur Asli Bangkok (2 Versi Suara)';
     }
 
     function quickTranslatePreset(text) {
@@ -3720,12 +3975,12 @@
       performLiveTranslation();
     }
 
-    function copyTranslationResult() {
-      const text = document.getElementById('transResultThai').textContent;
+    function copyTranslationGender(gender) {
+      const text = (gender === 'male') ? latestMaleThai : latestFemaleThai;
       if (!text) return;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-          showToast('✓ Teks terjemahan berhasil disalin!');
+          showToast(`✓ Teks versi ${gender === 'male' ? 'Laki-laki (ครับ)' : 'Perempuan (ค่ะ)'} berhasil disalin!`);
         }).catch(() => {
           showToast('Disalin: ' + text);
         });
@@ -3734,12 +3989,11 @@
       }
     }
 
-    function playTranslatedAudio() {
-      if (transDirection === 'id-to-th') {
-        speakThai(latestTranslatedThai || document.getElementById('transResultThai').textContent);
+    function playTranslatedGenderAudio(gender) {
+      if (gender === 'male') {
+        speakThai(latestMaleThai, 'male');
       } else {
-        const inputVal = document.getElementById('translatorInput').value;
-        speakThai(inputVal);
+        speakThai(latestFemaleThai, 'female');
       }
     }
 
@@ -3792,8 +4046,6 @@
       const submitBtn = document.getElementById('translateSubmitBtn');
       const statusInfo = document.getElementById('transStatusInfo');
       const resultBox = document.getElementById('translatorResultBox');
-      const resThai = document.getElementById('transResultThai');
-      const resRoman = document.getElementById('transResultRoman');
 
       submitBtn.textContent = 'Menerjemahkan...';
       submitBtn.disabled = true;
@@ -3813,7 +4065,6 @@
 
         if (data && data[0] && Array.isArray(data[0])) {
           translatedText = data[0].map(segment => segment[0] || '').join('');
-          // Check for transliteration / romanization segment
           if (data[0].length > 1 && data[0][data[0].length - 1] && typeof data[0][data[0].length - 1][3] === 'string') {
             romanization = data[0][data[0].length - 1][3];
           } else if (data[0][0] && data[0][0][3]) {
@@ -3828,23 +4079,36 @@
         resultBox.style.display = 'block';
 
         if (transDirection === 'id-to-th') {
-          latestTranslatedThai = translatedText;
-          resThai.textContent = translatedText;
-          resRoman.textContent = romanization 
-            ? `Transliterasi: ${romanization}` 
-            : 'Aksen Resmi Bangkok • Klik tombol dengarkan untuk mendengar nada asli';
-          speakThai(translatedText);
+          const isQuestion = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(translatedText) || query.includes('?');
+          latestFemaleThai = formatThaiForGender(translatedText, 'female');
+          latestFemaleRoman = formatRomanForGender(romanization, 'female', isQuestion);
+          latestMaleThai = formatThaiForGender(translatedText, 'male');
+          latestMaleRoman = formatRomanForGender(romanization, 'male', isQuestion);
+
+          document.getElementById('transFemaleThai').textContent = latestFemaleThai;
+          document.getElementById('transFemaleRoman').textContent = latestFemaleRoman || 'Aksen penutur wanita (ค่ะ/คะ) • Klik untuk mendengar';
+          document.getElementById('transMaleThai').textContent = latestMaleThai;
+          document.getElementById('transMaleRoman').textContent = latestMaleRoman || 'Aksen penutur pria (ครับ) • Klik untuk mendengar';
+
+          const pref = appState.speakerGender || 'female';
+          if (pref === 'male') {
+            speakThai(latestMaleThai, 'male');
+          } else {
+            speakThai(latestFemaleThai, 'female');
+          }
         } else {
-          latestTranslatedThai = query;
-          resThai.textContent = translatedText;
-          resRoman.textContent = `Teks Asli Thai: ${query}`;
-          speakThai(query);
+          latestFemaleThai = query;
+          latestMaleThai = query;
+          document.getElementById('transFemaleThai').textContent = translatedText;
+          document.getElementById('transFemaleRoman').textContent = `Teks Asli: ${query}`;
+          document.getElementById('transMaleThai').textContent = translatedText;
+          document.getElementById('transMaleRoman').textContent = `Teks Asli: ${query}`;
+          speakThai(query, appState.speakerGender);
         }
 
-        statusInfo.textContent = `✓ Berhasil diterjemahkan (${query.length} karakter) • Audio Penutur Asli Siap`;
+        statusInfo.textContent = `✓ Berhasil diterjemahkan ke 2 gaya bicara (Laki-laki & Perempuan)`;
       } catch (err) {
         console.warn('Live translate network fallback:', err);
-        // Fallback offline dictionary
         let foundOffline = null;
         const lowerQ = query.toLowerCase();
         for (const [k, v] of Object.entries(OFFLINE_THAI_DICT)) {
@@ -3856,14 +4120,23 @@
 
         resultBox.style.display = 'block';
         if (foundOffline) {
-          latestTranslatedThai = foundOffline.thai;
-          resThai.textContent = foundOffline.thai;
-          resRoman.textContent = `${foundOffline.roman} (${foundOffline.ind})`;
+          const isQ = foundOffline.ind.includes('?');
+          latestFemaleThai = formatThaiForGender(foundOffline.thai, 'female');
+          latestFemaleRoman = formatRomanForGender(foundOffline.roman, 'female', isQ);
+          latestMaleThai = formatThaiForGender(foundOffline.thai, 'male');
+          latestMaleRoman = formatRomanForGender(foundOffline.roman, 'male', isQ);
+
+          document.getElementById('transFemaleThai').textContent = latestFemaleThai;
+          document.getElementById('transFemaleRoman').textContent = `${latestFemaleRoman} (${foundOffline.ind})`;
+          document.getElementById('transMaleThai').textContent = latestMaleThai;
+          document.getElementById('transMaleRoman').textContent = `${latestMaleRoman} (${foundOffline.ind})`;
           statusInfo.textContent = '✓ Diterjemahkan melalui Kamus Cerdas Bawaan (Offline)';
-          speakThai(foundOffline.thai);
+          speakThai(appState.speakerGender === 'male' ? latestMaleThai : latestFemaleThai, appState.speakerGender);
         } else {
-          resThai.textContent = transDirection === 'id-to-th' ? query : 'ข้อความแปล';
-          resRoman.textContent = 'Gagal terhubung ke server penerjemah. Periksa koneksi internet.';
+          document.getElementById('transFemaleThai').textContent = query;
+          document.getElementById('transFemaleRoman').textContent = 'Periksa koneksi internet untuk terjemahan daring.';
+          document.getElementById('transMaleThai').textContent = query;
+          document.getElementById('transMaleRoman').textContent = 'Periksa koneksi internet untuk terjemahan daring.';
           statusInfo.textContent = '⚠️ Layanan daring tidak dapat dihubungi. Menampilkan mode cadangan.';
         }
       } finally {
@@ -4260,6 +4533,30 @@
 
     /* 3. THAILAND CULTURE & TRAVEL Q&A CHAT ENGINE (NONG MALI) */
     const QA_KNOWLEDGE_BASE = [
+      {
+        patterns: ['perempuan', 'wanita', 'laki', 'pria', 'khrap', 'kha', 'ครับ', 'ค่ะ', 'คะ', 'gaya bicara', 'gender', 'ngomong', 'beda', 'perbedaan'],
+        title: 'Perbedaan Cara Bicara Penutur Laki-laki vs Perempuan dalam Bahasa Thai',
+        thaiKey: 'สวัสดีครับ สวัสดีค่ะ',
+        thaiPhonetic: 'sà-wàt-dii khráp (Pria) / sà-wàt-dii khà (Wanita)',
+        response: `Dalam bahasa Thailand, jenis kelamin penutur menentukan partikel kesopanan dan kata ganti yang digunakan:\n\n` +
+          `### 👨 Penutur Laki-laki (Pria):\n` +
+          `1. **Partikel Sopan:** Selalu menggunakan **ครับ (khráp)** di akhir kalimat (baik kalimat berita, terima kasih, permohonan, maupun pertanyaan).\n` +
+          `   • Contoh: *สวัสดีครับ (sà-wàt-dii khráp)* = Halo.\n` +
+          `   • Contoh: *ขอบคุณครับ (khɔ̀ɔp-khun khráp)* = Terima kasih.\n` +
+          `   • Contoh: *อันนี้เท่าไหร่ครับ (an-níi thâo-rài khráp)* = Berapa harganya?\n` +
+          `2. **Kata Ganti "Saya":** Menggunakan **ผม (phǒm)**.\n\n` +
+          `### 👩 Penutur Perempuan (Wanita):\n` +
+          `1. **Partikel Sopan Kalimat Pernyataan/Salam/Jawaban:** Menggunakan **ค่ะ (khà - nada jatuh/rendah)**.\n` +
+          `   • Contoh: *สวัสดีค่ะ (sà-wàt-dii khà)* = Halo.\n` +
+          `   • Contoh: *ขอบคุณค่ะ (khɔ̀ɔp-khun khà)* = Terima kasih.\n` +
+          `   • Contoh: *ใช่ค่ะ (châi khà)* = Ya, betul.\n` +
+          `2. **Partikel Sopan Kalimat Pertanyaan/Ajakan:** Menggunakan **คะ (khá - nada tinggi melengking)**.\n` +
+          `   • Contoh: *อันนี้เท่าไหร่คะ (an-níi thâo-rài khá)* = Berapa harganya?\n` +
+          `   • Contoh: *ไปไหนคะ (pai nǎi khá)* = Mau ke mana?\n` +
+          `3. **Kata Ganti "Saya":** Menggunakan **ฉัน (chǎn)** (umum/akrab) atau **ดิฉัน (dì-chǎn)** (formal).\n\n` +
+          `*Tips Praktis:* Pria konsisten satu partikel (*khráp*), sedangkan wanita menggunakan nada jatuh *khà* saat menjawab/menyapa, dan nada naik/tinggi *khá* saat bertanya!`,
+        tips: 'Ganti gaya bicara Anda kapan saja melalui tombol header atau pilih mode pria/wanita di studio latihan!'
+      },
       {
         patterns: ['kuil', 'pakaian', 'baju', 'celana', 'rok', 'berpakaian', 'sopan', 'temple', 'wat'],
         title: 'Aturan Pakaian & Etika Mengunjungi Kuil di Thailand',

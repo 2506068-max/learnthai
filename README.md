@@ -34,6 +34,10 @@ Simulasi dialog interaktif dengan **Nong Mali (มะลิ)** di berbagai konte
 
 ### 4. 🔊 100% Penutur Asli Bangkok (Universal Native Thai Audio Engine)
 * **Seluruh Kata Berpenutur Asli**: Setiap kata, frasa, konsonan, vokal, pilihan jawaban kuis, dan token kalimat disuarakan langsung oleh penutur asli (*Bangkok Central Standard Thai*).
+* **👫 Dual-Gender Voice Engine (2 Versi Gaya Bicara: Perempuan & Laki-laki)**:
+  * **Versi Perempuan (Wanita):** Menggunakan partikel pernyataan **ค่ะ (khà - nada jatuh)**, partikel pertanyaan **คะ (khá - nada tinggi)**, dan kata ganti **ฉัน (chǎn)**, disuarakan dengan timbre vokal jernih dan melodis (*pitch 1.18*).
+  * **Versi Laki-laki (Pria):** Menggunakan partikel kesopanan universal **ครับ (khráp)** dan kata ganti **ผม (phǒm)**, disuarakan dengan resonansi vokal dada maskulin yang mantap (*pitch 0.80*).
+  * **Toggle Global & Komparasi Instan**: Tombol cepat di header navigasi atas (`👩 Wanita (ค่ะ)` ⇄ `👨 Pria (ครับ)`), tombol pendengaran komparatif di Studio Bicara, kartu perbandingan ganda di Buku Frasa, respon adaptif di Simulasi Roleplay, serta kartu hasil ganda di Penerjemah AI.
 * **Dual-Source Neural Audio Streaming**: Menggunakan redundansi ganda streaming audio beresolusi tinggi dengan nol jeda *buffering* dan pengamanan *fallback* ketat (tidak akan pernah beralih ke aksen bahasa Inggris kaku).
 * **Kontrol Kecepatan Bicara (Speed Toggle)**: Pilihan kecepatan **1.0x (Alami Percakapan Bangkok)** atau **0.8x (Santai & Artikulasi Jelas untuk Pemula)**.
 * **Nomenklatur Resmi Huruf**: Pengucapan konsonan tunggal otomatis melafalkan nama tradisional lengkapnya (misal: `ก` dilafalkan *กอ ไก่ / Ko Kai*, `ข` dilafalkan *ขอ ไข่ / Kho Khai*).
@@ -41,7 +45,7 @@ Simulasi dialog interaktif dengan **Nong Mali (มะลิ)** di berbagai konte
 ### 5. 🔬 Laboratorium 5 Nada, Aksara & Buku Frasa Audio
 * **Uji 5 Nada Tonal**: Visualisasi kontur SVG untuk *Mid, Low, Falling, High,* dan *Rising Tone*, dilengkapi tombol uji frekuensi sintetis dan 3 variasi kata contoh penutur asli di setiap nada.
 * **Matriks 44 Konsonan & 14 Vokal Lengkap**: Seluruh 44 huruf abjad Thailand terbagi rapi ke kelas Tengah, Tinggi, dan Rendah, masing-masing dengan audio asli interaktif.
-* **🍃 Buku Frasa Audio Real-Life (Phrasebook)**: Koleksi 25+ frasa penting Thailand (Salam, Restoran & Kafe, Tawar-menawar Pasar, Arah & Taksi) yang siap didengarkan dan dilatih kapan saja.
+* **🍃 Buku Frasa Audio Dual-Gender (Phrasebook)**: Koleksi 25+ frasa penting Thailand (Salam, Restoran & Kafe, Tawar-menawar Pasar, Arah & Taksi) yang menyajikan **versi pria (ครับ)** dan **versi wanita (ค่ะ/คะ)** berdampingan dengan tombol audio penutur asli untuk masing-masing versi.
 
 ### 6. 🗺️ Roadmap Kurikulum Berjenjang
 * 4 Unit Pembelajaran terstruktur dari pemula (Salam & Huruf Dasar) hingga percakapan tingkat lanjut.
