@@ -3,81 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stimuler Thai — AI Speaking & Fluency Coach</title>
-  <meta name="description" content="Tingkatkan kelancaran berbicara bahasa Thailand dengan pelatih AI real-time, evaluasi pengucapan, dan simulasi percakapan nyata.">
+  <title>Mali's Thai Garden — Ghibli AI Speaking Coach</title>
+  <meta name="description" content="Taman belajar dan latihan berbicara bahasa Thailand dengan AI Coach bertema Studio Ghibli, evaluasi suara asli, dan simulasi percakapan.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ==========================================================================
-       STIMULER DESIGN SYSTEM TOKENS — SLEEK DARK AI COACH AESTHETIC
+       STUDIO GHIBLI DESIGN SYSTEM TOKENS — ENCHANTED CEDAR FOREST & MEADOW
        ========================================================================== */
-    :root {
-      --bg: #09090b;
-      --bg-surface: #0f1015;
-      --bg-card: #15161e;
-      --bg-card-hover: #1c1d27;
-      --bg-elevated: #22232f;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-bright: rgba(255, 255, 255, 0.16);
-      --border-focus: #3b82f6;
+    :root, [data-theme="dark"] {
+      --bg: #0d1410;
+      --bg-surface: #131e18;
+      --bg-card: #18261f;
+      --bg-card-hover: #203228;
+      --bg-elevated: #293f33;
+      --border: rgba(116, 198, 157, 0.14);
+      --border-bright: rgba(116, 198, 157, 0.26);
+      --border-focus: #52b788;
 
-      --text: #f4f4f6;
-      --text-muted: #9496a1;
-      --text-dim: #606270;
+      --text: #edf6f0;
+      --text-muted: #9ab4a3;
+      --text-dim: #678371;
 
-      --primary: #3b82f6;
-      --primary-dark: #2563eb;
-      --primary-glow: rgba(59, 130, 246, 0.16);
-      --primary-light: rgba(59, 130, 246, 0.12);
+      --primary: #52b788;
+      --primary-dark: #40916c;
+      --primary-glow: rgba(82, 183, 136, 0.22);
+      --primary-light: rgba(82, 183, 136, 0.14);
 
-      --emerald: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.16);
-      --emerald-dark: #059669;
+      --emerald: #52b788;
+      --emerald-glow: rgba(82, 183, 136, 0.2);
+      --emerald-dark: #2d6a4f;
 
       --amber: #f59e0b;
-      --amber-glow: rgba(245, 158, 11, 0.16);
+      --amber-glow: rgba(245, 158, 11, 0.2);
 
-      --rose: #f43f5e;
-      --rose-glow: rgba(244, 63, 94, 0.16);
+      --rose: #fb7185;
+      --rose-glow: rgba(251, 113, 133, 0.2);
 
-      --purple: #8b5cf6;
-      --purple-glow: rgba(139, 92, 246, 0.16);
+      --purple: #a78bfa;
+      --purple-glow: rgba(167, 139, 250, 0.2);
 
+      --font-display: 'Fraunces', Georgia, serif;
       --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --font-thai: 'Noto Sans Thai', 'Plus Jakarta Sans', sans-serif;
 
       --radius-sm: 8px;
       --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 22px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
       --radius-pill: 9999px;
 
-      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
-      --shadow-glow: 0 0 32px rgba(59, 130, 246, 0.22);
+      --shadow-card: 0 4px 24px rgba(7, 14, 10, 0.45);
+      --shadow-glow: 0 0 32px rgba(82, 183, 136, 0.25);
     }
 
     [data-theme="light"] {
-      --bg: #f8fafc;
+      --bg: #f6f3eb;
       --bg-surface: #ffffff;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f1f5f9;
-      --bg-elevated: #e2e8f0;
-      --border: rgba(15, 23, 42, 0.08);
-      --border-bright: rgba(15, 23, 42, 0.16);
-      --border-focus: #2563eb;
+      --bg-card: #fdfbf7;
+      --bg-card-hover: #f3efe5;
+      --bg-elevated: #e9e3d5;
+      --border: rgba(45, 106, 79, 0.12);
+      --border-bright: rgba(45, 106, 79, 0.22);
+      --border-focus: #2d6a4f;
 
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --text-dim: #94a3b8;
+      --text: #202c24;
+      --text-muted: #536b5c;
+      --text-dim: #7f9988;
 
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --primary-glow: rgba(37, 99, 235, 0.12);
-      --primary-light: rgba(37, 99, 235, 0.08);
+      --primary: #2d6a4f;
+      --primary-dark: #1b4332;
+      --primary-glow: rgba(45, 106, 79, 0.18);
+      --primary-light: rgba(45, 106, 79, 0.1);
 
-      --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.06);
+      --emerald: #2d6a4f;
+      --emerald-glow: rgba(45, 106, 79, 0.16);
+      --emerald-dark: #1b4332;
+
+      --amber: #d97706;
+      --amber-glow: rgba(217, 119, 6, 0.16);
+
+      --shadow-card: 0 4px 24px rgba(45, 106, 79, 0.08);
+    }
+
+    #ghibliCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3, .panel-badge, .prompt-thai, .brand-titles h1, .unit-card-bento h3, .quiz-title-h2 {
+      font-family: var(--font-display);
+      letter-spacing: -0.01em;
     }
 
     * {
@@ -1348,22 +1375,25 @@
   </style>
 </head>
 <body>
+  <!-- GHIBLI AMBIENT FIREFLY CANVAS -->
+  <canvas id="ghibliCanvas"></canvas>
+
   <div class="app-shell">
     <!-- TOP HEADER -->
     <header class="top-header">
       <div class="brand-cluster" onclick="switchNavTab('studio')">
-        <div class="brand-icon-box">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+        <div class="brand-icon-box" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+          🍃
         </div>
         <div class="brand-titles">
-          <h1>Stimuler Thai <span class="brand-tag">AI COACH</span></h1>
-          <span>Praktik Bicara & Kelancaran Bahasa Thailand</span>
+          <h1 style="font-family:var(--font-display);">Mali's Thai Garden <span class="brand-tag">GHIBLI AI</span></h1>
+          <span>Taman Latihan Bicara & Kelancaran Bahasa Thailand</span>
         </div>
       </div>
 
       <div class="header-actions">
         <div class="metric-badge metric-cefr" title="Tingkat Kelancaran CEFR Thai">
-          <span>🎯 CEFR A1.2</span>
+          <span>🍃 CEFR A1.2</span>
         </div>
         <div class="metric-badge metric-streak" title="Streak Latihan Harian">
           <span>🔥</span> <span id="headerStreak">1</span> Hari
@@ -1374,8 +1404,8 @@
         <button class="icon-btn" onclick="toggleAudioEngine()" id="audioToggleBtn" title="Toggle Efek Suara">
           🔊
         </button>
-        <button class="icon-btn" onclick="toggleColorTheme()" title="Ubah Tema Terang/Gelap">
-          🌙
+        <button class="icon-btn" onclick="toggleColorTheme()" title="Ubah Suasana Siang / Malam">
+          🏮
         </button>
       </div>
     </header>
@@ -1413,13 +1443,13 @@
 
         <!-- AI Coach Card Pill -->
         <div class="ai-coach-pill" onclick="triggerCoachGreeting()">
-          <div class="ai-avatar">
-            🌸
+          <div class="ai-avatar" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);">
+            🍃
             <div class="ai-online-dot"></div>
           </div>
           <div class="ai-coach-info">
-            <h4>Nong Mali (มะลิ)</h4>
-            <p>AI Speaking Coach • Online</p>
+            <h4 style="font-family:var(--font-display);">Nong Mali (มะลิ)</h4>
+            <p>Roh Hutan Sukhumvit • Online</p>
           </div>
         </div>
       </aside>
@@ -2754,7 +2784,7 @@
       document.documentElement.setAttribute('data-theme', next);
       appState.theme = next;
       saveState();
-      showToast(next === 'dark' ? '🌙 Mode Gelap Aktif' : '☀️ Mode Terang Aktif');
+      showToast(next === 'dark' ? '🏮 Suasana Hutan Berbintang (Malam)' : '🍃 Suasana Padang Rumput (Siang)');
     }
 
     function toggleAudioEngine() {
@@ -2766,8 +2796,59 @@
 
     function triggerCoachGreeting() {
       playSynthSound('click');
-      speakThai('สวัสดีค่ะ ยินดีที่ได้คุยกันนะคะ');
-      showToast('🌸 Nong Mali: "Sawat-dii kha! Siap latihan bicara hari ini?"');
+      speakThai('ยินดีต้อนรับสู่สวนภาษาไทยนะคะ มะลิพร้อมช่วยค่ะ');
+      showToast('🍃 Nong Mali: "Sawat-dii kha! Selamat datang di taman bahasa Thai kami ✨"');
+    }
+
+    /* GHIBLI AMBIENT FIREFLY PARTICLES ANIMATION */
+    const gCanvas = document.getElementById('ghibliCanvas');
+    if (gCanvas) {
+      const gCtx = gCanvas.getContext('2d');
+      let gParticles = [];
+      function resizeGhibli() {
+        gCanvas.width = window.innerWidth;
+        gCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeGhibli);
+      resizeGhibli();
+
+      for (let i = 0; i < 26; i++) {
+        gParticles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: Math.random() * 2.2 + 1,
+          dx: (Math.random() - 0.5) * 0.4,
+          dy: -(Math.random() * 0.45 + 0.15),
+          alpha: Math.random() * 0.6 + 0.2
+        });
+      }
+
+      function animateGhibli() {
+        gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        const color = isDark ? '82, 183, 136' : '45, 106, 79';
+
+        gParticles.forEach(p => {
+          p.x += p.dx;
+          p.y += p.dy;
+          p.alpha += Math.sin(Date.now() * 0.002 + p.x) * 0.006;
+          if (p.alpha < 0.1) p.alpha = 0.1;
+          if (p.alpha > 0.8) p.alpha = 0.8;
+
+          if (p.y < -10) { p.y = gCanvas.height + 10; p.x = Math.random() * gCanvas.width; }
+          if (p.x < -10) p.x = gCanvas.width + 10;
+          if (p.x > gCanvas.width + 10) p.x = -10;
+
+          gCtx.beginPath();
+          gCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          gCtx.fillStyle = `rgba(${color}, ${p.alpha})`;
+          gCtx.shadowColor = `rgba(${color}, ${p.alpha * 1.5})`;
+          gCtx.shadowBlur = p.r * 5;
+          gCtx.fill();
+        });
+        requestAnimationFrame(animateGhibli);
+      }
+      requestAnimationFrame(animateGhibli);
     }
 
     /* INITIALIZE APP */
