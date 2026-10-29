@@ -770,46 +770,128 @@
        ========================================================================== */
     .roleplay-container {
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 24px;
-      min-height: 580px;
+      grid-template-columns: 340px 1fr;
+      gap: 20px;
+      min-height: 600px;
     }
 
     .scenario-sidebar {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+      max-height: 620px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .scenario-sidebar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .scenario-sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .scenario-sidebar::-webkit-scrollbar-thumb {
+      background: var(--border-bright);
+      border-radius: 4px;
+    }
+
+    .scenario-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 2px;
+      position: sticky;
+      top: 0;
+      background: var(--bg-body);
+      padding-bottom: 4px;
+      z-index: 2;
+    }
+    .scenario-filter-btn {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .scenario-filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--text-main);
+    }
+    .scenario-filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
     }
 
     .scenario-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      padding: 12px 14px;
       cursor: pointer;
       transition: all 0.15s;
       text-align: left;
+      position: relative;
     }
     .scenario-card:hover {
       border-color: var(--border-bright);
       background: var(--bg-card);
+      transform: translateY(-1px);
     }
     .scenario-card.active {
       border-color: var(--primary);
       background: var(--primary-light);
+      box-shadow: 0 4px 12px rgba(235, 94, 40, 0.1);
+    }
+    .scenario-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .scenario-card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-card-title-row h4 {
+      font-size: 13.5px;
+      font-weight: 800;
+      margin: 0;
     }
     .scenario-icon {
-      font-size: 26px;
-      margin-bottom: 8px;
+      font-size: 20px;
+      line-height: 1;
     }
-    .scenario-card h4 {
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 4px;
+    .scenario-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      background: rgba(0,0,0,0.05);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+    .dark .scenario-badge {
+      background: rgba(255,255,255,0.08);
+    }
+    .scenario-partner-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .scenario-card p {
       font-size: 12px;
       color: var(--text-muted);
+      margin: 0;
+      line-height: 1.4;
     }
 
     /* Chat Room */
@@ -1997,24 +2079,31 @@
           <div class="roleplay-container">
             <!-- Scenario Picker -->
             <div class="scenario-sidebar">
-              <h3 style="font-size:16px; font-weight:800; margin-bottom:8px;">Pilih Skenario Percakapan</h3>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="font-size:15px; font-weight:800; margin:0;">Pilih Skenario Percakapan</h3>
+                <span class="scenario-badge" id="roleplayCountBadge" style="background:var(--primary-light); color:var(--primary); font-weight:800;">12 Topik</span>
+              </div>
+              <p style="font-size:12px; color:var(--text-muted); margin:0;">Simulasi nyata percakapan jalanan, restoran, pasar, & kehidupan Bangkok:</p>
               
-              <div class="scenario-card active" onclick="selectRoleplayScenario('cafe')">
-                <div class="scenario-icon">🍜</div>
-                <h4>Pesan Makanan di Kafe</h4>
-                <p>Memesan Pad Thai, minta air minum, dan gunakan partikel santun.</p>
+              <!-- Filter Bar -->
+              <div class="scenario-filter-bar" id="roleplayCategoryBar">
+                <button class="scenario-filter-btn active" onclick="filterRoleplayScenarios('all', this)">Semua (12)</button>
+                <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('kuliner', this)">🍜 Kuliner</button>
+                <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('belanja', this)">🛍️ Belanja</button>
+                <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('transport', this)">🛺 Transport</button>
+                <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('wisata', this)">🏨 Wisata</button>
+                <button class="scenario-filter-btn" onclick="filterRoleplayScenarios('layanan', this)">💆 Layanan</button>
               </div>
 
-              <div class="scenario-card" onclick="selectRoleplayScenario('market')">
-                <div class="scenario-icon">🛍️</div>
-                <h4>Pasar Chatuchak</h4>
-                <p>Tanya harga pakaian, tawar menawar diskon secara ramah.</p>
+              <!-- Search Bar -->
+              <div style="position:relative;">
+                <input type="text" id="roleplaySearchInput" class="custom-input" placeholder="Cari skenario (contoh: kafe, hotel, tiket, pasar)..." oninput="searchRoleplayScenarios(this.value)" style="padding-left:32px; font-size:12px; height:34px; width:100%; border-radius:var(--radius-md); box-sizing:border-box;">
+                <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:12px; pointer-events:none;">🔍</span>
               </div>
 
-              <div class="scenario-card" onclick="selectRoleplayScenario('tuktuk')">
-                <div class="scenario-icon">🛺</div>
-                <h4>Naik Tuk-Tuk Keliling Kota</h4>
-                <p>Mengarahkan belok kiri, kanan, dan minta berhenti di kuil.</p>
+              <!-- Dynamic Scenario Cards Container -->
+              <div id="roleplayScenarioList" style="display:flex; flex-direction:column; gap:8px;">
+                <!-- Scenario cards rendered by JavaScript -->
               </div>
             </div>
 
@@ -2022,16 +2111,16 @@
             <div class="chat-room">
               <div class="chat-header">
                 <div class="chat-partner">
-                  <div class="chat-partner-avatar">👩🏻</div>
+                  <div class="chat-partner-avatar" id="roleplayPartnerAvatar" style="font-size:20px;">👩🏻</div>
                   <div class="chat-partner-name">
                     <h4 id="roleplayPartnerName">Pelayan Kafe (Khun Da)</h4>
-                    <span>● Online • AI Audio Aktif</span>
+                    <span id="roleplayPartnerStatus" style="color:var(--emerald);">● Online • Penutur Asli Wanita</span>
                   </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:8px;">
                   <div class="filter-pills" style="margin:0;">
-                    <button class="pill-filter" id="roleplayGenderMale" onclick="setRoleplayGender('male')" style="padding:4px 8px; font-size:11px;">👨 Pria</button>
-                    <button class="pill-filter active" id="roleplayGenderFemale" onclick="setRoleplayGender('female')" style="padding:4px 8px; font-size:11px;">👩 Wanita</button>
+                    <button class="pill-filter" id="roleplayGenderMale" onclick="setRoleplayGender('male')" style="padding:4px 8px; font-size:11px;" title="Suara respon Anda sebagai penutur Pria">Suara Anda: 👨 Pria</button>
+                    <button class="pill-filter active" id="roleplayGenderFemale" onclick="setRoleplayGender('female')" style="padding:4px 8px; font-size:11px;" title="Suara respon Anda sebagai penutur Wanita">Suara Anda: 👩 Wanita</button>
                   </div>
                   <button class="btn-audio-listen" onclick="resetRoleplay()">Reset Skenario</button>
                 </div>
@@ -3149,7 +3238,6 @@
       recognition.onend = () => {
         isRecording = false;
         isWaveformActive = false;
-        document.getElementById('micBtn').classList.remove('is-recording');
         document.getElementById('micStatusText').textContent = 'Selesai merekam • Klik untuk bicara lagi';
         evaluateSpokenResult();
       };
@@ -3220,140 +3308,674 @@
       setTimeout(() => toggleMicrophone(), 1800);
     }
 
-    /* 5. ROLEPLAY CONVERSATIONAL SIMULATOR */
+    /* 5. ROLEPLAY CONVERSATIONAL SIMULATOR (12 SCENARIOS) */
     const ROLEPLAY_SCENARIOS = {
       cafe: {
+        id: 'cafe',
+        category: 'kuliner',
+        categoryLabel: '🍜 Kuliner',
+        title: 'Pesan Makanan di Kafe Sukhumvit',
+        desc: 'Pesan Pad Thai, minta air es, menu rekomendasi, dan bayar tagihan.',
+        icon: '🍜',
+        level: 'A1 Dasar',
         partnerName: 'Pelayan Kafe (Khun Da)',
-        messages: [
+        partnerAvatar: '👩🏻',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Bangkok Cafe',
+        initialMessages: [
           { sender: 'ai', thai: 'สวัสดีค่ะ รับอะไรดีคะ?', roman: 'sà-wàt-dii khâ, ráp a-rai dii khá?', ind: 'Halo, mau pesan apa hari ini?' }
         ],
+        messages: [],
         chips: [
-          { thai: 'ขอผัดไทยหนึ่งจานครับ', roman: 'khɔ̌ɔ phàt-thai nèung jaan khráp', ind: 'Minta satu porsi Pad Thai' },
-          { thai: 'ขอน้ำเปล่าหนึ่งแก้วครับ', roman: 'khɔ̌ɔ náam-plào nèung gâew khráp', ind: 'Minta satu gelas air putih' },
-          { thai: 'มีเมนูแนะนำไหมครับ', roman: 'mii mee-nuu náe-nam mǎi khráp', ind: 'Ada menu rekomendasi?' }
+          {
+            thai: 'ขอผัดไทยหนึ่งจานครับ',
+            roman: 'khɔ̌ɔ phàt-thai nèung jaan khráp',
+            ind: 'Minta satu porsi Pad Thai',
+            reply: { thai: 'ได้เลยค่ะ ผัดไทยกุ้งสด รอสักครู่ 5 นาทีนะคะ!', roman: 'dâi loei khâ, phàt-thai gûng sòt, rɔɔ sàk-khrûu hâa naa-thii ná khá!', ind: 'Baik, Pad Thai udang segar, tunggu 5 menit ya!' }
+          },
+          {
+            thai: 'ขอน้ำเปล่าหนึ่งแก้วครับ',
+            roman: 'khɔ̌ɔ náam-plào nèung gâew khráp',
+            ind: 'Minta satu gelas air putih',
+            reply: { thai: 'ใส่น้ำแข็งด้วยไหมคะ?', roman: 'sài náam-khǎeng dûay mǎi khá?', ind: 'Pakai es batu juga tidak?' }
+          },
+          {
+            thai: 'มีเมนูแนะนำไหมครับ',
+            roman: 'mii mee-nuu náe-nam mǎi khráp',
+            ind: 'Ada menu rekomendasi?',
+            reply: { thai: 'แนะนำต้มยำกุ้งและข้าวซอยค่ะ อร่อยมาก!', roman: 'náe-nam dtôm-yam-gûng láe khâao-sɔɔi khâ, a-rɔ̀ɔy mâak!', ind: 'Rekomendasi Tom Yum Goong dan Khao Soi, enak sekali!' }
+          },
+          {
+            thai: 'เก็บเงินด้วยครับ',
+            roman: 'gèp ngoen dûay khráp',
+            ind: 'Minta bon / bayar tagihan',
+            reply: { thai: 'ทั้งหมด 120 บาทค่ะ สแกนจ่ายได้นะคะ', roman: 'tháng-mòt nèung-rɔ́ɔi yîi-sìp bàat khâ, sà-gaen jàai dâi ná khá', ind: 'Total 120 Baht, bisa bayar pakai QR/Scan ya' }
+          }
         ]
       },
       market: {
+        id: 'market',
+        category: 'belanja',
+        categoryLabel: '🛍️ Belanja',
+        title: 'Tawar-Menawar di Chatuchak',
+        desc: 'Tanya harga pakaian, tawar diskon ramah, dan cek varian warna.',
+        icon: '🛍️',
+        level: 'A1 Dasar',
         partnerName: 'Penjual Pasar (Pii Somchai)',
-        messages: [
+        partnerAvatar: '👨🏻',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • Chatuchak Market',
+        initialMessages: [
           { sender: 'ai', thai: 'เสื้อตัวนี้สวยมากครับ สนใจไหม?', roman: 'sûea dtua níi sǔay mâak khráp, sǒn-jai mǎi?', ind: 'Baju ini bagus sekali, berminat?' }
         ],
+        messages: [],
         chips: [
-          { thai: 'อันนี้เท่าไหร่ครับ', roman: 'an-níi thâo-rài khráp', ind: 'Berapa harganya yang ini?' },
-          { thai: 'ลดหน่อยได้ไหมครับ', roman: 'lót nɔ̀ɔy dâi mǎi khráp', ind: 'Bisa diskon sedikit?' },
-          { thai: 'มีสีแดงไหมครับ', roman: 'mii sǐi daeng mǎi khráp', ind: 'Apakah ada warna merah?' }
+          {
+            thai: 'อันนี้เท่าไหร่ครับ',
+            roman: 'an-níi thâo-rài khráp',
+            ind: 'Berapa harganya yang ini?',
+            reply: { thai: 'ตัวละ 250 บาทครับ เนื้อผ้าใส่สบายมาก!', roman: 'dtua lá sɔ̌ɔng-rɔ́ɔi hâa-sìp bàat khráp, núea-phâa sài sà-baai mâak!', ind: '250 Baht per potong, bahannya sangat adem dan nyaman!' }
+          },
+          {
+            thai: 'ลดหน่อยได้ไหมครับ',
+            roman: 'lót nɔ̀ɔy dâi mǎi khráp',
+            ind: 'Bisa diskon sedikit?',
+            reply: { thai: 'ถ้าซื้อสองตัว ลดให้เหลือ 400 บาทครับ!', roman: 'thâa súue sɔ̌ɔng dtua, lót hâi lǔea sìi-rɔ́ɔi bàat khráp!', ind: 'Kalau ambil dua, saya diskon jadi 400 Baht ya!' }
+          },
+          {
+            thai: 'มีสีอื่นไหมครับ',
+            roman: 'mii sǐi ùen mǎi khráp',
+            ind: 'Apakah ada warna lain?',
+            reply: { thai: 'มีสีน้ำเงินกับสีขาวครับ ลองดูได้เลย', roman: 'mii sǐi náam-ngoen gàp sǐi khǎao khráp, lɔɔng duu dâi loei', ind: 'Ada warna biru dan putih, silakan dicoba dulu' }
+          },
+          {
+            thai: 'เอาตัวนี้ครับ',
+            roman: 'ao dtua níi khráp',
+            ind: 'Saya ambil yang ini',
+            reply: { thai: 'ขอบคุณมากครับ ใส่ถุงให้เรียบร้อยแล้วครับ', roman: 'khɔ̀ɔp-khun mâak khráp, sài thǔng hâi rîap-rɔ́ɔy láew khráp', ind: 'Terima kasih banyak! Sudah saya bungkus rapi' }
+          }
         ]
       },
       tuktuk: {
-        partnerName: 'Sopir Tuk-Tuk (Bangkok Express)',
-        messages: [
+        id: 'tuktuk',
+        category: 'transport',
+        categoryLabel: '🛺 Transport',
+        title: 'Naik Tuk-Tuk Keliling Kota',
+        desc: 'Sepakat tarif, memberi petunjuk arah, dan minta berhenti di kuil.',
+        icon: '🛺',
+        level: 'A1 Dasar',
+        partnerName: 'Sopir Tuk-Tuk (Bang Somrak)',
+        partnerAvatar: '🛺',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • Bangkok Driver',
+        initialMessages: [
           { sender: 'ai', thai: 'จะไปไหนครับ ไปไกลไหม?', roman: 'jà pai nǎi khráp, pai glai mǎi?', ind: 'Mau pergi ke mana? Jauh tidak?' }
         ],
+        messages: [],
         chips: [
-          { thai: 'ไปวัดอรุณครับ', roman: 'pai wát a-run khráp', ind: 'Pergi ke kuil Wat Arun' },
-          { thai: 'ตรงไปแล้วเลี้ยวซ้ายครับ', roman: 'dtrong pai láew líao sáai khráp', ind: 'Lurus lalu belok kiri' },
-          { thai: 'จอดที่นี่ด้วยครับ', roman: 'jɔ̀ɔt thîi nîi dûay khráp', ind: 'Tolong berhenti di sini' }
+          {
+            thai: 'ไปวัดอรุณเท่าไหร่ครับ',
+            roman: 'pai wát a-run thâo-rài khráp',
+            ind: 'Ke Wat Arun berapa harganya?',
+            reply: { thai: '150 บาทครับ นั่งรับลมเย็นๆ สบายเลย!', roman: 'nèung-rɔ́ɔi hâa-sìp bàat khráp, nâng ráp lom yen-yen sà-baai loei!', ind: '150 Baht, duduk santai angin sejuk nyaman!' }
+          },
+          {
+            thai: 'ตรงไปแล้วเลี้ยวซ้ายครับ',
+            roman: 'dtrong pai láew líao sáai khráp',
+            ind: 'Lurus lalu belok kiri',
+            reply: { thai: 'โอเคครับ เลี้ยวซ้ายตรงสี่แยกข้างหน้านะ', roman: 'oo-kee khráp, líao sáai dtrong sìi-yâek khâang-nâa ná', ind: 'Oke, belok kiri di perempatan depan ya' }
+          },
+          {
+            thai: 'จอดที่นี่ด้วยครับ',
+            roman: 'jɔ̀ɔt thîi nîi dûay khráp',
+            ind: 'Tolong berhenti di sini',
+            reply: { thai: 'ถึงแล้วครับ ระวังรถมอเตอร์ไซค์ตอนลงด้วยนะ!', roman: 'thěung láew khráp, rá-wang rót mɔɔ-dtəə-sai dtɔɔn long dûay ná!', ind: 'Sudah sampai! Hati-hati motor saat turun ya' }
+          }
+        ]
+      },
+      hotel: {
+        id: 'hotel',
+        category: 'wisata',
+        categoryLabel: '🏨 Wisata',
+        title: 'Check-In Hotel di Sukhumvit',
+        desc: 'Konfirmasi reservasi kamar, tanya sarapan, dan minta password WiFi.',
+        icon: '🏨',
+        level: 'A2 Menengah',
+        partnerName: 'Resepsionis Hotel (Khun Ploy)',
+        partnerAvatar: '👩‍💼',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Sukhumvit Grand',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ ยินดีต้อนรับ เช็คอินใช่ไหมคะ?', roman: 'sà-wàt-dii khâ, yin-dii dtɔ̂ɔn-ráp chék-in châi mǎi khá?', ind: 'Selamat datang, mau check-in kan?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'จองห้องไว้แล้วครับ',
+            roman: 'jɔɔng hɔ̂ɔng wái láew khráp',
+            ind: 'Saya sudah reservasi kamar',
+            reply: { thai: 'ขอดูพาสปอร์ตและใบจองหน่อยค่ะ', roman: 'khɔ̌ɔ duu phâat-sà-bpɔ̀ɔt láe bai-jɔɔng nɔ̀ɔy khâ', ind: 'Boleh saya lihat paspor dan voucher reservasinya?' }
+          },
+          {
+            thai: 'อาหารเช้าเริ่มกี่โมงครับ',
+            roman: 'aa-hǎan-cháao rə̂əm gìi moong khráp',
+            ind: 'Sarapan pagi mulai jam berapa?',
+            reply: { thai: 'อาหารเช้าชั้น 2 เริ่มหกโมงครึ่งถึงสิบโมงเช้าค่ะ', roman: 'aa-hǎan-cháao chán sɔ̌ɔng, rə̂əm hòk moong khrûeng thěung sìp moong cháao khâ', ind: 'Sarapan di lantai 2 mulai 06.30 hingga 10.00 pagi ya' }
+          },
+          {
+            thai: 'ขอรหัสไวไฟด้วยครับ',
+            roman: 'khɔ̌ɔ rá-hàt wai-fai dûay khráp',
+            ind: 'Minta password WiFi hotel',
+            reply: { thai: 'รหัสไวไฟเขียนอยู่ที่ซองคีย์การ์ดค่ะ', roman: 'rá-hàt wai-fai khǐan yùu thîi sɔɔng kii-gàat khâ', ind: 'Password WiFi tertulis di amplop kartu kamar ya' }
+          }
+        ]
+      },
+      tea: {
+        id: 'tea',
+        category: 'kuliner',
+        categoryLabel: '🍜 Kuliner',
+        title: 'Kedai Minuman Cha Yen & Thai Tea',
+        desc: 'Pesan Cha Yen autentik, atur tingkat kemanisan, dan pesan take-away.',
+        icon: '🧋',
+        level: 'A1 Dasar',
+        partnerName: 'Barista Kedai (Nong Fern)',
+        partnerAvatar: '🧋',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • ChaTraMue Station',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ ดื่มชาไทยหรือชาเขียวดีคะ?', roman: 'sà-wàt-dii khâ, dèum chaa-thai rǔue chaa-kǐao dii khá?', ind: 'Halo, mau minum Thai Tea atau Green Tea?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ขอชาไทยเย็นหวานน้อยครับ',
+            roman: 'khɔ̌ɔ chaa-thai yen wǎan nɔ́ɔy khráp',
+            ind: 'Minta es Thai Tea manis sedikit (low sugar)',
+            reply: { thai: 'ได้ค่ะ ชาไทยเย็นหวาน 25% หอมเข้มข้นค่ะ', roman: 'dâi khâ, chaa-thai yen wǎan yîi-sìp-hâa bpəə-sen hɔ̌ɔm khêm-khǒn khâ', ind: 'Baik, Cha Yen manis 25% wangi dan kental!' }
+          },
+          {
+            thai: 'ขอชามะนาวแก้วใหญ่ครับ',
+            roman: 'khɔ̌ɔ chaa-má-naao gâew yài khráp',
+            ind: 'Minta es lemon tea ukuran besar',
+            reply: { thai: 'ชามะนาวเปรี้ยวหวานสดชื่น แก้วละ 40 บาทค่ะ', roman: 'chaa-má-naao bprîao wǎan sòt-chûen, gâew lá sìi-sìp bàat khâ', ind: 'Lemon Tea segar asam manis, 40 Baht per cup besar' }
+          },
+          {
+            thai: 'ใส่ถุงกลับบ้านครับ',
+            roman: 'sài thǔng glàp bâan khráp',
+            ind: 'Bungkus bawa pulang (take-away)',
+            reply: { thai: 'ใส่ถุงหูหิ้วพร้อมหลอดดูดให้เรียบร้อยแล้วค่ะ!', roman: 'sài thǔng hǔu-hîo phrɔ́ɔm lɔ̀ɔt-dùut hâi rîap-rɔ́ɔy láew khâ!', ind: 'Sudah dibungkus tas jinjing lengkap dengan sedotan ya!' }
+          }
+        ]
+      },
+      massage: {
+        id: 'massage',
+        category: 'layanan',
+        categoryLabel: '💆 Layanan',
+        title: 'Spa & Pijat Tradisional Nuad Thai',
+        desc: 'Pilih durasi pijat tradisional, minta tekanan lebih pelan atau kuat.',
+        icon: '💆‍♀️',
+        level: 'A2 Menengah',
+        partnerName: 'Terapis Pijat (Mae Pranom)',
+        partnerAvatar: '💆‍♀️',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Wat Pho Massage Spa',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ วันนี้เมื่อยตรงไหนเป็นพิเศษไหมคะ?', roman: 'sà-wàt-dii khâ, wan-níi mûeay dtrong nǎi pen phí-sèet mǎi khá?', ind: 'Halo, hari ini pegal di bagian mana secara khusus?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ขอนวดไทยโบราณสองชั่วโมงครับ',
+            roman: 'khɔ̌ɔ nûat thai boo-raan sɔ̌ɔng chûa-moong khráp',
+            ind: 'Minta pijat tradisional Thai 2 jam',
+            reply: { thai: 'เปลี่ยนชุดที่ห้องด้านในก่อนนะคะ สบายตัวแน่นอน', roman: 'bplìian chút thîi hɔ̂ɔng dâan-nai gɔ̀ɔn ná khá, sà-baai dtua nâae-nɔɔn', ind: 'Ganti baju di kamar dalam dulu ya, pasti badan segar kembali' }
+          },
+          {
+            thai: 'ช่วยนวดเบาๆ หน่อยครับ',
+            roman: 'chûay nûat bao-bao nɔ̀ɔy khráp',
+            ind: 'Tolong pijatnya pelan-pelan saja',
+            reply: { thai: 'ได้ค่ะ จะผ่อนคลายเบาๆ ให้ ไม่เจ็บแน่นอนค่ะ', roman: 'dâi khâ, jà phɔ̀ɔn-khlaai bao-bao hâi, mâi jèp nâae-nɔɔn khâ', ind: 'Baik, saya pijat lembut rileks, tidak akan sakit ya' }
+          },
+          {
+            thai: 'ตรงนี้นวดหนักๆ ได้ครับ',
+            roman: 'dtrong níi nûat nàk-nàk dâi khráp',
+            ind: 'Bagian ini boleh dipijat agak kencang',
+            reply: { thai: 'จัดให้ค่ะ คลายเส้นที่ตึงตรงบ่าไหล่ให้นะคะ', roman: 'jàt hâi khâ, khlaai sên thîi dteung dtrong bàa-lǎi hâi ná khá', ind: 'Siap! Saya uraikan urat kaku di pundak leher ya' }
+          }
+        ]
+      },
+      airport: {
+        id: 'airport',
+        category: 'wisata',
+        categoryLabel: '✈️ Wisata',
+        title: 'Imigrasi Bandara Suvarnabhumi',
+        desc: 'Jawab pertanyaan petugas imigrasi tentang durasi wisata dan hotel.',
+        icon: '✈️',
+        level: 'A2 Menengah',
+        partnerName: 'Petugas Imigrasi (Khun Arthit)',
+        partnerAvatar: '👨‍✈️',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • Suvarnabhumi Airport',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีครับ มาเที่ยวประเทศไทยใช่ไหมครับ?', roman: 'sà-wàt-dii khráp, maa thîao bprà-thêet thai châi mǎi khráp?', ind: 'Halo, datang untuk berlibur ke Thailand kan?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'มาเที่ยวหนึ่งสัปดาห์ครับ',
+            roman: 'maa thîao nèung sàp-daa khráp',
+            ind: 'Datang berlibur selama 1 minggu',
+            reply: { thai: 'ยินดีต้อนรับครับ พักที่โรงแรมไหนในกรุงเทพครับ?', roman: 'yin-dii dtɔ̂ɔn-ráp khráp, phák thîi roong-raem nǎi nai grung-thêep khráp?', ind: 'Selamat datang! Menginap di hotel mana di Bangkok?' }
+          },
+          {
+            thai: 'พักที่โรงแรมสุขุมวิทครับ',
+            roman: 'phák thîi roong-raem sù-khǔm-wít khráp',
+            ind: 'Menginap di hotel kawasan Sukhumvit',
+            reply: { thai: 'เรียบร้อยครับ ประทับตราให้แล้ว ขอให้เที่ยวให้สนุกครับ!', roman: 'rîap-rɔ́ɔy khráp, bprà-tháp-dtraa hâi láew, khɔ̌ɔ hâi thîao hâi sà-nùk khráp!', ind: 'Sudah beres dan dicap paspornya! Selamat menikmati liburan di Thailand!' }
+          },
+          {
+            thai: 'นี่พาสปอร์ตครับ',
+            roman: 'nîi phâat-sà-bpɔ̀ɔt khráp',
+            ind: 'Ini paspor saya',
+            reply: { thai: 'ขอบคุณครับ มองกล้องถ่ายรูปตรงนี้ด้วยครับ', roman: 'khɔ̀ɔp-khun khráp, mɔɔng glɔ̂ɔng thàai-rûup dtrong níi dûay khráp', ind: 'Terima kasih, silakan tatap kamera di depan ini ya' }
+          }
+        ]
+      },
+      seven: {
+        id: 'seven',
+        category: 'belanja',
+        categoryLabel: '🛍️ Belanja',
+        title: 'Belanja Cepat di 7-Eleven Thailand',
+        desc: 'Minta panaskan sandwich keju, tolak kantong plastik, dan bayar tunai.',
+        icon: '🏪',
+        level: 'A1 Dasar',
+        partnerName: 'Kasir 7-Eleven (Nong Best)',
+        partnerAvatar: '🏪',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • 7-Eleven Convenience Store',
+        initialMessages: [
+          { sender: 'ai', thai: 'เซเว่นสวัสดีครับ รับแซนด์วิชร้อนๆ ไหมครับ?', roman: 'see-wên sà-wàt-dii khráp, ráp saen-wít rɔ́ɔn-rɔ́ɔn mǎi khráp?', ind: 'Halo 7-Eleven! Mau sandwich panggang hangat?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'อุ่นให้ด้วยครับ',
+            roman: 'ùn hâi dûay khráp',
+            ind: 'Tolong dipanaskan sekalian',
+            reply: { thai: 'รอเวฟสักครู่ 2 นาทีนะครับ จะได้กรอบๆ', roman: 'rɔɔ wéep sàk-khrûu sɔ̌ɔng naa-thii ná khráp, jà dâi grɔ̀ɔp-grɔ̀ɔp', ind: 'Tunggu dihangatkan 2 menit ya, biar renyah!' }
+          },
+          {
+            thai: 'ไม่รับถุงพลาสติกครับ',
+            roman: 'mâi ráp thǔng phláat-sà-dtìk khráp',
+            ind: 'Tidak perlu kantong plastik',
+            reply: { thai: 'ขอบคุณที่ช่วยลดโลกร้อนครับ ยอดรวม 55 บาทครับ', roman: 'khɔ̀ɔp-khun thîi chûay lót lôok rɔ́ɔn khráp, yɔ̂ɔt ruam hâa-sìp-hâa bàat khráp', ind: 'Terima kasih bantu hemat plastik! Totalnya 55 Baht' }
+          },
+          {
+            thai: 'จ่ายเงินสดครับ',
+            roman: 'jàai ngoen sòt khráp',
+            ind: 'Saya bayar tunai',
+            reply: { thai: 'รับเงินมา 100 บาท ทอนเงิน 45 บาท ขอบคุณครับ!', roman: 'ráp ngoen maa nèung-rɔ́ɔi bàat, thɔɔn ngoen sìi-sìp-hâa bàat, khɔ̀ɔp-khun khráp!', ind: 'Uang diterima 100 Baht, kembalian 45 Baht, terima kasih!' }
+          }
+        ]
+      },
+      pharmacy: {
+        id: 'pharmacy',
+        category: 'layanan',
+        categoryLabel: '💆 Layanan',
+        title: 'Apotek & Konsultasi Obat',
+        desc: 'Jelaskan gejala pusing, demam, sakit perut, dan aturan minum obat.',
+        icon: '🏥',
+        level: 'A2 Menengah',
+        partnerName: 'Apoteker (Khun Mor Vipada)',
+        partnerAvatar: '👩‍⚕️',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Boots & Watsons Pharmacy',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีค่ะ รู้สึกไม่สบายตรงไหน ปรึกษาได้นะคะ', roman: 'sà-wàt-dii khâ, rúu-sèuk mâi sà-baai dtrong nǎi, bprèuk-sǎa dâi ná khá', ind: 'Halo, merasa kurang enak badan di bagian mana? Boleh konsultasi ya' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ปวดหัวและมีไข้ครับ',
+            roman: 'bpùat hǔa láe mii khâi khráp',
+            ind: 'Sakit kepala dan meriang/demam',
+            reply: { thai: 'มียาลดไข้พาราเซตามอล ทานครั้งละ 1 เม็ดนะคะ', roman: 'mii yaa lót khâi phaa-raa-see-dtaa-mɔɔn, thaan khráng lá nèung mét ná khá', ind: 'Ada obat penurun demam Paracetamol, minum 1 butir per waktu ya' }
+          },
+          {
+            thai: 'ปวดท้อง ท้องเสียครับ',
+            roman: 'bpùat thɔ́ɔng, thɔ́ɔng sǐa khráp',
+            ind: 'Sakit perut dan diare',
+            reply: { thai: 'ดื่มผงเกลือแร่โออาร์เอส และทานยาแก้อักเสบในลำไส้นะคะ', roman: 'dèum phǒng glǔea-râae oo-aa-et, láe thaan yaa gâae àk-sèep nai lam-sâi ná khá', ind: 'Minum larutan oralit ORS dan tablet lambung ya' }
+          },
+          {
+            thai: 'ทานก่อนหรือหลังอาหารครับ',
+            roman: 'thaan gɔ̀ɔn rǔue lǎng aa-hǎan khráp',
+            ind: 'Diminum sebelum atau sesudah makan?',
+            reply: { thai: 'ทานหลังอาหารทันที แล้วดื่มน้ำตามมากๆ ค่ะ', roman: 'thaan lǎng aa-hǎan than-thii, láew dèum náam dtaam mâak-mâak khâ', ind: 'Minum segera sesudah makan dan perbanyak minum air ya' }
+          }
+        ]
+      },
+      bts: {
+        id: 'bts',
+        category: 'transport',
+        categoryLabel: '🛺 Transport',
+        title: 'Stasiun BTS Skytrain & Beli Tiket',
+        desc: 'Beli single pass ke Siam, top up Rabbit card, dan tanya jalur transit.',
+        icon: '🚊',
+        level: 'A1 Dasar',
+        partnerName: 'Petugas Loket BTS (Khun Nat)',
+        partnerAvatar: '🚊',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • BTS Skytrain Station',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีครับ ซื้อตั๋วไปสถานีไหนดีครับ?', roman: 'sà-wàt-dii khráp, súue dtǔa pai sà-thǎa-nii nǎi dii khráp?', ind: 'Halo, mau beli tiket ke stasiun mana?' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ไปสยามสองใบครับ',
+            roman: 'pai sà-yǎam sɔ̌ɔng bai khráp',
+            ind: 'Ke stasiun Siam 2 tiket',
+            reply: { thai: 'ไปสถานีสยาม 2 ใบ รวมเป็น 88 บาทครับ', roman: 'pai sà-thǎa-nii sà-yǎam sɔ̌ɔng bai, ruam pen bpàaet-sìp-bpàaet bàat khráp', ind: 'Ke stasiun Siam 2 tiket, totalnya 88 Baht ya' }
+          },
+          {
+            thai: 'เติมเงินบัตรแรบบิทหนึ่งร้อยบาทครับ',
+            roman: 'dtəəm ngoen bàt ráep-bìt nèung-rɔ́ɔi bàat khráp',
+            ind: 'Isi ulang saldo Rabbit Card 100 Baht',
+            reply: { thai: 'แตะบัตรตรงนี้ได้เลยครับ เติมเรียบร้อยแล้ว', roman: 'dtàe bàt dtrong níi dâi loei khráp, dtəəm rîap-rɔ́ɔy láew', ind: 'Tempelkan kartu di sini, sudah berhasil diisi ulang' }
+          },
+          {
+            thai: 'ต้องเปลี่ยนสายที่ไหนครับ',
+            roman: 'dtɔ̂ɔng bplìian sǎai thîi nǎi khráp',
+            ind: 'Harus transit/pindah jalur di stasiun mana?',
+            reply: { thai: 'เปลี่ยนสายสีเขียวเข้มที่สถานีสยาม ชั้น 3 ครับ', roman: 'bplìian sǎai sǐi-kǐao khêm thîi sà-thǎa-nii sà-yǎam chán sǎam khráp', ind: 'Pindah ke Silom Line hijau tua di stasiun Siam lantai 3 ya' }
+          }
+        ]
+      },
+      fruit: {
+        id: 'fruit',
+        category: 'kuliner',
+        categoryLabel: '🍜 Kuliner',
+        title: 'Beli Buah Tropis di Pasar Malam',
+        desc: 'Beli mangga manis Nam Dok Mai, minta dipotongkan, dan kelapa muda.',
+        icon: '🥭',
+        level: 'A1 Dasar',
+        partnerName: 'Penjual Buah (Mae Somjit)',
+        partnerAvatar: '🥭',
+        partnerGender: 'female',
+        partnerRole: 'Penutur Asli Wanita • Yaowarat Night Market',
+        initialMessages: [
+          { sender: 'ai', thai: 'มะม่วงหวานๆ ทุเรียนหอมๆ จ้า ชิมดูก่อนได้นะ!', roman: 'má-mûang wǎan-wǎan, thú-riian hɔ̌ɔm-hɔ̌ɔm jâa, chim duu gɔ̀ɔn dâi ná!', ind: 'Mangga manis, durian wangi! Boleh cicip dulu ya!' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ขอมะม่วงสุกหนึ่งกิโลครับ',
+            roman: 'khɔ̌ɔ má-mûang sùk nèung gì-loo khráp',
+            ind: 'Minta mangga matang 1 kilogram',
+            reply: { thai: 'มะม่วงน้ำดอกไม้หวานฉ่ำ กิโลละ 80 บาทจ้า', roman: 'má-mûang nám-dɔ̀ɔk-máai wǎan-chàm, gì-loo lá bpàaet-sìp bàat jâa', ind: 'Mangga Nam Dok Mai manis segar, 80 Baht per kilo ya' }
+          },
+          {
+            thai: 'ช่วยหั่นให้ด้วยครับ',
+            roman: 'chûay hàn hâi dûay khráp',
+            ind: 'Tolong sekalian dipotongkan ya',
+            reply: { thai: 'หั่นใส่กล่องพร้อมไม้จิ้มให้เรียบร้อยจ้ะ!', roman: 'hàn sài glɔ̀ɔng phrɔ́ɔm máai-jîm hâi rîap-rɔ́ɔy jà!', ind: 'Sudah dipotong rapi dalam kotak plus tusukan!' }
+          },
+          {
+            thai: 'ขอมะพร้าวหวานๆ หนึ่งลูกครับ',
+            roman: 'khɔ̌ɔ má-phráao wǎan-wǎan nèung lûuk khráp',
+            ind: 'Minta satu butir kelapa muda yang manis',
+            reply: { thai: 'มะพร้าวน้ำหอมบ้านแพ้ว เฉาะสดๆ น้ำหวานชื่นใจจ้า', roman: 'má-phráao nám-hɔ̌ɔm bâan-phâaeo, chɔ̀ sòt-sòt, náam wǎan chûen-jai jâa', ind: 'Kelapa wangi Ban Phaeo, dipapas segar airnya manis sejuk!' }
+          }
+        ]
+      },
+      photo: {
+        id: 'photo',
+        category: 'wisata',
+        categoryLabel: '📸 Wisata',
+        title: 'Kenalan & Minta Tolong Foto di Wat Arun',
+        desc: 'Minta tolong ambil foto dengan latar candi, kenalan ramah, dan cerita asal negara.',
+        icon: '📸',
+        level: 'A1 Dasar',
+        partnerName: 'Mahasiswa Lokal (Nong Chai)',
+        partnerAvatar: '📸',
+        partnerGender: 'male',
+        partnerRole: 'Penutur Asli Pria • Bangkok University Student',
+        initialMessages: [
+          { sender: 'ai', thai: 'สวัสดีครับ มาคนเดียวเหรอครับ วิวตรงนี้สวยมากเลยนะ', roman: 'sà-wàt-dii khráp, maa khon diao rɔ̌ɔ khráp? wio dtrong níi sǔay mâak loei ná', ind: 'Halo! Jalan sendiri ya? Pemandangan di sini bagus sekali' }
+        ],
+        messages: [],
+        chips: [
+          {
+            thai: 'ช่วยถ่ายรูปให้หน่อยได้ไหมครับ',
+            roman: 'chûay thàai-rûup hâi nɔ̀ɔy dâi mǎi khráp',
+            ind: 'Bisa tolong bantu ambilkan foto?',
+            reply: { thai: 'ได้เลยครับ! ยืนตรงนี้เลย วิวพระปรางค์สวยมาก 1..2..3 แชะ!', roman: 'dâi loei khráp! yuun dtrong níi loei, wio phrá-bpraang sǔay mâak, nèung..sɔ̌ɔng..sǎam cháe!', ind: 'Bisa sekali! Berdiri di sini ya, pagoda Wat Arun terlihat indah. 1..2..3 Cekrek!' }
+          },
+          {
+            thai: 'ผมมาจากประเทศอินโดนีเซียครับ',
+            roman: 'phǒm maa jàak bprà-thêet in-doo-nii-siia khráp',
+            ind: 'Saya berasal dari negara Indonesia',
+            reply: { thai: 'ยินดีที่ได้รู้จักครับ! คนอินโดนีเซียน่ารักและเป็นมิตรมากครับ', roman: 'yin-dii thîi dâi rúu-jàk khráp! khon in-doo-nii-siia nâa-rák láe pen mít mâak khráp', ind: 'Senang berkenalan! Orang Indonesia ramah dan baik hati sekali' }
+          },
+          {
+            thai: 'กรุงเทพฯ สวยและของกินอร่อยมากครับ',
+            roman: 'grung-thêep sǔay láe khɔ̌ɔng-gin a-rɔ̀ɔy mâak khráp',
+            ind: 'Bangkok sangat indah dan makanannya enak-enak',
+            reply: { thai: 'ขอบคุณครับ! อย่าลืมไปลองผัดไทยกับล่องเรือแม่น้ำเจ้าพระยานะครับ', roman: 'khɔ̀ɔp-khun khráp! yàa luum bpai lɔɔng phàt-thai gàp lɔ̂ng-ruea mâae-náam jâao-phrá-yaa ná khráp', ind: 'Terima kasih! Jangan lupa coba Pad Thai dan naik kapal susur sungai Chao Phraya ya!' }
+          }
         ]
       }
     };
+
     let activeRoleplayKey = 'cafe';
+    let currentRoleplayCategory = 'all';
+    let currentRoleplaySearch = '';
+
+    function filterRoleplayScenarios(cat, btn) {
+      playSynthSound('click');
+      currentRoleplayCategory = cat;
+      if (btn) {
+        document.querySelectorAll('.scenario-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      renderScenarioList();
+    }
+
+    function searchRoleplayScenarios(query) {
+      currentRoleplaySearch = (query || '').toLowerCase().trim();
+      renderScenarioList();
+    }
+
+    function renderScenarioList() {
+      const container = document.getElementById('roleplayScenarioList');
+      if (!container) return;
+
+      const keys = Object.keys(ROLEPLAY_SCENARIOS).filter(key => {
+        const s = ROLEPLAY_SCENARIOS[key];
+        const matchCat = currentRoleplayCategory === 'all' || s.category === currentRoleplayCategory;
+        const matchSearch = !currentRoleplaySearch || 
+          s.title.toLowerCase().includes(currentRoleplaySearch) ||
+          s.desc.toLowerCase().includes(currentRoleplaySearch) ||
+          s.partnerName.toLowerCase().includes(currentRoleplaySearch);
+        return matchCat && matchSearch;
+      });
+
+      const badge = document.getElementById('roleplayCountBadge');
+      if (badge) badge.textContent = `${keys.length} Skenario`;
+
+      if (keys.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:24px 12px; color:var(--text-muted); font-size:12px;">
+            Tidak ada skenario yang sesuai dengan pencarian "${currentRoleplaySearch}".
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = keys.map(key => {
+        const s = ROLEPLAY_SCENARIOS[key];
+        const isActive = key === activeRoleplayKey;
+        return `
+          <div class="scenario-card ${isActive ? 'active' : ''}" onclick="selectRoleplayScenario('${key}')">
+            <div class="scenario-card-header">
+              <div class="scenario-card-title-row">
+                <span class="scenario-icon">${s.icon}</span>
+                <h4>${s.title}</h4>
+              </div>
+              <span class="scenario-badge">${s.level}</span>
+            </div>
+            <p>${s.desc}</p>
+            <div class="scenario-partner-tag">
+              <span>${s.partnerAvatar}</span>
+              <span>${s.partnerName} (${s.partnerGender === 'female' ? '👩 Wanita' : '👨 Pria'})</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
 
     function renderRoleplayChat() {
       const data = ROLEPLAY_SCENARIOS[activeRoleplayKey];
-      document.getElementById('roleplayPartnerName').textContent = data.partnerName;
+      if (!data) return;
+
+      // Initialize messages from initialMessages if empty
+      if (!data.messages || data.messages.length === 0) {
+        data.messages = JSON.parse(JSON.stringify(data.initialMessages));
+      }
+
+      // Update partner header elements
+      const partnerNameEl = document.getElementById('roleplayPartnerName');
+      const partnerAvatarEl = document.getElementById('roleplayPartnerAvatar');
+      const partnerStatusEl = document.getElementById('roleplayPartnerStatus');
+      if (partnerNameEl) partnerNameEl.textContent = data.partnerName;
+      if (partnerAvatarEl) partnerAvatarEl.textContent = data.partnerAvatar;
+      if (partnerStatusEl) {
+        partnerStatusEl.textContent = `● Online • ${data.partnerRole || (data.partnerGender === 'female' ? 'Penutur Asli Wanita' : 'Penutur Asli Pria')}`;
+      }
 
       const userGender = appState.speakerGender || 'female';
-      const aiGender = activeRoleplayKey === 'cafe' ? 'female' : 'male';
+      const aiGender = data.partnerGender || 'female';
       const container = document.getElementById('roleplayChatMessages');
-      container.innerHTML = data.messages.map(m => {
-        const msgGender = m.sender === 'user' ? userGender : aiGender;
-        return `
-        <div class="chat-bubble ${m.sender === 'ai' ? 'bubble-ai' : 'bubble-user'}">
-          <span class="bubble-thai" onclick="speakThai('${m.thai}', '${msgGender}')" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
-            ${m.thai} <span style="font-size:13px; opacity:0.8; vertical-align:middle;">🔊</span>
-          </span>
-          <div style="font-size:12px; opacity:0.85; font-family:var(--font-mono);">${m.roman}</div>
-          <div style="font-size:12px; margin-top:2px;">${m.ind}</div>
-          <button class="bubble-audio-btn" onclick="speakThai('${m.thai}', '${msgGender}')" style="${m.sender === 'user' ? 'color:#ffffff; opacity:0.95;' : ''}">
-            🔊 Dengar Suara Asli (${msgGender === 'male' ? '👨 Pria' : '👩 Wanita'})
-          </button>
-        </div>
-      `;
-      }).join('');
+      if (container) {
+        container.innerHTML = data.messages.map(m => {
+          const msgGender = m.sender === 'user' ? userGender : aiGender;
+          return `
+            <div class="chat-bubble ${m.sender === 'ai' ? 'bubble-ai' : 'bubble-user'}">
+              <span class="bubble-thai" onclick="speakThai('${m.thai}', '${msgGender}')" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
+                ${m.thai} <span style="font-size:13px; opacity:0.8; vertical-align:middle;">🔊</span>
+              </span>
+              <div style="font-size:12px; opacity:0.85; font-family:var(--font-mono);">${m.roman}</div>
+              <div style="font-size:12px; margin-top:2px;">${m.ind}</div>
+              <button class="bubble-audio-btn" onclick="speakThai('${m.thai}', '${msgGender}')" style="${m.sender === 'user' ? 'color:#ffffff; opacity:0.95;' : ''}">
+                🔊 Dengar Suara Asli (${msgGender === 'male' ? '👨 Pria' : '👩 Wanita'})
+              </button>
+            </div>
+          `;
+        }).join('');
+        container.scrollTop = container.scrollHeight;
+      }
 
       const chipsContainer = document.getElementById('roleplayQuickChips');
-      chipsContainer.innerHTML = data.chips.map(c => {
-        const isQuestion = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(c.thai);
-        const fThai = formatThaiForGender(c.thai, userGender);
-        const fRoman = formatRomanForGender(c.roman, userGender, isQuestion);
-        return `
-        <button class="speech-chip" onclick="userSendRoleplayMessage('${fThai}', '${fRoman}', '${c.ind}')" title="Kirim & Dengarkan lafal asli: ${fRoman}">
-          <span>${fThai}</span>
-          <span class="chip-speaker-tag" onclick="event.stopPropagation(); speakThai('${fThai}', '${userGender}');" title="Dengarkan sebelum kirim">🔊</span>
-        </button>
-      `;
-      }).join('');
+      if (chipsContainer) {
+        chipsContainer.innerHTML = data.chips.map((c, index) => {
+          const isQuestion = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(c.thai);
+          const fThai = formatThaiForGender(c.thai, userGender);
+          const fRoman = formatRomanForGender(c.roman, userGender, isQuestion);
+          return `
+            <button class="speech-chip" onclick="userSendRoleplayMessage(${index})" title="Kirim & Dengarkan lafal asli: ${fRoman}">
+              <span>${fThai}</span>
+              <span class="chip-speaker-tag" onclick="event.stopPropagation(); speakThai('${fThai}', '${userGender}');" title="Dengarkan sebelum kirim">🔊</span>
+            </button>
+          `;
+        }).join('');
+      }
 
-      container.scrollTop = container.scrollHeight;
       updateGenderControls();
     }
 
     function selectRoleplayScenario(key) {
       playSynthSound('click');
       activeRoleplayKey = key;
-      document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      renderScenarioList();
       renderRoleplayChat();
-      const firstMsg = ROLEPLAY_SCENARIOS[key]?.messages[0];
+      const s = ROLEPLAY_SCENARIOS[key];
+      const firstMsg = s?.messages[0] || s?.initialMessages[0];
       if (firstMsg) {
-        const aiGender = key === 'cafe' ? 'female' : 'male';
-        speakThai(firstMsg.thai, aiGender);
+        speakThai(firstMsg.thai, s.partnerGender || 'female');
       }
     }
 
     function resetRoleplay() {
       playSynthSound('click');
+      const s = ROLEPLAY_SCENARIOS[activeRoleplayKey];
+      if (s) {
+        s.messages = JSON.parse(JSON.stringify(s.initialMessages));
+      }
       renderRoleplayChat();
       showToast('Skenario berhasil diatur ulang.');
-      const firstMsg = ROLEPLAY_SCENARIOS[activeRoleplayKey]?.messages[0];
+      const firstMsg = s?.messages[0];
       if (firstMsg) {
-        const aiGender = activeRoleplayKey === 'cafe' ? 'female' : 'male';
-        speakThai(firstMsg.thai, aiGender);
+        speakThai(firstMsg.thai, s.partnerGender || 'female');
       }
     }
 
-    function userSendRoleplayMessage(thai, roman, ind) {
+    function userSendRoleplayMessage(chipIndexOrThai, maybeRoman, maybeInd) {
       playSynthSound('click');
-      const data = ROLEPLAY_SCENARIOS[activeRoleplayKey];
-      data.messages.push({ sender: 'user', thai, roman, ind });
+      const s = ROLEPLAY_SCENARIOS[activeRoleplayKey];
+      if (!s) return;
+
+      let userThai, userRoman, userInd, targetReply;
+      const userGender = appState.speakerGender || 'female';
+
+      if (typeof chipIndexOrThai === 'number') {
+        const c = s.chips[chipIndexOrThai];
+        if (!c) return;
+        const isQuestion = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(c.thai);
+        userThai = formatThaiForGender(c.thai, userGender);
+        userRoman = formatRomanForGender(c.roman, userGender, isQuestion);
+        userInd = c.ind;
+        targetReply = c.reply;
+      } else {
+        userThai = chipIndexOrThai;
+        userRoman = maybeRoman || '';
+        userInd = maybeInd || '';
+        const found = s.chips.find(c => c.thai.includes(userThai) || userThai.includes(c.thai));
+        targetReply = found ? found.reply : s.chips[0]?.reply;
+      }
+
+      s.messages.push({ sender: 'user', thai: userThai, roman: userRoman, ind: userInd });
       renderRoleplayChat();
-      // Speak user sentence in native Thai immediately
-      speakThai(thai, appState.speakerGender);
+
+      // Speak user sentence in user's gender
+      speakThai(userThai, userGender);
 
       // AI Partner Response
       setTimeout(() => {
         playSynthSound('correct');
-        const replyMap = {
-          cafe: { thai: 'ได้เลยค่ะ รอสักครู่ 5 นาทีนะคะ!', roman: 'dâi loei khâ, rɔɔ sàk-khrûu hâa naa-thii ná khá!', ind: 'Baik, tunggu sekitar 5 menit ya!' },
-          market: { thai: 'ลดให้พิเศษเหลือ 200 บาทครับ!', roman: 'lót hâi phí-sèet lǔea sɔ̌ɔng-rɔ́ɔi bàat khráp!', ind: 'Saya diskon khusus jadi 200 Baht ya!' },
-          tuktuk: { thai: 'โอเคครับ นั่งให้แน่นๆ เลยนะ!', roman: 'oo-kee khráp, nâng hâi nâen-nâen loei ná!', ind: 'Oke, pegangan yang erat ya!' }
+        const reply = targetReply || {
+          thai: 'รับทราบครับ ยินดีช่วยเหลือเสมอครับ!',
+          roman: 'ráp-sâap khráp, yin-dii chûay-lǔea sà-mə̌ə khráp!',
+          ind: 'Baik, senang bisa membantu!'
         };
-        const r = replyMap[activeRoleplayKey] || replyMap.cafe;
-        data.messages.push({ sender: 'ai', ...r });
+        s.messages.push({ sender: 'ai', thai: reply.thai, roman: reply.roman, ind: reply.ind });
         renderRoleplayChat();
-        const partnerGender = activeRoleplayKey === 'cafe' ? 'female' : 'male';
-        speakThai(r.thai, partnerGender);
-      }, 1600);
+        speakThai(reply.thai, s.partnerGender || 'female');
+      }, 1500);
     }
 
     function triggerRoleplayMic() {
       playSynthSound('click');
       showToast('Bicara kalimat respon Anda sekarang...');
-      const data = ROLEPLAY_SCENARIOS[activeRoleplayKey];
-      if (data.chips.length > 0) {
-        const c = data.chips[0];
-        setTimeout(() => userSendRoleplayMessage(c.thai, c.roman, c.ind), 1400);
+      const s = ROLEPLAY_SCENARIOS[activeRoleplayKey];
+      if (s && s.chips.length > 0) {
+        setTimeout(() => userSendRoleplayMessage(0), 1400);
       }
+    }
+
+    function setRoleplayGender(gender) {
+      setAppSpeakerGender(gender);
+      renderRoleplayChat();
     }
 
     /* 6. 5 TONES & PHONETICS DATA (AUTHENTIC BANGKOK NOMENCLATURE & CONTOURS) */
@@ -4966,6 +5588,7 @@
     document.getElementById('audioToggleBtn').textContent = appState.soundEnabled ? '🔊' : '🔇';
     updateTopMetrics();
     renderStudioPrompt();
+    renderScenarioList();
     renderRoleplayChat();
     renderTonesGrid();
     renderAlphabetMatrix('all');

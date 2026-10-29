@@ -26,11 +26,21 @@
 ### 2. ⚡ 60-Second Speaking Challenge
 Tantangan spontan khas Stimuler untuk melatih keberanian berbicara tanpa jeda ragu. Jawab pertanyaan pemantik dalam 60 detik penuh untuk menguji ketangkasan fonetik Anda.
 
-### 3. 💬 Simulasi Percakapan Roleplay
-Simulasi dialog interaktif dengan **Nong Mali (มะลิ)** di berbagai konteks kehidupan nyata di Bangkok:
-* 🍜 **Pesan Makanan di Kafe Sukhumvit**: Memesan Pad Thai, meminta air minum, dan menggunakan partikel kesopanan.
-* 🛍️ **Tawar-menawar di Pasar Chatuchak**: Menanyakan harga barang (*thâo-rài*), meminta diskon, dan memilih warna/ukuran.
-* 🛺 **Petualangan Tuk-Tuk Keliling Kota**: Mengarahkan navigasi (*lurus, belok kiri, belok kanan*) hingga berhenti di kuil Wat Arun.
+### 3. 💬 Simulasi Percakapan Roleplay (12 Skenario Nyata Bangkok)
+Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai konteks kehidupan dan perjalanan nyata di Bangkok, lengkap dengan filter kategori (`🍜 Kuliner`, `🛍️ Belanja`, `🛺 Transport`, `🏨 Wisata`, `💆 Layanan`) dan pencarian cepat:
+* 🍜 **Pesan Makanan di Kafe Sukhumvit** *(Pelayan Kafe Khun Da 👩)*: Memesan Pad Thai udang segar, minta air es, menu rekomendasi, dan bayar tagihan via QR.
+* 🛍️ **Tawar-Menawar di Pasar Chatuchak** *(Penjual Pasar Pii Somchai 👨)*: Menanyakan harga baju (*thâo-rài*), menawar diskon ramah, dan cek ketersediaan warna.
+* 🛺 **Naik Tuk-Tuk Keliling Kota** *(Sopir Tuk-Tuk Bang Somrak 👨)*: Sepakat tarif ke Wat Arun, mengarahkan belok kiri/kanan, dan minta berhenti.
+* 🏨 **Check-In Hotel di Sukhumvit** *(Resepsionis Hotel Khun Ploy 👩)*: Konfirmasi reservasi kamar, jadwal sarapan pagi, dan minta password WiFi hotel.
+* 🧋 **Kedai Cha Yen & Thai Tea** *(Barista Kedai Nong Fern 👩)*: Pesan Cha Yen dingin rendah gula (หวานน้อย 25%), es lemon tea, dan bungkus take-away.
+* 💆‍♀️ **Spa & Pijat Tradisional Nuad Thai** *(Terapis Pijat Mae Pranom 👩)*: Pesan pijat tradisional 2 jam, minta tekanan lebih santai atau urai urat pundak kaku.
+* ✈️ **Imigrasi Bandara Suvarnabhumi** *(Petugas Bandara Khun Arthit 👨)*: Menjawab pertanyaan durasi wisata, menyebut hotel tempat menginap, dan cap paspor.
+* 🏪 **Belanja Cepat di 7-Eleven Thailand** *(Kasir Nong Best 👨)*: Minta panaskan sandwich panggang keju, tolak kantong plastik, dan bayar tunai.
+* 🏥 **Apotek & Konsultasi Obat** *(Apoteker Khun Mor Vipada 👩)*: Menjelaskan gejala pusing demam (*bpùat hǔa*), sakit perut diare, dan aturan minum obat.
+* 🚊 **Stasiun Kereta BTS Skytrain** *(Petugas Loket Khun Nat 👨)*: Membeli tiket ke stasiun Siam, top up kartu Rabbit, dan petunjuk stasiun transit.
+* 🥭 **Beli Buah Tropis di Pasar Malam** *(Penjual Buah Mae Somjit 👩)*: Beli mangga manis Nam Dok Mai, minta dipotongkan dalam boks, dan kelapa muda wangi.
+* 📸 **Kenalan & Minta Tolong Foto di Wat Arun** *(Mahasiswa Lokal Nong Chai 👨)*: Minta tolong foto di depan pagoda kuil, bertukar asal negara, dan rekomendasi wisata lokal.
+* **Fitur Percakapan Interaktif**: *Quick-response speech chips*, respon balasan AI yang kontekstual dan natural, tombol dengarkan sebelum kirim, dan tombol suara asli ganda di setiap balon obrolan.
 
 ### 4. 🔊 100% Penutur Asli Bangkok (Universal Native Thai Audio Engine)
 * **Seluruh Kata Berpenutur Asli**: Setiap kata, frasa, konsonan, vokal, pilihan jawaban kuis, dan token kalimat disuarakan langsung oleh penutur asli (*Bangkok Central Standard Thai*).
