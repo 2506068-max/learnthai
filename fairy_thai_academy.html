@@ -1957,18 +1957,82 @@
       }
     }
 
+    let currentThaiAudio = null;
+
     function speakThai(text) {
+      if (!text) return;
+      const cleanText = text.replace(/<[^>]*>/g, '').trim();
+      if (!cleanText) return;
+
+      // Stop any active audio
+      if (currentThaiAudio) {
+        try {
+          currentThaiAudio.pause();
+          currentThaiAudio.currentTime = 0;
+        } catch (e) {}
+      }
+      if ('speechSynthesis' in window) {
+        try { speechSynthesis.cancel(); } catch (e) {}
+      }
+
+      // Activate waveform visualization during native speaking
+      isWaveformActive = true;
+      const waveHint = document.getElementById('waveformHintText');
+      if (waveHint) waveHint.style.display = 'none';
+
+      // 1. PRIMARY: High-Fidelity Native Bangkok Thai Audio (Real Native Accent & Tonal Contours)
+      const encoded = encodeURIComponent(cleanText);
+      const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`;
+
+      const audio = new Audio();
+      currentThaiAudio = audio;
+
+      let ended = false;
+      const finishAudio = () => {
+        if (ended) return;
+        ended = true;
+        isWaveformActive = false;
+        currentThaiAudio = null;
+      };
+
+      audio.onended = finishAudio;
+      audio.onerror = () => {
+        // Fallback: Web Speech API with strict Thai voice matching
+        fallbackSpeechSynthesis(cleanText, finishAudio);
+      };
+
+      audio.src = audioUrl;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          fallbackSpeechSynthesis(cleanText, finishAudio);
+        });
+      }
+    }
+
+    function fallbackSpeechSynthesis(text, onDone) {
       if (!('speechSynthesis' in window)) {
-        showToast('Suara tidak didukung browser ini.');
+        if (onDone) onDone();
         return;
       }
-      speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'th-TH';
-      u.rate = 0.88;
+      u.rate = 0.82; // slightly slower for authentic Thai articulation
+
+      // Prioritize genuine Thai native voices
       const voices = speechSynthesis.getVoices();
-      const v = voices.find(x => x.lang.toLowerCase().startsWith('th'));
-      if (v) u.voice = v;
+      const thaiVoice = voices.find(v => 
+        v.lang === 'th-TH' || 
+        v.lang === 'th_TH' || 
+        v.lang.toLowerCase().startsWith('th') ||
+        v.name.toLowerCase().includes('thai')
+      );
+      if (thaiVoice) {
+        u.voice = thaiVoice;
+      }
+
+      u.onend = () => { if (onDone) onDone(); };
+      u.onerror = () => { if (onDone) onDone(); };
       speechSynthesis.speak(u);
     }
 
@@ -2251,13 +2315,13 @@
       }
     }
 
-    /* 6. 5 TONES & CONSONANTS DATA */
+    /* 6. 5 TONES & CONSONANTS DATA (WITH AUTHENTIC THAI NOMENCLATURE) */
     const THAI_TONES = [
-      { name: 'Nada Tengah (Mid)', thai: 'สามัญ', desc: 'Datar netral tanpa naik/turun intonasi.', freq: 'M 5 25 L 95 25', example: 'กา (Gaa = gagak)', pitch: 260 },
-      { name: 'Nada Rendah (Low)', thai: 'เอก ( ่ )', desc: 'Suara dada rendah mendatar stabil.', freq: 'M 5 40 L 95 40', example: 'ไข่ (Khai = telur)', pitch: 190 },
-      { name: 'Nada Jatuh (Falling)', thai: 'โท ( ้ )', desc: 'Mulai tinggi lalu meluncur curam.', freq: 'M 5 10 Q 30 8 95 45', example: 'ข้าว (Khao = nasi)', pitch: 320, endPitch: 180 },
-      { name: 'Nada Tinggi (High)', thai: 'ตรี ( ๊ )', desc: 'Melengking tinggi nada heran.', freq: 'M 5 12 L 95 12', example: 'ม้า (Maa = kuda)', pitch: 340 },
-      { name: 'Nada Naik (Rising)', thai: 'จัตวา ( ๋ )', desc: 'Mulai bawah lalu meliuk naik tinggi.', freq: 'M 5 45 Q 35 48 95 12', example: 'หมา (Maa = anjing)', pitch: 200, endPitch: 330 }
+      { name: 'Nada Tengah (Mid)', thai: 'สามัญ', desc: 'Datar netral tanpa naik/turun intonasi.', freq: 'M 5 25 L 95 25', word: 'กา', example: 'กา (Gaa = gagak)', pitch: 260 },
+      { name: 'Nada Rendah (Low)', thai: 'เอก ( ่ )', desc: 'Suara dada rendah mendatar stabil.', freq: 'M 5 40 L 95 40', word: 'ไข่', example: 'ไข่ (Khai = telur)', pitch: 190 },
+      { name: 'Nada Jatuh (Falling)', thai: 'โท ( ้ )', desc: 'Mulai tinggi lalu meluncur curam.', freq: 'M 5 10 Q 30 8 95 45', word: 'ข้าว', example: 'ข้าว (Khao = nasi)', pitch: 320, endPitch: 180 },
+      { name: 'Nada Tinggi (High)', thai: 'ตรี ( ๊ )', desc: 'Melengking tinggi nada heran.', freq: 'M 5 12 L 95 12', word: 'ม้า', example: 'ม้า (Maa = kuda)', pitch: 340 },
+      { name: 'Nada Naik (Rising)', thai: 'จัตวา ( ๋ )', desc: 'Mulai bawah lalu meliuk naik tinggi.', freq: 'M 5 45 Q 35 48 95 12', word: 'หมา', example: 'หมา (Maa = anjing)', pitch: 200, endPitch: 330 }
     ];
 
     function renderTonesGrid() {
@@ -2273,10 +2337,12 @@
             <h4>${t.name} <span style="font-size:12px; color:var(--text-muted); font-family:var(--font-thai);">(${t.thai})</span></h4>
             <p>${t.desc}</p>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="tone-example-tag">${t.example}</span>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+            <button class="tone-example-tag" onclick="speakThai('${t.word}')" title="Klik untuk mendengar contoh asli penutur Thai">
+              🔊 ${t.example}
+            </button>
             <button class="btn-audio-listen" onclick="playTonePitchAudio(${t.pitch}, ${t.endPitch || t.pitch})">
-              ▶ Uji Nada
+              ▶ Uji Pitch
             </button>
           </div>
         </div>
@@ -2307,45 +2373,45 @@
       }
     }
 
-    /* Consonants Matrix */
+    /* Consonants Matrix with Authentic Native Spoken Names */
     const THAI_CONSONANTS = [
-      { thai: 'ก', roman: 'ko kai', meaning: 'ayam', class: 'mid' },
-      { thai: 'จ', roman: 'cho chan', meaning: 'piring', class: 'mid' },
-      { thai: 'ด', roman: 'do dek', meaning: 'anak', class: 'mid' },
-      { thai: 'ต', roman: 'to tao', meaning: 'kura-kura', class: 'mid' },
-      { thai: 'บ', roman: 'bo baimai', meaning: 'daun', class: 'mid' },
-      { thai: 'ป', roman: 'po pla', meaning: 'ikan', class: 'mid' },
-      { thai: 'อ', roman: 'o ang', meaning: 'baskom', class: 'mid' },
+      { thai: 'ก', spoken: 'กอ ไก่', roman: 'ko kai', meaning: 'ayam', class: 'mid' },
+      { thai: 'จ', spoken: 'จอ จาน', roman: 'cho chan', meaning: 'piring', class: 'mid' },
+      { thai: 'ด', spoken: 'ดอ เด็ก', roman: 'do dek', meaning: 'anak', class: 'mid' },
+      { thai: 'ต', spoken: 'ตอ เต่า', roman: 'to tao', meaning: 'kura-kura', class: 'mid' },
+      { thai: 'บ', spoken: 'บอ ใบไม้', roman: 'bo baimai', meaning: 'daun', class: 'mid' },
+      { thai: 'ป', spoken: 'ปอ ปลา', roman: 'po pla', meaning: 'ikan', class: 'mid' },
+      { thai: 'อ', spoken: 'ออ อ่าง', roman: 'o ang', meaning: 'baskom', class: 'mid' },
 
-      { thai: 'ข', roman: 'kho khai', meaning: 'telur', class: 'high' },
-      { thai: 'ฉ', roman: 'cho ching', meaning: 'simbal', class: 'high' },
-      { thai: 'ถ', roman: 'tho thung', meaning: 'karung/tas', class: 'high' },
-      { thai: 'ผ', roman: 'pho phueng', meaning: 'lebah', class: 'high' },
-      { thai: 'ฝ', roman: 'fo fa', meaning: 'tutup wadah', class: 'high' },
-      { thai: 'ส', roman: 'so suea', meaning: 'harimau', class: 'high' },
-      { thai: 'ห', roman: 'ho hip', meaning: 'peti', class: 'high' },
+      { thai: 'ข', spoken: 'ขอ ไข่', roman: 'kho khai', meaning: 'telur', class: 'high' },
+      { thai: 'ฉ', spoken: 'ฉอ ฉิ่ง', roman: 'cho ching', meaning: 'simbal', class: 'high' },
+      { thai: 'ถ', spoken: 'ถอ ถุง', roman: 'tho thung', meaning: 'karung/tas', class: 'high' },
+      { thai: 'ผ', spoken: 'ผอ ผึ้ง', roman: 'pho phueng', meaning: 'lebah', class: 'high' },
+      { thai: 'ฝ', spoken: 'ฝอ ฝา', roman: 'fo fa', meaning: 'tutup wadah', class: 'high' },
+      { thai: 'ส', spoken: 'สอ เสือ', roman: 'so suea', meaning: 'harimau', class: 'high' },
+      { thai: 'ห', spoken: 'หอ หีบ', roman: 'ho hip', meaning: 'peti', class: 'high' },
 
-      { thai: 'ค', roman: 'kho khwai', meaning: 'kerbau', class: 'low' },
-      { thai: 'ง', roman: 'ngo ngu', meaning: 'ular', class: 'low' },
-      { thai: 'ช', roman: 'cho chang', meaning: 'gajah', class: 'low' },
-      { thai: 'ซ', roman: 'so so', meaning: 'rantai', class: 'low' },
-      { thai: 'ท', roman: 'tho thahan', meaning: 'tentara', class: 'low' },
-      { thai: 'น', roman: 'no nu', meaning: 'tikus', class: 'low' },
-      { thai: 'ม', roman: 'mo ma', meaning: 'kuda', class: 'low' },
-      { thai: 'ย', roman: 'yo yak', meaning: 'raksasa', class: 'low' },
-      { thai: 'ร', roman: 'ro ruea', meaning: 'perahu', class: 'low' },
-      { thai: 'ล', roman: 'lo ling', meaning: 'monyet', class: 'low' },
-      { thai: 'ว', roman: 'wo waen', meaning: 'cincin', class: 'low' },
-      { thai: 'ฮ', roman: 'ho nok-huk', meaning: 'burung hantu', class: 'low' }
+      { thai: 'ค', spoken: 'คอ ควาย', roman: 'kho khwai', meaning: 'kerbau', class: 'low' },
+      { thai: 'ง', spoken: 'งอ งู', roman: 'ngo ngu', meaning: 'ular', class: 'low' },
+      { thai: 'ช', spoken: 'ชอ ช้าง', roman: 'cho chang', meaning: 'gajah', class: 'low' },
+      { thai: 'ซ', spoken: 'ซอ โซ่', roman: 'so so', meaning: 'rantai', class: 'low' },
+      { thai: 'ท', spoken: 'ทอ ทหาร', roman: 'tho thahan', meaning: 'tentara', class: 'low' },
+      { thai: 'น', spoken: 'นอ หนู', roman: 'no nu', meaning: 'tikus', class: 'low' },
+      { thai: 'ม', spoken: 'มอ ม้า', roman: 'mo ma', meaning: 'kuda', class: 'low' },
+      { thai: 'ย', spoken: 'ยอ ยักษ์', roman: 'yo yak', meaning: 'raksasa', class: 'low' },
+      { thai: 'ร', spoken: 'รอ เรือ', roman: 'ro ruea', meaning: 'perahu', class: 'low' },
+      { thai: 'ล', spoken: 'ลอ ลิง', roman: 'lo ling', meaning: 'monyet', class: 'low' },
+      { thai: 'ว', spoken: 'วอ แหวน', roman: 'wo waen', meaning: 'cincin', class: 'low' },
+      { thai: 'ฮ', spoken: 'ฮอ นกฮูก', roman: 'ho nok-huk', meaning: 'burung hantu', class: 'low' }
     ];
 
     const THAI_VOWELS = [
-      { thai: '-ะ', roman: 'a', meaning: 'pendek', class: 'vowel' },
-      { thai: '-า', roman: 'aa', meaning: 'panjang', class: 'vowel' },
-      { thai: '-ิ', roman: 'i', meaning: 'pendek', class: 'vowel' },
-      { thai: '-ี', roman: 'ii', meaning: 'panjang', class: 'vowel' },
-      { thai: '-ุ', roman: 'u', meaning: 'pendek', class: 'vowel' },
-      { thai: '-ู', roman: 'uu', meaning: 'panjang', class: 'vowel' }
+      { thai: '-ะ', spoken: 'สระอะ', roman: 'sara a (pendek)', meaning: 'vokal a pendek', class: 'vowel' },
+      { thai: '-า', spoken: 'สระอา', roman: 'sara aa (panjang)', meaning: 'vokal aa panjang', class: 'vowel' },
+      { thai: '-ิ', spoken: 'สระอิ', roman: 'sara i (pendek)', meaning: 'vokal i pendek', class: 'vowel' },
+      { thai: '-ี', spoken: 'สระอี', roman: 'sara ii (panjang)', meaning: 'vokal ii panjang', class: 'vowel' },
+      { thai: '-ุ', spoken: 'สระอุ', roman: 'sara u (pendek)', meaning: 'vokal u pendek', class: 'vowel' },
+      { thai: '-ู', spoken: 'สระอู', roman: 'sara uu (panjang)', meaning: 'vokal uu panjang', class: 'vowel' }
     ];
 
     function renderAlphabetMatrix(filter = 'all') {
@@ -2353,7 +2419,7 @@
       let items = (filter === 'vowel') ? THAI_VOWELS : THAI_CONSONANTS.filter(c => filter === 'all' || c.class === filter);
 
       container.innerHTML = items.map(c => `
-        <div class="glyph-card" onclick="speakThai('${c.thai.replace('-', '')}')">
+        <div class="glyph-card" onclick="speakThai('${c.spoken || c.thai.replace('-', '')}')" title="Klik untuk mendengar lafal Thai asli: ${c.spoken || c.thai}">
           <div class="glyph-thai">${c.thai}</div>
           <div class="glyph-roman">${c.roman}</div>
           <div class="glyph-meaning">${c.meaning}</div>
