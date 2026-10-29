@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Stimuler Thai (Local Server)",
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Fairy Thai Academy (Local Server)",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}",
             "runtimeExecutable": "/home/zaldy/.gemini/antigravity-ide/bin/google-chrome",
             "preLaunchTask": "Start Local Web Server (Port 3000)"
         },
         {
+            "name": "Launch Stimuler Thai (Direct File)",
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Fairy Thai Academy (Direct File)",
             "file": "${workspaceFolder}/fairy_thai_academy.html",
             "runtimeExecutable": "/home/zaldy/.gemini/antigravity-ide/bin/google-chrome"
         }
