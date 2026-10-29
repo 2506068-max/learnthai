@@ -1,0 +1,3707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moonpetal Thai — Belajar Bahasa Thailand Seperti Duolingo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       DUOLINGO DESIGN SYSTEM TOKENS & RESET
+       ========================================================================== */
+    :root {
+      --green: #58cc02;
+      --green-dark: #46a302;
+      --green-light: #d7ffb8;
+      --green-border: #b8f28b;
+      
+      --blue: #1cb0f6;
+      --blue-dark: #1899d6;
+      --blue-light: #ddf4ff;
+      --blue-border: #84d8ff;
+
+      --gold: #ffc800;
+      --gold-dark: #e5a500;
+      --gold-light: #fff5cc;
+
+      --orange: #ff9600;
+      --orange-dark: #e58600;
+
+      --red: #ff4b4b;
+      --red-dark: #ea2b2b;
+      --red-light: #ffdfe0;
+
+      --purple: #ce82ff;
+      --purple-dark: #a559e2;
+      --purple-light: #f3e5ff;
+
+      --teal: #00cd9c;
+      --teal-dark: #00a880;
+
+      --bg: #ffffff;
+      --bg-alt: #f7f9fa;
+      --card-bg: #ffffff;
+      --border: #e5e5e5;
+      --border-dark: #cecece;
+      --text: #3c3c3c;
+      --text-muted: #777777;
+      --text-subtle: #afafaf;
+      --shadow-color: rgba(0, 0, 0, 0.08);
+
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg: #131f24;
+      --bg-alt: #0e171b;
+      --card-bg: #1b2f38;
+      --border: #273e4d;
+      --border-dark: #1e313d;
+      --text: #f0f6f9;
+      --text-muted: #9bb0be;
+      --text-subtle: #5f7a8c;
+      --shadow-color: rgba(0, 0, 0, 0.35);
+
+      --green-light: #183822;
+      --green-border: #235532;
+      --blue-light: #16364a;
+      --blue-border: #21516e;
+      --red-light: #3d1b1f;
+      --purple-light: #351c4a;
+      --gold-light: #3c3010;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    /* ==========================================================================
+       DUOLINGO 3D TACTILE BUTTONS & CHIPS
+       ========================================================================== */
+    .btn-duo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 24px;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+      position: relative;
+      border: 2px solid transparent;
+      text-align: center;
+    }
+
+    .btn-duo:active:not(:disabled) {
+      transform: translateY(3px);
+    }
+
+    .btn-duo-green {
+      background-color: var(--green);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--green-dark);
+    }
+    .btn-duo-green:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-duo-green:active:not(:disabled) { box-shadow: 0 1px 0 var(--green-dark); }
+
+    .btn-duo-blue {
+      background-color: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--blue-dark);
+    }
+    .btn-duo-blue:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-duo-blue:active:not(:disabled) { box-shadow: 0 1px 0 var(--blue-dark); }
+
+    .btn-duo-gold {
+      background-color: var(--gold);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--gold-dark);
+    }
+    .btn-duo-gold:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-duo-gold:active:not(:disabled) { box-shadow: 0 1px 0 var(--gold-dark); }
+
+    .btn-duo-secondary {
+      background-color: var(--card-bg);
+      color: var(--text);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+    }
+    .btn-duo-secondary:hover:not(:disabled) { background-color: var(--bg-alt); }
+    .btn-duo-secondary:active:not(:disabled) { box-shadow: 0 1px 0 var(--border); }
+
+    .btn-duo-danger {
+      background-color: var(--red);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--red-dark);
+    }
+    .btn-duo-danger:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-duo-danger:active:not(:disabled) { box-shadow: 0 1px 0 var(--red-dark); }
+
+    .btn-duo:disabled {
+      background-color: var(--border) !important;
+      color: var(--text-subtle) !important;
+      box-shadow: 0 4px 0 var(--border-dark) !important;
+      cursor: not-allowed;
+      transform: none !important;
+      filter: none !important;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 13px;
+      border-radius: 12px;
+    }
+
+    .btn-icon-round {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 3px 0 var(--border);
+      color: var(--text);
+      transition: 0.1s;
+    }
+    .btn-icon-round:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    /* ==========================================================================
+       APP SHELL LAYOUT: SIDEBAR, MAIN FEED, RIGHT WIDGETS
+       ========================================================================== */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Left Duolingo Sidebar */
+    .duo-sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      border-right: 2px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 12px 24px 12px;
+      user-select: none;
+    }
+
+    /* Dynamic SVG Mascot Container */
+    .mascot-avatar-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #58cc02 0%, #22c55e 100%);
+      box-shadow: 0 4px 0 #16a34a;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      color: #fff;
+      position: relative;
+      animation: floatMascot 3.2s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    @keyframes floatMascot {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .brand-text h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--green);
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    .nav-tab {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 13px 18px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: 2px solid transparent;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .nav-tab:hover {
+      background-color: var(--bg-alt);
+      color: var(--text);
+    }
+
+    .nav-tab.active {
+      background-color: var(--blue-light);
+      color: var(--blue-dark);
+      border-color: var(--blue-border);
+    }
+    [data-theme="dark"] .nav-tab.active {
+      color: var(--blue);
+    }
+
+    .nav-tab svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      padding-top: 16px;
+      border-top: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      border-radius: 12px;
+    }
+
+    /* Central Content Area */
+    .main-content {
+      flex: 1;
+      padding: 30px 40px 100px 40px;
+      min-width: 0;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    /* Right Sidebar (Stats & Widgets) */
+    .right-sidebar {
+      width: 350px;
+      flex-shrink: 0;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Top Stats Bar */
+    .status-capsules {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .capsule {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.1s;
+      user-select: none;
+    }
+    .capsule:active { transform: scale(0.96); }
+
+    .capsule-streak { color: var(--orange); }
+    .capsule-gems { color: var(--blue); }
+    .capsule-hearts { color: var(--red); }
+
+    /* Right Widget Cards */
+    .duo-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 4px 0 var(--border);
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title-row h3 {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .card-title-row a, .card-title-row button {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Quest Item */
+    .quest-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .quest-icon {
+      font-size: 26px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--gold-light);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .quest-detail { flex: 1; }
+    .quest-detail p {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .progress-bar-track {
+      background: var(--border);
+      height: 12px;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      background: var(--gold);
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+    .progress-bar-fill.fill-green { background: var(--green); }
+
+    /* Mascot Speech Bubble */
+    .mascot-speech-box {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    /* Mascot Interactive Character SVG */
+    .mascot-character-art {
+      width: 72px;
+      height: 72px;
+      cursor: pointer;
+      user-select: none;
+      animation: floatMascot 3.5s ease-in-out infinite;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .mascot-character-art:hover { transform: scale(1.08); }
+    .mascot-character-art:active { transform: scale(0.95); }
+
+    .speech-bubble {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 18px;
+      position: relative;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 0 var(--border);
+      flex: 1;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: 12px;
+      left: -10px;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 10px solid var(--border);
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: 14px;
+      left: -7px;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 8px solid var(--card-bg);
+    }
+
+    /* ==========================================================================
+       DUOLINGO LEARNING PATH (THE SNAKE TREE)
+       ========================================================================== */
+    .path-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+      position: relative;
+    }
+
+    /* Unit Header Banner */
+    .unit-banner {
+      width: 100%;
+      border-radius: 20px;
+      padding: 22px 24px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .unit-banner-green { background: linear-gradient(135deg, #58cc02 0%, #46a302 100%); }
+    .unit-banner-blue { background: linear-gradient(135deg, #1cb0f6 0%, #1899d6 100%); }
+    .unit-banner-orange { background: linear-gradient(135deg, #ff9600 0%, #e58600 100%); }
+    .unit-banner-teal { background: linear-gradient(135deg, #00cd9c 0%, #00a880 100%); }
+
+    .unit-info h2 {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .unit-info p {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.94;
+    }
+
+    .unit-guide-btn {
+      background: rgba(255, 255, 255, 0.22);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s, transform 0.08s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .unit-guide-btn:hover { background: rgba(255, 255, 255, 0.35); }
+    .unit-guide-btn:active { transform: translateY(2px); }
+
+    /* Stepping Stones / Path Nodes */
+    .path-nodes-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      position: relative;
+    }
+
+    .node-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    .shift-0 { transform: translateX(0); }
+    .shift-left-1 { transform: translateX(-40px); }
+    .shift-left-2 { transform: translateX(-75px); }
+    .shift-right-1 { transform: translateX(40px); }
+    .shift-right-2 { transform: translateX(75px); }
+
+    .node-btn {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 3px solid transparent;
+      box-shadow: 0 9px 0 var(--node-dark);
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s, filter 0.15s;
+      user-select: none;
+    }
+
+    .node-btn:hover:not(.locked) { filter: brightness(1.08); }
+    .node-btn:active:not(.locked) {
+      transform: translateY(4px);
+      box-shadow: 0 4px 0 var(--node-dark);
+    }
+
+    .node-green { background: var(--green); --node-dark: var(--green-dark); color: #fff; }
+    .node-gold { background: var(--gold); --node-dark: var(--gold-dark); color: #fff; }
+    .node-blue { background: var(--blue); --node-dark: var(--blue-dark); color: #fff; }
+    .node-purple { background: var(--purple); --node-dark: var(--purple-dark); color: #fff; }
+    .node-teal { background: var(--teal); --node-dark: var(--teal-dark); color: #fff; }
+    
+    .node-chest {
+      background: #ff9600;
+      --node-dark: #cc7800;
+      color: #ffffff;
+      border-radius: 20px;
+      width: 80px;
+      height: 68px;
+    }
+
+    .node-locked {
+      background: var(--border) !important;
+      --node-dark: var(--border-dark) !important;
+      color: var(--text-subtle) !important;
+      cursor: not-allowed !important;
+      box-shadow: 0 8px 0 var(--border-dark) !important;
+      opacity: 0.85;
+    }
+
+    .node-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .node-active-ring {
+      position: absolute;
+      inset: -9px;
+      border-radius: 50%;
+      border: 3px solid var(--green);
+      animation: duoRingPulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      pointer-events: none;
+    }
+
+    @keyframes duoRingPulse {
+      0% { transform: scale(0.96); opacity: 0.9; }
+      50% { transform: scale(1.18); opacity: 0.2; }
+      100% { transform: scale(0.96); opacity: 0.9; }
+    }
+
+    .node-tooltip {
+      position: absolute;
+      bottom: calc(100% + 14px);
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 14px;
+      padding: 7px 14px;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--green);
+      white-space: nowrap;
+      pointer-events: none;
+      animation: bounceTooltip 1.6s ease-in-out infinite;
+      z-index: 10;
+    }
+    .node-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: var(--card-bg) transparent transparent transparent;
+    }
+    @keyframes bounceTooltip {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .node-stars {
+      display: flex;
+      gap: 2px;
+      position: absolute;
+      bottom: -16px;
+      background: var(--card-bg);
+      padding: 2px 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 10px;
+    }
+
+    /* ==========================================================================
+       FULLSCREEN DUOLINGO QUIZ ARENA
+       ========================================================================== */
+    .quiz-arena {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .quiz-arena.active { display: flex; }
+
+    .arena-topbar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 32px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .arena-close-btn {
+      font-size: 24px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 50%;
+      transition: color 0.15s;
+    }
+    .arena-close-btn:hover { color: var(--text); }
+
+    .arena-progress {
+      flex: 1;
+      height: 16px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+    .arena-progress-fill {
+      height: 100%;
+      background: var(--green);
+      width: 0%;
+      border-radius: 99px;
+      transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .arena-combo-badge {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--orange);
+      background: var(--gold-light);
+      padding: 4px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--orange);
+      animation: comboPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes comboPop {
+      0% { transform: scale(0.6); }
+      100% { transform: scale(1); }
+    }
+
+    .arena-hearts {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: var(--red);
+    }
+    .arena-hearts.shake {
+      animation: shakeHearts 0.5s ease-in-out;
+    }
+    @keyframes shakeHearts {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    .arena-body {
+      flex: 1;
+      max-width: 740px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 24px 140px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .arena-question-type {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .arena-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .prompt-bubble-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .thai-hero-speaker {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: var(--blue);
+      box-shadow: 0 4px 0 var(--blue-dark);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.08s;
+    }
+    .thai-hero-speaker:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--blue-dark);
+    }
+
+    .thai-text-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 18px;
+      padding: 14px 22px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .thai-text-card .thai-big {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text);
+    }
+    .thai-text-card .thai-roman {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Multiple Choice */
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .choice-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      transition: transform 0.08s, border-color 0.15s, background-color 0.15s, box-shadow 0.08s;
+      user-select: none;
+      text-align: left;
+    }
+    .choice-card:hover {
+      background: var(--bg-alt);
+      border-color: var(--border-dark);
+    }
+    .choice-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--border);
+    }
+    .choice-card.selected {
+      background: var(--blue-light);
+      border-color: var(--blue);
+      box-shadow: 0 4px 0 var(--blue-dark);
+      color: var(--blue-dark);
+    }
+    [data-theme="dark"] .choice-card.selected { color: var(--blue); }
+
+    .choice-key {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* Sentence Builder / Word Bank */
+    .sentence-slots-area {
+      min-height: 80px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 16px;
+      margin-bottom: 28px;
+    }
+
+    .word-bank-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .word-chip {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 14px;
+      padding: 10px 18px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.08s, box-shadow 0.08s;
+    }
+    .word-chip:hover { background: var(--bg-alt); }
+    .word-chip:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--border);
+    }
+    .word-chip.used {
+      opacity: 0.35;
+      pointer-events: none;
+      box-shadow: none;
+      border-color: transparent;
+      background: var(--border);
+    }
+
+    /* Matching Pairs Game Grid */
+    .matching-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .matching-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 16px;
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      min-height: 64px;
+      transition: 0.1s;
+    }
+    .matching-card:hover { background: var(--bg-alt); }
+    .matching-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--border);
+    }
+    .matching-card.selected {
+      border-color: var(--blue);
+      background: var(--blue-light);
+      box-shadow: 0 4px 0 var(--blue-dark);
+      color: var(--blue);
+    }
+    .matching-card.matched {
+      background: var(--green-light);
+      border-color: var(--green);
+      box-shadow: none;
+      color: var(--green-dark);
+      opacity: 0.6;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* Bottom Slide Drawer for Answer Feedback */
+    .arena-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 32px;
+      border-top: 2px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 1050;
+    }
+
+    .arena-bottom-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .feedback-bubble {
+      display: none;
+      align-items: center;
+      gap: 18px;
+    }
+    .feedback-icon-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .feedback-text h4 {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .feedback-text p {
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 2px;
+      max-width: 500px;
+    }
+
+    .arena-bottom-bar.is-correct {
+      background: var(--green-light);
+      border-color: var(--green-border);
+    }
+    .arena-bottom-bar.is-correct .feedback-bubble { display: flex; }
+    .arena-bottom-bar.is-correct .feedback-icon-circle { background: #fff; color: var(--green); }
+    .arena-bottom-bar.is-correct .feedback-text h4 { color: var(--green-dark); }
+    .arena-bottom-bar.is-correct .feedback-text p { color: var(--green-dark); }
+
+    .arena-bottom-bar.is-wrong {
+      background: var(--red-light);
+      border-color: var(--red);
+    }
+    .arena-bottom-bar.is-wrong .feedback-bubble { display: flex; }
+    .arena-bottom-bar.is-wrong .feedback-icon-circle { background: #fff; color: var(--red); }
+    .arena-bottom-bar.is-wrong .feedback-text h4 { color: var(--red-dark); }
+    .arena-bottom-bar.is-wrong .feedback-text p { color: var(--red-dark); }
+
+    /* Lesson Completed Screen */
+    .lesson-complete-modal {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+    }
+    .celebration-mascot {
+      font-size: 80px;
+      animation: celebrateBounce 0.8s infinite alternate;
+    }
+    @keyframes celebrateBounce {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-16px) scale(1.08); }
+    }
+    .complete-stat-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: 100%;
+      max-width: 520px;
+      margin: 16px 0;
+    }
+    .complete-stat-box {
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: var(--card-bg);
+      box-shadow: 0 4px 0 var(--border);
+    }
+    .complete-stat-box span {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+    }
+    .complete-stat-box strong {
+      display: block;
+      font-size: 24px;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10000;
+    }
+
+    /* ==========================================================================
+       PAGES: ALPHABET STUDIO, TONES, ACHIEVEMENTS, LEADERBOARD, SHOP
+       ========================================================================== */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    .page-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .page-header-row h2 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+    }
+    .page-header-row p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* 3D Flashcard Mode Modal */
+    .flashcard-arena-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2500;
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+    .flashcard-arena-overlay.active { display: grid; }
+
+    .flashcard-stage {
+      perspective: 1000px;
+      width: 320px;
+      height: 420px;
+      margin: 0 auto;
+    }
+    .flashcard-3d-box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .flashcard-3d-box.flipped {
+      transform: rotateY(180deg);
+    }
+    .flashcard-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 24px;
+      background: var(--card-bg);
+      border: 3px solid var(--border);
+      box-shadow: 0 16px 36px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background: var(--bg-alt);
+    }
+
+    /* Alphabet Studio Filter & Search */
+    .alphabet-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .class-filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-pill {
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      transition: 0.1s;
+    }
+    .filter-pill.active {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: var(--green-dark);
+    }
+    .search-input {
+      background: var(--bg-alt);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      outline: none;
+      width: 220px;
+      transition: border-color 0.15s;
+    }
+    .search-input:focus { border-color: var(--blue); }
+
+    .alphabet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .letter-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 18px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.08s, box-shadow 0.08s, border-color 0.15s;
+      position: relative;
+    }
+    .letter-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+    .letter-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .letter-card .class-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+    .class-tag.tag-mid { background: var(--blue-light); color: var(--blue-dark); }
+    .class-tag.tag-high { background: var(--purple-light); color: var(--purple-dark); }
+    .class-tag.tag-low { background: var(--gold-light); color: var(--orange-dark); }
+    .class-tag.tag-vowel { background: var(--green-light); color: var(--green-dark); }
+
+    .letter-card .thai-glyph {
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 8px 0 4px 0;
+    }
+    .letter-card .roman-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .letter-card .phonetic-sound {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Tone Cards Grid & Visualizer */
+    .tone-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .tone-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .tone-pitch-visual {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: var(--bg-alt);
+      border: 2px solid var(--border);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .tone-pitch-visual svg { width: 50px; height: 50px; }
+
+    .tone-card-info { flex: 1; }
+    .tone-card-info h4 {
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tone-card-info p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Achievements Grid */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .badge-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: 0.15s;
+    }
+    .badge-card.unlocked {
+      border-color: var(--gold);
+      background: var(--gold-light);
+    }
+    .badge-icon {
+      font-size: 36px;
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: var(--bg-alt);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .badge-card.unlocked .badge-icon {
+      background: var(--gold);
+      color: #fff;
+    }
+    .badge-info h4 {
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .badge-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .badge-status {
+      font-size: 11px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--green-dark);
+      margin-top: 4px;
+    }
+
+    /* Leaderboard League View */
+    .leaderboard-league-banner {
+      background: linear-gradient(135deg, #ffc800 0%, #ff9600 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 0 #cc7800;
+    }
+    .league-trophy { font-size: 48px; margin-bottom: 6px; }
+    .leaderboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .leaderboard-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 2px 0 var(--border);
+    }
+    .leaderboard-row.is-user {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+    .leaderboard-rank {
+      width: 28px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .rank-1 { color: #ffc800; }
+    .rank-2 { color: #94a3b8; }
+    .rank-3 { color: #b45309; }
+    .leaderboard-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      font-weight: 700;
+    }
+    .leaderboard-user .user-avatar { font-size: 22px; }
+    .leaderboard-xp {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    /* Shop View */
+    .shop-items-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .shop-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 0 var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .shop-item-info {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .shop-item-icon {
+      font-size: 38px;
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      background: var(--bg-alt);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .shop-item-info h4 {
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .shop-item-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Guidebook Modal */
+    .guide-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+    .guide-modal-overlay.active { display: grid; }
+    .guide-modal-box {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px var(--shadow-color);
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+    }
+    .guide-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .guide-modal-header h3 { font-size: 20px; font-weight: 800; }
+
+    /* Toast Notification */
+    .duo-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #1e293b;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      z-index: 9999;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .duo-toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (Mobile Duolingo Bottom Nav)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .right-sidebar { display: none; }
+      .main-content {
+        max-width: 100%;
+        padding: 24px 20px 100px 20px;
+      }
+      .achievements-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .duo-sidebar {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 72px;
+        flex-direction: row;
+        border-right: none;
+        border-top: 2px solid var(--border);
+        background: var(--bg);
+        padding: 6px 12px;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 500;
+      }
+      .brand-logo, .sidebar-footer { display: none; }
+      .sidebar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        gap: 0;
+      }
+      .nav-tab {
+        flex-direction: column;
+        padding: 6px 12px;
+        gap: 4px;
+        font-size: 10px;
+        border-radius: 12px;
+        border: none;
+      }
+      .nav-tab.active {
+        background: transparent;
+        color: var(--green);
+      }
+      .choices-grid { grid-template-columns: 1fr; }
+      .main-content { padding-bottom: 90px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Canvas for Celebrations -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="app-layout">
+
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <aside class="duo-sidebar">
+      <div class="brand-logo">
+        <div class="mascot-avatar-box" id="brandMascotBox" onclick="mascotSpeak()" title="Peri Thai Duolingo">
+          <span id="currentMascotIcon">🧚🏻‍♀️</span>
+        </div>
+        <div class="brand-text">
+          <h1>Moonpetal</h1>
+          <span>Thai Academy</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-tab active" data-page="learn" onclick="switchPage('learn')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2z"/></svg>
+          Belajar
+        </button>
+        <button class="nav-tab" data-page="alphabet" onclick="switchPage('alphabet')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 4v3h5v12h3V7h5V4h-13zm19 5h-9v3h3v7h3v-7h3V9z"/></svg>
+          Aksara Thai
+        </button>
+        <button class="nav-tab" data-page="tones" onclick="switchPage('tones')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          5 Nada Thai
+        </button>
+        <button class="nav-tab" data-page="achievements" onclick="switchPage('achievements')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          Lencana
+        </button>
+        <button class="nav-tab" data-page="leaderboard" onclick="switchPage('leaderboard')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+          Peringkat
+        </button>
+        <button class="nav-tab" data-page="shop" onclick="switchPage('shop')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+          Toko
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-toggle-row">
+          <span>🔊 Efek Suara</span>
+          <button class="btn-sm btn-duo-secondary" id="soundToggleBtn" onclick="toggleAudio()" style="padding:4px 10px; font-size:12px;">AKTIF</button>
+        </div>
+        <div class="sidebar-toggle-row">
+          <span>🌙 Mode Gelap</span>
+          <button class="btn-sm btn-duo-secondary" id="themeToggleBtn" onclick="toggleTheme()" style="padding:4px 10px; font-size:12px;">GANTI</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== CENTRAL CONTENT FEED ==================== -->
+    <main class="main-content">
+
+      <!-- PAGE: BELAJAR (DUOLINGO LEARNING PATH - 4 UNITS) -->
+      <section class="page-section active" id="page-learn">
+
+        <!-- Mascot Welcome Bubble -->
+        <div class="mascot-speech-box">
+          <div class="mascot-character-art" id="mascotSvgStage" onclick="mascotSpeak()" title="Klik Peri Thai untuk motivasi!">
+            <!-- Dynamic SVG Mascot with Costumes -->
+            <svg viewBox="0 0 100 100" width="72" height="72">
+              <defs>
+                <linearGradient id="fairyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#58cc02"/>
+                  <stop offset="100%" stop-color="#22c55e"/>
+                </linearGradient>
+              </defs>
+              <!-- Fairy Wings -->
+              <path d="M22 45 C5 25, 0 55, 25 58 Z" fill="#bbf7d0" opacity="0.8"/>
+              <path d="M78 45 C95 25, 100 55, 75 58 Z" fill="#bbf7d0" opacity="0.8"/>
+              <!-- Body -->
+              <ellipse cx="50" cy="58" rx="26" ry="24" fill="url(#fairyGrad)"/>
+              <!-- Belly -->
+              <ellipse cx="50" cy="62" rx="16" ry="14" fill="#ffffff" opacity="0.88"/>
+              <!-- Big Eyes -->
+              <circle cx="41" cy="48" r="7" fill="#ffffff"/>
+              <circle cx="59" cy="48" r="7" fill="#ffffff"/>
+              <circle cx="43" cy="48" r="3.5" fill="#1e293b"/>
+              <circle cx="57" cy="48" r="3.5" fill="#1e293b"/>
+              <!-- Beak / Smile -->
+              <polygon points="50,53 45,58 55,58" fill="#f59e0b"/>
+              <!-- Costume Element Placeholder -->
+              <g id="svgMascotAccessory">
+                <!-- Golden Crown by default or equipped costume -->
+                <polygon points="35,28 42,34 50,24 58,34 65,28 62,38 38,38" fill="#ffc800" stroke="#d97706" stroke-width="1.5"/>
+              </g>
+            </svg>
+          </div>
+          <div class="speech-bubble" id="mascotBubbleText">
+            Sawat-dii! Siap melanjutkan petualangan bahasa Thai hari ini? Mari raih streak tertinggi! ✨
+          </div>
+        </div>
+
+        <div class="path-container">
+
+          <!-- UNIT 1: LANGKAH PERTAMA -->
+          <div class="unit-banner unit-banner-green">
+            <div class="unit-info">
+              <h2>Unit 1: Langkah Pertama di Bangkok 🇹🇭</h2>
+              <p>Salam sopan, konsonan kelas tengah, dan kata pertama.</p>
+            </div>
+            <button class="unit-guide-btn" onclick="openGuidebook(1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+              Panduan
+            </button>
+          </div>
+
+          <div class="path-nodes-flow">
+            <div class="node-wrapper shift-0">
+              <div class="node-tooltip">MULAI!</div>
+              <button class="node-btn node-green" id="node-u1_l1" onclick="startLessonSession('u1_l1')">
+                <span class="node-icon">⭐</span>
+                <div class="node-active-ring"></div>
+              </button>
+              <div class="node-stars">⭐⭐⭐</div>
+            </div>
+
+            <div class="node-wrapper shift-left-1">
+              <button class="node-btn node-green" id="node-u1_l2" onclick="startLessonSession('u1_l2')">
+                <span class="node-icon">🔤</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-left-2">
+              <button class="node-btn node-chest" id="node-chest-1" onclick="openTreasureChest(1)">
+                <span class="node-icon">💎</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-left-1">
+              <button class="node-btn node-blue" id="node-u1_l3" onclick="startLessonSession('u1_l3')">
+                <span class="node-icon">🫧</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-0">
+              <button class="node-btn node-gold" id="node-u1_boss" onclick="startLessonSession('u1_boss')">
+                <span class="node-icon">🏆</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- UNIT 2: RESTORAN & MAKANAN -->
+          <div class="unit-banner unit-banner-blue" style="margin-top: 40px;">
+            <div class="unit-info">
+              <h2>Unit 2: Di Kafe & Restoran Thai 🍜</h2>
+              <p>Pesan makanan favorit, ucapkan terima kasih, dan angka 1-10.</p>
+            </div>
+            <button class="unit-guide-btn" onclick="openGuidebook(2)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+              Panduan
+            </button>
+          </div>
+
+          <div class="path-nodes-flow">
+            <div class="node-wrapper shift-right-1">
+              <button class="node-btn node-blue" id="node-u2_l1" onclick="startLessonSession('u2_l1')">
+                <span class="node-icon">🍜</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-right-2">
+              <button class="node-btn node-blue" id="node-u2_l2" onclick="startLessonSession('u2_l2')">
+                <span class="node-icon">🔢</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-right-1">
+              <button class="node-btn node-chest" id="node-chest-2" onclick="openTreasureChest(2)">
+                <span class="node-icon">🎁</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-0">
+              <button class="node-btn node-purple" id="node-u2_l3" onclick="startLessonSession('u2_l3')">
+                <span class="node-icon">💬</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-left-1">
+              <button class="node-btn node-gold" id="node-u2_boss" onclick="startLessonSession('u2_boss')">
+                <span class="node-icon">👑</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- UNIT 3: PASAR CHATUCHAK -->
+          <div class="unit-banner unit-banner-orange" style="margin-top: 40px;">
+            <div class="unit-info">
+              <h2>Unit 3: Belanja di Pasar Chatuchak 🛍️</h2>
+              <p>Tanya harga, tawar-menawar santun, serta warna dan ukuran barang.</p>
+            </div>
+            <button class="unit-guide-btn" onclick="openGuidebook(3)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+              Panduan
+            </button>
+          </div>
+
+          <div class="path-nodes-flow">
+            <div class="node-wrapper shift-left-2">
+              <button class="node-btn node-green" id="node-u3_l1" onclick="startLessonSession('u3_l1')">
+                <span class="node-icon">🏷️</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-left-1">
+              <button class="node-btn node-green" id="node-u3_l2" onclick="startLessonSession('u3_l2')">
+                <span class="node-icon">🤝</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-0">
+              <button class="node-btn node-chest" id="node-chest-3" onclick="openTreasureChest(3)">
+                <span class="node-icon">💎</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-right-1">
+              <button class="node-btn node-purple" id="node-u3_l3" onclick="startLessonSession('u3_l3')">
+                <span class="node-icon">🎨</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-right-2">
+              <button class="node-btn node-gold" id="node-u3_boss" onclick="startLessonSession('u3_boss')">
+                <span class="node-icon">🏆</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- UNIT 4: TRANSPORTASI TUK-TUK -->
+          <div class="unit-banner unit-banner-teal" style="margin-top: 40px;">
+            <div class="unit-info">
+              <h2>Unit 4: Transportasi Tuk-Tuk & Arah 🛺</h2>
+              <p>Naik tuk-tuk keliling kota, navigasi kiri/kanan, dan eksplorasi kuil bersejarah.</p>
+            </div>
+            <button class="unit-guide-btn" onclick="openGuidebook(4)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+              Panduan
+            </button>
+          </div>
+
+          <div class="path-nodes-flow">
+            <div class="node-wrapper shift-right-1">
+              <button class="node-btn node-teal" id="node-u4_l1" onclick="startLessonSession('u4_l1')">
+                <span class="node-icon">🛺</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-0">
+              <button class="node-btn node-teal" id="node-u4_l2" onclick="startLessonSession('u4_l2')">
+                <span class="node-icon">🧭</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-left-1">
+              <button class="node-btn node-chest" id="node-chest-4" onclick="openTreasureChest(4)">
+                <span class="node-icon">🎁</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-left-2">
+              <button class="node-btn node-blue" id="node-u4_l3" onclick="startLessonSession('u4_l3')">
+                <span class="node-icon">📍</span>
+              </button>
+            </div>
+
+            <div class="node-wrapper shift-0">
+              <button class="node-btn node-gold" id="node-u4_boss" onclick="startLessonSession('u4_boss')">
+                <span class="node-icon">👑</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PAGE: AKSARA THAI -->
+      <section class="page-section" id="page-alphabet">
+        <div class="page-header-row">
+          <div>
+            <h2>Studio Aksara Thai 🔤</h2>
+            <p>44 konsonan Thai dibagi ke 3 kelas (Tengah, Tinggi, Rendah) yang menentukan nada intonasi.</p>
+          </div>
+          <button class="btn-duo btn-duo-green btn-sm" onclick="openFlashcardArena()">
+            ⚡ Mode Flashcard 3D
+          </button>
+        </div>
+
+        <div class="alphabet-toolbar">
+          <div class="class-filter-pills">
+            <button class="filter-pill active" onclick="filterAlphabet('all', this)">Semua (44)</button>
+            <button class="filter-pill" onclick="filterAlphabet('mid', this)">🟢 Kelas Tengah (7)</button>
+            <button class="filter-pill" onclick="filterAlphabet('high', this)">🟣 Kelas Tinggi (11)</button>
+            <button class="filter-pill" onclick="filterAlphabet('low', this)">🟠 Kelas Rendah (24)</button>
+            <button class="filter-pill" onclick="filterAlphabet('vowel', this)">💧 Vokal (12)</button>
+          </div>
+          <input type="text" class="search-input" id="letterSearch" placeholder="Cari huruf atau bunyi..." oninput="searchLetters(this.value)">
+        </div>
+
+        <div class="alphabet-grid" id="alphabetGridContainer"></div>
+      </section>
+
+      <!-- PAGE: 5 NADA THAI -->
+      <section class="page-section" id="page-tones">
+        <div class="page-header-row">
+          <div>
+            <h2>Studio 5 Nada Thai 🎼</h2>
+            <p>Dalam bahasa Thai, nada membedakan makna! Klik untuk mendengar dan melatih telinga.</p>
+          </div>
+          <button class="btn-duo btn-duo-blue btn-sm" onclick="startToneEarTrainer()">
+            🎧 Uji Telinga Mini-Game
+          </button>
+        </div>
+
+        <div class="tone-grid" id="toneCardsContainer"></div>
+
+        <div class="duo-card" style="margin-top: 24px;">
+          <div class="card-title-row">
+            <h3>🧪 Eksperimen Perubahan Makna Kata</h3>
+            <span style="font-size:12px; font-weight:800; color:var(--purple);">KATA 'MA'</span>
+          </div>
+          <p style="font-size:14px; color:var(--text-muted);">
+            Satu suku kata dasar <b>"maa"</b> bisa berarti sangat berbeda jika diucapkan dengan nada berbeda:
+          </p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; margin-top:8px;">
+            <button class="btn-duo btn-duo-secondary" onclick="speakThai('มา'); playToneCurve('mid')">
+              มา (Maa)<br><small style="color:var(--text-muted)">Nada Datar · Datang</small>
+            </button>
+            <button class="btn-duo btn-duo-secondary" onclick="speakThai('ม้า'); playToneCurve('high')">
+              ม้า (Máa)<br><small style="color:var(--text-muted)">Nada Tinggi · Kuda</small>
+            </button>
+            <button class="btn-duo btn-duo-secondary" onclick="speakThai('หมา'); playToneCurve('rising')">
+              หมา (Mǎa)<br><small style="color:var(--text-muted)">Nada Naik · Anjing</small>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: LENCANA & PENCAPAIAN -->
+      <section class="page-section" id="page-achievements">
+        <div class="page-header-row">
+          <div>
+            <h2>Pencapaian & Lencana 🎖️</h2>
+            <p>Buka lencana kehormatan seiring berkembangnya kemampuan bahasa Thailand-mu!</p>
+          </div>
+        </div>
+
+        <div class="achievements-grid" id="achievementsGrid">
+          <!-- Dynamic Badges -->
+        </div>
+      </section>
+
+      <!-- PAGE: PERINGKAT -->
+      <section class="page-section" id="page-leaderboard">
+        <div class="leaderboard-league-banner">
+          <div class="league-trophy">🏆</div>
+          <h2 style="font-size:24px; font-weight:800;">Liga Perunggu (Bronze League)</h2>
+          <p style="font-size:14px; opacity:0.9;">Top 3 teratas akan dipromosikan ke Liga Perak dalam 3 hari!</p>
+        </div>
+
+        <div class="leaderboard-list" id="leaderboardList"></div>
+      </section>
+
+      <!-- PAGE: TOKO (SHOP & WARDROBE) -->
+      <section class="page-section" id="page-shop">
+        <div class="page-header-row">
+          <div>
+            <h2>Toko Hadiah & Lemari Busana 🛍️</h2>
+            <p>Beli kekuatan perlindungan rangkaian dan dandani maskot Peri Thai-mu!</p>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px; font-size:18px;">⚡ Item Kekuatan Belajar</h3>
+        <div class="shop-items-grid" style="margin-bottom:30px;">
+          <div class="shop-card">
+            <div class="shop-item-info">
+              <div class="shop-item-icon">🧊</div>
+              <div>
+                <h4>Bekukan Rangkaian (Streak Freeze)</h4>
+                <p>Melindungi rangkaian belajarmu jika kamu melewatkan 1 hari tanpa latihan.</p>
+              </div>
+            </div>
+            <button class="btn-duo btn-duo-blue" onclick="buyShopItem('freeze', 50)">
+              50 💎
+            </button>
+          </div>
+
+          <div class="shop-card">
+            <div class="shop-item-info">
+              <div class="shop-item-icon">❤️</div>
+              <div>
+                <h4>Isi Penuh Nyawa (Full Refill)</h4>
+                <p>Pulihkan kembali 5 hatimu agar bisa terus berlatih kuis tanpa henti.</p>
+              </div>
+            </div>
+            <button class="btn-duo btn-duo-danger" onclick="buyShopItem('hearts', 30)">
+              30 💎
+            </button>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px; font-size:18px;">👗 Lemari Kostum Maskot Peri</h3>
+        <div class="shop-items-grid">
+          <div class="shop-card">
+            <div class="shop-item-info">
+              <div class="shop-item-icon">👘</div>
+              <div>
+                <h4>Busana Tradisional Thai (Chut Thai)</h4>
+                <p>Kostum elegan khas bangsawan kerajaan Ayutthaya lengkap dengan selendang emas.</p>
+              </div>
+            </div>
+            <button class="btn-duo btn-duo-gold" id="btn-costume-thai" onclick="buyOrEquipCostume('thai', 60)">
+              60 💎
+            </button>
+          </div>
+
+          <div class="shop-card">
+            <div class="shop-item-info">
+              <div class="shop-item-icon">👨‍🍳</div>
+              <div>
+                <h4>Topi Koki Pad Thai (Master Chef)</h4>
+                <p>Maskot siap memasak hidangan lezat dan menyemangati belajarmu di dapur.</p>
+              </div>
+            </div>
+            <button class="btn-duo btn-duo-green" id="btn-costume-chef" onclick="buyOrEquipCostume('chef', 50)">
+              50 💎
+            </button>
+          </div>
+
+          <div class="shop-card">
+            <div class="shop-item-info">
+              <div class="shop-item-icon">😎</div>
+              <div>
+                <h4>Kacamata Hitam Gaul (Siam Cool)</h4>
+                <p>Gaya santai ala remaja Siam Square yang siap jalan-jalan di Bangkok.</p>
+              </div>
+            </div>
+            <button class="btn-duo btn-duo-purple" id="btn-costume-shades" onclick="buyOrEquipCostume('shades', 40)">
+              40 💎
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==================== RIGHT SIDEBAR ==================== -->
+    <aside class="right-sidebar">
+
+      <!-- Status Capsules -->
+      <div class="status-capsules">
+        <div class="capsule" style="color:var(--text);" title="Bahasa Thai">
+          <span style="font-size: 20px;">🇹🇭</span>
+        </div>
+
+        <div class="capsule capsule-streak" id="streakBadge" title="Rangkaian Hari Belajar">
+          <span>🔥</span>
+          <span id="streakCount">1</span>
+        </div>
+
+        <div class="capsule capsule-gems" id="gemsBadge" title="XP Gems">
+          <span>💎</span>
+          <span id="gemCount">120</span>
+        </div>
+
+        <div class="capsule capsule-hearts" id="heartsBadge" title="Nyawa / Hati Tersisa">
+          <span>❤️</span>
+          <span id="heartCount">5</span>
+        </div>
+      </div>
+
+      <!-- Daily Quests Widget -->
+      <div class="duo-card">
+        <div class="card-title-row">
+          <h3>Misi Harian 🎯</h3>
+          <span style="font-size:12px; font-weight:800; color:var(--text-muted);" id="questCountdown">RESET 12J</span>
+        </div>
+
+        <div class="quest-item">
+          <div class="quest-icon">⚡</div>
+          <div class="quest-detail">
+            <p>Dapatkan 30 XP hari ini</p>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="questXpBar" style="width: 45%;"></div>
+            </div>
+          </div>
+          <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;" id="questXpText">15/30</span>
+        </div>
+
+        <div class="quest-item">
+          <div class="quest-icon">🎯</div>
+          <div class="quest-detail">
+            <p>Selesaikan 1 sesi latihan</p>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill fill-green" id="questLessonBar" style="width: 100%;"></div>
+            </div>
+          </div>
+          <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;" id="questLessonText">1/1</span>
+        </div>
+
+        <button class="btn-duo btn-duo-gold btn-sm" id="claimQuestBtn" onclick="claimDailyQuestReward()" style="display:none; width:100%; margin-top:6px;">
+          🎁 Klaim Hadiah (+15 💎)
+        </button>
+      </div>
+
+      <!-- Mini Leaderboard Preview -->
+      <div class="duo-card">
+        <div class="card-title-row">
+          <h3>Papan Peringkat</h3>
+          <a href="#leaderboard" onclick="switchPage('leaderboard')">Lihat Semua</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:24px;">🥇</span>
+          <div style="flex:1;">
+            <b style="font-size:14px;">Budi Santoso</b>
+            <div style="font-size:12px; color:var(--text-muted);">Liga Perunggu · Posisi #1</div>
+          </div>
+          <span style="font-family:var(--font-mono); font-weight:800; color:var(--blue);">280 XP</span>
+        </div>
+      </div>
+
+      <!-- Spaced Repetition / Review Wrong Answers -->
+      <div class="duo-card">
+        <div class="card-title-row">
+          <h3>Kebun Pengulangan 🌱</h3>
+          <span class="btn-sm btn-duo-secondary" id="mistakeBadge" style="padding:2px 8px; font-size:11px;">0 Catatan</span>
+        </div>
+        <p style="font-size:13px; color:var(--text-muted);" id="mistakeSummaryText">
+          Jawaban yang keliru saat kuis otomatis disimpan di sini agar bisa kamu kuasai kembali.
+        </p>
+        <button class="btn-duo btn-duo-secondary btn-sm" id="reviewMistakesBtn" onclick="reviewMistakesSession()" disabled>
+          Latih Kesalahan
+        </button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: FULLSCREEN DUOLINGO QUIZ ARENA
+       ========================================================================== -->
+  <div class="quiz-arena" id="quizArena">
+    
+    <div class="arena-topbar">
+      <button class="arena-close-btn" onclick="confirmExitQuiz()" title="Keluar Latihan">✖</button>
+      <div class="arena-progress">
+        <div class="arena-progress-fill" id="quizProgressBar"></div>
+      </div>
+      <div class="arena-combo-badge" id="arenaComboBadge">🔥 COMBO 2X</div>
+      <div class="arena-hearts" id="arenaHeartsBox">
+        <span>❤️</span>
+        <span id="arenaHeartCount">5</span>
+      </div>
+    </div>
+
+    <div class="arena-body" id="quizContentBody"></div>
+
+    <div class="arena-bottom-bar" id="arenaBottomBar">
+      <div class="arena-bottom-inner">
+        <div class="feedback-bubble" id="feedbackBubble">
+          <div class="feedback-icon-circle" id="feedbackIcon">✓</div>
+          <div class="feedback-text">
+            <h4 id="feedbackTitle">Bagus Sekali!</h4>
+            <p id="feedbackExplain">Penjelasan tata bahasa akan muncul di sini.</p>
+          </div>
+        </div>
+
+        <button class="btn-duo btn-duo-green" id="quizActionBtn" onclick="handleQuizAction()">
+          PERIKSA
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: 3D FLASHCARD ARENA
+       ========================================================================== -->
+  <div class="flashcard-arena-overlay" id="flashcardModal">
+    <div style="max-width:380px; width:100%; text-align:center;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; color:#fff;">
+        <h3 style="font-size:18px;">Latihan Huruf Flashcard 3D</h3>
+        <button class="btn-icon-round" style="background:#fff;" onclick="closeFlashcardArena()">✕</button>
+      </div>
+
+      <div class="flashcard-stage">
+        <div class="flashcard-3d-box" id="flashcardBox" onclick="flipFlashcard()">
+          <!-- Front -->
+          <div class="flashcard-face">
+            <span style="font-size:12px; font-weight:800; color:var(--text-muted); text-transform:uppercase;" id="fcTag">Kelas Tengah</span>
+            <span style="font-size:80px; font-weight:700; margin:16px 0;" id="fcGlyph">ก</span>
+            <p style="font-size:13px; color:var(--text-muted);">Ketuk kartu untuk melihat arti & bunyi ↺</p>
+          </div>
+          <!-- Back -->
+          <div class="flashcard-face flashcard-back">
+            <h3 style="font-size:24px; color:var(--green); margin-bottom:6px;" id="fcRoman">Ko Kai</h3>
+            <p style="font-size:16px; font-weight:700; margin-bottom:12px;" id="fcMeaning">Artinya: Ayam (Chicken)</p>
+            <div style="font-size:13px; color:var(--text-muted); line-height:1.6;" id="fcDetail">
+              Awal: /k/ · Akhir: /k/<br>Mampu membentuk 5 nada lengkap!
+            </div>
+            <button class="btn-duo btn-duo-blue btn-sm" style="margin-top:20px;" onclick="event.stopPropagation(); speakFlashcardAudio()">
+              🔊 Dengarkan Bunyi
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:16px; margin-top:24px;">
+        <button class="btn-duo btn-duo-secondary btn-sm" onclick="prevFlashcard()">← Sebelumnya</button>
+        <button class="btn-duo btn-duo-green btn-sm" onclick="nextFlashcard()">Berikutnya →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: UNIT GUIDEBOOK (BUKU PANDUAN)
+       ========================================================================== -->
+  <div class="guide-modal-overlay" id="guideModal" onclick="closeGuidebook(event)">
+    <div class="guide-modal-box" onclick="event.stopPropagation()">
+      <div class="guide-modal-header">
+        <h3 id="guideTitle">Buku Panduan Unit</h3>
+        <button class="btn-icon-round" onclick="closeGuidebook()">✕</button>
+      </div>
+      <div id="guideBody" style="font-size: 14px; line-height: 1.7; color: var(--text);"></div>
+      <div style="margin-top: 24px; text-align: right;">
+        <button class="btn-duo btn-duo-green btn-sm" onclick="closeGuidebook()">Mengerti, Terima Kasih!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div class="duo-toast" id="duoToast">
+    <span id="toastIcon">✨</span>
+    <span id="toastMessage">Pesan notifikasi</span>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT APP LOGIC & SOUND SYNTHESIS
+       ========================================================================== -->
+  <script>
+    /* 1. GLOBAL STATE & PERSISTENCE */
+    const DEFAULT_STATE = {
+      xp: 65,
+      gems: 150,
+      streak: 1,
+      hearts: 5,
+      completedLessons: ['u1_l1'],
+      unlockedLessons: ['u1_l1', 'u1_l2'],
+      openedChests: [],
+      inventory: ['freeze'],
+      equippedCostume: 'default',
+      unlockedCostumes: ['default'],
+      achievements: ['first_step'],
+      mistakes: [],
+      dailyQuestXp: 15,
+      dailyQuestClaimed: false,
+      soundEnabled: true,
+      theme: 'light'
+    };
+
+    let appState = JSON.parse(localStorage.getItem('moonpetal_duo_state') || JSON.stringify(DEFAULT_STATE));
+    if (!Array.isArray(appState.unlockedLessons) || appState.unlockedLessons.length === 0) {
+      appState.unlockedLessons = ['u1_l1'];
+    }
+    if (!Array.isArray(appState.completedLessons)) {
+      appState.completedLessons = [];
+    }
+
+    function saveState() {
+      localStorage.setItem('moonpetal_duo_state', JSON.stringify(appState));
+      updateTopBarStats();
+      renderPathNodes();
+      updateMascotCostumeDisplay();
+    }
+
+    /* 2. WEB AUDIO API SYNTHESIZER */
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playSound(type, pitchOffset = 0) {
+      if (!appState.soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        if (type === 'click') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.exponentialRampToValueAtTime(300, now + 0.04);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'correct') {
+          // Dynamic combo pitch!
+          const base = 523.25 * Math.pow(1.06, pitchOffset);
+          const notes = [base, base * 1.259, base * 1.498];
+          notes.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+            gain.gain.setValueAtTime(0.2, now + idx * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.22);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + idx * 0.08);
+            osc.stop(now + idx * 0.08 + 0.25);
+          });
+        } else if (type === 'wrong') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(160, now);
+          osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.26);
+        } else if (type === 'fanfare') {
+          const chord1 = [523.25, 659.25, 783.99];
+          const chord2 = [587.33, 739.99, 880.00];
+          const chord3 = [659.25, 830.61, 1046.50];
+
+          [chord1, chord2, chord3].forEach((chord, step) => {
+            chord.forEach(f => {
+              const osc = ctx.createOscillator();
+              const gain = ctx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(f, now + step * 0.16);
+              gain.gain.setValueAtTime(0.12, now + step * 0.16);
+              gain.gain.exponentialRampToValueAtTime(0.001, now + step * 0.16 + 0.35);
+              osc.connect(gain);
+              gain.connect(ctx.destination);
+              osc.start(now + step * 0.16);
+              osc.stop(now + step * 0.16 + 0.38);
+            });
+          });
+        } else if (type === 'gem') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1100, now);
+          osc.frequency.exponentialRampToValueAtTime(1760, now + 0.15);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.16);
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+
+    function playToneCurve(toneType) {
+      if (!appState.soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.2, now);
+
+        if (toneType === 'mid') {
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.linearRampToValueAtTime(220, now + 0.5);
+        } else if (toneType === 'low') {
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.linearRampToValueAtTime(160, now + 0.5);
+        } else if (toneType === 'falling') {
+          osc.frequency.setValueAtTime(260, now);
+          osc.frequency.linearRampToValueAtTime(140, now + 0.5);
+        } else if (toneType === 'high') {
+          osc.frequency.setValueAtTime(280, now);
+          osc.frequency.linearRampToValueAtTime(300, now + 0.5);
+        } else if (toneType === 'rising') {
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.linearRampToValueAtTime(150, now + 0.2);
+          osc.frequency.linearRampToValueAtTime(270, now + 0.5);
+        }
+
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.52);
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+
+    function speakThai(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Suara tidak didukung oleh browser ini.');
+        return;
+      }
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'th-TH';
+      u.rate = 0.88;
+      const voices = speechSynthesis.getVoices();
+      const v = voices.find(x => x.lang.toLowerCase().startsWith('th'));
+      if (v) u.voice = v;
+      speechSynthesis.speak(u);
+    }
+
+    /* 3. DATASET: 44 CONSONANTS, VOWELS, TONES */
+    const THAI_CONSONANTS = [
+      // Mid (7)
+      { thai: 'ก', roman: 'ko kai', meaning: 'ayam (chicken)', initial: 'k', final: 'k', class: 'mid' },
+      { thai: 'จ', roman: 'cho chan', meaning: 'piring (plate)', initial: 'ch', final: 't', class: 'mid' },
+      { thai: 'ด', roman: 'do dek', meaning: 'anak (child)', initial: 'd', final: 't', class: 'mid' },
+      { thai: 'ต', roman: 'to tao', meaning: 'kura-kura (turtle)', initial: 't', final: 't', class: 'mid' },
+      { thai: 'บ', roman: 'bo baimai', meaning: 'daun (leaf)', initial: 'b', final: 'p', class: 'mid' },
+      { thai: 'ป', roman: 'po pla', meaning: 'ikan (fish)', initial: 'p', final: 'p', class: 'mid' },
+      { thai: 'อ', roman: 'o ang', meaning: 'baskom (basin)', initial: 'silent', final: '-', class: 'mid' },
+
+      // High (11)
+      { thai: 'ข', roman: 'kho khai', meaning: 'telur (egg)', initial: 'kh', final: 'k', class: 'high' },
+      { thai: 'ฃ', roman: 'kho khuat', meaning: 'botol kuno', initial: 'kh', final: 'k', class: 'high' },
+      { thai: 'ฉ', roman: 'cho ching', meaning: 'simbal kecil', initial: 'chh', final: '-', class: 'high' },
+      { thai: 'ฐ', roman: 'tho than', meaning: 'alas tumpuan', initial: 'th', final: 't', class: 'high' },
+      { thai: 'ถ', roman: 'tho thung', meaning: 'karung/tas', initial: 'th', final: 't', class: 'high' },
+      { thai: 'ผ', roman: 'pho phueng', meaning: 'lebah (bee)', initial: 'ph', final: '-', class: 'high' },
+      { thai: 'ฝ', roman: 'fo fa', meaning: 'tutup wadah', initial: 'f', final: '-', class: 'high' },
+      { thai: 'ศ', roman: 'so sala', meaning: 'paviliun kuil', initial: 's', final: 't', class: 'high' },
+      { thai: 'ษ', roman: 'so ruesi', meaning: 'petapa suci', initial: 's', final: 't', class: 'high' },
+      { thai: 'ส', roman: 'so suea', meaning: 'harimau (tiger)', initial: 's', final: 't', class: 'high' },
+      { thai: 'ห', roman: 'ho hip', meaning: 'peti harta', initial: 'h', final: '-', class: 'high' },
+
+      // Low (24)
+      { thai: 'ค', roman: 'kho khwai', meaning: 'kerbau (buffalo)', initial: 'kh', final: 'k', class: 'low' },
+      { thai: 'ฅ', roman: 'kho khon', meaning: 'orang kuno', initial: 'kh', final: 'k', class: 'low' },
+      { thai: 'ฆ', roman: 'kho ra-khang', meaning: 'lonceng kuil', initial: 'kh', final: 'k', class: 'low' },
+      { thai: 'ง', roman: 'ngo ngu', meaning: 'ular (snake)', initial: 'ng', final: 'ng', class: 'low' },
+      { thai: 'ช', roman: 'cho chang', meaning: 'gajah (elephant)', initial: 'ch', final: 't', class: 'low' },
+      { thai: 'ซ', roman: 'so so', meaning: 'rantai (chain)', initial: 's', final: 't', class: 'low' },
+      { thai: 'ฌ', roman: 'cho choe', meaning: 'pohon kecil', initial: 'ch', final: '-', class: 'low' },
+      { thai: 'ญ', roman: 'yo ying', meaning: 'wanita (woman)', initial: 'y', final: 'n', class: 'low' },
+      { thai: 'ฑ', roman: 'tho montho', meaning: 'ratu montho', initial: 'th', final: 't', class: 'low' },
+      { thai: 'ฒ', roman: 'tho phu-thao', meaning: 'kakek tua', initial: 'th', final: 't', class: 'low' },
+      { thai: 'ณ', roman: 'no nen', meaning: 'biksu cilik', initial: 'n', final: 'n', class: 'low' },
+      { thai: 'ท', roman: 'tho thahan', meaning: 'tentara (soldier)', initial: 'th', final: 't', class: 'low' },
+      { thai: 'ธ', roman: 'tho thong', meaning: 'bendera negara', initial: 'th', final: 't', class: 'low' },
+      { thai: 'น', roman: 'no nu', meaning: 'tikus (mouse)', initial: 'n', final: 'n', class: 'low' },
+      { thai: 'พ', roman: 'pho phan', meaning: 'nampan sesaji', initial: 'ph', final: 'p', class: 'low' },
+      { thai: 'ฟ', roman: 'fo fan', meaning: 'gigi (teeth)', initial: 'f', final: 'p', class: 'low' },
+      { thai: 'ภ', roman: 'pho sam-phao', meaning: 'kapal layar', initial: 'ph', final: 'p', class: 'low' },
+      { thai: 'ม', roman: 'mo ma', meaning: 'kuda (horse)', initial: 'm', final: 'm', class: 'low' },
+      { thai: 'ย', roman: 'yo yak', meaning: 'raksasa yaksa', initial: 'y', final: '-', class: 'low' },
+      { thai: 'ร', roman: 'ro ruea', meaning: 'perahu (boat)', initial: 'r', final: 'n', class: 'low' },
+      { thai: 'ล', roman: 'lo ling', meaning: 'monyet (monkey)', initial: 'l', final: 'n', class: 'low' },
+      { thai: 'ว', roman: 'wo waen', meaning: 'cincin (ring)', initial: 'w', final: '-', class: 'low' },
+      { thai: 'ฬ', roman: 'lo chu-la', meaning: 'layang-layang', initial: 'l', final: 'n', class: 'low' },
+      { thai: 'ฮ', roman: 'ho nok-huk', meaning: 'burung hantu', initial: 'h', final: '-', class: 'low' }
+    ];
+
+    const THAI_VOWELS = [
+      { thai: '-ะ', roman: 'a', meaning: 'vokal a pendek', class: 'vowel' },
+      { thai: '-า', roman: 'aa', meaning: 'vokal aa panjang', class: 'vowel' },
+      { thai: '-ิ', roman: 'i', meaning: 'vokal i pendek', class: 'vowel' },
+      { thai: '-ี', roman: 'ii', meaning: 'vokal ii panjang', class: 'vowel' },
+      { thai: '-ึ', roman: 'ue', meaning: 'vokal eu pendek', class: 'vowel' },
+      { thai: '-ื', roman: 'uee', meaning: 'vokal eu panjang', class: 'vowel' },
+      { thai: '-ุ', roman: 'u', meaning: 'vokal u pendek', class: 'vowel' },
+      { thai: '-ู', roman: 'uu', meaning: 'vokal uu panjang', class: 'vowel' },
+      { thai: 'เ-', roman: 'e', meaning: 'vokal e depan', class: 'vowel' },
+      { thai: 'แ-', roman: 'ae', meaning: 'vokal ae depan', class: 'vowel' },
+      { thai: 'โ-', roman: 'o', meaning: 'vokal o depan', class: 'vowel' },
+      { thai: 'ไ-', roman: 'ai', meaning: 'vokal ai depan', class: 'vowel' }
+    ];
+
+    const THAI_TONES = [
+      { name: 'Nada Tengah (Mid Tone)', thaiName: 'สามัญ (Sa-man)', desc: 'Suara datar netral tanpa naik atau turun intonasi.', contour: 'M 5 25 L 45 25', type: 'mid', example: 'กา (Gaa = gagak)' },
+      { name: 'Nada Rendah (Low Tone)', thaiName: 'เอก (Ek - ่)', desc: 'Dimulai dari suara rendah dan tetap rendah seperti suara dada.', contour: 'M 5 38 L 45 38', type: 'low', example: 'ไข่ (Khai = telur)' },
+      { name: 'Nada Jatuh (Falling Tone)', thaiName: 'โท (Tho - ้)', desc: 'Dimulai tinggi lalu turun curam seperti orang menegur.', contour: 'M 5 10 Q 20 8 45 40', type: 'falling', example: 'ข้าว (Khao = nasi)' },
+      { name: 'Nada Tinggi (High Tone)', thaiName: 'ตรี (Tri - ๊)', desc: 'Suara melengking tinggi dan tetap di atas seperti nada heran.', contour: 'M 5 12 L 45 12', type: 'high', example: 'ม้า (Maa = kuda)' },
+      { name: 'Nada Naik (Rising Tone)', thaiName: 'จัตวา (Chattawa - ๋)', desc: 'Dimulai dari bawah lalu meliuk naik seperti bertanya "Hah?".', contour: 'M 5 35 Q 20 40 45 10', type: 'rising', example: 'หมา (Maa = anjing)' }
+    ];
+
+    /* 4. EXPANDED LESSON DATABASE (4 FULL UNITS) */
+    const LESSON_DATABASE = {
+      // UNIT 1: SALAM & DASAR
+      u1_l1: {
+        title: 'Salam & Perkenalan',
+        questions: [
+          { type: 'choice', prompt: 'Pilih arti dari ungkapan ini:', thai: 'สวัสดี', roman: 'sawat-dii', options: ['Halo / Salam', 'Terima kasih', 'Maaf', 'Sampai jumpa'], answer: 0, explain: 'สวัสดี (sawat-dii) adalah salam sopan khas Thailand yang berlaku sepanjang hari.' },
+          { type: 'choice', prompt: 'Partikel sopan penutur laki-laki adalah...', thai: 'ครับ', roman: 'khráp', options: ['ค่ะ (khâ)', 'ครับ (khráp)', 'จ้า (jaa)', 'นะ (na)'], answer: 1, explain: 'ครับ (khráp) ditaruh di akhir kalimat oleh penutur pria untuk menunjukkan kesopanan.' },
+          { type: 'matching', prompt: 'Cocokkan pasangan kata berikut:', pairs: [
+            { thai: 'สวัสดี', label: 'Halo' }, { thai: 'ขอบคุณ', label: 'Terima kasih' }, { thai: 'ขอโทษ', label: 'Maaf' }, { thai: 'ไม่เป็นไร', label: 'Tidak apa-apa' }
+          ], explain: 'Hebat! Kamu sudah mengingat 4 pilar kesopanan bahasa Thai.' },
+          { type: 'builder', prompt: 'Susun kalimat: "Halo (untuk pembicara pria)"', correctSentence: ['สวัสดี', 'ครับ'], options: ['สวัสดี', 'ครับ', 'ค่ะ', 'ไม่', 'ขอบคุณ'], explain: 'Susunan sopan: สวัสดี + ครับ = สวัสดีครับ.' }
+        ]
+      },
+      u1_l2: {
+        title: 'Konsonan Kelas Tengah',
+        questions: [
+          { type: 'choice', prompt: 'Manakah huruf pertama dalam alfabet Thai (Ko Kai)?', thai: 'ก', roman: 'ko kai', options: ['ก (Ayam)', 'ข (Telur)', 'ง (Ular)', 'ด (Anak)'], answer: 0, explain: 'ก (Ko Kai) adalah huruf pertama dalam aksara Thai dan termasuk kelas tengah.' },
+          { type: 'audio', prompt: 'Dengarkan suara berikut, lalu pilih hurufnya:', thaiAudio: 'ป', options: ['ป (Po Pla)', 'ข (Kho Khai)', 'ม (Mo Ma)', 'ส (So Suea)'], answer: 0, explain: 'ป (Po Pla) berarti ikan, dibaca "p" tanpa hembusan nafas.' },
+          { type: 'matching', prompt: 'Cocokkan huruf kelas tengah dengan artinya:', pairs: [
+            { thai: 'ก', label: 'Ayam (Kai)' }, { thai: 'ด', label: 'Anak (Dek)' }, { thai: 'ต', label: 'Kura-kura (Tao)' }, { thai: 'ป', label: 'Ikan (Pla)' }
+          ], explain: 'Karakteristik kelas tengah adalah bisa membentuk 5 nada secara lengkap!' }
+        ]
+      },
+      u1_l3: {
+        title: 'Mendengar Nada Dasar',
+        questions: [
+          { type: 'choice', prompt: 'Berapa jumlah nada dalam bahasa Thai baku?', thai: 'เสียงวรรณยุกต์', roman: 'siang wannayuk', options: ['3 nada', '4 nada', '5 nada', '6 nada'], answer: 2, explain: 'Bahasa Thai memiliki 5 nada: Tengah, Rendah, Jatuh, Tinggi, dan Naik.' },
+          { type: 'choice', prompt: 'Kata "ข้าว" (khao = nasi) dibaca dengan nada apa?', thai: 'ข้าว', roman: 'khâao', options: ['Nada Jatuh (Falling)', 'Nada Datar (Mid)', 'Nada Rendah (Low)', 'Nada Naik (Rising)'], answer: 0, explain: 'Tanda nada " ้ " (Mai Tho) pada konsonan tinggi menghasilkan nada jatuh.' }
+        ]
+      },
+      u1_boss: {
+        title: 'Tantangan Unit 1 🏆',
+        questions: [
+          { type: 'choice', prompt: 'Apa arti dari ungkapan "ขอบคุณ"?', thai: 'ขอบคุณ', roman: 'khop khun', options: ['Terima kasih', 'Selamat tinggal', 'Permisi', 'Apa kabar'], answer: 0, explain: 'ขอบคุณ (khop khun) berarti terima kasih.' },
+          { type: 'builder', prompt: 'Susun: "Terima kasih (wanita)"', correctSentence: ['ขอบคุณ', 'ค่ะ'], options: ['ขอบคุณ', 'ค่ะ', 'ครับ', 'สวัสดี'], explain: 'Wanita menggunakan partikel ค่ะ (khâ) untuk ungkapan santun.' },
+          { type: 'matching', prompt: 'Uji penguasaan kata salam dan konsonan:', pairs: [
+            { thai: 'ก', label: 'Ayam (Kai)' }, { thai: 'จ', label: 'Piring (Chan)' }, { thai: 'ด', label: 'Anak (Dek)' }, { thai: 'บ', label: 'Daun (Baimai)' }
+          ], explain: 'Luar biasa! Kamu menyelesaikan seluruh materi Unit 1!' }
+        ]
+      },
+
+      // UNIT 2: RESTORAN & MAKANAN
+      u2_l1: {
+        title: 'Makanan & Minuman Favorit',
+        questions: [
+          { type: 'choice', prompt: 'Apa arti dari "ผัดไทย" (Pad Thai)?', thai: 'ผัดไทย', roman: 'phat thai', options: ['Mie goreng khas Thailand', 'Sup asam pedas', 'Es teh manis', 'Nasi goreng'], answer: 0, explain: 'ผัดไทย (Pad Thai) adalah salah satu kuliner mie goreng paling terkenal di dunia!' },
+          { type: 'choice', prompt: 'Kata Thai untuk "Air minum" adalah...', thai: 'น้ำ', roman: 'naam', options: ['น้ำ (Naam)', 'ข้าว (Khao)', 'ชา (Chaa)', 'กาแฟ (Kaa-fae)'], answer: 0, explain: 'น้ำ (naam) berarti air. Contoh: น้ำเปล่า (naam plao) = air putih.' }
+        ]
+      },
+      u2_l2: {
+        title: 'Angka 1 - 10 dalam Thai',
+        questions: [
+          { type: 'choice', prompt: 'Angka "1" dalam bahasa Thai adalah...', thai: 'หนึ่ง', roman: 'neung', options: ['หนึ่ง (1)', 'สอง (2)', 'สาม (3)', 'สี่ (4)'], answer: 0, explain: 'หนึ่ง (neung) = 1, สอง (song) = 2, สาม (saam) = 3.' },
+          { type: 'matching', prompt: 'Cocokkan angka Thai berikut:', pairs: [
+            { thai: '๑ (หนึ่ง)', label: 'Satu (1)' }, { thai: '๒ (สอง)', label: 'Dua (2)' }, { thai: '๓ (สาม)', label: 'Tiga (3)' }, { thai: '๔ (สี่)', label: 'Empat (4)' }
+          ], explain: 'Thailand memiliki aksara angka tradisional sendiri di samping angka Arab.' }
+        ]
+      },
+      u2_l3: {
+        title: 'Menyusun Pesanan Kafe',
+        questions: [
+          { type: 'builder', prompt: 'Susun: "Minta air putih satu (pria)"', correctSentence: ['ขอ', 'น้ำ', 'ครับ'], options: ['ขอ', 'น้ำ', 'ครับ', 'ค่ะ', 'ข้าว'], explain: 'ขอ (kho) = minta/tolong, น้ำ (naam) = air, ครับ (khrap) = partikel pria.' }
+        ]
+      },
+      u2_boss: {
+        title: 'Tantangan Kafe Master 👑',
+        questions: [
+          { type: 'choice', prompt: 'Bagaimana cara mengatakan "Tidak apa-apa" dalam bahasa Thai?', thai: 'ไม่เป็นไร', roman: 'mai pen rai', options: ['ไม่เป็นไร (Mai pen rai)', 'ขอโทษ (Kho thot)', 'ขอบคุณ (Khop khun)', 'อร่อย (Aroi)'], answer: 0, explain: 'ไม่เป็นไร (mai pen rai) adalah filosofi santai Thai yang sangat terkenal!' }
+        ]
+      },
+
+      // UNIT 3: PASAR CHATUCHAK (NEW!)
+      u3_l1: {
+        title: 'Tanya Harga di Pasar',
+        questions: [
+          { type: 'choice', prompt: 'Bagaimana menanyakan "Berapa harganya?" dalam bahasa Thai?', thai: 'เท่าไหร่', roman: 'thâo-rài', options: ['เท่าไหร่ (Thâo-rài)', 'ที่ไหน (Thîi-nǎi)', 'อะไร (A-rai)', 'เมื่อไหร่ (Mûea-rài)'], answer: 0, explain: 'อันนี้เท่าไหร่ (an níi thâo-rài) = Yang ini berapa harganya?' },
+          { type: 'choice', prompt: 'Mata uang resmi Thailand adalah...', thai: 'บาท', roman: 'bàat', options: ['บาท (Baht)', 'ดอลลาร์ (Dollar)', 'เยน (Yen)', 'รูเปียห์ (Rupiah)'], answer: 0, explain: 'Mata uang Thailand adalah Baht (บาท - bàat).' },
+          { type: 'builder', prompt: 'Susun: "Ini berapa baht? (pria)"', correctSentence: ['อันนี้', 'กี่', 'บาท', 'ครับ'], options: ['อันนี้', 'กี่', 'บาท', 'ครับ', 'ค่ะ', 'แพง'], explain: 'อันนี้ (yang ini) + กี่ (berapa) + บาท (baht) + ครับ (sopan).' }
+        ]
+      },
+      u3_l2: {
+        title: 'Tawar Menawar Santun',
+        questions: [
+          { type: 'choice', prompt: 'Kata untuk "Mahal sekali!" dalam bahasa Thai adalah...', thai: 'แพงมาก', roman: 'phaeng mâak', options: ['แพงมาก (Phaeng mâak)', 'ถูกมาก (Thùuk mâak)', 'สวยมาก (Sǔay mâak)', 'อร่อยมาก (Aròy mâak)'], answer: 0, explain: 'แพง (phaeng) = mahal, มาก (mâak) = sangat/sekali.' },
+          { type: 'matching', prompt: 'Cocokkan frasa belanja berikut:', pairs: [
+            { thai: 'แพง (phaeng)', label: 'Mahal' }, { thai: 'ถูก (thùuk)', label: 'Murah' }, { thai: 'ลดได้ไหม', label: 'Bisa diskon?' }, { thai: 'เอาอันนี้', label: 'Saya mau yang ini' }
+          ], explain: 'Kunci tawar-menawar di Bangkok adalah selalu tersenyum dan gunakan partikel sopan!' }
+        ]
+      },
+      u3_l3: {
+        title: 'Warna & Ukuran Barang',
+        questions: [
+          { type: 'choice', prompt: 'Warna "Merah" dalam bahasa Thai adalah...', thai: 'สีแดง', roman: 'sǐi daeng', options: ['สีแดง (Merah)', 'สีขาว (Putih)', 'สีดำ (Hitam)', 'สีฟ้า (Biru muda)'], answer: 0, explain: 'สี (sǐi) = warna, แดง (daeng) = merah.' },
+          { type: 'matching', prompt: 'Cocokkan ukuran barang:', pairs: [
+            { thai: 'ใหญ่ (yài)', label: 'Besar' }, { thai: 'เล็ก (lék)', label: 'Kecil' }, { thai: 'ยาว (yaaw)', label: 'Panjang' }, { thai: 'สั้น (sân)', label: 'Pendek' }
+          ], explain: 'Hebat! Sekarang kamu bisa memilih pakaian dengan ukuran tepat di pasar Chatuchak.' }
+        ]
+      },
+      u3_boss: {
+        title: 'Tantangan Sultan Pasar 🏆',
+        questions: [
+          { type: 'builder', prompt: 'Susun: "Bisa diskon sedikit tidak? (wanita)"', correctSentence: ['ลด', 'หน่อย', 'ได้ไหม', 'คะ'], options: ['ลด', 'หน่อย', 'ได้ไหม', 'คะ', 'ครับ', 'แพง'], explain: 'ลด (potong/diskon) + หน่อย (sedikit) + ได้ไหม (bolehkah) + คะ (partikel tanya wanita).' }
+        ]
+      },
+
+      // UNIT 4: TRANSPORTASI TUK-TUK (NEW!)
+      u4_l1: {
+        title: 'Naik Tuk-Tuk & Taksi',
+        questions: [
+          { type: 'choice', prompt: 'Bagaimana cara bertanya "Mau pergi ke mana?"', thai: 'ไปไหน', roman: 'pai nǎi', options: ['ไปไหน (Pai nǎi)', 'มาจากไหน (Maa jàak nǎi)', 'อยู่ที่ไหน (Yùu thîi nǎi)', 'กินอะไร (Kin a-rai)'], answer: 0, explain: 'ไป (pai) = pergi, ไหน (nǎi) = ke mana.' },
+          { type: 'choice', prompt: 'Kendaraan roda tiga khas Thailand disebut...', thai: 'ตุ๊กตุ๊ก', roman: 'túk túk', options: ['ตุ๊กตุ๊ก (Tuk-tuk)', 'รถเมล์ (Bus)', 'เรือ (Perahu)', 'รถไฟ (Kereta api)'], answer: 0, explain: 'ตุ๊กตุ๊ก (Tuk-tuk) dinamai berdasarkan suara knalpot mesinnya!' }
+        ]
+      },
+      u4_l2: {
+        title: 'Arah Navigasi: Kiri, Kanan, Lurus',
+        questions: [
+          { type: 'matching', prompt: 'Cocokkan arah petunjuk jalan:', pairs: [
+            { thai: 'เลี้ยวซ้าย (líao sáai)', label: 'Belok Kiri' }, { thai: 'เลี้ยวขวา (líao khwǎa)', label: 'Belok Kanan' }, { thai: 'ตรงไป (trong pai)', label: 'Jalan Lurus' }, { thai: 'จอดที่นี่ (jòt thîi nîi)', label: 'Berhenti di sini' }
+          ], explain: 'Kiri = ซ้าย (sáai), Kanan = ขวา (khwǎa). Jangan sampai tertukar!' }
+        ]
+      },
+      u4_l3: {
+        title: 'Tempat Wisata & Kuil Bersejarah',
+        questions: [
+          { type: 'choice', prompt: 'Kata "วัด" (Wat) dalam bahasa Thai berarti...', thai: 'วัด', roman: 'wát', options: ['Kuil Buddha', 'Pasar malam', 'Stasiun kereta', 'Bandara'], answer: 0, explain: 'วัด (wát) berarti kuil atau biara Buddha. Contoh: วัดพระแก้ว (Wat Phra Kaew).' },
+          { type: 'builder', prompt: 'Susun: "Pergi ke kuil Wat Arun (pria)"', correctSentence: ['ไป', 'วัดอรุณ', 'ครับ'], options: ['ไป', 'วัดอรุณ', 'ครับ', 'ค่ะ', 'ตรงไป'], explain: 'ไป (pergi ke) + วัดอรุณ (Wat Arun) + ครับ (partikel sopan).' }
+        ]
+      },
+      u4_boss: {
+        title: 'Mahkota Master Bangkok 👑',
+        questions: [
+          { type: 'choice', prompt: 'Ungkapan untuk memberitahu sopir "Tolong berhenti di sini":', thai: 'จอดที่นี่ด้วยครับ', roman: 'jòt thîi nîi dûay khráp', options: ['จอดที่นี่ด้วยครับ', 'ไปไกลมาก', 'ไม่ไปแล้ว', 'เลี้ยวซ้ายไม่ได้'], answer: 0, explain: 'จอด (berhenti) + ที่นี่ (di sini) + ด้วย (tolong) + ครับ (sopan).' }
+        ]
+      }
+    };
+
+    const ALL_LESSONS_ORDER = [
+      'u1_l1', 'u1_l2', 'u1_l3', 'u1_boss',
+      'u2_l1', 'u2_l2', 'u2_l3', 'u2_boss',
+      'u3_l1', 'u3_l2', 'u3_l3', 'u3_boss',
+      'u4_l1', 'u4_l2', 'u4_l3', 'u4_boss'
+    ];
+
+    /* 5. ACTIVE EXERCISE SESSION ENGINE */
+    let currentSession = {
+      lessonId: null,
+      title: '',
+      questions: [],
+      currentIndex: 0,
+      selectedAnswer: null,
+      builderSlots: [],
+      matchingPairsLeft: 0,
+      matchedPairsCount: 0,
+      activeMatchingCard: null,
+      heartsLeft: 5,
+      xpEarned: 0,
+      comboStreak: 0,
+      startTime: 0,
+      isAnswerChecked: false
+    };
+
+    function startLessonSession(lessonId) {
+      if (!appState.unlockedLessons.includes(lessonId)) {
+        playSound('wrong');
+        showToast('Selesaikan pelajaran sebelumnya terlebih dahulu! 🔒');
+        return;
+      }
+      playSound('click');
+      const lesson = LESSON_DATABASE[lessonId];
+      if (!lesson) {
+        showToast('Pelajaran sedang disiapkan oleh peri!');
+        return;
+      }
+
+      currentSession.lessonId = lessonId;
+      currentSession.title = lesson.title;
+      currentSession.questions = JSON.parse(JSON.stringify(lesson.questions));
+      currentSession.currentIndex = 0;
+      currentSession.heartsLeft = appState.hearts;
+      currentSession.xpEarned = 0;
+      currentSession.comboStreak = 0;
+      currentSession.startTime = Date.now();
+      currentSession.isAnswerChecked = false;
+
+      document.getElementById('arenaHeartCount').textContent = currentSession.heartsLeft;
+      document.getElementById('quizArena').classList.add('active');
+      renderCurrentQuestion();
+    }
+
+    function renderCurrentQuestion() {
+      const q = currentSession.questions[currentSession.currentIndex];
+      const total = currentSession.questions.length;
+      const progressPercent = (currentSession.currentIndex / total) * 100;
+      document.getElementById('quizProgressBar').style.width = progressPercent + '%';
+
+      currentSession.selectedAnswer = null;
+      currentSession.builderSlots = [];
+      currentSession.activeMatchingCard = null;
+      currentSession.isAnswerChecked = false;
+
+      // Update Combo Badge
+      const comboBadge = document.getElementById('arenaComboBadge');
+      if (currentSession.comboStreak >= 2) {
+        comboBadge.style.display = 'inline-flex';
+        comboBadge.textContent = `🔥 COMBO ${currentSession.comboStreak}X`;
+      } else {
+        comboBadge.style.display = 'none';
+      }
+
+      const bottomBar = document.getElementById('arenaBottomBar');
+      bottomBar.className = 'arena-bottom-bar';
+      const actionBtn = document.getElementById('quizActionBtn');
+      actionBtn.textContent = 'PERIKSA';
+      actionBtn.className = 'btn-duo btn-duo-green';
+      actionBtn.disabled = true;
+
+      const body = document.getElementById('quizContentBody');
+
+      if (q.type === 'choice') {
+        body.innerHTML = `
+          <div class="arena-question-type">PILIHAN GANDA</div>
+          <h2 class="arena-title">${q.prompt}</h2>
+          
+          <div class="prompt-bubble-row">
+            <button class="thai-hero-speaker" onclick="speakThai('${q.thai}')" title="Dengarkan Suara">🔊</button>
+            <div class="thai-text-card">
+              <span class="thai-big">${q.thai}</span>
+              ${q.roman ? `<span class="thai-roman">(${q.roman})</span>` : ''}
+            </div>
+          </div>
+
+          <div class="choices-grid">
+            ${q.options.map((opt, idx) => `
+              <div class="choice-card" onclick="selectChoice(${idx})">
+                <span class="choice-key">${idx + 1}</span>
+                <span>${opt}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        if (q.thai) speakThai(q.thai);
+
+      } else if (q.type === 'audio') {
+        body.innerHTML = `
+          <div class="arena-question-type">TANTANGAN MENDENGAR 🎧</div>
+          <h2 class="arena-title">${q.prompt}</h2>
+          
+          <div style="text-align:center; margin: 20px 0 36px 0;">
+            <button class="btn-duo btn-duo-blue" style="border-radius:50%; width:90px; height:90px; font-size:36px;" onclick="speakThai('${q.thaiAudio}')">
+              🔊
+            </button>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:10px;">Tekan untuk memutar audio Thai</p>
+          </div>
+
+          <div class="choices-grid">
+            ${q.options.map((opt, idx) => `
+              <div class="choice-card" onclick="selectChoice(${idx})">
+                <span class="choice-key">${idx + 1}</span>
+                <span>${opt}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        speakThai(q.thaiAudio);
+
+      } else if (q.type === 'matching') {
+        currentSession.matchedPairsCount = 0;
+        currentSession.matchingPairsLeft = q.pairs.length;
+
+        const thaiCards = q.pairs.map(p => ({ text: p.thai, id: p.thai, type: 'thai', isThai: true }));
+        const labelCards = q.pairs.map(p => ({ text: p.label, id: p.thai, type: 'label', isThai: false }));
+        const allCards = [...thaiCards, ...labelCards].sort(() => Math.random() - 0.5);
+
+        body.innerHTML = `
+          <div class="arena-question-type">COCOKKAN PASANGAN 🧩</div>
+          <h2 class="arena-title">${q.prompt}</h2>
+
+          <div class="matching-grid" id="matchingGrid">
+            ${allCards.map((c, i) => `
+              <div class="matching-card" data-id="${c.id}" data-is-thai="${c.isThai}" onclick="handleMatchingCardClick(this, '${c.text}', ${c.isThai})">
+                ${c.text}
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+      } else if (q.type === 'builder') {
+        body.innerHTML = `
+          <div class="arena-question-type">SUSUN KALIMAT 🪄</div>
+          <h2 class="arena-title">${q.prompt}</h2>
+
+          <div class="sentence-slots-area" id="sentenceSlots">
+            <span style="color:var(--text-subtle); font-size:14px;" id="slotPlaceholder">Ketuk balok kata di bawah untuk menyusun kalimat...</span>
+          </div>
+
+          <div class="word-bank-chips" id="wordBankChips">
+            ${q.options.map((w, idx) => `
+              <div class="word-chip" data-word="${w}" onclick="tapWordBankChip(this, '${w}')">
+                ${w}
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+    }
+
+    function selectChoice(index) {
+      if (currentSession.isAnswerChecked) return;
+      playSound('click');
+      currentSession.selectedAnswer = index;
+
+      document.querySelectorAll('.choice-card').forEach((c, idx) => {
+        c.classList.toggle('selected', idx === index);
+      });
+
+      document.getElementById('quizActionBtn').disabled = false;
+    }
+
+    function handleMatchingCardClick(el, text, isThai) {
+      if (currentSession.isAnswerChecked || el.classList.contains('matched')) return;
+      playSound('click');
+      if (isThai) speakThai(text);
+
+      if (!currentSession.activeMatchingCard) {
+        document.querySelectorAll('.matching-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        currentSession.activeMatchingCard = el;
+      } else {
+        const first = currentSession.activeMatchingCard;
+        if (first === el) {
+          el.classList.remove('selected');
+          currentSession.activeMatchingCard = null;
+          return;
+        }
+
+        const id1 = first.getAttribute('data-id');
+        const id2 = el.getAttribute('data-id');
+
+        if (id1 === id2) {
+          playSound('correct', currentSession.comboStreak);
+          first.classList.remove('selected');
+          first.classList.add('matched');
+          el.classList.remove('selected');
+          el.classList.add('matched');
+          currentSession.activeMatchingCard = null;
+          currentSession.matchedPairsCount++;
+
+          if (currentSession.matchedPairsCount === currentSession.matchingPairsLeft) {
+            document.getElementById('quizActionBtn').disabled = false;
+            handleQuizAction();
+          }
+        } else {
+          playSound('wrong');
+          el.classList.add('selected');
+          setTimeout(() => {
+            first.classList.remove('selected');
+            el.classList.remove('selected');
+            currentSession.activeMatchingCard = null;
+          }, 350);
+        }
+      }
+    }
+
+    function tapWordBankChip(el, word) {
+      if (currentSession.isAnswerChecked) return;
+      playSound('click');
+      speakThai(word);
+
+      currentSession.builderSlots.push(word);
+      el.classList.add('used');
+
+      renderSentenceSlots();
+      document.getElementById('quizActionBtn').disabled = currentSession.builderSlots.length === 0;
+    }
+
+    function removeSlotWord(index, word) {
+      if (currentSession.isAnswerChecked) return;
+      playSound('click');
+      currentSession.builderSlots.splice(index, 1);
+
+      const chip = document.querySelector(`.word-chip.used[data-word="${word}"]`);
+      if (chip) chip.classList.remove('used');
+
+      renderSentenceSlots();
+      document.getElementById('quizActionBtn').disabled = currentSession.builderSlots.length === 0;
+    }
+
+    function renderSentenceSlots() {
+      const area = document.getElementById('sentenceSlots');
+      if (currentSession.builderSlots.length === 0) {
+        area.innerHTML = '<span style="color:var(--text-subtle); font-size:14px;" id="slotPlaceholder">Ketuk balok kata di bawah untuk menyusun kalimat...</span>';
+        return;
+      }
+
+      area.innerHTML = currentSession.builderSlots.map((w, idx) => `
+        <div class="word-chip" style="background:var(--blue-light); border-color:var(--blue); color:var(--blue-dark);" onclick="removeSlotWord(${idx}, '${w}')">
+          ${w} ✕
+        </div>
+      `).join('');
+    }
+
+    function handleQuizAction() {
+      const q = currentSession.questions[currentSession.currentIndex];
+      const bottomBar = document.getElementById('arenaBottomBar');
+      const actionBtn = document.getElementById('quizActionBtn');
+      const feedbackTitle = document.getElementById('feedbackTitle');
+      const feedbackExplain = document.getElementById('feedbackExplain');
+      const feedbackIcon = document.getElementById('feedbackIcon');
+
+      if (!currentSession.isAnswerChecked) {
+        currentSession.isAnswerChecked = true;
+        let isCorrect = false;
+
+        if (q.type === 'choice' || q.type === 'audio') {
+          isCorrect = currentSession.selectedAnswer === q.answer;
+        } else if (q.type === 'matching') {
+          isCorrect = true;
+        } else if (q.type === 'builder') {
+          isCorrect = JSON.stringify(currentSession.builderSlots) === JSON.stringify(q.correctSentence);
+        }
+
+        if (isCorrect) {
+          currentSession.comboStreak++;
+          playSound('correct', currentSession.comboStreak);
+          bottomBar.classList.add('is-correct');
+          feedbackTitle.textContent = currentSession.comboStreak >= 3 ? `Luar Biasa! 🔥 ${currentSession.comboStreak}x Combo!` : 'Bagus sekali! ✨';
+          feedbackExplain.textContent = q.explain;
+          feedbackIcon.textContent = '✓';
+          actionBtn.textContent = 'LANJUTKAN';
+          actionBtn.className = 'btn-duo btn-duo-green';
+
+          currentSession.xpEarned += 5;
+        } else {
+          currentSession.comboStreak = 0;
+          playSound('wrong');
+          bottomBar.classList.add('is-wrong');
+          feedbackTitle.textContent = 'Belum tepat... 🌿';
+          feedbackExplain.textContent = q.explain;
+          feedbackIcon.textContent = '✕';
+          actionBtn.textContent = 'LANJUTKAN';
+          actionBtn.className = 'btn-duo btn-duo-danger';
+
+          currentSession.heartsLeft = Math.max(0, currentSession.heartsLeft - 1);
+          appState.hearts = currentSession.heartsLeft;
+          document.getElementById('arenaHeartCount').textContent = currentSession.heartsLeft;
+          const heartsBox = document.getElementById('arenaHeartsBox');
+          heartsBox.classList.add('shake');
+          setTimeout(() => heartsBox.classList.remove('shake'), 600);
+
+          if (q.thai && !appState.mistakes.some(m => m.thai === q.thai)) {
+            appState.mistakes.unshift({ thai: q.thai, prompt: q.prompt, explain: q.explain });
+          }
+
+          // Spaced repetition: Re-queue question to ensure mastery!
+          currentSession.questions.push(JSON.parse(JSON.stringify(q)));
+        }
+
+        saveState();
+
+      } else {
+        currentSession.currentIndex++;
+
+        if (currentSession.heartsLeft <= 0) {
+          alert('Nyawamu habis! Kamu bisa mengisi ulang nyawa di Toko Hadiah dengan gems.');
+          closeQuizArena();
+          return;
+        }
+
+        if (currentSession.currentIndex >= currentSession.questions.length) {
+          finishLessonSession();
+        } else {
+          renderCurrentQuestion();
+        }
+      }
+    }
+
+    function finishLessonSession() {
+      playSound('fanfare');
+      fireConfetti();
+
+      const xpBonus = 15;
+      const gemBonus = 5;
+      appState.xp += xpBonus;
+      appState.gems += gemBonus;
+      appState.dailyQuestXp += xpBonus;
+
+      if (!appState.completedLessons.includes(currentSession.lessonId)) {
+        appState.completedLessons.push(currentSession.lessonId);
+      }
+
+      const curIdx = ALL_LESSONS_ORDER.indexOf(currentSession.lessonId);
+      if (curIdx !== -1 && curIdx + 1 < ALL_LESSONS_ORDER.length) {
+        const nextLesson = ALL_LESSONS_ORDER[curIdx + 1];
+        if (!appState.unlockedLessons.includes(nextLesson)) {
+          appState.unlockedLessons.push(nextLesson);
+        }
+      }
+
+      // Check unlock achievements
+      if (!appState.achievements.includes('first_step')) {
+        unlockAchievement('first_step');
+      }
+      if (currentSession.heartsLeft === 5 && !appState.achievements.includes('flawless')) {
+        unlockAchievement('flawless');
+      }
+
+      saveState();
+
+      const timeTakenSec = Math.round((Date.now() - currentSession.startTime) / 1000);
+      const minutes = Math.floor(timeTakenSec / 60);
+      const seconds = timeTakenSec % 60;
+      const formattedTime = `${minutes}m ${seconds}d`;
+
+      const body = document.getElementById('quizContentBody');
+      body.innerHTML = `
+        <div class="lesson-complete-modal">
+          <div class="celebration-mascot">🎉</div>
+          <h2 style="font-size:28px; font-weight:800; color:var(--green);">Pelajaran Selesai!</h2>
+          <p style="font-size:16px; color:var(--text-muted); max-width:440px;">
+            Luar biasa! Kamu semakin dekat untuk fasih berbahasa Thailand. Tetap konsisten setiap hari!
+          </p>
+
+          <div class="complete-stat-cards">
+            <div class="complete-stat-box">
+              <span>TOTAL XP</span>
+              <strong style="color:var(--gold);">+${xpBonus} XP</strong>
+            </div>
+            <div class="complete-stat-box">
+              <span>HADIAH GEMS</span>
+              <strong style="color:var(--blue);">+${gemBonus} 💎</strong>
+            </div>
+            <div class="complete-stat-box">
+              <span>WAKTU LATIHAN</span>
+              <strong style="color:var(--green);">${formattedTime}</strong>
+            </div>
+          </div>
+
+          <button class="btn-duo btn-duo-green" style="min-width:240px; margin-top:12px;" onclick="closeQuizArena()">
+            SELESAIKAN & KEMBALI
+          </button>
+        </div>
+      `;
+
+      document.getElementById('arenaBottomBar').style.display = 'none';
+      document.getElementById('quizProgressBar').style.width = '100%';
+    }
+
+    function confirmExitQuiz() {
+      if (confirm('Yakin ingin keluar? Progres latihan sesi ini akan hilang.')) {
+        closeQuizArena();
+      }
+    }
+
+    function closeQuizArena() {
+      document.getElementById('quizArena').classList.remove('active');
+      document.getElementById('arenaBottomBar').style.display = 'flex';
+    }
+
+    function openTreasureChest(chestId) {
+      if (appState.openedChests.includes(chestId)) {
+        showToast('Peti ini sudah kamu buka! ✨');
+        return;
+      }
+      playSound('gem');
+      fireConfetti();
+      appState.openedChests.push(chestId);
+      appState.gems += 25;
+      appState.xp += 10;
+      saveState();
+      showToast(`Hore! Kamu membuka Peti #${chestId}: +25 💎 & +10 XP!`);
+    }
+
+    /* 6. CANVAS CONFETTI */
+    function fireConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#58cc02', '#1cb0f6', '#ffc800', '#ff4b4b', '#ce82ff', '#00cd9c', '#ff9600'];
+
+      for (let i = 0; i < 95; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          r: Math.random() * 6 + 4,
+          dx: (Math.random() - 0.5) * 14,
+          dy: (Math.random() - 0.7) * 16,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          tilt: Math.random() * 10,
+          tiltAngle: 0,
+          tiltSpeed: Math.random() * 0.1 + 0.05
+        });
+      }
+
+      let animationFrame;
+      let frameCount = 0;
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.tiltAngle += p.tiltSpeed;
+          p.y += (Math.cos(p.tiltAngle) + 1 + p.r / 2) / 2 + 3;
+          p.x += Math.sin(p.tiltAngle) * 2;
+          p.tilt = Math.sin(p.tiltAngle) * 15;
+
+          ctx.beginPath();
+          ctx.lineWidth = p.r;
+          ctx.strokeStyle = p.color;
+          ctx.moveTo(p.x + p.tilt + p.r / 4, p.y);
+          ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 4);
+          ctx.stroke();
+        });
+
+        frameCount++;
+        if (frameCount < 120) {
+          animationFrame = requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          cancelAnimationFrame(animationFrame);
+        }
+      }
+      render();
+    }
+
+    /* 7. ACHIEVEMENTS SYSTEM */
+    const BADGES_DATA = [
+      { id: 'first_step', icon: '🌱', title: 'Langkah Pertama', desc: 'Menyelesaikan pelajaran pertamamu di taman Thai.' },
+      { id: 'flawless', icon: '🎯', title: 'Akurasi Sempurna', desc: 'Selesaikan 1 sesi latihan tanpa kehilangan satu hati pun.' },
+      { id: 'consonant_explorer', icon: '🔤', title: 'Penjelajah Aksara', desc: 'Kunjungi dan dengarkan 10 konsonan Thai di Studio.' },
+      { id: 'streak_flame', icon: '🔥', title: 'Api Ketekunan', desc: 'Pertahankan rangkaian belajar selama 3 hari berturut-turut.' },
+      { id: 'gem_hoarder', icon: '💎', title: 'Kolektor Permata', desc: 'Kumpulkan lebih dari 150 Gems di pundi-pundimu.' },
+      { id: 'fashion_icon', icon: '👗', title: 'Sultan Busana', desc: 'Beli dan pasang kostum baru untuk maskot Peri Thai.' }
+    ];
+
+    function unlockAchievement(id) {
+      if (!appState.achievements.includes(id)) {
+        appState.achievements.push(id);
+        const b = BADGES_DATA.find(x => x.id === id);
+        if (b) {
+          playSound('gem');
+          showToast(`Lencana Baru Dibuka! 🎖️ ${b.title}`);
+        }
+        saveState();
+        renderAchievements();
+      }
+    }
+
+    function renderAchievements() {
+      const container = document.getElementById('achievementsGrid');
+      container.innerHTML = BADGES_DATA.map(b => {
+        const isUnlocked = appState.achievements.includes(b.id);
+        return `
+          <div class="badge-card ${isUnlocked ? 'unlocked' : ''}">
+            <div class="badge-icon">${b.icon}</div>
+            <div class="badge-info">
+              <h4>${b.title}</h4>
+              <p>${b.desc}</p>
+              <div class="badge-status">${isUnlocked ? '✓ TELAH DIBUKA' : '🔒 TERKUNCI'}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* 8. 3D FLASHCARD ARENA */
+    let fcIndex = 0;
+    function openFlashcardArena() {
+      playSound('click');
+      fcIndex = 0;
+      updateFlashcardView();
+      document.getElementById('flashcardModal').classList.add('active');
+    }
+
+    function closeFlashcardArena() {
+      document.getElementById('flashcardModal').classList.remove('active');
+    }
+
+    function flipFlashcard() {
+      playSound('click');
+      document.getElementById('flashcardBox').classList.toggle('flipped');
+    }
+
+    function updateFlashcardView() {
+      document.getElementById('flashcardBox').classList.remove('flipped');
+      const item = THAI_CONSONANTS[fcIndex];
+      document.getElementById('fcTag').textContent = `Kelas ${item.class.toUpperCase()} (${fcIndex + 1}/${THAI_CONSONANTS.length})`;
+      document.getElementById('fcGlyph').textContent = item.thai;
+      document.getElementById('fcRoman').textContent = item.roman;
+      document.getElementById('fcMeaning').textContent = `Arti: ${item.meaning}`;
+      document.getElementById('fcDetail').innerHTML = `Awal: /${item.initial}/ · Akhir: /${item.final}/<br>Suku kata Thai kelas ${item.class}`;
+    }
+
+    function nextFlashcard() {
+      playSound('click');
+      fcIndex = (fcIndex + 1) % THAI_CONSONANTS.length;
+      updateFlashcardView();
+    }
+
+    function prevFlashcard() {
+      playSound('click');
+      fcIndex = (fcIndex - 1 + THAI_CONSONANTS.length) % THAI_CONSONANTS.length;
+      updateFlashcardView();
+    }
+
+    function speakFlashcardAudio() {
+      speakThai(THAI_CONSONANTS[fcIndex].thai);
+    }
+
+    /* 9. TONE EAR TRAINER MINI-GAME */
+    function startToneEarTrainer() {
+      playSound('click');
+      const randomTone = THAI_TONES[Math.floor(Math.random() * THAI_TONES.length)];
+      playToneCurve(randomTone.type);
+
+      const guessed = prompt(`[Uji Telinga Nada]\n\nBaru saja diputar sebuah nada Thai. Tebak jenis nadanya:\n1. Nada Tengah (Mid)\n2. Nada Rendah (Low)\n3. Nada Jatuh (Falling)\n4. Nada Tinggi (High)\n5. Nada Naik (Rising)\n\nKetik nomor 1-5:`);
+      
+      const toneMap = { '1': 'mid', '2': 'low', '3': 'falling', '4': 'high', '5': 'rising' };
+      if (guessed && toneMap[guessed.trim()] === randomTone.type) {
+        playSound('correct');
+        fireConfetti();
+        appState.xp += 10;
+        appState.gems += 3;
+        saveState();
+        showToast(`Tebakan Tepat! ✨ Itu adalah ${randomTone.name}! (+10 XP)`);
+      } else if (guessed) {
+        playSound('wrong');
+        showToast(`Belum tepat! Nada tersebut adalah ${randomTone.name}.`);
+      }
+    }
+
+    /* 10. SHOP & COSTUMES */
+    function buyShopItem(itemType, cost) {
+      if (appState.gems < cost) {
+        showToast('Gems 💎 tidak cukup! Kumpulkan XP lagi lewat pelajaran.');
+        playSound('wrong');
+        return;
+      }
+      playSound('gem');
+      appState.gems -= cost;
+
+      if (itemType === 'hearts') {
+        appState.hearts = 5;
+        showToast('Semua 5 hatimu telah pulih penuh! ❤️');
+      } else if (itemType === 'freeze') {
+        appState.inventory.push('freeze');
+        showToast('Streak Freeze aktif! Rangkaianmu aman 1 hari.');
+      }
+      saveState();
+    }
+
+    function buyOrEquipCostume(costumeId, cost) {
+      if (appState.unlockedCostumes.includes(costumeId)) {
+        // Toggle Equip
+        appState.equippedCostume = (appState.equippedCostume === costumeId) ? 'default' : costumeId;
+        playSound('click');
+        showToast(`Kostum berhasil diganti! ✨`);
+        saveState();
+        updateCostumeButtons();
+        return;
+      }
+
+      if (appState.gems < cost) {
+        showToast('Gems 💎 tidak cukup untuk membeli kostum ini!');
+        playSound('wrong');
+        return;
+      }
+
+      playSound('gem');
+      appState.gems -= cost;
+      appState.unlockedCostumes.push(costumeId);
+      appState.equippedCostume = costumeId;
+      unlockAchievement('fashion_icon');
+      showToast('Hore! Kostum baru berhasil dibeli dan dipakai!');
+      saveState();
+      updateCostumeButtons();
+    }
+
+    function updateCostumeButtons() {
+      const costumes = [
+        { id: 'thai', btnId: 'btn-costume-thai', price: '60 💎' },
+        { id: 'chef', btnId: 'btn-costume-chef', price: '50 💎' },
+        { id: 'shades', btnId: 'btn-costume-shades', price: '40 💎' }
+      ];
+
+      costumes.forEach(c => {
+        const btn = document.getElementById(c.btnId);
+        if (!btn) return;
+        if (appState.equippedCostume === c.id) {
+          btn.textContent = 'DIPAKAI ✓';
+          btn.className = 'btn-duo btn-duo-secondary btn-sm';
+        } else if (appState.unlockedCostumes.includes(c.id)) {
+          btn.textContent = 'PAKAI';
+          btn.className = 'btn-duo btn-duo-green btn-sm';
+        } else {
+          btn.textContent = c.price;
+        }
+      });
+    }
+
+    function updateMascotCostumeDisplay() {
+      const accessory = document.getElementById('svgMascotAccessory');
+      const iconSpan = document.getElementById('currentMascotIcon');
+      if (!accessory) return;
+
+      if (appState.equippedCostume === 'thai') {
+        iconSpan.textContent = '🧕';
+        accessory.innerHTML = `
+          <!-- Golden Tiara & Sash -->
+          <polygon points="38,26 44,18 50,22 56,18 62,26 50,32" fill="#ffc800" stroke="#d97706" stroke-width="1"/>
+          <path d="M30 65 L 70 65" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+        `;
+      } else if (appState.equippedCostume === 'chef') {
+        iconSpan.textContent = '👨‍🍳';
+        accessory.innerHTML = `
+          <!-- Chef Hat -->
+          <ellipse cx="50" cy="28" rx="14" ry="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <rect x="40" y="32" width="20" height="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        `;
+      } else if (appState.equippedCostume === 'shades') {
+        iconSpan.textContent = '😎';
+        accessory.innerHTML = `
+          <!-- Cool Sunglasses -->
+          <rect x="34" y="44" width="14" height="9" rx="3" fill="#0f172a"/>
+          <rect x="52" y="44" width="14" height="9" rx="3" fill="#0f172a"/>
+          <line x1="48" y1="48" x2="52" y2="48" stroke="#0f172a" stroke-width="2"/>
+        `;
+      } else {
+        iconSpan.textContent = '🧚🏻‍♀️';
+        accessory.innerHTML = `
+          <polygon points="35,28 42,34 50,24 58,34 65,28 62,38 38,38" fill="#ffc800" stroke="#d97706" stroke-width="1.5"/>
+        `;
+      }
+    }
+
+    /* 11. GUIDEBOOKS */
+    const UNIT_GUIDES = {
+      1: {
+        title: 'Panduan Unit 1: Tata Bahasa & Partikel Sopan',
+        body: `
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--green);">1. Salam Universal: สวัสดี (sawat-dii)</h4>
+          <p>Orang Thailand menyapa dengan ungkapan <b>sawat-dii</b> sambil menyatukan kedua telapak tangan di dada yang disebut salam <i>Wai</i> (ไหว้).</p>
+          <br>
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--blue);">2. Partikel Kesopanan</h4>
+          <p>• <b>ครับ (khráp)</b>: Diucapkan oleh penutur pria di setiap akhir salam atau jawaban santun.</p>
+          <p>• <b>ค่ะ / คะ (khâ / kha)</b>: Diucapkan oleh wanita. <i>Khâ</i> untuk pernyataan dan salam, <i>kha</i> untuk bertanya.</p>
+        `
+      },
+      2: {
+        title: 'Panduan Unit 2: Pemesanan Restoran & Angka',
+        body: `
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--green);">1. Pola Memesan Makanan</h4>
+          <p>Gunakan rumus: <code>ขอ (kho) + Nama Makanan + Partikel Sopan</code>.</p>
+          <p>Contoh: <i>Kho pad thai khrap</i> (Tolong pad thai satu ya).</p>
+          <br>
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--gold-dark);">2. Angka Dasar</h4>
+          <p>• หนึ่ง (neung) = 1 &nbsp;• สอง (song) = 2 &nbsp;• สาม (saam) = 3</p>
+          <p>• สี่ (sii) = 4 &nbsp;• ห้า (haa) = 5 &nbsp;• หก (hok) = 6</p>
+        `
+      },
+      3: {
+        title: 'Panduan Unit 3: Belanja di Pasar Chatuchak',
+        body: `
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--orange);">1. Menanyakan Harga</h4>
+          <p>• <code>อันนี้เท่าไหร่ (an níi thâo-rài)</code>: Yang ini berapa harganya?</p>
+          <p>• <code>กี่บาท (kìi bàat)</code>: Berapa baht?</p>
+          <br>
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--green);">2. Tawar Menawar Santun</h4>
+          <p>• <code>ลดได้ไหม (lót dâi mǎi)</code>: Bisa diskon tidak?</p>
+          <p>• <code>ลดหน่อยได้ไหมครับ (lót nòi dâi mǎi khráp)</code>: Bisa tolong kurang sedikit harganya?</p>
+        `
+      },
+      4: {
+        title: 'Panduan Unit 4: Transportasi Tuk-Tuk & Arah',
+        body: `
+          <h4 style="font-weight:800; margin-bottom:8px; color:var(--teal);">1. Naik Tuk-Tuk & Navigasi</h4>
+          <p>• <code>ไป... (pai...)</code>: Mau pergi ke...</p>
+          <p>• <code>เลี้ยวซ้าย (líao sáai)</code>: Belok Kiri &nbsp;• <code>เลี้ยวขวา (líao khwǎa)</code>: Belok Kanan</p>
+          <p>• <code>ตรงไป (trong pai)</code>: Jalan lurus terus</p>
+          <p>• <code>จอดที่นี่ (jòt thîi nîi)</code>: Berhenti di sini</p>
+        `
+      }
+    };
+
+    function openGuidebook(unitNum) {
+      playSound('click');
+      const guide = UNIT_GUIDES[unitNum];
+      if (!guide) return;
+      document.getElementById('guideTitle').textContent = guide.title;
+      document.getElementById('guideBody').innerHTML = guide.body;
+      document.getElementById('guideModal').classList.add('active');
+    }
+
+    function closeGuidebook(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('btn-icon-round') && !e.target.classList.contains('btn-duo')) return;
+      document.getElementById('guideModal').classList.remove('active');
+    }
+
+    /* 12. UI UPDATES & EVENT LISTENERS */
+    function updateTopBarStats() {
+      document.getElementById('streakCount').textContent = appState.streak;
+      document.getElementById('gemCount').textContent = appState.gems;
+      document.getElementById('heartCount').textContent = appState.hearts;
+
+      // Quest Bar
+      const xpGoal = 30;
+      const curXp = Math.min(xpGoal, appState.dailyQuestXp);
+      const xpPct = (curXp / xpGoal) * 100;
+      document.getElementById('questXpBar').style.width = xpPct + '%';
+      document.getElementById('questXpText').textContent = `${curXp}/${xpGoal}`;
+
+      const claimBtn = document.getElementById('claimQuestBtn');
+      if (curXp >= xpGoal && !appState.dailyQuestClaimed) {
+        claimBtn.style.display = 'block';
+      } else {
+        claimBtn.style.display = 'none';
+      }
+
+      // Mistakes Count
+      const mCount = appState.mistakes.length;
+      document.getElementById('mistakeBadge').textContent = `${mCount} Catatan`;
+      document.getElementById('reviewMistakesBtn').disabled = mCount === 0;
+    }
+
+    function claimDailyQuestReward() {
+      playSound('gem');
+      fireConfetti();
+      appState.gems += 15;
+      appState.dailyQuestClaimed = true;
+      saveState();
+      showToast('Hadiah Misi Harian Berhasil Diklaim: +15 💎!');
+    }
+
+    function reviewMistakesSession() {
+      if (appState.mistakes.length === 0) return;
+      playSound('click');
+      const questions = appState.mistakes.map(m => ({
+        type: 'choice',
+        prompt: `Ulangi materi: ${m.prompt}`,
+        thai: m.thai,
+        options: ['Opsi A', 'Opsi B', 'Saya sudah paham!', 'Ulangi lagi'],
+        answer: 2,
+        explain: m.explain
+      }));
+
+      currentSession.lessonId = 'review';
+      currentSession.title = 'Kebun Pengulangan 🌱';
+      currentSession.questions = questions;
+      currentSession.currentIndex = 0;
+      currentSession.heartsLeft = appState.hearts;
+      currentSession.xpEarned = 0;
+      currentSession.comboStreak = 0;
+      currentSession.startTime = Date.now();
+      currentSession.isAnswerChecked = false;
+
+      document.getElementById('quizArena').classList.add('active');
+      renderCurrentQuestion();
+    }
+
+    function renderPathNodes() {
+      for (let i = 1; i <= 4; i++) {
+        const chest = document.getElementById(`node-chest-${i}`);
+        if (chest && appState.openedChests.includes(i)) {
+          chest.style.opacity = '0.6';
+          const iconEl = chest.querySelector('.node-icon');
+          if (iconEl) iconEl.textContent = '✨';
+        }
+      }
+
+      let frontierLesson = null;
+      for (const id of ALL_LESSONS_ORDER) {
+        if (!appState.completedLessons.includes(id) && appState.unlockedLessons.includes(id)) {
+          frontierLesson = id;
+          break;
+        }
+      }
+
+      ALL_LESSONS_ORDER.forEach(id => {
+        const btn = document.getElementById(`node-${id}`);
+        if (!btn) return;
+        const wrapper = btn.closest('.node-wrapper');
+        const isCompleted = appState.completedLessons.includes(id);
+        const isUnlocked = appState.unlockedLessons.includes(id);
+        const isFrontier = (id === frontierLesson);
+
+        const existingRing = btn.querySelector('.node-active-ring');
+        if (existingRing) existingRing.remove();
+
+        if (wrapper) {
+          const existingTooltip = wrapper.querySelector('.node-tooltip');
+          if (existingTooltip) existingTooltip.remove();
+          const existingStars = wrapper.querySelector('.node-stars');
+          if (existingStars) existingStars.remove();
+
+          if (isCompleted) {
+            btn.classList.remove('node-locked');
+            const stars = document.createElement('div');
+            stars.className = 'node-stars';
+            stars.textContent = '⭐⭐⭐';
+            wrapper.appendChild(stars);
+          } else if (isUnlocked) {
+            btn.classList.remove('node-locked');
+            if (isFrontier) {
+              const tooltip = document.createElement('div');
+              tooltip.className = 'node-tooltip';
+              tooltip.textContent = 'MULAI!';
+              wrapper.insertBefore(tooltip, btn);
+
+              const ring = document.createElement('div');
+              ring.className = 'node-active-ring';
+              btn.appendChild(ring);
+            }
+          } else {
+            btn.classList.add('node-locked');
+          }
+        }
+      });
+    }
+
+    function renderAlphabetGrid(filter = 'all', searchQuery = '') {
+      const container = document.getElementById('alphabetGridContainer');
+      let items = (filter === 'vowel') ? THAI_VOWELS : THAI_CONSONANTS.filter(c => filter === 'all' || c.class === filter);
+
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        items = items.filter(item => 
+          item.thai.includes(q) || 
+          item.roman.toLowerCase().includes(q) || 
+          item.meaning.toLowerCase().includes(q)
+        );
+      }
+
+      container.innerHTML = items.map(c => `
+        <div class="letter-card" onclick="speakThai('${c.thai.replace('-', '')}'); playSound('click')">
+          <span class="class-tag tag-${c.class}">${c.class}</span>
+          <span class="thai-glyph">${c.thai}</span>
+          <span class="roman-name">${c.roman}</span>
+          <span class="phonetic-sound">${c.meaning}</span>
+        </div>
+      `).join('');
+    }
+
+    function filterAlphabet(classType, btnEl) {
+      playSound('click');
+      document.querySelectorAll('.class-filter-pills .filter-pill').forEach(p => p.classList.remove('active'));
+      btnEl.classList.add('active');
+      renderAlphabetGrid(classType, document.getElementById('letterSearch').value);
+    }
+
+    function searchLetters(val) {
+      const activeFilter = document.querySelector('.class-filter-pills .filter-pill.active').textContent;
+      let filter = 'all';
+      if (activeFilter.includes('Tengah')) filter = 'mid';
+      else if (activeFilter.includes('Tinggi')) filter = 'high';
+      else if (activeFilter.includes('Rendah')) filter = 'low';
+      else if (activeFilter.includes('Vokal')) filter = 'vowel';
+      renderAlphabetGrid(filter, val);
+    }
+
+    function renderToneCards() {
+      const container = document.getElementById('toneCardsContainer');
+      container.innerHTML = THAI_TONES.map(t => `
+        <div class="tone-card">
+          <div class="tone-pitch-visual">
+            <svg viewBox="0 0 50 50">
+              <path d="${t.contour}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="tone-card-info">
+            <h4>${t.name} <small style="font-size:12px; color:var(--text-muted); font-weight:600;">(${t.thaiName})</small></h4>
+            <p>${t.desc}</p>
+            <div style="font-size:13px; margin-top:8px; font-weight:700; color:var(--green-dark);">
+              Contoh kata: ${t.example}
+            </div>
+          </div>
+          <button class="btn-duo btn-duo-secondary btn-sm" onclick="playToneCurve('${t.type}')">
+            ▶ Uji Pitch
+          </button>
+        </div>
+      `).join('');
+    }
+
+    const LEADERBOARD_USERS = [
+      { name: 'Budi Santoso', xp: 280, avatar: '🦁', rank: 1 },
+      { name: 'Siti Nurhaliza', xp: 245, avatar: '🌸', rank: 2 },
+      { name: 'Somchai Prasert', xp: 210, avatar: '🐘', rank: 3 },
+      { name: 'Thai Dreamer (Kamu)', xp: 195, avatar: '🧚🏻‍♀️', rank: 4, isUser: true },
+      { name: 'Maya Lin', xp: 165, avatar: '🦊', rank: 5 },
+      { name: 'Rizky Ramadhan', xp: 140, avatar: '🚀', rank: 6 },
+      { name: 'Ananya Chai', xp: 120, avatar: '🪷', rank: 7 }
+    ];
+
+    function renderLeaderboard() {
+      const container = document.getElementById('leaderboardList');
+      const users = LEADERBOARD_USERS.map(u => {
+        if (u.isUser) u.xp = appState.xp + 150;
+        return u;
+      }).sort((a, b) => b.xp - a.xp);
+
+      container.innerHTML = users.map((u, i) => `
+        <div class="leaderboard-row ${u.isUser ? 'is-user' : ''}">
+          <span class="leaderboard-rank rank-${i + 1}">#${i + 1}</span>
+          <div class="leaderboard-user">
+            <span class="user-avatar">${u.avatar}</span>
+            <span>${u.name}</span>
+          </div>
+          <span class="leaderboard-xp">${u.xp} XP</span>
+        </div>
+      `).join('');
+    }
+
+    function switchPage(pageId) {
+      playSound('click');
+      document.querySelectorAll('.sidebar-nav .nav-tab').forEach(t => {
+        t.classList.toggle('active', t.getAttribute('data-page') === pageId);
+      });
+      document.querySelectorAll('.page-section').forEach(sec => {
+        sec.classList.toggle('active', sec.id === `page-${pageId}`);
+      });
+
+      if (pageId === 'alphabet') renderAlphabetGrid();
+      else if (pageId === 'tones') renderToneCards();
+      else if (pageId === 'achievements') renderAchievements();
+      else if (pageId === 'leaderboard') renderLeaderboard();
+      else if (pageId === 'shop') updateCostumeButtons();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('duoToast');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    function toggleAudio() {
+      appState.soundEnabled = !appState.soundEnabled;
+      document.getElementById('soundToggleBtn').textContent = appState.soundEnabled ? 'AKTIF' : 'MATI';
+      showToast(appState.soundEnabled ? 'Efek suara aktif 🔊' : 'Efek suara dimatikan 🔇');
+      saveState();
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      appState.theme = next;
+      saveState();
+      showToast(next === 'dark' ? 'Mode gelap aktif 🌙' : 'Mode terang aktif ☀️');
+    }
+
+    const MASCOT_QUOTES = [
+      "Sawat-dii! Sedikit latihan setiap hari membawa keajaiban besar! ✨",
+      "Konsonan tengah ก (Ko Kai) artinya ayam! Lucu ya? 🐥",
+      "Di pasar Chatuchak, tawar dengan senyuman manis: 'Lot noi dai mai khrap?' 😊",
+      "Kamu sudah luar biasa hari ini! Pertahankan api streak-mu 🔥",
+      "Naik Tuk-Tuk di Bangkok rasanya seru banget! 'Trong pai, jòt thîi nîi!' 🛺"
+    ];
+
+    function mascotSpeak() {
+      playSound('click');
+      const quote = MASCOT_QUOTES[Math.floor(Math.random() * MASCOT_QUOTES.length)];
+      document.getElementById('mascotBubbleText').textContent = quote;
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (!document.getElementById('quizArena').classList.contains('active')) return;
+      if (e.key >= '1' && e.key <= '4') {
+        selectChoice(parseInt(e.key) - 1);
+      } else if (e.key === 'Enter') {
+        const actionBtn = document.getElementById('quizActionBtn');
+        if (!actionBtn.disabled) handleQuizAction();
+      }
+    });
+
+    /* Init App */
+    document.documentElement.setAttribute('data-theme', appState.theme || 'light');
+    document.getElementById('soundToggleBtn').textContent = appState.soundEnabled ? 'AKTIF' : 'MATI';
+    updateTopBarStats();
+    renderPathNodes();
+    renderAlphabetGrid();
+    renderToneCards();
+    renderAchievements();
+    updateCostumeButtons();
+    updateMascotCostumeDisplay();
+  </script>
+</body>
+</html>

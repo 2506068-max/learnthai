@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Fairy Thai Academy (Local Server)",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "/home/zaldy/.gemini/antigravity-ide/bin/google-chrome",
+            "preLaunchTask": "Start Local Web Server (Port 3000)"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Fairy Thai Academy (Direct File)",
+            "file": "${workspaceFolder}/fairy_thai_academy.html",
+            "runtimeExecutable": "/home/zaldy/.gemini/antigravity-ide/bin/google-chrome"
+        }
+    ]
+}
