@@ -103,20 +103,21 @@ Proyek ini sudah dilengkapi konfigurasi otomatis di direktori `.vscode/`:
 2. Tekan tombol **F5** pada keyboard (atau buka menu **Run & Debug** ▶ pilih **Launch Stimuler Thai (Local Server)**).
 3. Web server lokal otomatis berjalan di port `3000` dan browser langsung terbuka.
 
-### Opsi B: Jalankan Melalui Terminal (Python Web Server)
+### Opsi B: Jalankan Melalui Python Neural TTS Server (Rekomendasi untuk Suara Pria & Wanita Terbaik)
 1. Buka terminal di direktori proyek:
    ```bash
    cd /path/to/learnthai
    ```
-2. Jalankan server lokal:
+2. Jalankan server neural bawaan:
    ```bash
-   python3 -m http.server 3000
+   python3 server.py
    ```
+   *Server ini melayani file statis sekaligus endpoint `/api/tts` berbasis suara neural asli (Niwat untuk Pria & Premwadee untuk Wanita).*
 3. Buka browser dan akses:
    [http://localhost:3000](http://localhost:3000)
 
-### Opsi C: Buka File Langsung
-Anda juga dapat langsung membuka file [index.html](index.html) atau [fairy_thai_academy.html](fairy_thai_academy.html) menggunakan browser Anda (`double-click` atau `Open with Chrome`).
+### Opsi C: Buka File Langsung / GitHub Pages
+Anda juga dapat langsung membuka file [index.html](index.html) atau [fairy_thai_academy.html](fairy_thai_academy.html) menggunakan browser Anda (`double-click` atau `Open with Chrome`) atau mengaksesnya via hosting statis GitHub Pages. Aplikasi otomatis memanfaatkan pustaka audio pre-rendered di folder `audio/` serta engine sintesis adaptif.
 
 ---
 
@@ -126,7 +127,12 @@ Anda juga dapat langsung membuka file [index.html](index.html) atau [fairy_thai_
 learnthai/
 ├── .vscode/
 │   ├── launch.json          # Konfigurasi Run & Debug Chrome ke port 3000
-│   └── tasks.json           # Background task otomatis untuk Python HTTP server
+│   └── tasks.json           # Background task otomatis untuk Python server
+├── audio/                   # Pustaka audio pre-rendered suara asli penutur Bangkok
+│   ├── male/                # Suara asli penutur pria (th-TH-NiwatNeural)
+│   └── female/              # Suara asli penutur wanita (th-TH-PremwadeeNeural)
+├── server.py                # Server HTTP Python dengan real-time Neural TTS engine
+├── generate_voices.py       # Generator pustaka audio otomatis untuk frasa Thailand
 ├── fairy_thai_academy.html  # Kode aplikasi utama (HTML, CSS Ghibli, dan JavaScript)
 ├── index.html               # Symlink entry-point ke fairy_thai_academy.html
 └── README.md                # Dokumentasi proyek

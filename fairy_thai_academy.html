@@ -264,6 +264,48 @@
       transform: scale(0.96);
     }
 
+    /* GENDER SPEAKER SWITCHER CONTROLS */
+    .gender-segmented-control {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      gap: 3px;
+    }
+    .gender-pill-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gender-pill-btn:hover {
+      color: var(--text);
+      background: var(--bg-card-hover);
+    }
+    .gender-pill-btn.active#headerGenderFemale {
+      background: rgba(244, 162, 97, 0.20);
+      color: #f4a261;
+      border-color: rgba(244, 162, 97, 0.45);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .gender-pill-btn.active#headerGenderMale {
+      background: rgba(82, 183, 136, 0.20);
+      color: #52b788;
+      border-color: rgba(82, 183, 136, 0.45);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
     /* Main Container with Sidebar + Content */
     .app-body {
       display: flex;
@@ -1745,9 +1787,14 @@
         <div class="metric-badge metric-xp" title="Total XP Berbicara">
           <span>⚡</span> <span id="headerXp">65</span> XP
         </div>
-        <button class="icon-btn" onclick="toggleSpeakerGender()" id="genderToggleBtn" style="width:auto; padding:0 12px; gap:6px; font-weight:700; font-size:12px; font-family:var(--font-mono);" title="Ganti Gaya Bicara: Perempuan (ค่ะ) / Laki-laki (ครับ)">
-          👩 Wanita (ค่ะ)
-        </button>
+        <div class="gender-segmented-control" id="headerGenderSegmented" title="Pilih Gaya Bicara Penutur Asli: Pria (ครับ) atau Wanita (ค่ะ)">
+          <button class="gender-pill-btn active" id="headerGenderFemale" onclick="setAppSpeakerGender('female')" title="Suara Penutur Asli Perempuan (ค่ะ/คะ)">
+            <span>👩 Wanita (ค่ะ)</span>
+          </button>
+          <button class="gender-pill-btn" id="headerGenderMale" onclick="setAppSpeakerGender('male')" title="Suara Penutur Asli Laki-laki (ครับ)">
+            <span>👨 Pria (ครับ)</span>
+          </button>
+        </div>
         <button class="icon-btn" onclick="toggleSpeechRate()" id="rateToggleBtn" title="Kecepatan Bicara Penutur Asli (1.0x Normal / 0.8x Lambat)">
           ⚡ 1.0x
         </button>
@@ -2550,41 +2597,44 @@
     }
 
     /* GENDER SPEAKER SWITCHER & THAI GENDER GRAMMAR ENGINE */
-    function toggleSpeakerGender() {
+    /* GENDER SPEAKER SWITCHER & THAI GENDER GRAMMAR ENGINE */
+    function setAppSpeakerGender(gender) {
       playSynthSound('click');
-      appState.speakerGender = (appState.speakerGender === 'male') ? 'female' : 'male';
+      appState.speakerGender = gender;
       saveState();
       updateGenderControls();
       renderStudioPrompt();
       renderPhrasebook();
       renderRoleplayChat();
-      showToast(appState.speakerGender === 'male' 
+      showToast(gender === 'male' 
         ? '👨 Gaya Bicara: Laki-laki (ครับ / ผม)' 
         : '👩 Gaya Bicara: Perempuan (ค่ะ / คะ / ฉัน)');
     }
 
+    function toggleSpeakerGender() {
+      setAppSpeakerGender((appState.speakerGender === 'male') ? 'female' : 'male');
+    }
+
     function setStudioPromptGender(gender) {
-      playSynthSound('click');
-      appState.speakerGender = gender;
-      saveState();
-      updateGenderControls();
-      renderStudioPrompt();
+      setAppSpeakerGender(gender);
     }
 
     function setRoleplayGender(gender) {
-      playSynthSound('click');
-      appState.speakerGender = gender;
-      saveState();
-      updateGenderControls();
-      renderRoleplayChat();
+      setAppSpeakerGender(gender);
     }
 
     function updateGenderControls() {
       const isMale = appState.speakerGender === 'male';
-      const btn = document.getElementById('genderToggleBtn');
-      if (btn) {
-        btn.innerHTML = isMale ? '👨 Pria (ครับ)' : '👩 Wanita (ค่ะ)';
-        btn.style.borderColor = isMale ? 'var(--primary)' : 'var(--accent-gold)';
+      const headerFemaleBtn = document.getElementById('headerGenderFemale');
+      const headerMaleBtn = document.getElementById('headerGenderMale');
+      if (headerFemaleBtn && headerMaleBtn) {
+        headerFemaleBtn.classList.toggle('active', !isMale);
+        headerMaleBtn.classList.toggle('active', isMale);
+      }
+      const legacyBtn = document.getElementById('genderToggleBtn');
+      if (legacyBtn) {
+        legacyBtn.innerHTML = isMale ? '👨 Pria (ครับ)' : '👩 Wanita (ค่ะ)';
+        legacyBtn.style.borderColor = isMale ? 'var(--primary)' : 'var(--accent-gold)';
       }
       const studioMaleBtn = document.getElementById('promptGenderMale');
       const studioFemaleBtn = document.getElementById('promptGenderFemale');
@@ -2604,12 +2654,14 @@
       if (!text) return text;
       let str = text.trim();
       const isQuestion = /[?？]|ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม|หรือเปล่า|ใช่ไหม|เหรอ|หรอ/.test(str);
+      const hasParticle = /ครับ|ค่ะ|คะ|นะครับ|นะคะ|ผม|ฉัน|ดิฉัน/.test(str);
+      const isSentence = isQuestion || hasParticle || /[.!?]/.test(str) || /^(สวัสดี|ขอบคุณ|ขอโทษ|ไม่เป็นไร|ยินดี|ลาก่อน|พบกันใหม่|ขอ|ไป|จอด|ช่วย)/.test(str);
 
       if (gender === 'male') {
         str = str.replace(/ดิฉัน|ฉัน/g, 'ผม');
         str = str.replace(/นะคะ/g, 'นะครับ');
         str = str.replace(/ค่ะ|คะ/g, 'ครับ');
-        if (!/(ครับ|นะครับ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
+        if (isSentence && !/(ครับ|นะครับ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
           str = str.replace(/[\s.!?]+$/, '') + 'ครับ';
         }
       } else {
@@ -2617,12 +2669,12 @@
         str = str.replace(/นะครับ/g, 'นะคะ');
         if (isQuestion) {
           str = str.replace(/ครับ/g, 'คะ');
-          if (!/(คะ|นะคะ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
+          if (isSentence && !/(คะ|นะคะ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
             str = str.replace(/[\s.!?]+$/, '') + 'คะ';
           }
         } else {
           str = str.replace(/ครับ/g, 'ค่ะ');
-          if (!/(ค่ะ|นะคะ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
+          if (isSentence && !/(ค่ะ|นะคะ)[\s.!?]*$/.test(str) && /[\u0E00-\u0E7F]/.test(str)) {
             str = str.replace(/[\s.!?]+$/, '') + 'ค่ะ';
           }
         }
@@ -2633,11 +2685,13 @@
     function formatRomanForGender(roman, gender, isQuestion) {
       if (!roman) return '';
       let str = roman.trim();
+      const isSentence = isQuestion || /[.!?]/.test(str) || /(sà-wàt-dii|khɔ̀ɔp-khun|khɔ̌ɔ-thôot|mâi pen rai|khɔ̌ɔ|pai)/i.test(str);
+
       if (gender === 'male') {
         str = str.replace(/\b(dichan|chan|dì-chǎn|chǎn)\b/gi, 'phǒm');
         str = str.replace(/ná\s*(khà|khá|kha)/gi, 'ná khráp');
         str = str.replace(/(khà|khá|kha|ka)/gi, 'khráp');
-        if (!/(khráp|khrap)/i.test(str)) {
+        if (isSentence && !/(khráp|khrap)/i.test(str)) {
           str += ' khráp';
         }
       } else {
@@ -2645,7 +2699,7 @@
         str = str.replace(/ná\s*(khráp|khrap)/gi, 'ná khá');
         const femP = isQuestion ? 'khá' : 'khà';
         str = str.replace(/(khráp|khrap)/gi, femP);
-        if (!/(khà|khá|kha)/i.test(str)) {
+        if (isSentence && !/(khà|khá|kha)/i.test(str)) {
           str += ' ' + femP;
         }
       }
@@ -2762,7 +2816,18 @@
       } catch (e) {}
     }, { once: true });
 
-    /* UNIVERSAL NATIVE THAI AUDIO ENGINE (DUAL MALE & FEMALE VOICE PROFILES) */
+    function getAudioHash(str) {
+      if (!str) return '00000000';
+      const utf8 = new TextEncoder().encode(str);
+      let h = 0x811c9dc5;
+      for (let i = 0; i < utf8.length; i++) {
+        h ^= utf8[i];
+        h = Math.imul(h, 0x01000193) >>> 0;
+      }
+      return h.toString(16).padStart(8, '0');
+    }
+
+    /* UNIVERSAL NATIVE THAI AUDIO ENGINE (TRUE DUAL MALE & FEMALE NATIVE VOICES) */
     function speakThai(text, gender) {
       if (!text) return;
 
@@ -2816,22 +2881,42 @@
         currentThaiAudio = null;
       };
 
+      const hash = getAudioHash(targetText);
       const encoded = encodeURIComponent(targetText);
 
-      // Tier 1: Direct Google TTS streaming with no-referrer
+      // Audio Endpoints Tiered Architecture:
+      // Tier 1: Pre-rendered Studio Audio (th-TH-NiwatNeural Male / th-TH-PremwadeeNeural Female)
+      const staticAudioUrl = `audio/${targetGender}/${hash}.mp3`;
+
+      // Tier 2: Real-time Neural TTS Endpoint via Local Server
+      const serverTtsUrl = `/api/tts?text=${encoded}&gender=${targetGender}`;
+
+      // Tier 4: Direct Google TTS streaming with no-referrer
       const googleTtsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`;
 
-      function playAudioUrl(url, onFail) {
+      function playAudioUrl(url, onFail, isAcousticFallback = false) {
         try {
           const audio = new Audio();
           currentThaiAudio = audio;
           audio.referrerPolicy = 'no-referrer';
 
-          const baseRate = appState.speechRate || 1.0;
-          if (targetGender === 'male') {
-            audio.playbackRate = baseRate * 0.90;
+          if (isAcousticFallback) {
+            try {
+              audio.preservesPitch = false;
+              audio.mozPreservesPitch = false;
+              audio.webkitPreservesPitch = false;
+            } catch (e) {}
+            const baseRate = appState.speechRate || 1.0;
+            if (targetGender === 'male') {
+              // Deep, authoritative masculine baritone pitch (approx -4.5 semitones)
+              audio.playbackRate = baseRate * 0.77;
+            } else {
+              // Melodic, feminine pitch
+              audio.playbackRate = baseRate * 1.05;
+            }
           } else {
-            audio.playbackRate = baseRate * 1.03;
+            const baseRate = appState.speechRate || 1.0;
+            audio.playbackRate = baseRate * (targetGender === 'male' ? 0.98 : 1.02);
           }
 
           audio.onended = finishAudio;
@@ -2853,13 +2938,11 @@
         }
       }
 
-      // Tier 2: SoundOfText Cloudflare API Fallback
+      // Tier 4b: SoundOfText Cloudflare API Fallback
       async function trySoundOfTextFallback() {
-        const cacheKey = 'sot_' + targetText;
+        const cacheKey = 'sot_' + targetGender + '_' + targetText;
         if (audioUrlCache.has(cacheKey)) {
-          playAudioUrl(audioUrlCache.get(cacheKey), () => {
-            fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
-          });
+          playAudioUrl(audioUrlCache.get(cacheKey), finishAudio, true);
           return;
         }
 
@@ -2876,27 +2959,30 @@
           if (data && data.success && data.id) {
             const sotUrl = `https://files.soundoftext.com/${data.id}.mp3`;
             audioUrlCache.set(cacheKey, sotUrl);
-            playAudioUrl(sotUrl, () => {
-              fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
-            });
+            playAudioUrl(sotUrl, finishAudio, true);
             return;
           }
         } catch (e) {
           console.warn("SoundOfText fallback failed:", e);
         }
 
-        // Tier 3: SpeechSynthesis
-        fallbackSpeechSynthesis(targetText, finishAudio, targetGender);
+        finishAudio();
       }
 
-      // Start with Tier 1 (Google TTS direct), fallback to Tier 2, then Tier 3
-      playAudioUrl(googleTtsUrl, trySoundOfTextFallback);
+      // CASCADE: Tier 1 (Static MP3) -> Tier 2 (Server Neural TTS) -> Tier 3 (SpeechSynthesis) -> Tier 4 (Google TTS) -> Tier 4b (SoundOfText)
+      playAudioUrl(staticAudioUrl, () => {
+        playAudioUrl(serverTtsUrl, () => {
+          fallbackSpeechSynthesis(targetText, finishAudio, targetGender, () => {
+            playAudioUrl(googleTtsUrl, trySoundOfTextFallback, true);
+          });
+        });
+      });
     }
 
-    /* TIER 3: WEB SPEECH SYNTHESIS ENGINE (FAIL-SAFE) */
-    function fallbackSpeechSynthesis(text, onDone, targetGender = 'female') {
+    /* TIER 3: WEB SPEECH SYNTHESIS ENGINE (FAIL-SAFE WITH TRUE GENDER SEPARATION) */
+    function fallbackSpeechSynthesis(text, onDone, targetGender = 'female', onFail) {
       if (!('speechSynthesis' in window)) {
-        if (onDone) onDone();
+        if (onFail) onFail(); else if (onDone) onDone();
         return;
       }
       try {
@@ -2911,10 +2997,10 @@
         if (thaiVoices.length > 0) {
           selectedVoice = thaiVoices[0];
           if (targetGender === 'male') {
-            const maleVoice = thaiVoices.find(v => /male|man|niwat|pattara/i.test(v.name));
+            const maleVoice = thaiVoices.find(v => /male|man|niwat|pattara|boy/i.test(v.name));
             if (maleVoice) selectedVoice = maleVoice;
           } else {
-            const femaleVoice = thaiVoices.find(v => /female|woman|narisa|premwadee|kanya/i.test(v.name));
+            const femaleVoice = thaiVoices.find(v => /female|woman|narisa|premwadee|kanya|girl/i.test(v.name));
             if (femaleVoice) selectedVoice = femaleVoice;
           }
         }
@@ -2924,19 +3010,28 @@
           u.voice = selectedVoice;
         }
         u.lang = 'th-TH';
-        u.rate = (appState.speechRate || 1.0) * (targetGender === 'male' ? 0.88 : 0.98);
-        u.pitch = targetGender === 'male' ? 0.80 : 1.18;
+        
+        // Distinct acoustic profile for male vs female
+        if (targetGender === 'male') {
+          u.pitch = 0.68; // Deep baritone
+          u.rate = (appState.speechRate || 1.0) * 0.86;
+        } else {
+          u.pitch = 1.18; // Melodious female
+          u.rate = (appState.speechRate || 1.0) * 1.02;
+        }
 
+        let hasSpoken = false;
+        u.onstart = () => { hasSpoken = true; };
         u.onend = () => { if (onDone) onDone(); };
         u.onerror = (e) => {
           console.warn("speechSynthesis error:", e);
-          if (onDone) onDone();
+          if (!hasSpoken && onFail) onFail(); else if (onDone) onDone();
         };
 
         speechSynthesis.speak(u);
       } catch (err) {
         console.warn("fallbackSpeechSynthesis critical error:", err);
-        if (onDone) onDone();
+        if (onFail) onFail(); else if (onDone) onDone();
       }
     }
 
@@ -3168,9 +3263,10 @@
       document.getElementById('roleplayPartnerName').textContent = data.partnerName;
 
       const userGender = appState.speakerGender || 'female';
+      const aiGender = activeRoleplayKey === 'cafe' ? 'female' : 'male';
       const container = document.getElementById('roleplayChatMessages');
       container.innerHTML = data.messages.map(m => {
-        const msgGender = m.sender === 'user' ? userGender : '';
+        const msgGender = m.sender === 'user' ? userGender : aiGender;
         return `
         <div class="chat-bubble ${m.sender === 'ai' ? 'bubble-ai' : 'bubble-user'}">
           <span class="bubble-thai" onclick="speakThai('${m.thai}', '${msgGender}')" title="Klik untuk mendengar suara penutur asli Bangkok" style="cursor:pointer;">
@@ -3179,7 +3275,7 @@
           <div style="font-size:12px; opacity:0.85; font-family:var(--font-mono);">${m.roman}</div>
           <div style="font-size:12px; margin-top:2px;">${m.ind}</div>
           <button class="bubble-audio-btn" onclick="speakThai('${m.thai}', '${msgGender}')" style="${m.sender === 'user' ? 'color:#ffffff; opacity:0.95;' : ''}">
-            🔊 Dengar Suara Asli
+            🔊 Dengar Suara Asli (${msgGender === 'male' ? '👨 Pria' : '👩 Wanita'})
           </button>
         </div>
       `;
@@ -3210,7 +3306,8 @@
       renderRoleplayChat();
       const firstMsg = ROLEPLAY_SCENARIOS[key]?.messages[0];
       if (firstMsg) {
-        speakThai(firstMsg.thai);
+        const aiGender = key === 'cafe' ? 'female' : 'male';
+        speakThai(firstMsg.thai, aiGender);
       }
     }
 
@@ -3220,7 +3317,8 @@
       showToast('Skenario berhasil diatur ulang.');
       const firstMsg = ROLEPLAY_SCENARIOS[activeRoleplayKey]?.messages[0];
       if (firstMsg) {
-        speakThai(firstMsg.thai);
+        const aiGender = activeRoleplayKey === 'cafe' ? 'female' : 'male';
+        speakThai(firstMsg.thai, aiGender);
       }
     }
 
@@ -3243,7 +3341,8 @@
         const r = replyMap[activeRoleplayKey] || replyMap.cafe;
         data.messages.push({ sender: 'ai', ...r });
         renderRoleplayChat();
-        speakThai(r.thai);
+        const partnerGender = activeRoleplayKey === 'cafe' ? 'female' : 'male';
+        speakThai(r.thai, partnerGender);
       }, 1600);
     }
 
