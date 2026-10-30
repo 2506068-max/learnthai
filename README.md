@@ -65,10 +65,29 @@ Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai 
 * **Matriks 44 Konsonan & 14 Vokal Lengkap**: Seluruh 44 huruf abjad Thailand terbagi rapi ke kelas Tengah, Tinggi, dan Rendah, masing-masing dengan audio asli interaktif.
 * **🍃 Buku Frasa Audio Dual-Gender (Phrasebook)**: Koleksi 25+ frasa penting Thailand (Salam, Restoran & Kafe, Tawar-menawar Pasar, Arah & Taksi) yang menyajikan **versi pria (ครับ)** dan **versi wanita (ค่ะ/คะ)** berdampingan dengan tombol audio penutur asli untuk masing-masing versi.
 
-### 6. 🗺️ Roadmap Kurikulum Berjenjang
-* 4 Unit Pembelajaran terstruktur dari pemula (Salam & Huruf Dasar) hingga percakapan tingkat lanjut.
-* Dilengkapi kuis pilihan ganda, mencocokkan kartu (*matching pairs*), dan penyusunan kalimat (*sentence builder*).
-* Status kemajuan (*progress*, XP, streak, dan modul terbuka) tersimpan otomatis di `localStorage`.
+### 6. 🗺️ Roadmap Kurikulum Komprehensif (12 Unit • 48 Modul Interaktif)
+Kurikulum terstruktur berjenjang lengkap dari level **A1 Pemula**, **A2 Menengah**, hingga **B1 Percakapan Mandiri**:
+* **🌱 Level A1 (Unit 1 - 4): Pondasi Bangkok & Bertahan Hidup**
+  * **Unit 1: Langkah Pertama di Bangkok 🇹🇭** *(Salam, Konsonan Tengah, 5 Nada, Wai)*
+  * **Unit 2: Di Kafe & Restoran Thai 🍜** *(Pad Thai, Tom Yum, Tingkat Pedas, Cha Yen, Minta Bon)*
+  * **Unit 3: Belanja di Pasar Chatuchak 🛍️** *(Angka 1-1.000, Menawar Harga, Warna, Ukuran Pakaian)*
+  * **Unit 4: Transportasi & Navigasi Kota 🛺** *(Taksi Meter, Tuk-Tuk, BTS Skytrain, Arah Belok)*
+* **🌿 Level A2 (Unit 5 - 8): Kehidupan Sehari-hari & Wisata**
+  * **Unit 5: Waktu, Hari & Janji Temu ⏰** *(Jam, Menit, Hari, Kapan, Janji Temu Esok Hari)*
+  * **Unit 6: Menginap di Hotel & Resor 🏨** *(Check-in/out, Paspor, AC, Fasilitas Kolam, Password WiFi)*
+  * **Unit 7: Etika Kuil & Budaya Tradisional 🛕** *(Wat Pho/Arun, Aturan Pakaian, Minta Tolong Foto, Songkran)*
+  * **Unit 8: Kesehatan, Gejala & Apotek 🏥** *(Pusing, Sakit Perut, Apotek, Petunjuk Minum Obat)*
+* **🌳 Level B1 (Unit 9 - 12): Kelancaran Sosial & Percakapan Mandiri**
+  * **Unit 9: Cuaca, Pantai & Kepulauan Tropis 🏖️** *(Musim Panas/Hujan, Wisata Phuket/Krabi, Snorkeling)*
+  * **Unit 10: Hobi, Minat & Waktu Luang 🎨** *(Musik, Fotografi, Muay Thai, Olahraga, Mengungkapkan Alasan)*
+  * **Unit 11: Emosi, Perasaan & Filosofi Sosial 💖** *(Bahagia, Lelah, Rindu, Nilai Jai Yen & Kreng Jai)*
+  * **Unit 12: Kenalan, Asal Negara & Perpisahan 🌏** *(Bercerita Asal Indonesia, Kesan Thailand, Salam Selamat Jalan)*
+* **Fitur Interaktif Canggih:**
+  * **Filter Level (Semua, A1, A2, B1)** & **Mesin Pencari Materi Real-Time** (cari materi berdasarkan topik: angka, kuil, obat, dll.)
+  * **Tombol Buka Semua Modul (Unlock All)**: Membuka kebebasan bagi pembelajar untuk langsung melompat ke unit yang diminati tanpa harus menyelesaikan modul secara linear.
+  * **Ujian Boss Tantangan Akhir Unit (🏆 Boss Challenges)** untuk menguji penguasaan terintegrasi di akhir setiap unit.
+  * Dilengkapi audio penutur asli ganda (*NiwatNeural & PremwadeeNeural*), pilihan ganda, mencocokkan kartu (*matching pairs*), dan penyusun kalimat (*sentence builder*).
+  * Status kemajuan (*progress*, skor XP, streak, dan modul selesai) tersimpan otomatis di `localStorage`.
 
 ### 7. 🤖 Pusat AI Cerdas Thailand (AI Thailand Hub: Searching, Translating & Culture Q&A)
 Pusat kecerdasan buatan lengkap yang mengintegrasikan tiga kapabilitas utama dalam satu tab interaktif:
