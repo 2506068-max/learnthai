@@ -70,12 +70,24 @@ Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai 
 * **Kontrol Kecepatan Bicara (Speed Toggle)**: Pilihan kecepatan **1.0x (Alami Percakapan Bangkok)** atau **0.8x (Santai & Artikulasi Jelas untuk Pemula)**.
 * **Nomenklatur Resmi Huruf**: Pengucapan konsonan tunggal otomatis melafalkan nama tradisional lengkapnya (misal: `ก` dilafalkan *กอ ไก่ / Ko Kai*, `ข` dilafalkan *ขอ ไข่ / Kho Khai*).
 
-### 5. 🔬 Laboratorium 5 Nada, Aksara & Buku Frasa Audio
-* **Uji 5 Nada Tonal**: Visualisasi kontur SVG untuk *Mid, Low, Falling, High,* dan *Rising Tone*, dilengkapi tombol uji frekuensi sintetis dan 3 variasi kata contoh penutur asli di setiap nada.
-* **Matriks 44 Konsonan & 14 Vokal Lengkap**: Seluruh 44 huruf abjad Thailand terbagi rapi ke kelas Tengah, Tinggi, dan Rendah, masing-masing dengan audio asli interaktif.
+### 5. 🔤 Materi Aksara & 44 Konsonan Thai (อักษรไทย - Modul Mandiri)
+* **Materi Terpisah & Terstruktur**: Modul khusus aksara Thai yang dipisahkan dari laboratorium suara agar pembelajar dapat fokus mendalami sistem tulisan Thailand secara sistematis.
+* **Matriks 44 Konsonan Resmi**: Seluruh 44 konsonan dilengkapi sebutan nama tradisional (misal: *กอ ไก่ / Ko Kai*), romanisasi fonetik, arti bahasa Indonesia, dan audio asli penutur Bangkok.
+* **Panduan 3 Kelas Nada Konsonan (Bento Guide)**:
+  * **Kelas Tengah (อักษรกลาง - 9 Konsonan)**: *ก จ ฎ ฏ ด ต บ ป อ* (nada dasar datar/mid).
+  * **Kelas Tinggi (อักษรสูง - 11 Konsonan)**: *ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห* (nada dasar naik/rising).
+  * **Kelas Rendah (อักษรต่ำ - 24 Konsonan)**: *ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ* (responsif terhadap tanda nada Mai Ek & Mai Tho).
+* **14 Vokal & Diftong Inti**: Vokal pendek, panjang, dan diftong majemuk.
+* **4 Tanda Nada (วรรณยุกต์)** & **10 Angka Thai (ตัวเลขไทย)**: Pengenalan tanda *Mai Ek, Mai Tho, Mai Tri, Mai Chattawa* dan angka tradisional `๐` - `๙`.
+* **Pencarian Cepat & Filter Multikategori**: Filter instan kelas huruf atau cari berdasarkan nama/romanisasi/arti.
+* **Kuis Kilat Memori Huruf**: Latihan interaktif menebak nama sebutan aksara Thai dengan reward +5 XP.
+
+### 6. 🎵 Laboratorium Suara & 5 Nada (Akustik & Intonasi Tonal)
+* **Uji 5 Nada Tonal**: Visualisasi kurva kontur SVG untuk *Mid (สามัญ), Low (เอก), Falling (โท), High (ตรี),* dan *Rising (จัตวา)*, dilengkapi audio synthesizer pitch sweep dan 3 kata contoh penutur asli di setiap nada.
+* **Jembatan Akses Cepat**: Kartu pintasan interaktif menuju materi aksara mandiri.
 * **🍃 Buku Frasa Audio Dual-Gender (Phrasebook)**: Koleksi 25+ frasa penting Thailand (Salam, Restoran & Kafe, Tawar-menawar Pasar, Arah & Taksi) yang menyajikan **versi pria (ครับ)** dan **versi wanita (ค่ะ/คะ)** berdampingan dengan tombol audio penutur asli untuk masing-masing versi.
 
-### 6. 🗺️ Roadmap Kurikulum Komprehensif (12 Unit • 48 Modul Interaktif)
+### 7. 🗺️ Roadmap Kurikulum Komprehensif (12 Unit • 48 Modul Interaktif)
 Kurikulum terstruktur berjenjang lengkap dari level **A1 Pemula**, **A2 Menengah**, hingga **B1 Percakapan Mandiri**:
 * **🌱 Level A1 (Unit 1 - 4): Pondasi Bangkok & Bertahan Hidup**
   * **Unit 1: Langkah Pertama di Bangkok 🇹🇭** *(Salam, Konsonan Tengah, 5 Nada, Wai)*
@@ -99,7 +111,7 @@ Kurikulum terstruktur berjenjang lengkap dari level **A1 Pemula**, **A2 Menengah
   * Dilengkapi audio penutur asli ganda (*NiwatNeural & PremwadeeNeural*), pilihan ganda, mencocokkan kartu (*matching pairs*), dan penyusun kalimat (*sentence builder*).
   * Status kemajuan (*progress*, skor XP, streak, dan modul selesai) tersimpan otomatis di `localStorage`.
 
-### 7. 🤖 Pusat AI Cerdas Thailand (AI Thailand Hub: Searching, Translating & Culture Q&A)
+### 8. 🤖 Pusat AI Cerdas Thailand (AI Thailand Hub: Searching, Translating & Culture Q&A)
 Pusat kecerdasan buatan lengkap yang mengintegrasikan tiga kapabilitas utama dalam satu tab interaktif:
 * **🌐 Penerjemah Pintar Real-Time (Live Translator)**:
   * Terjemahan instan dua arah: **Indonesia ⇄ Thailand**.

@@ -1409,37 +1409,130 @@
 
     .alphabet-cards-matrix {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
       gap: 14px;
     }
 
     .glyph-card {
-      background: var(--bg-surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 10px;
+      border-radius: var(--radius-lg);
+      padding: 14px 12px 12px 12px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
     }
     .glyph-card:hover {
       border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
-    .glyph-card:active { transform: scale(0.96); }
+    [data-theme="light"] .glyph-card:hover {
+      box-shadow: 0 6px 20px rgba(45, 106, 79, 0.12);
+    }
+    .glyph-card:active { transform: scale(0.97); }
+
+    .glyph-card-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .glyph-badge {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      line-height: 1.2;
+    }
+    .glyph-badge.badge-mid {
+      background: rgba(82, 183, 136, 0.15);
+      color: #52b788;
+      border: 1px solid rgba(82, 183, 136, 0.3);
+    }
+    [data-theme="light"] .glyph-badge.badge-mid {
+      background: rgba(45, 106, 79, 0.1);
+      color: #2d6a4f;
+      border-color: rgba(45, 106, 79, 0.25);
+    }
+    .glyph-badge.badge-high {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    [data-theme="light"] .glyph-badge.badge-high {
+      background: rgba(217, 119, 6, 0.1);
+      color: #b45309;
+      border-color: rgba(217, 119, 6, 0.25);
+    }
+    .glyph-badge.badge-low {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    [data-theme="light"] .glyph-badge.badge-low {
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+      border-color: rgba(37, 99, 235, 0.25);
+    }
+    .glyph-badge.badge-vowel {
+      background: rgba(167, 139, 250, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
+    [data-theme="light"] .glyph-badge.badge-vowel {
+      background: rgba(147, 51, 234, 0.1);
+      color: #7e22ce;
+      border-color: rgba(147, 51, 234, 0.25);
+    }
+    .glyph-badge.badge-tone-mark {
+      background: rgba(244, 114, 182, 0.15);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    .glyph-badge.badge-numeral {
+      background: rgba(20, 184, 166, 0.15);
+      color: #2dd4bf;
+      border: 1px solid rgba(20, 184, 166, 0.3);
+    }
+    .glyph-audio-icon {
+      font-size: 11px;
+      color: var(--text-dim);
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+    .glyph-card:hover .glyph-audio-icon {
+      opacity: 1;
+      color: var(--primary);
+    }
 
     .glyph-thai {
       font-family: var(--font-thai);
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 4px;
+      line-height: 1.1;
+      margin-bottom: 2px;
     }
     [data-theme="light"] .glyph-thai { color: #0f172a; }
+    .glyph-spoken {
+      font-family: var(--font-thai);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
     .glyph-roman {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--primary);
       font-weight: 700;
     }
@@ -1450,6 +1543,156 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* Class Guide Bento Grid */
+    .class-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 900px) {
+      .class-guide-grid { grid-template-columns: 1fr; }
+    }
+    .class-guide-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .class-guide-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+    .class-guide-card.guide-mid::before { background: #52b788; }
+    .class-guide-card.guide-high::before { background: #f59e0b; }
+    .class-guide-card.guide-low::before { background: #3b82f6; }
+    .class-guide-title {
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .class-guide-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .class-guide-sample {
+      font-family: var(--font-thai);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 6px 10px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    /* Alphabet Toolbar */
+    .alphabet-toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+    .alphabet-search-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .alphabet-search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+    .alphabet-search-input {
+      width: 100%;
+      height: 38px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 0 16px 0 38px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: all 0.15s;
+    }
+    .alphabet-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    .alphabet-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    /* Alphabet Mini Quiz Card */
+    .alphabet-quiz-card {
+      margin-top: 36px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .quiz-option-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: all 0.15s;
+    }
+    .quiz-option-btn:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+    }
+    .quiz-option-btn:active {
+      transform: scale(0.98);
+    }
+    .quiz-option-btn strong {
+      font-family: var(--font-thai);
+      font-size: 14px;
+      color: var(--text);
+    }
+    .quiz-option-btn small {
+      font-size: 11px;
+      color: var(--text-muted);
     }
 
     /* ==========================================================================
@@ -2819,8 +3062,16 @@
             <div class="pathway-icon">🗺️</div>
             <div class="pathway-body">
               <h4>Kurikulum 12 Unit (48 Modul)</h4>
-              <p>Belajar terstruktur dari A1 Pemula (salam & angka) hingga B1 Percakapan mandiri.</p>
+              <p>Belajar terstruktur dari A1 Pemula (salam &amp; angka) hingga B1 Percakapan mandiri.</p>
               <span class="pathway-tag">12 Unit • 48 Modul Interaktif</span>
+            </div>
+          </div>
+          <div class="portal-pathway-card" onclick="enterLearningApp('alphabet')" title="Buka Materi Aksara &amp; 44 Konsonan Thai">
+            <div class="pathway-icon">🔤</div>
+            <div class="pathway-body">
+              <h4>Materi Aksara &amp; 44 Konsonan</h4>
+              <p>Kuasai 44 konsonan 3 kelas nada, 14 vokal, tanda nada, &amp; angka tradisional Thai.</p>
+              <span class="pathway-tag">Materi Aksara Mandiri</span>
             </div>
           </div>
           <div class="portal-pathway-card" onclick="enterLearningApp('studio')" title="Buka Studio Latihan Bicara">
@@ -2839,12 +3090,12 @@
               <span class="pathway-tag">Simulasi Percakapan Bebas</span>
             </div>
           </div>
-          <div class="portal-pathway-card" onclick="enterLearningApp('phonetics')" title="Buka Laboratorium Fonetik">
+          <div class="portal-pathway-card" onclick="enterLearningApp('phonetics')" title="Buka Laboratorium Suara &amp; 5 Nada">
             <div class="pathway-icon">🎵</div>
             <div class="pathway-body">
-              <h4>5 Nada & 44 Konsonan Thai</h4>
-              <p>Kuasai kontur 5 nada tonal (datar, rendah, jatuh, tinggi, naik) & tabel konsonan.</p>
-              <span class="pathway-tag">Laboratorium Fonetik</span>
+              <h4>Laboratorium Suara &amp; 5 Nada</h4>
+              <p>Uji kontur 5 nada tonal (datar, rendah, jatuh, tinggi, naik) &amp; buku frasa audio.</p>
+              <span class="pathway-tag">Laboratorium Suara</span>
             </div>
           </div>
         </div>
@@ -2924,7 +3175,7 @@
           <span>Portal Belajar</span>
         </button>
 
-        <div class="nav-section-title">Latihan Utama</div>
+        <div class="nav-section-title">Materi &amp; Latihan</div>
         <button class="nav-item-btn active" data-tab="studio" onclick="switchNavTab('studio')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
           <span>Studio Bicara</span>
@@ -2940,10 +3191,15 @@
           <span>Kurikulum Unit</span>
         </button>
 
+        <button class="nav-item-btn" data-tab="alphabet" onclick="switchNavTab('alphabet')" title="Materi Aksara &amp; 44 Konsonan Thai">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 17l4-10 4 10"/><path d="M9.5 13h5"/></svg>
+          <span>Aksara &amp; Alfabet</span>
+        </button>
+
         <div class="nav-section-title">Laboratorium Suara</div>
         <button class="nav-item-btn" data-tab="phonetics" onclick="switchNavTab('phonetics')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-          <span>5 Nada & Aksara</span>
+          <span>5 Nada &amp; Frasa</span>
         </button>
 
         <button class="nav-item-btn" data-tab="analytics" onclick="switchNavTab('analytics')">
@@ -3226,10 +3482,126 @@
           </div>
         </section>
 
-        <!-- 4. 5 NADA & AKSARA LAB -->
+        <!-- 4. MATERI AKSARA & ALFABET THAI (SEPARATE DEDICATED MATERIAL) -->
+        <section id="panel-alphabet" class="section-tab-panel">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
+            <div>
+              <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
+                🔤 MATERI DASAR AKSARA THAI (อักษรไทย)
+              </div>
+              <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Aksara &amp; Alfabet Bahasa Thai</h2>
+              <p style="font-size:14px; color:var(--text-muted); max-width:720px;">
+                Pelajari 44 konsonan resmi dalam 3 kelas nada (Tengah, Tinggi, Rendah), 14 vokal inti, 4 tanda nada, serta angka tradisional Thai. Klik kartu huruf apa pun untuk mendengarkan nama sebutan dan bunyinya dari penutur asli Bangkok.
+              </p>
+            </div>
+            <div class="stats-group-pill" style="align-self:flex-start;">
+              <span class="stat-chip" style="color:var(--emerald);">🍃 44 Konsonan</span>
+              <span class="stat-divider"></span>
+              <span class="stat-chip" style="color:var(--primary);">✨ 14 Vokal</span>
+              <span class="stat-divider"></span>
+              <span class="stat-chip" style="color:var(--amber);">🎵 4 Nada</span>
+            </div>
+          </div>
+
+          <!-- BENTO PEDAGOGICAL GUIDE: 3 CONSONANT CLASSES -->
+          <div class="class-guide-grid">
+            <div class="class-guide-card guide-mid">
+              <div class="class-guide-title">
+                <span style="color:#52b788;">อักษรกลาง • Kelas Tengah</span>
+                <span class="glyph-badge badge-mid">9 Konsonan</span>
+              </div>
+              <p>Mampu membentuk kelima nada penuh. Nada bawaan suku kata hidup adalah <strong>Datar (Mid Tone)</strong>.</p>
+              <div class="class-guide-sample">ก จ ฎ ฏ ด ต บ ป อ</div>
+            </div>
+
+            <div class="class-guide-card guide-high">
+              <div class="class-guide-title">
+                <span style="color:#f59e0b;">อักษรสูง • Kelas Tinggi</span>
+                <span class="glyph-badge badge-high">11 Konsonan</span>
+              </div>
+              <p>Menghasilkan hembusan aspirasi. Nada bawaan suku kata hidup secara alami adalah <strong>Naik (Rising Tone)</strong>.</p>
+              <div class="class-guide-sample">ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห</div>
+            </div>
+
+            <div class="class-guide-card guide-low">
+              <div class="class-guide-title">
+                <span style="color:#60a5fa;">อักษรต่ำ • Kelas Rendah</span>
+                <span class="glyph-badge badge-low">24 Konsonan</span>
+              </div>
+              <p>Kelompok terbesar. Diberi tanda <code> ่ </code> (Mai Ek) menjadi nada <strong>Jatuh</strong>; tanda <code> ้ </code> (Mai Tho) menjadi nada <strong>Tinggi</strong>.</p>
+              <div class="class-guide-sample">ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ...</div>
+            </div>
+          </div>
+
+          <!-- TOOLBAR: SEARCH & CATEGORY FILTERS -->
+          <div class="alphabet-toolbar">
+            <div class="alphabet-search-row">
+              <div class="alphabet-search-box">
+                <input type="text" id="alphabetSearchInput" class="alphabet-search-input" placeholder="🔍 Cari huruf Thai, romanisasi (misal: kai, cho), atau arti (misal: ayam, ikan)..." oninput="onAlphabetSearch(this.value)">
+                <span class="alphabet-search-icon">🔍</span>
+              </div>
+              <div style="font-size:12px; font-family:var(--font-mono); color:var(--text-dim);" id="alphabetResultCounter">
+                Menampilkan 44 huruf
+              </div>
+            </div>
+
+            <div class="filter-pills" id="alphabetCategoryPills" style="flex-wrap:wrap;">
+              <button class="pill-filter active" onclick="filterAlphabetGrid('all', this)">Semua (44 Konsonan)</button>
+              <button class="pill-filter" onclick="filterAlphabetGrid('mid', this)">Kelas Tengah (9)</button>
+              <button class="pill-filter" onclick="filterAlphabetGrid('high', this)">Kelas Tinggi (11)</button>
+              <button class="pill-filter" onclick="filterAlphabetGrid('low', this)">Kelas Rendah (24)</button>
+              <button class="pill-filter" onclick="filterAlphabetGrid('vowel', this)">Vokal &amp; Diftong (14)</button>
+              <button class="pill-filter" onclick="filterAlphabetGrid('tone-mark', this)">Tanda Nada (4)</button>
+              <button class="pill-filter" onclick="filterAlphabetGrid('numeral', this)">Angka Thai (10)</button>
+            </div>
+          </div>
+
+          <!-- THE ALPHABET MATRIX GRID -->
+          <div class="alphabet-cards-matrix" id="alphabetMatrix">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+
+          <!-- INTERACTIVE MINI-QUIZ / FLASHCARD PRACTICE -->
+          <div class="alphabet-quiz-card" id="alphabetMiniQuizCard">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--amber); padding:2px 8px; background:rgba(245, 158, 11, 0.1); border-radius:var(--radius-pill); margin-bottom:4px;">
+                  ⚡ LATIHAN MEMORI REFLEKS
+                </div>
+                <h3 style="font-size:18px; font-weight:800; margin:0;">Kuis Kilat: Tebak Nama Huruf Thai</h3>
+              </div>
+              <button class="pill-filter" onclick="initAlphabetMiniQuiz()" style="font-size:11px; padding:6px 14px;">
+                🔄 Soal Huruf Baru
+              </button>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:24px; padding:18px; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); flex-wrap:wrap;">
+              <div style="text-align:center; min-width:80px;">
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim); margin-bottom:4px;">HURUF THAI:</div>
+                <div id="quizPromptLetter" style="font-family:var(--font-thai); font-size:46px; font-weight:800; color:var(--primary); line-height:1;">
+                  ก
+                </div>
+              </div>
+              <div style="flex:1; min-width:260px;">
+                <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:var(--text-muted);">
+                  Pilih nama sebutan tradisional yang sesuai:
+                </div>
+                <div class="quiz-options-grid" id="quizLetterOptions">
+                  <!-- Populated dynamically -->
+                </div>
+                <div id="quizFeedbackMsg" style="margin-top:10px; font-size:13px; min-height:20px;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. LABORATORIUM SUARA & 5 NADA (FOCUSED ON AUDIO & TONES) -->
         <section id="panel-phonetics" class="section-tab-panel">
-          <div style="margin-bottom:28px;">
-            <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">Laboratorium Fonetik & 5 Nada Bahasa Thai</h2>
+          <div style="margin-bottom:24px;">
+            <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
+              🎵 LABORATORIUM AKUSTIK &amp; INTONASI
+            </div>
+            <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">Laboratorium Suara &amp; 5 Nada Bahasa Thai</h2>
             <p style="font-size:14px; color:var(--text-muted);">Bahasa Thailand adalah bahasa tonal. Perbedaan nada mengubah makna kata sepenuhnya.</p>
           </div>
 
@@ -3238,27 +3610,25 @@
             <!-- Rendered dynamically -->
           </div>
 
-          <!-- CONSONANTS & VOWELS -->
-          <div class="consonant-filter-bar">
-            <div>
-              <h3 style="font-size:18px; font-weight:800;">Matriks 44 Konsonan & Vokal</h3>
-              <span style="font-size:12px; color:var(--text-muted);">Klik setiap kartu untuk mendengarkan audio asli penutur.</span>
+          <!-- SHORTCUT CARD TO DEDICATED ALPHABET MATERIAL -->
+          <div class="lab-alphabet-shortcut-card" onclick="switchNavTab('alphabet')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:18px 22px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); margin: 34px 0; transition:all 0.15s ease;">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="width:44px; height:44px; border-radius:var(--radius-md); background:var(--primary-light); display:grid; place-items:center; font-size:22px; flex-shrink:0;">
+                🔤
+              </div>
+              <div>
+                <h4 style="font-size:16px; font-weight:800; margin-bottom:3px; color:var(--text);">Materi Aksara &amp; 44 Konsonan Thai</h4>
+                <p style="font-size:13px; color:var(--text-muted); margin:0;">Materi aksara kini telah dipisahkan menjadi modul belajar mandiri lengkap dengan aturan 3 kelas nada, vokal, dan kuis tebak huruf.</p>
+              </div>
             </div>
-            <div class="filter-pills">
-              <button class="pill-filter active" onclick="filterAlphabetGrid('all', this)">Semua</button>
-              <button class="pill-filter" onclick="filterAlphabetGrid('mid', this)">Kelas Tengah</button>
-              <button class="pill-filter" onclick="filterAlphabetGrid('high', this)">Kelas Tinggi</button>
-              <button class="pill-filter" onclick="filterAlphabetGrid('low', this)">Kelas Rendah</button>
-              <button class="pill-filter" onclick="filterAlphabetGrid('vowel', this)">Vokal</button>
-            </div>
-          </div>
-
-          <div class="alphabet-cards-matrix" id="alphabetMatrix">
-            <!-- Alphabet cards rendered dynamically -->
+            <button class="pill-filter" style="background:var(--primary); color:#ffffff; border-color:var(--primary); display:flex; align-items:center; gap:6px; flex-shrink:0;">
+              <span>Buka Materi Aksara</span>
+              <span>→</span>
+            </button>
           </div>
 
           <!-- NATIVE AUDIO PHRASEBOOK (BUKU FRASA PENUTUR ASLI) -->
-          <div class="phrasebook-section" style="margin-top:48px;">
+          <div class="phrasebook-section" style="margin-top:24px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
               <div>
                 <h3 style="font-size:20px; font-weight:800; margin-bottom:4px;">🍃 Buku Frasa Audio Penutur Asli Bangkok</h3>
@@ -3266,10 +3636,10 @@
               </div>
               <div class="filter-pills" id="phrasebookCategoryPills">
                 <button class="pill-filter active" onclick="filterPhrasebook('all', this)">Semua</button>
-                <button class="pill-filter" onclick="filterPhrasebook('salam', this)">Salam & Sapaan</button>
-                <button class="pill-filter" onclick="filterPhrasebook('makan', this)">Kuliner & Kafe</button>
-                <button class="pill-filter" onclick="filterPhrasebook('pasar', this)">Pasar & Belanja</button>
-                <button class="pill-filter" onclick="filterPhrasebook('jalan', this)">Arah & Taksi</button>
+                <button class="pill-filter" onclick="filterPhrasebook('salam', this)">Salam &amp; Sapaan</button>
+                <button class="pill-filter" onclick="filterPhrasebook('makan', this)">Kuliner &amp; Kafe</button>
+                <button class="pill-filter" onclick="filterPhrasebook('pasar', this)">Pasar &amp; Belanja</button>
+                <button class="pill-filter" onclick="filterPhrasebook('jalan', this)">Arah &amp; Taksi</button>
               </div>
             </div>
 
@@ -5442,24 +5812,173 @@
       { thai: 'เ-ือ', spoken: 'สระเอือ', roman: 'sara uea (diftong)', meaning: 'diftong uea', class: 'vowel' }
     ];
 
-    function renderAlphabetMatrix(filter = 'all') {
-      const container = document.getElementById('alphabetMatrix');
-      let items = (filter === 'vowel') ? THAI_VOWELS : THAI_CONSONANTS.filter(c => filter === 'all' || c.class === filter);
+    /* 4 THAI TONE MARKS (วรรณยุกต์) */
+    const THAI_TONE_MARKS = [
+      { thai: ' ่ ', markName: 'ไม้เอก', spoken: 'ไม้เอก', roman: 'mái èek', meaning: 'Tanda Nada 1 (Rendah / Jatuh)', class: 'tone-mark' },
+      { thai: ' ้ ', markName: 'ไม้โท', spoken: 'ไม้โท', roman: 'mái thoo', meaning: 'Tanda Nada 2 (Jatuh / Tinggi)', class: 'tone-mark' },
+      { thai: ' ๊ ', markName: 'ไม้ตรี', spoken: 'ไม้ตรี', roman: 'mái trii', meaning: 'Tanda Nada 3 (Tinggi)', class: 'tone-mark' },
+      { thai: ' ๋ ', markName: 'ไม้จัตวา', spoken: 'ไม้จัตวา', roman: 'mái jàt-dtà-waa', meaning: 'Tanda Nada 4 (Naik)', class: 'tone-mark' }
+    ];
 
-      container.innerHTML = items.map(c => `
-        <div class="glyph-card" onclick="speakThai('${c.spoken || c.thai.replace('-', '')}')" title="Klik dengar suara asli penutur Bangkok: ${c.spoken || c.thai}">
-          <div class="glyph-thai">${c.thai}</div>
-          <div class="glyph-roman">${c.roman}</div>
-          <div class="glyph-meaning">${c.meaning}</div>
-        </div>
-      `).join('');
+    /* 10 THAI TRADITIONAL NUMERALS (ตัวเลขไทย) */
+    const THAI_NUMERALS = [
+      { thai: '๐', spoken: 'ศูนย์', roman: 'sǔun', meaning: 'Angka Nol (0)', class: 'numeral' },
+      { thai: '๑', spoken: 'หนึ่ง', roman: 'nèung', meaning: 'Angka Satu (1)', class: 'numeral' },
+      { thai: '๒', spoken: 'สอง', roman: 'sɔ̌ɔng', meaning: 'Angka Dua (2)', class: 'numeral' },
+      { thai: '๓', spoken: 'สาม', roman: 'sǎam', meaning: 'Angka Tiga (3)', class: 'numeral' },
+      { thai: '๔', spoken: 'สี่', roman: 'sìi', meaning: 'Angka Empat (4)', class: 'numeral' },
+      { thai: '๕', spoken: 'ห้า', roman: 'hâa', meaning: 'Angka Lima (5)', class: 'numeral' },
+      { thai: '๖', spoken: 'หก', roman: 'hòk', meaning: 'Angka Enam (6)', class: 'numeral' },
+      { thai: '๗', spoken: 'เจ็ด', roman: 'jèt', meaning: 'Angka Tujuh (7)', class: 'numeral' },
+      { thai: '๘', spoken: 'แปด', roman: 'bpàet', meaning: 'Angka Delapan (8)', class: 'numeral' },
+      { thai: '๙', spoken: 'เก้า', roman: 'gâao', meaning: 'Angka Sembilan (9)', class: 'numeral' }
+    ];
+
+    let currentAlphabetFilter = 'all';
+    let currentAlphabetSearch = '';
+
+    function getAlphabetBadgeInfo(cls) {
+      switch (cls) {
+        case 'mid': return { label: 'Tengah', badgeClass: 'badge-mid' };
+        case 'high': return { label: 'Tinggi', badgeClass: 'badge-high' };
+        case 'low': return { label: 'Rendah', badgeClass: 'badge-low' };
+        case 'vowel': return { label: 'Vokal', badgeClass: 'badge-vowel' };
+        case 'tone-mark': return { label: 'Tanda Nada', badgeClass: 'badge-tone-mark' };
+        case 'numeral': return { label: 'Angka', badgeClass: 'badge-numeral' };
+        default: return { label: 'Konsonan', badgeClass: 'badge-mid' };
+      }
+    }
+
+    function renderAlphabetMatrix(filter = currentAlphabetFilter) {
+      currentAlphabetFilter = filter;
+      const container = document.getElementById('alphabetMatrix');
+      if (!container) return;
+
+      let allPool = [];
+      if (filter === 'all') {
+        allPool = THAI_CONSONANTS;
+      } else if (filter === 'mid' || filter === 'high' || filter === 'low') {
+        allPool = THAI_CONSONANTS.filter(c => c.class === filter);
+      } else if (filter === 'vowel') {
+        allPool = THAI_VOWELS;
+      } else if (filter === 'tone-mark') {
+        allPool = THAI_TONE_MARKS;
+      } else if (filter === 'numeral') {
+        allPool = THAI_NUMERALS;
+      } else {
+        allPool = THAI_CONSONANTS;
+      }
+
+      // Apply Search Filter if any
+      const q = currentAlphabetSearch.toLowerCase().trim();
+      let filtered = allPool;
+      if (q) {
+        filtered = allPool.filter(item => 
+          (item.thai && item.thai.toLowerCase().includes(q)) ||
+          (item.spoken && item.spoken.toLowerCase().includes(q)) ||
+          (item.roman && item.roman.toLowerCase().includes(q)) ||
+          (item.meaning && item.meaning.toLowerCase().includes(q))
+        );
+      }
+
+      const counter = document.getElementById('alphabetResultCounter');
+      if (counter) {
+        counter.textContent = `Menampilkan ${filtered.length} huruf`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding:36px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); color:var(--text-muted);">
+            <div style="font-size:28px; margin-bottom:8px;">🔍</div>
+            <p style="font-size:14px; margin:0;">Tidak ditemukan huruf yang cocok dengan "<strong>${currentAlphabetSearch}</strong>"</p>
+            <button class="pill-filter" onclick="document.getElementById('alphabetSearchInput').value=''; onAlphabetSearch('');" style="margin-top:12px;">Reset Pencarian</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(c => {
+        const info = getAlphabetBadgeInfo(c.class);
+        const speakTarget = c.spoken || c.thai.replace('-', '').trim();
+        return `
+          <div class="glyph-card" onclick="speakThai('${speakTarget}')" title="Klik dengar pelafalan penutur Bangkok: ${c.spoken || c.thai}">
+            <div class="glyph-card-header">
+              <span class="glyph-badge ${info.badgeClass}">${info.label}</span>
+              <span class="glyph-audio-icon">🔊</span>
+            </div>
+            <div class="glyph-thai">${c.thai}</div>
+            <div class="glyph-spoken">${c.spoken || ''}</div>
+            <div class="glyph-roman">${c.roman}</div>
+            <div class="glyph-meaning">${c.meaning}</div>
+          </div>
+        `;
+      }).join('');
     }
 
     function filterAlphabetGrid(type, btn) {
       playSynthSound('click');
-      document.querySelectorAll('.filter-pills .pill-filter').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
+      const pillsContainer = document.getElementById('alphabetCategoryPills');
+      if (pillsContainer) {
+        pillsContainer.querySelectorAll('.pill-filter').forEach(p => p.classList.remove('active'));
+      }
+      if (btn) btn.classList.add('active');
       renderAlphabetMatrix(type);
+    }
+
+    function onAlphabetSearch(val) {
+      currentAlphabetSearch = val || '';
+      renderAlphabetMatrix(currentAlphabetFilter);
+    }
+
+    /* ALPHABET INTERACTIVE MINI-QUIZ ENGINE */
+    let currentQuizLetter = null;
+
+    function initAlphabetMiniQuiz() {
+      if (!THAI_CONSONANTS || THAI_CONSONANTS.length === 0) return;
+      const target = THAI_CONSONANTS[Math.floor(Math.random() * THAI_CONSONANTS.length)];
+      currentQuizLetter = target;
+
+      const distractors = THAI_CONSONANTS
+        .filter(c => c.thai !== target.thai)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+
+      const options = [target, ...distractors].sort(() => 0.5 - Math.random());
+
+      const elLetter = document.getElementById('quizPromptLetter');
+      const elOpts = document.getElementById('quizLetterOptions');
+      const elFeedback = document.getElementById('quizFeedbackMsg');
+      if (elLetter && elOpts) {
+        elLetter.textContent = target.thai;
+        if (elFeedback) elFeedback.innerHTML = '';
+        elOpts.innerHTML = options.map(opt => `
+          <button type="button" class="quiz-option-btn" onclick="checkAlphabetQuizAnswer('${opt.thai}')">
+            <strong>${opt.spoken}</strong>
+            <small>(${opt.roman} • ${opt.meaning})</small>
+          </button>
+        `).join('');
+      }
+    }
+
+    function checkAlphabetQuizAnswer(selectedThai) {
+      if (!currentQuizLetter) return;
+      const elFeedback = document.getElementById('quizFeedbackMsg');
+      if (selectedThai === currentQuizLetter.thai) {
+        playSynthSound('success');
+        speakThai(currentQuizLetter.spoken);
+        appState.xp += 5;
+        saveState();
+        updateTopMetrics();
+        if (elFeedback) {
+          elFeedback.innerHTML = `<span style="color:#52b788; font-weight:700;">🎉 Benar sekali! ${currentQuizLetter.spoken} (${currentQuizLetter.roman}) • +5 XP</span>`;
+        }
+        setTimeout(() => initAlphabetMiniQuiz(), 1600);
+      } else {
+        playSynthSound('error');
+        if (elFeedback) {
+          elFeedback.innerHTML = `<span style="color:#fb7185; font-weight:700;">Belum tepat, coba dengarkan lagi dengan klik huruf di atas!</span>`;
+        }
+      }
     }
 
     /* 7. NATIVE AUDIO PHRASEBOOK DATASET & ENGINE */
@@ -10616,6 +11135,7 @@
     renderRoleplayChat();
     renderTonesGrid();
     renderAlphabetMatrix('all');
+    initAlphabetMiniQuiz();
     renderPhrasebook('all');
     renderCurriculumNodes();
     renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
