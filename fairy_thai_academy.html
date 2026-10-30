@@ -1830,6 +1830,407 @@
       padding: 12px 20px 0 20px;
     }
 
+    /* ==========================================================================
+       LEARNING PORTAL (GATEWAY / WELCOME SCREEN)
+       ========================================================================== */
+    body.in-portal-mode .app-shell {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .app-shell {
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #learningPortal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px 60px;
+      min-height: 100vh;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+    }
+
+    #learningPortal.portal-hidden {
+      opacity: 0;
+      transform: scale(0.97) translateY(-14px);
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    #learningPortal.portal-visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .portal-inner {
+      max-width: 820px;
+      width: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Learning Icon Badge & Emblem */
+    .learning-icon-container {
+      position: relative;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .learning-icon-halo {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+      filter: blur(24px);
+      pointer-events: none;
+      animation: pulseHalo 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseHalo {
+      0% { transform: scale(0.88); opacity: 0.45; }
+      100% { transform: scale(1.18); opacity: 0.85; }
+    }
+
+    .learning-icon-emblem {
+      width: 110px;
+      height: 110px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-surface) 100%);
+      border: 1px solid var(--border-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s, box-shadow 0.25s;
+      animation: gentleFloat 5s ease-in-out infinite;
+    }
+
+    .learning-icon-emblem:hover {
+      transform: translateY(-5px) scale(1.04);
+      border-color: var(--primary);
+      box-shadow: 0 20px 42px var(--primary-glow);
+    }
+
+    .learning-icon-emblem:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .portal-book-svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .learning-icon-thai-char {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-family: var(--font-thai);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-bright);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      line-height: 1;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .portal-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-light);
+      border: 1px solid var(--border-bright);
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .portal-title {
+      font-size: clamp(28px, 4.5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .portal-thai-subtitle {
+      font-family: var(--font-thai);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .portal-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    /* Portal Voice Gender Box */
+    .portal-gender-box {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .portal-gender-label {
+      display: block;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .portal-gender-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .portal-gender-btn {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-align: left;
+      transition: all 0.18s ease;
+    }
+
+    .portal-gender-btn:hover {
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    .portal-gender-btn.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    .portal-gender-btn .p-icon {
+      font-size: 20px;
+    }
+
+    .portal-gender-btn strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .portal-gender-btn small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .portal-gender-btn.active small {
+      color: var(--primary);
+    }
+
+    .portal-test-audio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-bright);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .portal-test-audio-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .portal-test-audio-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Portal CTA Group */
+    .portal-cta-group {
+      margin-bottom: 32px;
+    }
+
+    .portal-main-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 38px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 22px var(--primary-glow);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+    }
+
+    .portal-main-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--primary-glow);
+    }
+
+    .portal-main-cta-btn:active {
+      transform: scale(0.98);
+    }
+
+    .portal-main-cta-btn .cta-arrow {
+      font-size: 18px;
+      transition: transform 0.2s;
+    }
+
+    .portal-main-cta-btn:hover .cta-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Portal Pathways Section */
+    .portal-pathways-section {
+      width: 100%;
+      max-width: 820px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .portal-pathways-header {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .portal-pathways-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .portal-pathway-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: left;
+      display: flex;
+      gap: 14px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portal-pathway-card:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .portal-pathway-card:active {
+      transform: scale(0.98);
+    }
+
+    .portal-pathway-card .pathway-icon {
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .portal-pathway-card .pathway-body h4 {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .portal-pathway-card .pathway-body p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .portal-pathway-card .pathway-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+    }
+
     /* Responsive adjustments */
     @media (max-width: 960px) {
       .stimuler-nav-rail { width: 80px; padding: 16px 8px; }
@@ -1843,10 +2244,128 @@
   <!-- GHIBLI AMBIENT FIREFLY CANVAS -->
   <canvas id="ghibliCanvas"></canvas>
 
+  <!-- ==========================================================================
+       LEARNING PORTAL: INTRODUCTORY LEARNING GATEWAY & ICON
+       ========================================================================== -->
+  <div id="learningPortal" class="portal-visible">
+    <div class="portal-inner">
+      <!-- Centered Learning Emblem / Icon -->
+      <div class="learning-icon-container">
+        <div class="learning-icon-halo"></div>
+        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="enterLearningApp('studio')" title="Klik untuk Mulai Belajar">
+          <svg class="portal-book-svg" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bookGrad" x1="12" y1="20" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#52b788"/>
+                <stop offset="100%" stop-color="#2d6a4f"/>
+              </linearGradient>
+            </defs>
+            <!-- Orbit circles & spark rays -->
+            <circle cx="36" cy="36" r="32" stroke="rgba(116, 198, 157, 0.22)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M36 4v5M36 63v5M4 36h5M63 36h5" stroke="rgba(116, 198, 157, 0.45)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Open Book of Knowledge -->
+            <path d="M36 24v28" stroke="#edf6f0" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M14 47c7-3 15-3 22 2V21c-8-4-15-4-22-1v27z" fill="url(#bookGrad)" stroke="#edf6f0" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M58 47c-7-3-15-3-22 2V21c8-4 15-4 22-1v27z" fill="url(#bookGrad)" stroke="#edf6f0" stroke-width="2" stroke-linejoin="round"/>
+            <!-- Bookmark Ribbon -->
+            <path d="M36 24v16l3.5-2.5 3.5 2.5V24" fill="#f59e0b"/>
+            <!-- Sprouting Thai Jasmine Leaf -->
+            <path d="M36 10c-5 6-3 11 0 13 3-2 5-7 0-13z" fill="#52b788"/>
+          </svg>
+          <div class="learning-icon-thai-char" title="Huruf Pertama Abjad Thailand: ก (Ko Kai)">ก</div>
+        </div>
+      </div>
+
+      <!-- Badge & Welcoming Headers -->
+      <div class="portal-badge-pill">
+        <span>🍃 AKADEMI BAHASA THAILAND • BANGKOK CENTRAL</span>
+      </div>
+      <h1 class="portal-title">Taman Belajar Bahasa Thailand</h1>
+      <div class="portal-thai-subtitle">สวนภาษาไทยของมะลิ • ยินดีต้อนรับสู่การเรียนรู้</div>
+      <p class="portal-desc">
+        Mulai petualangan belajar bahasa Thailand dari dasar hingga lancar. Latih kepekaan 5 nada fonetik, dengarkan audio penutur asli Bangkok berkualitas studio, dan ikuti kurikulum interaktif berjenjang.
+      </p>
+
+      <!-- Native Voice Gender Selector & Greeting Audio Test -->
+      <div class="portal-gender-box">
+        <span class="portal-gender-label">PILIH GAYA BICARA PENUTUR ASLI SEBELUM MEMULAI:</span>
+        <div class="portal-gender-pills">
+          <button class="portal-gender-btn active" id="portalGenderFemale" onclick="setPortalGender('female')" title="Gaya Bicara Sopan Wanita (ค่ะ/คะ)">
+            <span class="p-icon">👩</span>
+            <div>
+              <strong>Wanita (ค่ะ / khâ)</strong>
+              <small>Nong Premwadee • Melodis</small>
+            </div>
+          </button>
+          <button class="portal-gender-btn" id="portalGenderMale" onclick="setPortalGender('male')" title="Gaya Bicara Sopan Pria (ครับ)">
+            <span class="p-icon">👨</span>
+            <div>
+              <strong>Pria (ครับ / khráp)</strong>
+              <small>Phi Niwat • Berwibawa</small>
+            </div>
+          </button>
+          <button class="portal-test-audio-btn" onclick="playPortalGreetingAudio()" title="Dengarkan Contoh Sapaan Penutur Asli">
+            <span id="portalAudioIcon">🔊</span>
+            <span>Dengar Sapaan</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary Entry CTA Button -->
+      <div class="portal-cta-group">
+        <button class="portal-main-cta-btn" onclick="enterLearningApp('studio')" title="Masuk ke Taman Pembelajaran">
+          <span>✨ Mulai Belajar & Masuk Menu</span>
+          <span class="cta-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Direct Learning Pathways (Bahan Ajar Cepat) -->
+      <div class="portal-pathways-section">
+        <div class="portal-pathways-header">
+          <span>ATAU LANGSUNG PILIH MATERI & BAHAN AJAR:</span>
+        </div>
+        <div class="portal-pathways-grid">
+          <div class="portal-pathway-card" onclick="enterLearningApp('curriculum')" title="Buka Roadmap Kurikulum">
+            <div class="pathway-icon">🗺️</div>
+            <div class="pathway-body">
+              <h4>Kurikulum 12 Unit (48 Modul)</h4>
+              <p>Belajar terstruktur dari A1 Pemula (salam & angka) hingga B1 Percakapan mandiri.</p>
+              <span class="pathway-tag">12 Unit • 48 Modul Interaktif</span>
+            </div>
+          </div>
+          <div class="portal-pathway-card" onclick="enterLearningApp('studio')" title="Buka Studio Latihan Bicara">
+            <div class="pathway-icon">🎙️</div>
+            <div class="pathway-body">
+              <h4>Studio Latihan Berbicara</h4>
+              <p>Latihan mikrofon artikulasi langsung dengan umpan balik skor nada AI.</p>
+              <span class="pathway-tag">Evaluasi Akurasi Suara</span>
+            </div>
+          </div>
+          <div class="portal-pathway-card" onclick="enterLearningApp('roleplay')" title="Buka Simulasi Roleplay">
+            <div class="pathway-icon">🎭</div>
+            <div class="pathway-body">
+              <h4>20 Skenario Roleplay Nyata</h4>
+              <p>Simulasi dialog interaktif: kafe Pad Thai, belanja Chatuchak, taksi, kuil.</p>
+              <span class="pathway-tag">Simulasi Percakapan Bebas</span>
+            </div>
+          </div>
+          <div class="portal-pathway-card" onclick="enterLearningApp('phonetics')" title="Buka Laboratorium Fonetik">
+            <div class="pathway-icon">🎵</div>
+            <div class="pathway-body">
+              <h4>5 Nada & 44 Konsonan Thai</h4>
+              <p>Kuasai kontur 5 nada tonal (datar, rendah, jatuh, tinggi, naik) & tabel konsonan.</p>
+              <span class="pathway-tag">Laboratorium Fonetik</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="app-shell">
     <!-- TOP HEADER -->
     <header class="top-header">
-      <div class="brand-cluster" onclick="switchNavTab('studio')">
+      <div class="brand-cluster" onclick="openLearningPortal()" title="Kembali ke Portal Belajar">
         <div class="brand-icon-box" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
           🍃
         </div>
@@ -1857,6 +2376,9 @@
       </div>
 
       <div class="header-actions">
+        <button class="icon-btn" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Ikon Belajar">
+          🏠
+        </button>
         <div class="metric-badge metric-native-badge" onclick="triggerCoachGreeting()" title="Penutur Asli: Bangkok Central Thai • Klik untuk mendengar sapaan Nong Mali">
           <span>🇹🇭 Penutur Asli Bangkok</span>
         </div>
@@ -1893,6 +2415,12 @@
     <div class="app-body">
       <!-- LEFT NAV RAIL -->
       <aside class="stimuler-nav-rail">
+        <div class="nav-section-title">Navigasi Utama</div>
+        <button class="nav-item-btn" id="navBtnPortal" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Ikon Belajar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+          <span>Portal Belajar</span>
+        </button>
+
         <div class="nav-section-title">Latihan Utama</div>
         <button class="nav-item-btn active" data-tab="studio" onclick="switchNavTab('studio')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
@@ -2635,6 +3163,12 @@
       if (roleMaleBtn && roleFemaleBtn) {
         roleMaleBtn.classList.toggle('active', isMale);
         roleFemaleBtn.classList.toggle('active', !isMale);
+      }
+      const portalFemaleBtn = document.getElementById('portalGenderFemale');
+      const portalMaleBtn = document.getElementById('portalGenderMale');
+      if (portalFemaleBtn && portalMaleBtn) {
+        portalFemaleBtn.classList.toggle('active', !isMale);
+        portalMaleBtn.classList.toggle('active', isMale);
       }
     }
 
@@ -8319,9 +8853,71 @@
       }
     }
 
+    /* PORTAL GATEWAY HELPERS */
+    function openLearningPortal() {
+      playSynthSound('click');
+      const portal = document.getElementById('learningPortal');
+      if (portal) {
+        portal.classList.remove('portal-hidden');
+        portal.classList.add('portal-visible');
+        document.body.classList.add('in-portal-mode');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function enterLearningApp(targetTab = 'studio') {
+      playSynthSound('click');
+      const portal = document.getElementById('learningPortal');
+      if (portal) {
+        portal.classList.remove('portal-visible');
+        portal.classList.add('portal-hidden');
+      }
+      document.body.classList.remove('in-portal-mode');
+      if (targetTab) {
+        switchNavTab(targetTab);
+      }
+    }
+
+    function setPortalGender(gender) {
+      setAppSpeakerGender(gender);
+    }
+
+    function playPortalGreetingAudio() {
+      const gender = appState.speakerGender || 'female';
+      const icon = document.getElementById('portalAudioIcon');
+      if (icon) icon.textContent = '⏳';
+      const audio = new Audio(`audio/${gender}/sawatdee.mp3`);
+      audio.referrerPolicy = 'no-referrer';
+      audio.onended = () => { if (icon) icon.textContent = '🔊'; };
+      audio.onerror = () => {
+        if (icon) icon.textContent = '🔊';
+        speakThai(gender === 'male' ? 'สวัสดีครับ ยินดีต้อนรับครับ' : 'สวัสดีค่ะ ยินดีต้อนรับค่ะ');
+      };
+      audio.play().catch(() => {
+        if (icon) icon.textContent = '🔊';
+        speakThai(gender === 'male' ? 'สวัสดีครับ ยินดีต้อนรับครับ' : 'สวัสดีค่ะ ยินดีต้อนรับค่ะ');
+      });
+    }
+
+    function initLearningPortal() {
+      document.body.classList.add('in-portal-mode');
+      const portal = document.getElementById('learningPortal');
+      if (portal) {
+        portal.classList.remove('portal-hidden');
+        portal.classList.add('portal-visible');
+      }
+      updateGenderControls();
+    }
+
     /* 8. NAVIGATION, THEME & UI HELPERS */
     function switchNavTab(tabKey) {
       playSynthSound('click');
+      const portal = document.getElementById('learningPortal');
+      if (portal && portal.classList.contains('portal-visible')) {
+        portal.classList.remove('portal-visible');
+        portal.classList.add('portal-hidden');
+        document.body.classList.remove('in-portal-mode');
+      }
       document.querySelectorAll('.stimuler-nav-rail .nav-item-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-tab') === tabKey);
       });
@@ -9305,6 +9901,7 @@
     renderCurriculumNodes();
     renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
     initQaChat();
+    initLearningPortal();
   </script>
 </body>
 </html>

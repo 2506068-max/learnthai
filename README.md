@@ -13,6 +13,13 @@
 
 ## ✨ Fitur Utama
 
+### 0. 🍃 Portal Gerbang Pembelajaran (Learning Entry Gateway & Emblem)
+* **Layar Pembuka Tenang Berorientasi Belajar**: Saat pertama kali membuka website, pengguna disambut oleh portal belajar terpusat yang tenang tanpa langsung dijejali menu atau materi bahan ajar yang padat.
+* **Ikon Belajar Ghibli Eksklusif**: Menampilkan lambang belajar animasi halus (*floating emblem*) berupa buku suci ilmu pengetahuan, aksara pertama abjad Thailand **ก (Ko Kai)**, dan pucuk daun melati (*jasmine leaf*).
+* **Pemilihan Gaya Bicara di Awal**: Memilih preferensi suara penutur wanita (ค่ะ) atau pria (ครับ) sejak awal dengan tombol uji coba dengar sapaan langsung (*"สวัสดีค่ะ/ครับ ยินดีต้อนรับ..."*).
+* **Jalur Masuk Cepat (Direct Learning Pathways)**: Tombol *Mulai Belajar* utama untuk masuk ke Studio, serta 4 kartu pintasan langsung ke Kurikulum, Studio Bicara, Roleplay, atau Laboratorium Fonetik.
+* **Akses Kembali Fleksibel**: Tombol **🏠 Portal Belajar** di header dan bilah navigasi kiri memungkinkan pengguna kembali ke layar tenang ini kapan saja.
+
 ### 1. 🎙️ Studio Bicara Real-Time (Voice-First Studio)
 * **Perekaman Suara Interaktif**: Tombol mikrofon terpusat dengan efek *pulsating talisman* saat merekam suara pengguna.
 * **Canvas Waveform Dinamis**: Visualisasi gelombang audio real-time yang beranimasi saat pengguna berbicara maupun saat mendengarkan penutur asli.
