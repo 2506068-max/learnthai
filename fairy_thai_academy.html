@@ -8,7 +8,7 @@
   <meta name="description" content="Taman belajar dan latihan berbicara bahasa Thailand dengan AI Coach bertema Studio Ghibli, evaluasi suara asli, dan simulasi percakapan.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@400;600;700;800&family=Mali:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Thai:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@400;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     /* ==========================================================================
        STUDIO GHIBLI DESIGN SYSTEM TOKENS — ENCHANTED CEDAR FOREST & MEADOW
@@ -48,7 +48,11 @@
       --font-display: 'Fraunces', Georgia, serif;
       --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --font-thai: 'Noto Sans Thai', 'Plus Jakarta Sans', sans-serif;
+      --font-thai-looped: 'Noto Sans Thai', 'Sarabun', 'Plus Jakarta Sans', sans-serif;
+      --font-thai-loopless: 'Kanit', 'Prompt', 'Plus Jakarta Sans', sans-serif;
+      --font-thai-handwritten: 'Mali', cursive, 'Plus Jakarta Sans', sans-serif;
+      --font-thai-serif: 'Noto Serif Thai', 'Fraunces', Georgia, serif;
+      --font-thai: var(--font-thai-looped);
 
       --radius-sm: 8px;
       --radius-md: 12px;
@@ -87,6 +91,42 @@
       --amber-glow: rgba(217, 119, 6, 0.16);
 
       --shadow-card: 0 4px 24px rgba(45, 106, 79, 0.08);
+    }
+
+    /* ==========================================================================
+       THAI FONT & SCRIPT STYLE VARIATIONS (DYNAMIC CSS CUSTOM PROPERTIES)
+       ========================================================================== */
+    [data-thai-font="looped"] {
+      --font-thai: var(--font-thai-looped);
+    }
+    [data-thai-font="loopless"] {
+      --font-thai: var(--font-thai-loopless);
+    }
+    [data-thai-font="handwritten"] {
+      --font-thai: var(--font-thai-handwritten);
+    }
+    [data-thai-font="serif"] {
+      --font-thai: var(--font-thai-serif);
+    }
+
+    /* Script Assistance Modes (Full vs Native Thai Challenge) */
+    [data-script-mode="native"] .glyph-roman,
+    [data-script-mode="native"] .scenario-roman,
+    [data-script-mode="native"] .lesson-roman,
+    [data-script-mode="native"] .word-roman-sub,
+    [data-script-mode="native"] .phrase-phonetic {
+      opacity: 0.18;
+      filter: blur(4px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    [data-script-mode="native"] .glyph-roman:hover,
+    [data-script-mode="native"] .scenario-roman:hover,
+    [data-script-mode="native"] .lesson-roman:hover,
+    [data-script-mode="native"] .word-roman-sub:hover,
+    [data-script-mode="native"] .phrase-phonetic:hover {
+      opacity: 1;
+      filter: blur(0);
     }
 
     #ghibliCanvas {
@@ -353,6 +393,175 @@
       color: var(--primary);
       border-color: var(--border-bright);
       font-weight: 800;
+    }
+
+    /* Header Thai Font Selector */
+    .thai-font-selector-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .thai-font-trigger-btn {
+      height: 34px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 0 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .thai-font-trigger-btn:hover {
+      color: var(--text);
+      background: var(--bg-card-hover);
+      border-color: var(--border-bright);
+    }
+    .thai-font-trigger-btn:active {
+      transform: scale(0.97);
+    }
+    .thai-font-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-lg);
+      padding: 10px;
+      box-shadow: var(--shadow-card), 0 12px 36px rgba(0, 0, 0, 0.45);
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      backdrop-filter: blur(14px);
+    }
+    [data-theme="light"] .thai-font-dropdown {
+      box-shadow: var(--shadow-card), 0 12px 36px rgba(45, 106, 79, 0.15);
+    }
+    .thai-font-dropdown.open {
+      display: flex;
+      animation: fadeInDown 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .thai-font-dropdown-title {
+      font-size: 10px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      padding: 4px 8px 4px 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .thai-font-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: all 0.15s ease;
+    }
+    .thai-font-option:hover {
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .thai-font-option.active {
+      background: var(--primary-light);
+      border-color: var(--border-bright);
+    }
+    .font-preview-col {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .thai-font-option.active .font-preview-col {
+      background: rgba(82, 183, 136, 0.2);
+      border-color: var(--primary);
+    }
+    .font-preview-sample {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .font-info-col {
+      flex: 1;
+      min-width: 0;
+    }
+    .font-name-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+    .font-name-row strong {
+      font-size: 13px;
+      color: var(--text);
+    }
+    .font-style-tag {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag-formal { background: rgba(82,183,136,0.15); color: #52b788; }
+    .tag-modern { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .tag-ghibli { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .tag-classic { background: rgba(167,139,250,0.15); color: #a78bfa; }
+    .font-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
+      white-space: normal;
+    }
+    .thai-font-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+    .thai-script-mode-row {
+      display: flex;
+      gap: 6px;
+      padding: 2px 4px 4px 4px;
+    }
+    .script-mode-pill {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .script-mode-pill:hover {
+      color: var(--text);
+      background: var(--bg-card-hover);
+    }
+    .script-mode-pill.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
     }
 
     /* Utility Buttons Group */
@@ -1548,6 +1757,103 @@
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+    }
+
+    /* Letter Font Variants Comparison Bar */
+    .glyph-font-variants-bar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin: 3px 0 5px 0;
+      padding: 2px 8px;
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+    [data-theme="light"] .glyph-font-variants-bar {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .variant-chip {
+      font-size: 13px;
+      line-height: 1;
+      opacity: 0.6;
+      transition: all 0.15s ease;
+      cursor: default;
+    }
+    .variant-chip:hover {
+      opacity: 1;
+      transform: scale(1.22);
+      color: var(--primary);
+    }
+    [data-thai-font="looped"] .variant-chip.font-var-looped,
+    [data-thai-font="loopless"] .variant-chip.font-var-loopless,
+    [data-thai-font="handwritten"] .variant-chip.font-var-hand,
+    [data-thai-font="serif"] .variant-chip.font-var-serif {
+      opacity: 1;
+      font-weight: 800;
+      color: var(--primary);
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+
+    /* Alphabet Section Font Switcher Row */
+    .alphabet-font-switcher-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+    }
+    .font-switcher-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .font-switcher-pills {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pill-font-btn {
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .pill-font-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text);
+      border-color: var(--border-bright);
+    }
+    .pill-font-btn.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    .pill-font-btn .mini-sample {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
     }
 
     /* Class Guide Bento Grid */
@@ -3475,6 +3781,341 @@
       .studio-grid { grid-template-columns: 1fr; }
       .roleplay-container { grid-template-columns: 1fr; }
     }
+
+    /* ==========================================================================
+       JAZMI NARA COMPLETE CURRICULUM SERIES (PARTS I - IV • 119 VIDEOS)
+       ========================================================================== */
+    .jazmi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .jazmi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .jazmi-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+    [data-theme="light"] .jazmi-card:hover {
+      box-shadow: 0 10px 28px rgba(45, 106, 79, 0.12);
+    }
+    .jazmi-card.completed {
+      border-color: rgba(82, 183, 136, 0.45);
+    }
+    .jazmi-card.completed .jazmi-thumb-box::after {
+      content: '✅ Selesai';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(16, 185, 129, 0.92);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+    .jazmi-thumb-box {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .jazmi-thumb-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .jazmi-thumb-box:hover .jazmi-thumb-img {
+      transform: scale(1.06);
+    }
+    .jazmi-play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease;
+    }
+    .jazmi-thumb-box:hover .jazmi-play-overlay {
+      background: rgba(0, 0, 0, 0.15);
+    }
+    .jazmi-play-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(225, 29, 72, 0.92);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .jazmi-thumb-box:hover .jazmi-play-icon {
+      transform: scale(1.15);
+      background: #e11d48;
+    }
+    .jazmi-duration-pill {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      padding: 2px 7px;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.78);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      backdrop-filter: blur(4px);
+    }
+    .jazmi-card-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .jazmi-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .jazmi-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .badge-lesson {
+      background: rgba(82, 183, 136, 0.15);
+      color: #52b788;
+      border: 1px solid rgba(82, 183, 136, 0.3);
+    }
+    .badge-game {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .badge-practice {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    .jazmi-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .jazmi-card-part-info {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+    .jazmi-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .jazmi-btn-play {
+      flex: 1;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-light);
+      border: 1px solid var(--border-bright);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .jazmi-btn-play:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .jazmi-check-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-dim);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .jazmi-check-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .jazmi-card.completed .jazmi-check-btn {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .jazmi-worksheet-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.28);
+      color: #ef4444;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .jazmi-worksheet-badge:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Video Player Modal */
+    .jazmi-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .jazmi-modal-backdrop.active {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+    .jazmi-modal-dialog {
+      width: 100%;
+      max-width: 920px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+    }
+    .jazmi-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-surface);
+    }
+    .jazmi-modal-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .jazmi-modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--rose);
+      border-color: var(--rose);
+    }
+    .jazmi-modal-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+    }
+    .jazmi-modal-video-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .jazmi-modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-surface);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .jazmi-modal-nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-subtle-nav {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-subtle-nav:hover {
+      color: var(--text);
+      background: var(--bg-card-hover);
+      border-color: var(--border-bright);
+    }
+    .btn-subtle-nav:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -3683,6 +4324,77 @@
           </button>
         </div>
 
+        <!-- Thai Font & Script Style Selector -->
+        <div class="thai-font-selector-wrap" id="headerThaiFontWrap" title="Pilih Ragam Tulisan Thailand (Gaya Font Aksara)">
+          <button class="thai-font-trigger-btn" id="headerThaiFontBtn" onclick="toggleThaiFontMenu(event)" aria-haspopup="true" aria-expanded="false" title="Ubah Ragam Gaya Tulisan Thai">
+            <span style="font-size:13px;">🔤</span>
+            <span class="thai-font-current-label" id="currentThaiFontLabel">Berloop</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;opacity:0.75;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="thai-font-dropdown" id="headerThaiFontDropdown">
+            <div class="thai-font-dropdown-title">RAGAM TULISAN THAILAND</div>
+            <div class="thai-font-option active" data-font="looped" onclick="setAppThaiFontStyle('looped')">
+              <div class="font-preview-col">
+                <span class="font-preview-sample" style="font-family:var(--font-thai-looped);">กขคง</span>
+              </div>
+              <div class="font-info-col">
+                <div class="font-name-row">
+                  <strong>Standar Berloop</strong>
+                  <span class="font-style-tag tag-formal">Sekolah</span>
+                </div>
+                <div class="font-desc">Noto Sans Thai • Memiliki kepala bulat tradisional, paling mudah untuk pemula</div>
+              </div>
+            </div>
+            <div class="thai-font-option" data-font="loopless" onclick="setAppThaiFontStyle('loopless')">
+              <div class="font-preview-col">
+                <span class="font-preview-sample" style="font-family:var(--font-thai-loopless);">กขคง</span>
+              </div>
+              <div class="font-info-col">
+                <div class="font-name-row">
+                  <strong>Modern Tanpa Loop</strong>
+                  <span class="font-style-tag tag-modern">Urban BTS</span>
+                </div>
+                <div class="font-desc">Kanit • Minimalis tanpa loop, gaya huruf BTS Skytrain, plang kota &amp; poster</div>
+              </div>
+            </div>
+            <div class="thai-font-option" data-font="handwritten" onclick="setAppThaiFontStyle('handwritten')">
+              <div class="font-preview-col">
+                <span class="font-preview-sample" style="font-family:var(--font-thai-handwritten);">กขคง</span>
+              </div>
+              <div class="font-info-col">
+                <div class="font-name-row">
+                  <strong>Tulisan Tangan Santai</strong>
+                  <span class="font-style-tag tag-ghibli">Mali Ghibli</span>
+                </div>
+                <div class="font-desc">Mali • Santai &amp; estetik, seperti tulisan kapur menu street food &amp; kafe</div>
+              </div>
+            </div>
+            <div class="thai-font-option" data-font="serif" onclick="setAppThaiFontStyle('serif')">
+              <div class="font-preview-col">
+                <span class="font-preview-sample" style="font-family:var(--font-thai-serif);">กขคง</span>
+              </div>
+              <div class="font-info-col">
+                <div class="font-name-row">
+                  <strong>Klasik Serif</strong>
+                  <span class="font-style-tag tag-classic">Formal</span>
+                </div>
+                <div class="font-desc">Noto Serif Thai • Wibawa formal, gaya surat kabar dan dokumen kerajaan</div>
+              </div>
+            </div>
+
+            <div class="thai-font-divider"></div>
+            <div class="thai-font-dropdown-title">BANTUAN BACA LATIN</div>
+            <div class="thai-script-mode-row">
+              <button class="script-mode-pill active" id="btnModeScriptFull" onclick="setAppThaiScriptMode('full')" title="Tampilkan Aksara Thai + Transliterasi Latin Fonetik">
+                👁️ Lengkap (Thai + Latin)
+              </button>
+              <button class="script-mode-pill" id="btnModeScriptNative" onclick="setAppThaiScriptMode('native')" title="Sembunyikan bantuan latin untuk menguji kemampuan membaca huruf asli">
+                🇹🇭 Hanya Thai Asli
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- Compact Utility Actions Group -->
         <div class="header-utils-group">
           <button class="icon-btn-compact" onclick="toggleSpeechRate()" id="rateToggleBtn" title="Kecepatan Bicara (1.0x Normal / 0.8x Lambat)">
@@ -3728,6 +4440,12 @@
         <button class="nav-item-btn" data-tab="curriculum" onclick="switchNavTab('curriculum')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
           <span>Kurikulum Unit</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="jazmi-series" onclick="switchNavTab('jazmi-series')" title="Seri Belajar Bahasa Thailand dari Nol (Jazmi Nara - Part I s/d IV • Materi 01-90)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><polygon points="5 3 19 12 5 21 5 3"/><circle cx="12" cy="12" r="9" style="stroke-dasharray: 2 4;"/></svg>
+          <span>Seri Belajar (01-90)</span>
+          <span class="vocab-badge-daily" style="background:#e11d48; color:#fff;" title="119 Video Lengkap">119</span>
         </button>
 
         <button class="nav-item-btn" data-tab="roleplay" onclick="switchNavTab('roleplay')">
@@ -4021,6 +4739,77 @@
           </div>
         </section>
 
+        <!-- JAZMI NARA COMPLETE SERIES TAB (PARTS I - IV • 119 VIDEOS • MATERI 01-90) -->
+        <section id="panel-jazmi-series" class="section-tab-panel">
+          <!-- Top Hero Card with Drive PDF downloads -->
+          <div class="jazmi-banner-card" style="padding:22px 24px; background:linear-gradient(135deg, rgba(45,106,79,0.22) 0%, rgba(13,20,16,0.92) 100%); border:1px solid var(--border-bright); border-radius:var(--radius-xl); margin-bottom:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+              <div>
+                <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
+                  🎓 KURIKULUM RESMI JAZMI NARA • BELAJAR THAILAND DARI NOL
+                </div>
+                <h2 style="font-size:24px; font-weight:800; margin-bottom:6px; color:var(--text);">Learning Thai from Zero (Part I s/d IV)</h2>
+                <p style="font-size:13.5px; color:var(--text-muted); max-width:760px; margin:0 0 14px 0; line-height:1.5;">
+                  Koleksi lengkap 119 video pembelajaran, lembar latihan menulis aksara, kaidah 5 nada, tata bahasa SVO, percakapan sehari-hari, serta game interaktif dari kurikulum Jazmi Nara (Materi [01] sampai [90] tuntas).
+                </p>
+                
+                <!-- Worksheets Download Strip -->
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                  <span style="font-size:12px; font-weight:700; color:var(--text); font-family:var(--font-mono);">📁 Lembar Latihan Menulis:</span>
+                  <a href="/materials/lembar_menulis_konsonan_thai.pdf" download class="jazmi-worksheet-badge" title="Unduh Lembar Menulis 44 Konsonan Thai (PDF)">
+                    📄 Lembar Konsonan Thai (PDF 2.4 MB) ↓
+                  </a>
+                  <a href="/materials/lembar_menulis_vokal_thai.pdf" download class="jazmi-worksheet-badge" title="Unduh Lembar Menulis Vokal Thai (PDF)">
+                    📄 Lembar Vokal Thai (PDF 2.0 MB) ↓
+                  </a>
+                </div>
+              </div>
+
+              <!-- Stats & Completion Progress -->
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+                <div class="stats-group-pill">
+                  <span class="stat-chip" style="color:var(--primary);">📺 119 Video</span>
+                  <span class="stat-divider"></span>
+                  <span class="stat-chip" style="color:var(--amber);">📚 4 Part</span>
+                  <span class="stat-divider"></span>
+                  <span class="stat-chip" style="color:var(--emerald);" id="jazmiProgressChip">✅ 0 / 119</span>
+                </div>
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim);" id="jazmiXpEarnedText">
+                  Reward: +15 XP per modul selesai
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TOOLBAR: FILTER PART & REALTIME SEARCH -->
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px; margin-bottom:20px; display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div class="filter-pills" id="jazmiPartFilterPills" style="margin:0; flex-wrap:wrap;">
+                <button type="button" class="pill-filter active" onclick="filterJazmiPart('all', this)">Semua (119)</button>
+                <button type="button" class="pill-filter" onclick="filterJazmiPart('1', this)">Part I: Aksara &amp; Baca (31)</button>
+                <button type="button" class="pill-filter" onclick="filterJazmiPart('2', this)">Part II: Nada &amp; Aturan (23)</button>
+                <button type="button" class="pill-filter" onclick="filterJazmiPart('3', this)">Part III: Tata Bahasa (37)</button>
+                <button type="button" class="pill-filter" onclick="filterJazmiPart('4', this)">Part IV: Aktivitas (28)</button>
+                <button type="button" class="pill-filter" onclick="filterJazmiPart('games', this)">🎮 Games &amp; Kuis (29)</button>
+              </div>
+
+              <div style="font-size:12px; font-family:var(--font-mono); color:var(--text-dim);" id="jazmiCounterText">
+                Menampilkan 119 video
+              </div>
+            </div>
+
+            <div style="position:relative;">
+              <input type="text" id="jazmiSearchInput" class="custom-input" placeholder="🔍 Cari materi (misal: 01, nada, konsonan, vokal, tenses, jam, tata bahasa, kepemilikan, game)..." oninput="searchJazmiVideos(this.value)" style="padding-left:36px; font-size:13px; height:40px; width:100%; border-radius:var(--radius-md); box-sizing:border-box;">
+              <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:15px; pointer-events:none;">🔍</span>
+            </div>
+          </div>
+
+          <!-- CARDS GRID CONTAINER -->
+          <div class="jazmi-grid" id="jazmiGridContainer">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+        </section>
+
         <!-- 1. MATERI AKSARA & ALFABET THAI (SEPARATE DEDICATED MATERIAL) -->
         <section id="panel-alphabet" class="section-tab-panel active">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
@@ -4081,6 +4870,28 @@
               </div>
               <div style="font-size:12px; font-family:var(--font-mono); color:var(--text-dim);" id="alphabetResultCounter">
                 Menampilkan 44 huruf
+              </div>
+            </div>
+
+            <!-- FONT QUICK SWITCHER ROW -->
+            <div class="alphabet-font-switcher-row">
+              <div class="font-switcher-label">
+                <span>🔤</span>
+                <span>Pilih Ragam Gaya Tulisan Thai:</span>
+              </div>
+              <div class="font-switcher-pills">
+                <button type="button" class="pill-font-btn active" id="pillFontLooped" onclick="setAppThaiFontStyle('looped')" title="Font resmi buku teks dengan lingkaran kepala (Noto Sans Thai)">
+                  <span class="mini-sample" style="font-family:var(--font-thai-looped);">ก</span> Standar Berloop
+                </button>
+                <button type="button" class="pill-font-btn" id="pillFontLoopless" onclick="setAppThaiFontStyle('loopless')" title="Font modern minimalis tanpa kepala bulat, khas BTS &amp; perkotaan Bangkok (Kanit)">
+                  <span class="mini-sample" style="font-family:var(--font-thai-loopless);">ก</span> Modern Tanpa Loop (BTS)
+                </button>
+                <button type="button" class="pill-font-btn" id="pillFontHandwritten" onclick="setAppThaiFontStyle('handwritten')" title="Font tulisan tangan estetik &amp; santai khas kafe &amp; street food (Mali)">
+                  <span class="mini-sample" style="font-family:var(--font-thai-handwritten);">ก</span> Tulisan Tangan (Mali)
+                </button>
+                <button type="button" class="pill-font-btn" id="pillFontSerif" onclick="setAppThaiFontStyle('serif')" title="Font klasik berkait elegan untuk dokumen formal &amp; koran (Noto Serif Thai)">
+                  <span class="mini-sample" style="font-family:var(--font-thai-serif);">ก</span> Klasik Serif
+                </button>
               </div>
             </div>
 
@@ -4645,6 +5456,45 @@
     <span id="toastMsg">Pesan notifikasi</span>
   </div>
 
+  <!-- JAZMI SERIES VIDEO MODAL PLAYER -->
+  <div class="jazmi-modal-backdrop" id="jazmiVideoModal" onclick="handleJazmiModalBackdropClick(event)">
+    <div class="jazmi-modal-dialog">
+      <div class="jazmi-modal-header">
+        <div style="display:flex; align-items:center; gap:10px; min-width:0;">
+          <span class="jazmi-badge badge-lesson" id="modalJazmiBadge">Materi [01]</span>
+          <h3 id="modalJazmiTitle" style="margin:0; font-size:15px; font-weight:800; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Judul Video</h3>
+        </div>
+        <button type="button" class="jazmi-modal-close-btn" onclick="closeJazmiVideoModal()" title="Tutup Video (Esc)">✕</button>
+      </div>
+
+      <div class="jazmi-modal-video-wrap">
+        <iframe id="jazmiModalIframe" src="" title="Video Pembelajaran Bahasa Thai Jazmi Nara" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <div class="jazmi-modal-footer">
+        <div class="jazmi-modal-nav-btns">
+          <button type="button" class="btn-subtle-nav" id="btnJazmiPrev" onclick="navigateJazmiVideo(-1)" title="Video Sebelumnya">
+            ← Sebelumnya
+          </button>
+          <button type="button" class="btn-subtle-nav" id="btnJazmiNext" onclick="navigateJazmiVideo(1)" title="Video Selanjutnya">
+            Selanjutnya →
+          </button>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <a id="modalJazmiYoutubeLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-subtle-nav" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; color:#ef4444; border-color:rgba(239,68,68,0.3);">
+            <span>▶ Buka di YouTube</span>
+          </a>
+          <button type="button" class="btn-stimuler-primary" id="modalJazmiCompleteBtn" onclick="toggleJazmiVideoCompletedCurrent()" style="font-size:12px; padding:6px 14px;">
+            ✅ Tandai Selesai (+15 XP)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAZMI NARA COMPLETE CURRICULUM DATA (PARTS I - IV • 119 VIDEOS) -->
+  <script src="jazmi_curriculum_data.js"></script>
+
   <!-- ==========================================================================
        JAVASCRIPT APP LOGIC — AUDIO, SPEECH RECOGNITION & CURRICULUM
        ========================================================================== */ -->
@@ -4664,6 +5514,9 @@
       speechRate: 1.0,
       speakerGender: 'female',
       theme: 'dark',
+      thaiFontStyle: 'looped',
+      thaiScriptMode: 'full',
+      completedJazmiVideos: [],
       vocabDailyMission: {
         date: '',
         studiedWords: [],
@@ -4688,6 +5541,15 @@
     }
     if (!appState.userAvatar) {
       appState.userAvatar = '🍃';
+    }
+    if (!appState.thaiFontStyle) {
+      appState.thaiFontStyle = 'looped';
+    }
+    if (!appState.thaiScriptMode) {
+      appState.thaiScriptMode = 'full';
+    }
+    if (!Array.isArray(appState.completedJazmiVideos)) {
+      appState.completedJazmiVideos = [];
     }
 
     // Hydrate Daily Vocab Mission state
@@ -4726,6 +5588,9 @@
             name: appState.userName,
             avatar: appState.userAvatar,
             speakerGender: appState.speakerGender,
+            thaiFontStyle: appState.thaiFontStyle,
+            thaiScriptMode: appState.thaiScriptMode,
+            completedJazmiVideos: appState.completedJazmiVideos,
             xp: appState.xp,
             streak: appState.streak,
             completedLessons: appState.completedLessons,
@@ -4744,6 +5609,83 @@
       }
       renderCurriculumNodes();
     }
+
+    /* 1.1 THAI FONT & SCRIPT STYLE ENGINE */
+    function applyThaiFontStyle(fontKey) {
+      if (!['looped', 'loopless', 'handwritten', 'serif'].includes(fontKey)) fontKey = 'looped';
+      appState.thaiFontStyle = fontKey;
+      document.documentElement.setAttribute('data-thai-font', fontKey);
+      document.body.setAttribute('data-thai-font', fontKey);
+
+      const labels = {
+        'looped': 'Berloop',
+        'loopless': 'Tanpa Loop',
+        'handwritten': 'Tulis Tangan',
+        'serif': 'Serif'
+      };
+      const labelEl = document.getElementById('currentThaiFontLabel');
+      if (labelEl) labelEl.textContent = labels[fontKey] || 'Berloop';
+
+      document.querySelectorAll('.thai-font-option').forEach(opt => {
+        opt.classList.toggle('active', opt.getAttribute('data-font') === fontKey);
+      });
+      document.querySelectorAll('.pill-font-btn').forEach(btn => {
+        const idExpected = `pillFont${fontKey.charAt(0).toUpperCase() + fontKey.slice(1)}`;
+        btn.classList.toggle('active', btn.id === idExpected);
+      });
+    }
+
+    function setAppThaiFontStyle(fontKey) {
+      applyThaiFontStyle(fontKey);
+      const dropdown = document.getElementById('headerThaiFontDropdown');
+      if (dropdown) dropdown.classList.remove('open');
+      saveState();
+      playSynthSound('click');
+      const labels = {
+        'looped': 'Standar Berloop (Formal / Buku Teks)',
+        'loopless': 'Modern Tanpa Loop (BTS & Urban Bangkok)',
+        'handwritten': 'Tulisan Tangan Santai (Mali / Ghibli)',
+        'serif': 'Klasik Serif (Formal Sastra & Koran)'
+      };
+      showToast(`Ragam tulisan Thai: ${labels[fontKey] || fontKey}`);
+    }
+
+    function applyThaiScriptMode(mode) {
+      if (!['full', 'native'].includes(mode)) mode = 'full';
+      appState.thaiScriptMode = mode;
+      document.documentElement.setAttribute('data-script-mode', mode);
+      document.body.setAttribute('data-script-mode', mode);
+
+      const fullBtn = document.getElementById('btnModeScriptFull');
+      const nativeBtn = document.getElementById('btnModeScriptNative');
+      if (fullBtn) fullBtn.classList.toggle('active', mode === 'full');
+      if (nativeBtn) nativeBtn.classList.toggle('active', mode === 'native');
+    }
+
+    function setAppThaiScriptMode(mode) {
+      applyThaiScriptMode(mode);
+      saveState();
+      playSynthSound('click');
+      showToast(mode === 'native' ? 'Mode Aksara Murni (Bantuan Latin disembunyikan untuk latihan baca)' : 'Mode Lengkap (Aksara + Latin aktif)');
+    }
+
+    function toggleThaiFontMenu(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const dropdown = document.getElementById('headerThaiFontDropdown');
+      if (dropdown) dropdown.classList.toggle('open');
+    }
+
+    // Close font menu on outside click
+    window.addEventListener('click', (e) => {
+      const wrap = document.getElementById('headerThaiFontWrap');
+      const dropdown = document.getElementById('headerThaiFontDropdown');
+      if (wrap && dropdown && !wrap.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
 
     function updateTopMetrics() {
       document.getElementById('headerStreak').textContent = appState.streak;
@@ -6648,6 +7590,11 @@
               <span class="glyph-audio-icon">🔊</span>
             </div>
             <div class="glyph-thai">${c.thai}</div>
+            <div class="glyph-font-variants-bar" title="Perbandingan 3 Ragam Tulisan: Berloop • Tanpa Loop • Tulis Tangan">
+              <span class="variant-chip font-var-looped" style="font-family:var(--font-thai-looped);" title="Standar Berloop (Noto Sans Thai)">${c.thai}</span>
+              <span class="variant-chip font-var-loopless" style="font-family:var(--font-thai-loopless);" title="Modern Tanpa Loop (Kanit / BTS)">${c.thai}</span>
+              <span class="variant-chip font-var-hand" style="font-family:var(--font-thai-handwritten);" title="Tulisan Tangan Santai (Mali)">${c.thai}</span>
+            </div>
             <div class="glyph-spoken">${c.spoken || ''}</div>
             <div class="glyph-roman">${c.roman}</div>
             <div class="glyph-meaning">${c.meaning}</div>
@@ -11957,6 +12904,9 @@
         appState.userName = acc.name || name;
         appState.userAvatar = acc.avatar || selectedStudentAvatar;
         if (acc.speakerGender) appState.speakerGender = acc.speakerGender;
+        if (acc.thaiFontStyle) appState.thaiFontStyle = acc.thaiFontStyle;
+        if (acc.thaiScriptMode) appState.thaiScriptMode = acc.thaiScriptMode;
+        if (Array.isArray(acc.completedJazmiVideos)) appState.completedJazmiVideos = acc.completedJazmiVideos;
         if (typeof acc.xp === 'number') appState.xp = acc.xp;
         if (typeof acc.streak === 'number') appState.streak = acc.streak;
         if (Array.isArray(acc.completedLessons)) appState.completedLessons = acc.completedLessons;
@@ -11969,6 +12919,9 @@
           pin: pin,
           avatar: selectedStudentAvatar,
           speakerGender: appState.speakerGender,
+          thaiFontStyle: appState.thaiFontStyle,
+          thaiScriptMode: appState.thaiScriptMode,
+          completedJazmiVideos: appState.completedJazmiVideos || [],
           xp: appState.xp,
           streak: appState.streak,
           completedLessons: appState.completedLessons,
@@ -12082,6 +13035,13 @@
         formView.style.display = 'block';
         if (title) title.textContent = 'Masuk ke Akun Pembelajar';
       }
+
+      if (typeof applyThaiFontStyle === 'function') {
+        applyThaiFontStyle(appState.thaiFontStyle || 'looped');
+      }
+      if (typeof applyThaiScriptMode === 'function') {
+        applyThaiScriptMode(appState.thaiScriptMode || 'full');
+      }
     }
 
     function openLearningPortal() {
@@ -12160,6 +13120,8 @@
         updateVocabDailyMissionUI();
         if (currentVocabViewMode === 'focus') renderVocabFocusCard();
         else if (currentVocabViewMode === 'grid') renderVocabGrid(currentVocabGridFilter);
+      } else if (tabKey === 'jazmi-series') {
+        renderJazmiGrid();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -13125,8 +14087,256 @@
       }, 400);
     }
 
+    /* ==========================================================================
+       JAZMI NARA COMPLETE CURRICULUM SERIES ENGINE (119 VIDEOS • MATERI 01-90)
+       ========================================================================== */
+    let currentJazmiFilter = 'all';
+    let currentJazmiSearch = '';
+    let currentJazmiModalVideoId = null;
+    let currentJazmiFilteredList = [];
+
+    function getAllJazmiLessonsFlat() {
+      if (typeof JAZMI_CURRICULUM_DATA === 'undefined' || !Array.isArray(JAZMI_CURRICULUM_DATA)) return [];
+      let flat = [];
+      JAZMI_CURRICULUM_DATA.forEach(part => {
+        if (Array.isArray(part.lessons)) {
+          flat = flat.concat(part.lessons);
+        }
+      });
+      return flat;
+    }
+
+    function renderJazmiGrid() {
+      const container = document.getElementById('jazmiGridContainer');
+      if (!container) return;
+
+      const all = getAllJazmiLessonsFlat();
+      const q = (currentJazmiSearch || '').toLowerCase().trim();
+
+      let filtered = all.filter(l => {
+        // Filter by Part or Games
+        if (currentJazmiFilter === 'games') {
+          if (!l.isGame) return false;
+        } else if (currentJazmiFilter !== 'all') {
+          if (String(l.part) !== String(currentJazmiFilter)) return false;
+        }
+
+        // Search text
+        if (q) {
+          const matchTitle = l.title && l.title.toLowerCase().includes(q);
+          const matchNum = l.lessonNumber !== null && String(l.lessonNumber).includes(q);
+          const matchTag = l.tag && l.tag.toLowerCase().includes(q);
+          const matchPart = l.partTitle && l.partTitle.toLowerCase().includes(q);
+          if (!matchTitle && !matchNum && !matchTag && !matchPart) return false;
+        }
+
+        return true;
+      });
+
+      currentJazmiFilteredList = filtered;
+
+      // Update counters
+      const counterEl = document.getElementById('jazmiCounterText');
+      if (counterEl) {
+        counterEl.textContent = `Menampilkan ${filtered.length} dari ${all.length} video`;
+      }
+
+      const completedCount = all.filter(l => (appState.completedJazmiVideos || []).includes(l.id)).length;
+      const progressChip = document.getElementById('jazmiProgressChip');
+      if (progressChip) {
+        progressChip.textContent = `✅ ${completedCount} / ${all.length} Selesai`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding:48px 20px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); color:var(--text-muted);">
+            <div style="font-size:32px; margin-bottom:10px;">🔍</div>
+            <h4 style="font-size:16px; font-weight:800; color:var(--text); margin-bottom:6px;">Tidak ada video yang cocok</h4>
+            <p style="font-size:13px; margin:0 0 14px 0;">Coba gunakan kata kunci lain atau reset filter pencarian.</p>
+            <button class="pill-filter" onclick="document.getElementById('jazmiSearchInput').value=''; searchJazmiVideos('');">Reset Pencarian</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const isCompleted = (appState.completedJazmiVideos || []).includes(item.id);
+        const worksheetHtml = item.worksheet ? `
+          <a href="/${item.worksheet.file}" download class="jazmi-worksheet-badge" onclick="event.stopPropagation();" title="Unduh ${item.worksheet.title}">
+            📄 PDF Latihan
+          </a>
+        ` : '';
+
+        return `
+          <div class="jazmi-card ${isCompleted ? 'completed' : ''}" onclick="openJazmiVideoModal('${item.id}')" title="Klik untuk tonton: ${item.title}">
+            <div class="jazmi-thumb-box">
+              <img class="jazmi-thumb-img" src="https://img.youtube.com/vi/${item.id}/mqdefault.jpg" alt="${item.title}" loading="lazy">
+              <div class="jazmi-play-overlay">
+                <div class="jazmi-play-icon">▶</div>
+              </div>
+              <span class="jazmi-duration-pill">${item.durationFormatted}</span>
+            </div>
+
+            <div class="jazmi-card-body">
+              <div class="jazmi-card-meta">
+                <span class="jazmi-badge ${item.badgeClass}">${item.tag}</span>
+                ${worksheetHtml}
+              </div>
+
+              <div class="jazmi-card-title">${item.title}</div>
+              <div class="jazmi-card-part-info">${item.partTitle}</div>
+
+              <div class="jazmi-card-actions">
+                <button type="button" class="jazmi-btn-play" onclick="event.stopPropagation(); openJazmiVideoModal('${item.id}');">
+                  <span>▶ Tonton Video</span>
+                </button>
+                <button type="button" class="jazmi-check-btn" onclick="toggleJazmiVideoCompleted('${item.id}', event)" title="${isCompleted ? 'Tandai belum selesai' : 'Tandai selesai (+15 XP)'}">
+                  ${isCompleted ? '✓' : '○'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterJazmiPart(filterKey, btn) {
+      playSynthSound('click');
+      currentJazmiFilter = filterKey;
+      const pills = document.getElementById('jazmiPartFilterPills');
+      if (pills) {
+        pills.querySelectorAll('.pill-filter').forEach(p => p.classList.remove('active'));
+      }
+      if (btn) btn.classList.add('active');
+      renderJazmiGrid();
+    }
+
+    function searchJazmiVideos(val) {
+      currentJazmiSearch = val || '';
+      renderJazmiGrid();
+    }
+
+    function openJazmiVideoModal(videoId) {
+      playSynthSound('click');
+      const all = getAllJazmiLessonsFlat();
+      const item = all.find(l => l.id === videoId);
+      if (!item) return;
+
+      currentJazmiModalVideoId = videoId;
+      const modal = document.getElementById('jazmiVideoModal');
+      const iframe = document.getElementById('jazmiModalIframe');
+      const titleEl = document.getElementById('modalJazmiTitle');
+      const badgeEl = document.getElementById('modalJazmiBadge');
+      const ytLink = document.getElementById('modalJazmiYoutubeLink');
+
+      if (titleEl) titleEl.textContent = item.title;
+      if (badgeEl) {
+        badgeEl.textContent = item.tag;
+        badgeEl.className = `jazmi-badge ${item.badgeClass}`;
+      }
+      if (ytLink) ytLink.href = item.youtubeUrl;
+      if (iframe) iframe.src = `${item.embedUrl}?autoplay=1`;
+
+      updateJazmiModalNavButtons();
+      updateJazmiModalCompleteButton();
+
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeJazmiVideoModal() {
+      const modal = document.getElementById('jazmiVideoModal');
+      const iframe = document.getElementById('jazmiModalIframe');
+      if (iframe) iframe.src = '';
+      if (modal) modal.classList.remove('active');
+      document.body.style.overflow = '';
+      currentJazmiModalVideoId = null;
+    }
+
+    function handleJazmiModalBackdropClick(event) {
+      if (event.target.id === 'jazmiVideoModal') {
+        closeJazmiVideoModal();
+      }
+    }
+
+    function navigateJazmiVideo(direction) {
+      if (!currentJazmiModalVideoId) return;
+      const list = currentJazmiFilteredList.length > 0 ? currentJazmiFilteredList : getAllJazmiLessonsFlat();
+      const idx = list.findIndex(l => l.id === currentJazmiModalVideoId);
+      if (idx === -1) return;
+
+      const targetIdx = idx + direction;
+      if (targetIdx >= 0 && targetIdx < list.length) {
+        openJazmiVideoModal(list[targetIdx].id);
+      }
+    }
+
+    function updateJazmiModalNavButtons() {
+      const list = currentJazmiFilteredList.length > 0 ? currentJazmiFilteredList : getAllJazmiLessonsFlat();
+      const idx = list.findIndex(l => l.id === currentJazmiModalVideoId);
+      const prevBtn = document.getElementById('btnJazmiPrev');
+      const nextBtn = document.getElementById('btnJazmiNext');
+      if (prevBtn) prevBtn.disabled = (idx <= 0);
+      if (nextBtn) nextBtn.disabled = (idx === -1 || idx >= list.length - 1);
+    }
+
+    function updateJazmiModalCompleteButton() {
+      const btn = document.getElementById('modalJazmiCompleteBtn');
+      if (!btn || !currentJazmiModalVideoId) return;
+      const isCompleted = (appState.completedJazmiVideos || []).includes(currentJazmiModalVideoId);
+      if (isCompleted) {
+        btn.textContent = '✅ Selesai (Klik Batal)';
+        btn.style.background = 'var(--emerald)';
+      } else {
+        btn.textContent = '✅ Tandai Selesai (+15 XP)';
+        btn.style.background = '';
+      }
+    }
+
+    function toggleJazmiVideoCompletedCurrent() {
+      if (!currentJazmiModalVideoId) return;
+      toggleJazmiVideoCompleted(currentJazmiModalVideoId);
+      updateJazmiModalCompleteButton();
+    }
+
+    function toggleJazmiVideoCompleted(videoId, event) {
+      if (event) event.stopPropagation();
+      if (!Array.isArray(appState.completedJazmiVideos)) {
+        appState.completedJazmiVideos = [];
+      }
+
+      const idx = appState.completedJazmiVideos.indexOf(videoId);
+      if (idx === -1) {
+        appState.completedJazmiVideos.push(videoId);
+        appState.xp = (appState.xp || 0) + 15;
+        playSynthSound('success');
+        showToast('Hebat! Modul ditandai selesai (+15 XP) 🎉');
+      } else {
+        appState.completedJazmiVideos.splice(idx, 1);
+        playSynthSound('click');
+        showToast('Status modul diperbarui');
+      }
+
+      saveState();
+      renderJazmiGrid();
+    }
+
+    // Close modal on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('jazmiVideoModal');
+        if (modal && modal.classList.contains('active')) {
+          closeJazmiVideoModal();
+        }
+      }
+    });
+
     /* INITIALIZE APP */
     document.documentElement.setAttribute('data-theme', appState.theme || 'dark');
+    applyThaiFontStyle(appState.thaiFontStyle || 'looped');
+    applyThaiScriptMode(appState.thaiScriptMode || 'full');
     document.getElementById('audioToggleBtn').textContent = appState.soundEnabled ? '🔊' : '🔇';
     updateTopMetrics();
     renderStudioPrompt();
@@ -13137,6 +14347,7 @@
     initAlphabetMiniQuiz();
     renderPhrasebook('all');
     renderCurriculumNodes();
+    renderJazmiGrid();
     renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
     initQaChat();
     initLearningPortal();

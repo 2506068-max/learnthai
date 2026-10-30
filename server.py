@@ -3,10 +3,28 @@ import http.server
 import socketserver
 import urllib.parse
 import os
+import sys
+import socket
 import asyncio
 import edge_tts
 
-PORT = 3000
+if sys.platform == 'win32':
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    if hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
+def find_available_port(preferred: int = 3000) -> int:
+    port = preferred
+    while port < 65535:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(0.2)
+            if s.connect_ex(('127.0.0.1', port)) != 0:
+                return port
+        port += 1
+    return preferred
+
+PORT = int(os.environ.get('PORT', find_available_port(3000)))
 MALE_VOICE = 'th-TH-NiwatNeural'
 FEMALE_VOICE = 'th-TH-PremwadeeNeural'
 
@@ -45,6 +63,12 @@ class ThaiAppRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path in ('/', '/index.html'):
+            self.send_response(302)
+            self.send_header('Location', '/fairy_thai_academy.html')
+            self.end_headers()
+            return
+
         if parsed.path == '/api/tts':
             query = urllib.parse.parse_qs(parsed.query)
             text = query.get('text', [''])[0].strip()
@@ -91,7 +115,7 @@ class ThaiAppRequestHandler(http.server.SimpleHTTPRequestHandler):
 if __name__ == '__main__':
     socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", PORT), ThaiAppRequestHandler) as httpd:
-        print(f"🌿 Mali's Thai Garden Server running with Neural TTS at http://localhost:{PORT}")
+        print(f"🌿 Mali's Thai Garden Server running with Neural TTS at http://localhost:{PORT}", flush=True)
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

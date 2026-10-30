@@ -2,9 +2,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Local Web Server (Port 3000)",
+            "label": "Start Local Web Server",
             "type": "shell",
-            "command": "python3 server.py",
+            "command": "python server.py",
             "isBackground": true,
             "problemMatcher": {
                 "pattern": {

@@ -1,24 +1,25 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Stimuler Thai (Local Server)",
+            "name": "Launch Mali's Thai Garden (Local Server)",
             "type": "chrome",
             "request": "launch",
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}",
-            "runtimeExecutable": "/home/zaldy/.gemini/antigravity-ide/bin/google-chrome",
-            "preLaunchTask": "Start Local Web Server (Port 3000)"
+            "url": "http://localhost:3001",
+            "webRoot": "${workspaceFolder}"
         },
         {
-            "name": "Launch Stimuler Thai (Direct File)",
+            "name": "Launch Mali's Thai Garden (Direct File)",
             "type": "chrome",
             "request": "launch",
-            "file": "${workspaceFolder}/fairy_thai_academy.html",
-            "runtimeExecutable": "/home/zaldy/.gemini/antigravity-ide/bin/google-chrome"
+            "file": "${workspaceFolder}/fairy_thai_academy.html"
+        },
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }

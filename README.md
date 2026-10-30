@@ -48,6 +48,44 @@ Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai 
 * 🏥 **Apotek & Konsultasi Obat** *(Apoteker Khun Mor Vipada 👩)*: Menjelaskan gejala pusing demam (*bpùat hǔa*), sakit perut diare, dan aturan minum obat.
 * 🚊 **Stasiun Kereta BTS Skytrain** *(Petugas Loket Khun Nat 👨)*: Membeli tiket ke stasiun Siam, top up kartu Rabbit, dan petunjuk stasiun transit.
 * 🥭 **Beli Buah Tropis di Pasar Malam** *(Penjual Buah Mae Somjit 👩)*: Beli mangga manis Nam Dok Mai, minta dipotongkan dalam boks, dan kelapa muda wangi.
+
+### 4. 🎓 Seri Belajar Bahasa Thailand dari Nol (Jazmi Nara • 119 Modul & Games Part I - IV)
+Integrasi komprehensif kurikulum resmi **"Learning Thai from Zero"** karya kreator Jazmi Nara, mencakup 119 video dari Materi [01] sampai [90] lengkap dengan lembar latihan PDF dan pemutar video interaktif:
+* **Part I: Mengenal Aksara dan Ketentuan Bacanya (31 Video • Materi 01-12)**:
+  * 44 Konsonan, konsonan aktif/pasif, tips menghafal, 5 versi game tebak konsonan.
+  * Aksara vokal, posisi penulisan, 2 game melatinkan kata (Easy).
+  * Perubahan bunyi konsonan akhir (Mae Kok, Kot, Kop, Kon, dll) & game tebak bunyi.
+  * Perubahan bentuk vokal (Mai Han-Akat, dll) & game melatinkan kata (Medium/Hard).
+  * Konsonan gabung / klaster sejati & semu, vokal kompleks, penggunaan spasi, pemisahan suku kata.
+* **Part II: Nada dan Ketentuan Tambahan Lainnya (23 Video • Materi 13-25)**:
+  * 5 Nada bahasa Thai (Mid, Low, Falling, High, Rising) & praktik bersama native speaker (*Thai with Vee*).
+  * 4 Game tebak nada suara pria & wanita.
+  * Nada khusus vokal pendek & penentuan nada suku kata tanpa tanda nada vs dengan tanda nada (Mai Ek, Mai Tho, Mai Tri, Mai Chattawa).
+  * Aksara peredam Ho Hip (ห) dan O Aang (อ) senyap, tanda peredam bunyi Mai Thanthakhaat ` ์ `.
+  * Tanda baca khas: `ๆ` (pengulang kata), `ฯ` (singkatan), `ฯลฯ` (dan lain-lain), serta aturan tanda tanya.
+  * Panduan lengkap mengetik keyboard Thai di komputer dan HP.
+* **Part III: Ilmu Dasar Bahasa Thai (37 Video • Materi 26-62)**:
+  * 20 kata wajib pemula, partikel kesopanan (*khrap/kha*), berhitung 1-99, perkenalan diri formal & santai.
+  * Kosakata pekerjaan, benda sekitar, status hubungan, dan tempat.
+  * Kata tunjuk benda (*nii/nan/noon*), kata tunjuk lokasi (*thii-nii/thii-nan*), kepemilikan (*khaawng*).
+  * Kata tanya *mai / chai mai / roo / reuu plao*, kata ganti orang (*phom, chan, khun, slang gua/mueng*).
+  * Tata bahasa SVO (Subjek-Predikat-Objek), kata kerja dasar, perbedaan fatal *ao* (ambil) vs *yaak* (ingin).
+  * Menyatakan kebisaan (*dai / mai dai*), konjungsi (*dan, tapi, atau, jika*), menyatakan "bersama" (*gap, duuay gan, gan*).
+  * Menyatakan sudah (*laeo*) vs belum (*yang / yang mai*), serta 4 sesi bedah terjemahan kalimat nyata.
+* **Part IV: Ceritakan Aktivitasmu! (28 Video • Materi 63-90)**:
+  * Nama-nama 7 hari sepekan & filosofi warna harian Thailand.
+  * 3 Tenses: Lampau (*khoei*), Sekarang (*gam-lang*), Masa Depan (*ja*).
+  * Menanyakan "Sedang apa?", kalender (hari, tanggal, minggu, bulan, tahun), dan kata tanya "Kapan?".
+  * Pembagian waktu 24 jam & adverb frekuensi (sering vs jarang).
+  * Perbedaan Harus (*dtawng*), Butuh (*dtawng-gaan*), Perlu (*jam-bpen*).
+  * Menyatakan selesai tuntas (*set laeo*), "Setelah..." (*lang-jaak*), menanyakan durasi "Berapa lama?" & titik awal "Sejak kapan?".
+  * Sistem waktu 6 jam tradisional (*Mong Chao, Bai, Thum, Thiang*) & tips praktis menghafal jam.
+  * Menggabungkan keterangan waktu lengkap & menceritakan rutinitas harian dari bangun tidur sampai malam.
+  * Kosakata emosi/mental, memberikan alasan (*karena / karena itu*), pertanyaan 5W 1H lengkap, kata penjelas "Yang...", hingga menceritakan aktivitas mandiri secara lancar.
+* **📁 Berkas Lembar Latihan Menulis (Unduhan Langsung)**:
+  * 📄 [`materials/lembar_menulis_konsonan_thai.pdf`](file:///d:/LearnThai/materials/lembar_menulis_konsonan_thai.pdf) (2.4 MB) — Lembar petunjuk grid garis tulis 44 konsonan resmi.
+  * 📄 [`materials/lembar_menulis_vokal_thai.pdf`](file:///d:/LearnThai/materials/lembar_menulis_vokal_thai.pdf) (2.0 MB) — Lembar petunjuk grid garis tulis vokal Thai.
+* **🎬 Pemutar Video Modal YouTube**: Setiap video dapat ditonton langsung di dalam website tanpa iklan pop-up yang mengganggu, lengkap dengan tombol navigasi *Sebelumnya / Selanjutnya* dan fitur centang tandai selesai (+15 XP).
 * 📸 **Kenalan & Minta Tolong Foto di Wat Arun** *(Mahasiswa Lokal Nong Chai 👨)*: Minta tolong foto di depan pagoda kuil, bertukar asal negara, dan rekomendasi wisata lokal.
 * 🚕 **Naik Taksi Meter Bangkok** *(Sopir Taksi Lung Wichai 👨)*: Minta nyalakan argo meter (*bpə̀ət mí-dtə̂ə*), tolak jalan tol macet, dan turun di halte bus.
 * 🚤 **Perahu Cepat Chao Phraya Express** *(Petugas Dermaga Pii Orn 👩)*: Tiket perahu bendera oranye ke Grand Palace Tha Chang (16 Baht), kapal Iconsiam, jam operasional.
@@ -78,6 +116,13 @@ Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai 
   * **Kelas Rendah (อักษรต่ำ - 24 Konsonan)**: *ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ* (responsif terhadap tanda nada Mai Ek & Mai Tho).
 * **14 Vokal & Diftong Inti**: Vokal pendek, panjang, dan diftong majemuk.
 * **4 Tanda Nada (วรรณยุกต์)** & **10 Angka Thai (ตัวเลขไทย)**: Pengenalan tanda *Mai Ek, Mai Tho, Mai Tri, Mai Chattawa* dan angka tradisional `๐` - `๙`.
+* **4 Ragam Gaya Tulisan Thai yang Dapat Dipilih Bebas (Thai Typography Switcher)**:
+  * 🏫 **Standar Berloop (Formal / Buku Teks)** — *Noto Sans Thai / Sarabun*: Memiliki lingkaran kepala (loop/หัว), standar kurikulum sekolah dan sangat mudah dikenali pemula.
+  * 🏙️ **Modern Tanpa Loop (BTS & Urban Bangkok)** — *Kanit / Prompt*: Gaya minimalis modern tanpa lingkaran kepala (loopless), font yang digunakan pada 90% papan penunjuk jalan, stasiun BTS/MRT Skytrain, kafe modern, dan iklan di Thailand.
+  * ✍️ **Tulisan Tangan Santai (Mali / Ghibli Style)** — *Mali*: Gaya kasual berkarakter seperti tulisan kapur pada papan menu warung makan jalanan (*street food*) dan kafe Bangkok.
+  * 📜 **Klasik Berbingkai (Serif Formal)** — *Noto Serif Thai*: Gaya berserif dengan wibawa formal elegan khas naskah sastra, surat kabar, dan piagam kerajaan.
+* **Komparasi 3 Ragam Huruf Langsung di Kartu Matriks**: Setiap kartu konsonan menampilkan strip perbandingan langsung bentuk huruf dalam versi Berloop, Tanpa Loop, dan Tulisan Tangan untuk memudahkan identifikasi bentuk huruf di dunia nyata.
+* **Mode Bantuan Baca Latin**: Opsi beralih antara Mode Lengkap (Aksara + Latin Fonetik) dan Mode Aksara Murni (Native Thai Only dengan efek *blur-peek* untuk menguji kemahiran membaca mandiri).
 * **Pencarian Cepat & Filter Multikategori**: Filter instan kelas huruf atau cari berdasarkan nama/romanisasi/arti.
 * **Kuis Kilat Memori Huruf**: Latihan interaktif menebak nama sebutan aksara Thai dengan reward +5 XP.
 
