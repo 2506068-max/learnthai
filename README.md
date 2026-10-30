@@ -20,8 +20,7 @@
 * **Penyambutan Pengguna Berulang (*Returning User Card*)**: Pengguna yang sudah masuk disambut dengan kartu profil aktif dan tombol *Lanjutkan Belajar* instan serta opsi *Ganti Akun*.
 * **Mode Tamu Cepat (*Guest Mode*)**: Tombol masuk instan sekali klik tanpa harus membuat akun terlebih dahulu.
 * **Badge Profil & Logout di Header/Sidebar**: Profil pembelajar aktif tampil di pojok kanan atas dan bilah navigasi kiri, lengkap dengan tombol keluar (*logout*) `🚪` untuk beralih akun kapan saja.
-* **Pemilihan Gaya Bicara di Awal**: Memilih preferensi suara penutur wanita (ค่ะ) atau pria (ครับ) sejak awal dengan tombol uji coba dengar sapaan langsung (*"สวัสดีค่ะ/ครับ ยินดีต้อนรับ..."*).
-* **Jalur Masuk Cepat (Direct Learning Pathways)**: 4 kartu pintasan langsung ke Kurikulum, Studio Bicara, Roleplay, atau Laboratorium Fonetik.
+* **Fokus Penuh pada Akun & Sapaan**: Halaman portal pembuka dirancang bersih dan tenang, berfokus murni pada lambang belajar dan akun pengguna tanpa membanjiri layar dengan menu atau bahan ajar di awal.
 
 ### 1. 🎙️ Studio Bicara Real-Time (Voice-First Studio)
 * **Perekaman Suara Interaktif**: Tombol mikrofon terpusat dengan efek *pulsating talisman* saat merekam suara pengguna.

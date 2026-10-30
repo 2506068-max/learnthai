@@ -2237,7 +2237,7 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: var(--bg);
+      background: #0d1410;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -2246,6 +2246,9 @@
       padding: 40px 20px 60px;
       min-height: 100vh;
       transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+    }
+    [data-theme="light"] #learningPortal {
+      background: #f6f3eb;
     }
 
     #learningPortal.portal-hidden {
@@ -2534,89 +2537,6 @@
 
     .portal-main-cta-btn:hover .cta-arrow {
       transform: translateX(4px);
-    }
-
-    /* Portal Pathways Section */
-    .portal-pathways-section {
-      width: 100%;
-      max-width: 820px;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-    }
-
-    .portal-pathways-header {
-      font-size: 11px;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .portal-pathways-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-    }
-
-    .portal-pathway-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      text-align: left;
-      display: flex;
-      gap: 14px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .portal-pathway-card:hover {
-      border-color: var(--primary);
-      background: var(--bg-card-hover);
-      transform: translateY(-2px);
-    }
-
-    .portal-pathway-card:active {
-      transform: scale(0.98);
-    }
-
-    .portal-pathway-card .pathway-icon {
-      font-size: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-md);
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-
-    .portal-pathway-card .pathway-body h4 {
-      font-size: 14px;
-      font-weight: 800;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .portal-pathway-card .pathway-body p {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-
-    .portal-pathway-card .pathway-tag {
-      display: inline-block;
-      font-size: 10px;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 2px 8px;
-      border-radius: var(--radius-pill);
     }
 
     /* ==========================================================================
@@ -3050,55 +2970,6 @@
             </div>
           </div>
         </form>
-      </div>
-
-      <!-- Direct Learning Pathways (Bahan Ajar Cepat) -->
-      <div class="portal-pathways-section">
-        <div class="portal-pathways-header">
-          <span>ATAU LANGSUNG PILIH MATERI & BAHAN AJAR:</span>
-        </div>
-        <div class="portal-pathways-grid">
-          <div class="portal-pathway-card" onclick="enterLearningApp('curriculum')" title="Buka Roadmap Kurikulum">
-            <div class="pathway-icon">🗺️</div>
-            <div class="pathway-body">
-              <h4>Kurikulum 12 Unit (48 Modul)</h4>
-              <p>Belajar terstruktur dari A1 Pemula (salam &amp; angka) hingga B1 Percakapan mandiri.</p>
-              <span class="pathway-tag">12 Unit • 48 Modul Interaktif</span>
-            </div>
-          </div>
-          <div class="portal-pathway-card" onclick="enterLearningApp('alphabet')" title="Buka Materi Aksara &amp; 44 Konsonan Thai">
-            <div class="pathway-icon">🔤</div>
-            <div class="pathway-body">
-              <h4>Materi Aksara &amp; 44 Konsonan</h4>
-              <p>Kuasai 44 konsonan 3 kelas nada, 14 vokal, tanda nada, &amp; angka tradisional Thai.</p>
-              <span class="pathway-tag">Materi Aksara Mandiri</span>
-            </div>
-          </div>
-          <div class="portal-pathway-card" onclick="enterLearningApp('studio')" title="Buka Studio Latihan Bicara">
-            <div class="pathway-icon">🎙️</div>
-            <div class="pathway-body">
-              <h4>Studio Latihan Berbicara</h4>
-              <p>Latihan mikrofon artikulasi langsung dengan umpan balik skor nada AI.</p>
-              <span class="pathway-tag">Evaluasi Akurasi Suara</span>
-            </div>
-          </div>
-          <div class="portal-pathway-card" onclick="enterLearningApp('roleplay')" title="Buka Simulasi Roleplay">
-            <div class="pathway-icon">🎭</div>
-            <div class="pathway-body">
-              <h4>20 Skenario Roleplay Nyata</h4>
-              <p>Simulasi dialog interaktif: kafe Pad Thai, belanja Chatuchak, taksi, kuil.</p>
-              <span class="pathway-tag">Simulasi Percakapan Bebas</span>
-            </div>
-          </div>
-          <div class="portal-pathway-card" onclick="enterLearningApp('phonetics')" title="Buka Laboratorium Suara &amp; 5 Nada">
-            <div class="pathway-icon">🎵</div>
-            <div class="pathway-body">
-              <h4>Laboratorium Suara &amp; 5 Nada</h4>
-              <p>Uji kontur 5 nada tonal (datar, rendah, jatuh, tinggi, naik) &amp; buku frasa audio.</p>
-              <span class="pathway-tag">Laboratorium Suara</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
