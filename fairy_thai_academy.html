@@ -2231,10 +2231,324 @@
       border-radius: var(--radius-pill);
     }
 
+    /* ==========================================================================
+       LOGIN MENU & STUDENT PROFILE CARD
+       ========================================================================== */
+    .portal-login-card {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      margin-bottom: 28px;
+      text-align: left;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+      position: relative;
+    }
+
+    .portal-login-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .portal-badge-sm {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.05em;
+    }
+
+    .returning-user-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-lg);
+    }
+
+    .returning-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      border: 2px solid var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .returning-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .returning-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    .portal-switch-account-btn {
+      padding: 14px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .portal-switch-account-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .portal-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .portal-form-grid { grid-template-columns: 1fr; }
+    }
+
+    .portal-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .portal-label {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .portal-input-wrap {
+      position: relative;
+    }
+
+    .portal-text-input {
+      width: 100%;
+      padding: 11px 14px 11px 36px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+
+    .portal-text-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .portal-input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .portal-avatar-section {
+      margin-bottom: 18px;
+    }
+
+    .portal-avatar-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .avatar-pick-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--border);
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.18s, border-color 0.18s, background-color 0.18s;
+    }
+
+    .avatar-pick-btn:hover {
+      transform: scale(1.08);
+      border-color: var(--primary);
+    }
+
+    .avatar-pick-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: scale(1.1);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .portal-gender-section {
+      margin-bottom: 22px;
+    }
+
+    .portal-guest-btn {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: none;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: color 0.18s;
+      border: none;
+    }
+
+    .portal-guest-btn:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Header Profile Badge */
+    .user-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-size: 13px;
+    }
+
+    .user-profile-badge:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+
+    .profile-badge-avatar {
+      font-size: 16px;
+    }
+
+    .profile-badge-name {
+      font-weight: 700;
+      max-width: 110px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .profile-logout-btn {
+      background: none;
+      border: none;
+      font-size: 13px;
+      opacity: 0.6;
+      padding: 2px 4px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.18s, transform 0.18s;
+    }
+
+    .profile-logout-btn:hover {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+
+    /* Nav Rail User Card */
+    .nav-user-card {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      margin-bottom: 8px;
+    }
+
+    .nav-user-card:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+
+    .nav-user-avatar {
+      font-size: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav-user-info {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .nav-user-info strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .nav-user-info small {
+      display: block;
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .nav-logout-btn {
+      font-size: 13px;
+      opacity: 0.6;
+      transition: opacity 0.18s;
+      cursor: pointer;
+    }
+
+    .nav-logout-btn:hover {
+      opacity: 1;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 960px) {
       .stimuler-nav-rail { width: 80px; padding: 16px 8px; }
-      .nav-item-btn span, .nav-section-title, .ai-coach-info { display: none; }
+      .nav-item-btn span, .nav-section-title, .ai-coach-info, .nav-user-info { display: none; }
       .studio-grid { grid-template-columns: 1fr; }
       .roleplay-container { grid-template-columns: 1fr; }
     }
@@ -2286,37 +2600,115 @@
         Mulai petualangan belajar bahasa Thailand dari dasar hingga lancar. Latih kepekaan 5 nada fonetik, dengarkan audio penutur asli Bangkok berkualitas studio, dan ikuti kurikulum interaktif berjenjang.
       </p>
 
-      <!-- Native Voice Gender Selector & Greeting Audio Test -->
-      <div class="portal-gender-box">
-        <span class="portal-gender-label">PILIH GAYA BICARA PENUTUR ASLI SEBELUM MEMULAI:</span>
-        <div class="portal-gender-pills">
-          <button class="portal-gender-btn active" id="portalGenderFemale" onclick="setPortalGender('female')" title="Gaya Bicara Sopan Wanita (ค่ะ/คะ)">
-            <span class="p-icon">👩</span>
-            <div>
-              <strong>Wanita (ค่ะ / khâ)</strong>
-              <small>Nong Premwadee • Melodis</small>
+      <!-- LOGIN / STUDENT PROFILE CARD -->
+      <div class="portal-login-card" id="portalLoginCard">
+        <div class="portal-login-header">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:18px;">🔐</span>
+              <h3 style="font-size:16px; font-weight:800; margin:0;" id="portalLoginTitle">Masuk ke Akun Pembelajar</h3>
             </div>
-          </button>
-          <button class="portal-gender-btn" id="portalGenderMale" onclick="setPortalGender('male')" title="Gaya Bicara Sopan Pria (ครับ)">
-            <span class="p-icon">👨</span>
-            <div>
-              <strong>Pria (ครับ / khráp)</strong>
-              <small>Phi Niwat • Berwibawa</small>
-            </div>
-          </button>
-          <button class="portal-test-audio-btn" onclick="playPortalGreetingAudio()" title="Dengarkan Contoh Sapaan Penutur Asli">
-            <span id="portalAudioIcon">🔊</span>
-            <span>Dengar Sapaan</span>
-          </button>
+            <span class="portal-badge-sm" id="portalLoginBadge">PROFIL BELAJAR</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0 0;">
+            Simpan kemajuan materi, perolehan XP nada, streak harian, dan modul yang sudah Anda kuasai.
+          </p>
         </div>
-      </div>
 
-      <!-- Primary Entry CTA Button -->
-      <div class="portal-cta-group">
-        <button class="portal-main-cta-btn" onclick="enterLearningApp('studio')" title="Masuk ke Taman Pembelajaran">
-          <span>✨ Mulai Belajar & Masuk Menu</span>
-          <span class="cta-arrow">→</span>
-        </button>
+        <!-- Mode A: Returning User Account Card (Displayed if already logged in) -->
+        <div id="portalReturningUserView" style="display:none;">
+          <div class="returning-user-box">
+            <div class="returning-avatar" id="returningUserAvatar">🍃</div>
+            <div class="returning-info">
+              <div style="font-size:11px; font-family:var(--font-mono); color:var(--primary); font-weight:700;">AKUN AKTIF</div>
+              <h4 style="font-size:17px; font-weight:800; margin:2px 0;" id="returningUserName">Pembelajar Thai</h4>
+              <div class="returning-meta" id="returningUserMeta">🔥 1 Hari Streak • ⚡ 65 XP • Level A1</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
+            <button type="button" class="portal-main-cta-btn" style="flex:2; justify-content:center; padding:14px 24px;" onclick="continueAsReturningUser()">
+              <span>Lanjutkan Belajar 🚀</span>
+            </button>
+            <button type="button" class="portal-switch-account-btn" onclick="showNewLoginForm()">
+              <span>🔄 Ganti Akun</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mode B: Active Login / Register Form -->
+        <form id="portalLoginForm" onsubmit="event.preventDefault(); handleStudentLogin();" style="display:block;">
+          <div class="portal-form-grid">
+            <div class="portal-field-group">
+              <label for="portalInputName" class="portal-label">NAMA PEMBELAJAR / PANGGILAN *</label>
+              <div class="portal-input-wrap">
+                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (misal: Nesya / Zaldy)" required autocomplete="name">
+                <span class="portal-input-icon">👤</span>
+              </div>
+            </div>
+
+            <div class="portal-field-group">
+              <label for="portalInputPin" class="portal-label">KATA SANDI / PIN (OPSIONAL)</label>
+              <div class="portal-input-wrap">
+                <input type="password" id="portalInputPin" class="portal-text-input" placeholder="PIN opsional (misal: 1234)" maxlength="20" autocomplete="current-password">
+                <span class="portal-input-icon">🔑</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avatar Picker -->
+          <div class="portal-avatar-section">
+            <label class="portal-label">PILIH AVATAR PEMBELAJAR:</label>
+            <div class="portal-avatar-row" id="portalAvatarRow">
+              <button type="button" class="avatar-pick-btn active" data-avatar="🍃" onclick="selectStudentAvatar('🍃', this)" title="Nong Mali (Roh Hutan)">🍃</button>
+              <button type="button" class="avatar-pick-btn" data-avatar="🐘" onclick="selectStudentAvatar('🐘', this)" title="Chang Noi (Gajah Chiang Mai)">🐘</button>
+              <button type="button" class="avatar-pick-btn" data-avatar="🛺" onclick="selectStudentAvatar('🛺', this)" title="Pii Somchai (Petualang Bangkok)">🛺</button>
+              <button type="button" class="avatar-pick-btn" data-avatar="🌸" onclick="selectStudentAvatar('🌸', this)" title="Dok Bua (Bunga Teratai)">🌸</button>
+              <button type="button" class="avatar-pick-btn" data-avatar="🐯" onclick="selectStudentAvatar('🐯', this)" title="Sua Noi (Harimau Gesit)">🐯</button>
+              <button type="button" class="avatar-pick-btn" data-avatar="🦉" onclick="selectStudentAvatar('🦉', this)" title="Nok Hook (Burung Hantu Bijak)">🦉</button>
+            </div>
+          </div>
+
+          <!-- Native Voice Gender Selector & Greeting Audio Test -->
+          <div class="portal-gender-section">
+            <label class="portal-label">GAYA BICARA PENUTUR ASLI:</label>
+            <div class="portal-gender-pills">
+              <button type="button" class="portal-gender-btn active" id="portalGenderFemale" onclick="setPortalGender('female')" title="Gaya Bicara Sopan Wanita (ค่ะ/คะ)">
+                <span class="p-icon">👩</span>
+                <div>
+                  <strong>Wanita (ค่ะ / khâ)</strong>
+                  <small>Premwadee • Melodis</small>
+                </div>
+              </button>
+              <button type="button" class="portal-gender-btn" id="portalGenderMale" onclick="setPortalGender('male')" title="Gaya Bicara Sopan Pria (ครับ)">
+                <span class="p-icon">👨</span>
+                <div>
+                  <strong>Pria (ครับ / khráp)</strong>
+                  <small>Niwat • Berwibawa</small>
+                </div>
+              </button>
+              <button type="button" class="portal-test-audio-btn" onclick="playPortalGreetingAudio()" title="Dengarkan Contoh Sapaan Penutur Asli">
+                <span id="portalAudioIcon">🔊</span>
+                <span>Dengar Sapaan</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="portal-login-actions">
+            <button type="submit" class="portal-main-cta-btn" style="width:100%; justify-content:center; padding:15px;">
+              <span>✨ Masuk & Mulai Belajar</span>
+              <span class="cta-arrow">→</span>
+            </button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="portal-guest-btn" onclick="handleGuestLogin()">
+                ⚡ Masuk Cepat sebagai Tamu (Guest)
+              </button>
+              <span style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">
+                Kemajuan tersimpan otomatis di browser
+              </span>
+            </div>
+          </div>
+        </form>
       </div>
 
       <!-- Direct Learning Pathways (Bahan Ajar Cepat) -->
@@ -2376,6 +2768,12 @@
       </div>
 
       <div class="header-actions">
+        <!-- User Profile Pill -->
+        <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()" title="Profil Akun: Klik untuk melihat atau ganti akun">
+          <span class="profile-badge-avatar" id="headerUserAvatar">🍃</span>
+          <span class="profile-badge-name" id="headerUserName">Pembelajar</span>
+          <button class="profile-logout-btn" onclick="event.stopPropagation(); handleStudentLogout();" title="Keluar / Ganti Akun">🚪</button>
+        </div>
         <button class="icon-btn" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Ikon Belajar">
           🏠
         </button>
@@ -2464,6 +2862,16 @@
             <h4 style="font-family:var(--font-display);">Nong Mali (มะลิ)</h4>
             <p>Roh Hutan Sukhumvit • Online</p>
           </div>
+        </div>
+
+        <!-- Student Profile Card in Sidebar -->
+        <div class="nav-user-card" id="navUserCard" onclick="openLearningPortal()" title="Klik untuk mengelola profil / ganti akun">
+          <div class="nav-user-avatar" id="navUserAvatar">🍃</div>
+          <div class="nav-user-info">
+            <strong id="navUserName">Pembelajar Thai</strong>
+            <small id="navUserLevel">Tingkat A1 • Masuk</small>
+          </div>
+          <span class="nav-logout-btn" onclick="event.stopPropagation(); handleStudentLogout();" title="Keluar Akun">🚪</span>
         </div>
       </aside>
 
@@ -3062,6 +3470,9 @@
   <script>
     /* 1. STATE & PERSISTENCE */
     const DEFAULT_STATE = {
+      userName: '',
+      userAvatar: '🍃',
+      isLoggedIn: false,
       xp: 65,
       gems: 150,
       streak: 1,
@@ -3084,10 +3495,37 @@
     if (!appState.speakerGender) {
       appState.speakerGender = 'female';
     }
+    if (typeof appState.userName !== 'string') {
+      appState.userName = '';
+    }
+    if (!appState.userAvatar) {
+      appState.userAvatar = '🍃';
+    }
 
     function saveState() {
       localStorage.setItem('stimuler_thai_state', JSON.stringify(appState));
+      // Persist to user accounts store if logged in
+      if (appState.userName && appState.userName !== 'Tamu Belajar' && appState.isLoggedIn) {
+        try {
+          const accounts = JSON.parse(localStorage.getItem('stimuler_thai_accounts') || '{}');
+          const key = appState.userName.toLowerCase();
+          accounts[key] = {
+            ...(accounts[key] || {}),
+            name: appState.userName,
+            avatar: appState.userAvatar,
+            speakerGender: appState.speakerGender,
+            xp: appState.xp,
+            streak: appState.streak,
+            completedLessons: appState.completedLessons,
+            unlockedLessons: appState.unlockedLessons
+          };
+          localStorage.setItem('stimuler_thai_accounts', JSON.stringify(accounts));
+        } catch(e) {}
+      }
       updateTopMetrics();
+      if (typeof syncUserProfileUI === 'function') {
+        syncUserProfileUI();
+      }
       renderCurriculumNodes();
     }
 
@@ -8853,7 +9291,181 @@
       }
     }
 
-    /* PORTAL GATEWAY HELPERS */
+    /* PORTAL GATEWAY & STUDENT LOGIN HELPERS */
+    let selectedStudentAvatar = '🍃';
+
+    function selectStudentAvatar(avatar, btn) {
+      playSynthSound('click');
+      selectedStudentAvatar = avatar;
+      document.querySelectorAll('#portalAvatarRow .avatar-pick-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
+      });
+    }
+
+    function getSavedAccounts() {
+      try {
+        return JSON.parse(localStorage.getItem('stimuler_thai_accounts') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveAccounts(accounts) {
+      localStorage.setItem('stimuler_thai_accounts', JSON.stringify(accounts));
+    }
+
+    function handleStudentLogin() {
+      const nameInput = document.getElementById('portalInputName');
+      const pinInput = document.getElementById('portalInputPin');
+      const name = (nameInput ? nameInput.value : '').trim();
+      const pin = (pinInput ? pinInput.value : '').trim();
+
+      if (!name) {
+        showToast('Silakan tuliskan nama Anda terlebih dahulu! ✍️');
+        if (nameInput) nameInput.focus();
+        return;
+      }
+
+      const accounts = getSavedAccounts();
+      const key = name.toLowerCase();
+
+      if (accounts[key]) {
+        const acc = accounts[key];
+        if (acc.pin && pin && acc.pin !== pin) {
+          showToast('PIN kata sandi tidak sesuai! Silakan periksa kembali. 🔒');
+          if (pinInput) pinInput.focus();
+          return;
+        }
+        appState.userName = acc.name || name;
+        appState.userAvatar = acc.avatar || selectedStudentAvatar;
+        if (acc.speakerGender) appState.speakerGender = acc.speakerGender;
+        if (typeof acc.xp === 'number') appState.xp = acc.xp;
+        if (typeof acc.streak === 'number') appState.streak = acc.streak;
+        if (Array.isArray(acc.completedLessons)) appState.completedLessons = acc.completedLessons;
+        if (Array.isArray(acc.unlockedLessons)) appState.unlockedLessons = acc.unlockedLessons;
+      } else {
+        appState.userName = name;
+        appState.userAvatar = selectedStudentAvatar;
+        accounts[key] = {
+          name: name,
+          pin: pin,
+          avatar: selectedStudentAvatar,
+          speakerGender: appState.speakerGender,
+          xp: appState.xp,
+          streak: appState.streak,
+          completedLessons: appState.completedLessons,
+          unlockedLessons: appState.unlockedLessons,
+          createdAt: new Date().toISOString()
+        };
+        saveAccounts(accounts);
+      }
+
+      appState.isLoggedIn = true;
+      saveState();
+      syncUserProfileUI();
+      playSynthSound('success');
+      showToast(`Selamat datang, ${appState.userName}! Selamat belajar 🇹🇭`);
+      enterLearningApp('studio');
+    }
+
+    function handleGuestLogin() {
+      appState.userName = 'Tamu Belajar';
+      appState.userAvatar = '🍃';
+      appState.isLoggedIn = true;
+      saveState();
+      syncUserProfileUI();
+      playSynthSound('click');
+      showToast('Masuk dalam Mode Tamu. Selamat belajar! 🌿');
+      enterLearningApp('studio');
+    }
+
+    function continueAsReturningUser() {
+      playSynthSound('success');
+      showToast(`Selamat datang kembali, ${appState.userName || 'Pembelajar'}! 👋`);
+      enterLearningApp('studio');
+    }
+
+    function showNewLoginForm() {
+      playSynthSound('click');
+      const returningView = document.getElementById('portalReturningUserView');
+      const formView = document.getElementById('portalLoginForm');
+      const title = document.getElementById('portalLoginTitle');
+      if (returningView) returningView.style.display = 'none';
+      if (formView) formView.style.display = 'block';
+      if (title) title.textContent = 'Ganti Akun / Masuk Akun Baru';
+      const nameInput = document.getElementById('portalInputName');
+      if (nameInput) {
+        nameInput.value = '';
+        nameInput.focus();
+      }
+    }
+
+    function handleStudentLogout() {
+      playSynthSound('click');
+      if (appState.userName && appState.userName !== 'Tamu Belajar') {
+        const accounts = getSavedAccounts();
+        const key = appState.userName.toLowerCase();
+        accounts[key] = {
+          ...(accounts[key] || {}),
+          name: appState.userName,
+          avatar: appState.userAvatar,
+          speakerGender: appState.speakerGender,
+          xp: appState.xp,
+          streak: appState.streak,
+          completedLessons: appState.completedLessons,
+          unlockedLessons: appState.unlockedLessons
+        };
+        saveAccounts(accounts);
+      }
+
+      appState.isLoggedIn = false;
+      saveState();
+      syncUserProfileUI();
+      openLearningPortal();
+      showToast('Berhasil keluar dari akun 👋');
+    }
+
+    function syncUserProfileUI() {
+      const name = appState.userName || 'Pembelajar';
+      const avatar = appState.userAvatar || '🍃';
+      const isLoggedIn = !!appState.isLoggedIn;
+
+      // Header profile badge
+      const headerName = document.getElementById('headerUserName');
+      const headerAvatar = document.getElementById('headerUserAvatar');
+      if (headerName) headerName.textContent = name;
+      if (headerAvatar) headerAvatar.textContent = avatar;
+
+      // Nav rail user card
+      const navName = document.getElementById('navUserName');
+      const navAvatar = document.getElementById('navUserAvatar');
+      const navLevel = document.getElementById('navUserLevel');
+      if (navName) navName.textContent = name;
+      if (navAvatar) navAvatar.textContent = avatar;
+      if (navLevel) navLevel.textContent = isLoggedIn ? `🔥 ${appState.streak} Hari • ⚡ ${appState.xp} XP` : 'Belum Masuk';
+
+      // Returning view vs form view in portal
+      const returningView = document.getElementById('portalReturningUserView');
+      const formView = document.getElementById('portalLoginForm');
+      const retName = document.getElementById('returningUserName');
+      const retAvatar = document.getElementById('returningUserAvatar');
+      const retMeta = document.getElementById('returningUserMeta');
+      const title = document.getElementById('portalLoginTitle');
+
+      if (isLoggedIn && name && name !== 'Tamu Belajar' && returningView && formView) {
+        returningView.style.display = 'block';
+        formView.style.display = 'none';
+        if (retName) retName.textContent = name;
+        if (retAvatar) retAvatar.textContent = avatar;
+        if (retMeta) retMeta.textContent = `🔥 ${appState.streak} Hari Streak • ⚡ ${appState.xp} XP • CEFR A1.2`;
+        if (title) title.textContent = `Akun Pembelajar Aktif: ${name}`;
+      } else if (returningView && formView) {
+        returningView.style.display = 'none';
+        formView.style.display = 'block';
+        if (title) title.textContent = 'Masuk ke Akun Pembelajar';
+      }
+    }
+
     function openLearningPortal() {
       playSynthSound('click');
       const portal = document.getElementById('learningPortal');
@@ -8862,6 +9474,7 @@
         portal.classList.add('portal-visible');
         document.body.classList.add('in-portal-mode');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        syncUserProfileUI();
       }
     }
 
@@ -8906,6 +9519,7 @@
         portal.classList.remove('portal-hidden');
         portal.classList.add('portal-visible');
       }
+      syncUserProfileUI();
       updateGenderControls();
     }
 

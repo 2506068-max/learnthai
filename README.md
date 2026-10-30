@@ -13,12 +13,15 @@
 
 ## ✨ Fitur Utama
 
-### 0. 🍃 Portal Gerbang Pembelajaran (Learning Entry Gateway & Emblem)
-* **Layar Pembuka Tenang Berorientasi Belajar**: Saat pertama kali membuka website, pengguna disambut oleh portal belajar terpusat yang tenang tanpa langsung dijejali menu atau materi bahan ajar yang padat.
+### 0. 🍃 Portal Gerbang Pembelajaran & Menu Login (Learning Gateway, Emblem & Student Login)
+* **Layar Pembuka & Menu Login di Awal**: Saat pertama kali membuka website, pengguna disambut oleh portal belajar terpusat yang tenang dengan formulir **Masuk / Login Akun Pembelajar** tanpa langsung dijejali menu atau materi bahan ajar yang padat.
 * **Ikon Belajar Ghibli Eksklusif**: Menampilkan lambang belajar animasi halus (*floating emblem*) berupa buku suci ilmu pengetahuan, aksara pertama abjad Thailand **ก (Ko Kai)**, dan pucuk daun melati (*jasmine leaf*).
+* **Multi-Profil Pembelajar & Avatar**: Pengguna dapat memasukkan nama pembelajar (misal: *Nesya* / *Zaldy*), PIN opsional, serta memilih 6 avatar Ghibli/Thailand unik (🍃 *Mali*, 🐘 *Chang Noi*, 🛺 *Somchai*, 🌸 *Dok Bua*, 🐯 *Sua Noi*, 🦉 *Nok Hook*). Kemajuan materi (XP, streak, modul selesai) disimpan terpisah per profil di `localStorage`.
+* **Penyambutan Pengguna Berulang (*Returning User Card*)**: Pengguna yang sudah masuk disambut dengan kartu profil aktif dan tombol *Lanjutkan Belajar* instan serta opsi *Ganti Akun*.
+* **Mode Tamu Cepat (*Guest Mode*)**: Tombol masuk instan sekali klik tanpa harus membuat akun terlebih dahulu.
+* **Badge Profil & Logout di Header/Sidebar**: Profil pembelajar aktif tampil di pojok kanan atas dan bilah navigasi kiri, lengkap dengan tombol keluar (*logout*) `🚪` untuk beralih akun kapan saja.
 * **Pemilihan Gaya Bicara di Awal**: Memilih preferensi suara penutur wanita (ค่ะ) atau pria (ครับ) sejak awal dengan tombol uji coba dengar sapaan langsung (*"สวัสดีค่ะ/ครับ ยินดีต้อนรับ..."*).
-* **Jalur Masuk Cepat (Direct Learning Pathways)**: Tombol *Mulai Belajar* utama untuk masuk ke Studio, serta 4 kartu pintasan langsung ke Kurikulum, Studio Bicara, Roleplay, atau Laboratorium Fonetik.
-* **Akses Kembali Fleksibel**: Tombol **🏠 Portal Belajar** di header dan bilah navigasi kiri memungkinkan pengguna kembali ke layar tenang ini kapan saja.
+* **Jalur Masuk Cepat (Direct Learning Pathways)**: 4 kartu pintasan langsung ke Kurikulum, Studio Bicara, Roleplay, atau Laboratorium Fonetik.
 
 ### 1. 🎙️ Studio Bicara Real-Time (Voice-First Studio)
 * **Perekaman Suara Interaktif**: Tombol mikrofon terpusat dengan efek *pulsating talisman* saat merekam suara pengguna.
