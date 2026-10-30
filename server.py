@@ -113,8 +113,8 @@ class ThaiAppRequestHandler(http.server.SimpleHTTPRequestHandler):
         super().do_GET()
 
 if __name__ == '__main__':
-    socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", PORT), ThaiAppRequestHandler) as httpd:
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
+    with socketserver.ThreadingTCPServer(("", PORT), ThaiAppRequestHandler) as httpd:
         print(f"🌿 Mali's Thai Garden Server running with Neural TTS at http://localhost:{PORT}", flush=True)
         try:
             httpd.serve_forever()

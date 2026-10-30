@@ -110,7 +110,18 @@ def get_part1_content():
       <div style="font-weight:700; color:var(--text);">Lembar Kerja Menulis Konsonan:</div>
       <div style="font-size:12px; color:var(--text-muted);">Gunakan lembar grid panduan resmi untuk melatih goresan tangan Anda.</div>
     </div>
-    <a href="/materials/lembar_menulis_konsonan_thai.pdf" download class="btn-stimuler-primary" style="margin-left:auto; text-decoration:none;">Unduh PDF (2.4 MB) ↓</a>
+    <div style="display:flex; gap:8px; margin-left:auto; flex-wrap:wrap;">
+      <a href="/materials/lembar_menulis_konsonan_thai.pdf" download class="btn-stimuler-primary" style="text-decoration:none;">📄 Unduh PDF ↓</a>
+      <a href="/materials/lembar_menulis_konsonan_thai.jpg" target="_blank" class="btn-subtle-nav" style="text-decoration:none; display:inline-flex; align-items:center;">🖼️ Buka JPG ↗</a>
+    </div>
+  </div>
+
+  <div style="margin:18px 0; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; background:#ffffff; text-align:center; box-shadow:0 4px 14px rgba(0,0,0,0.25);">
+    <div style="padding:8px 14px; background:#f1f5f9; color:#475569; font-size:12px; font-weight:700; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+      <span>👁️ Pratinjau Lembar Menulis 44 Konsonan:</span>
+      <a href="/materials/lembar_menulis_konsonan_thai.jpg" target="_blank" style="color:#0284c7; text-decoration:none; font-size:11px;">Buka Ukuran Penuh ↗</a>
+    </div>
+    <img src="/materials/lembar_menulis_konsonan_thai.jpg" alt="Lembar Latihan Menulis Konsonan Thai" style="max-width:100%; height:auto; display:block; margin:0 auto;" loading="lazy">
   </div>
 </div>
 """
@@ -317,9 +328,20 @@ def get_part1_content():
     <div style="font-size:24px;">📄</div>
     <div>
       <div style="font-weight:700; color:var(--text);">Lembar Kerja Menulis Vokal Thai:</div>
-      <div style="font-size:12px; color:var(--text-muted);">Latih goresan vokal atas, bawah, depan, dan sekeliling dengan lembar panduan PDF.</div>
+      <div style="font-size:12px; color:var(--text-muted);">Latih goresan vokal atas, bawah, depan, dan sekeliling dengan lembar panduan.</div>
     </div>
-    <a href="/materials/lembar_menulis_vokal_thai.pdf" download class="btn-stimuler-primary" style="margin-left:auto; text-decoration:none;">Unduh PDF (2.0 MB) ↓</a>
+    <div style="display:flex; gap:8px; margin-left:auto; flex-wrap:wrap;">
+      <a href="/materials/lembar_menulis_vokal_thai.pdf" download class="btn-stimuler-primary" style="text-decoration:none;">📄 Unduh PDF ↓</a>
+      <a href="/materials/lembar_menulis_vokal_thai.jpg" target="_blank" class="btn-subtle-nav" style="text-decoration:none; display:inline-flex; align-items:center;">🖼️ Buka JPG ↗</a>
+    </div>
+  </div>
+
+  <div style="margin:18px 0; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; background:#ffffff; text-align:center; box-shadow:0 4px 14px rgba(0,0,0,0.25);">
+    <div style="padding:8px 14px; background:#f1f5f9; color:#475569; font-size:12px; font-weight:700; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+      <span>👁️ Pratinjau Lembar Menulis Vokal Thai:</span>
+      <a href="/materials/lembar_menulis_vokal_thai.jpg" target="_blank" style="color:#0284c7; text-decoration:none; font-size:11px;">Buka Ukuran Penuh ↗</a>
+    </div>
+    <img src="/materials/lembar_menulis_vokal_thai.jpg" alt="Lembar Latihan Menulis Vokal Thai" style="max-width:100%; height:auto; display:block; margin:0 auto;" loading="lazy">
   </div>
 </div>
 """
@@ -680,3 +702,4 @@ def get_part1_content():
     }
 
 print("Part 1 content helper defined.")
+
