@@ -482,9 +482,13 @@
       gap: 6px;
       border-right: 1px solid var(--border);
       position: sticky;
-      top: 68px;
-      height: calc(100vh - 68px);
+      top: 62px;
+      height: calc(100vh - 62px);
       overflow-y: auto;
+      background: #0d1410;
+    }
+    [data-theme="light"] .stimuler-nav-rail {
+      background: #f6f3eb;
     }
 
     .nav-item-btn {
@@ -2827,7 +2831,7 @@
       <!-- Centered Learning Emblem / Icon -->
       <div class="learning-icon-container">
         <div class="learning-icon-halo"></div>
-        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="enterLearningApp('studio')" title="Klik untuk Mulai Belajar">
+        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="enterLearningApp('alphabet')" title="Klik untuk Mulai Belajar">
           <svg class="portal-book-svg" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="bookGrad" x1="12" y1="20" x2="60" y2="60" gradientUnits="userSpaceOnUse">
@@ -3047,14 +3051,9 @@
         </button>
 
         <div class="nav-section-title">Materi &amp; Latihan</div>
-        <button class="nav-item-btn active" data-tab="studio" onclick="switchNavTab('studio')">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-          <span>Studio Bicara</span>
-        </button>
-
-        <button class="nav-item-btn" data-tab="roleplay" onclick="switchNavTab('roleplay')">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-          <span>Simulasi Roleplay</span>
+        <button class="nav-item-btn active" data-tab="alphabet" onclick="switchNavTab('alphabet')" title="Materi Aksara &amp; 44 Konsonan Thai">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 17l4-10 4 10"/><path d="M9.5 13h5"/></svg>
+          <span>Aksara &amp; Alfabet</span>
         </button>
 
         <button class="nav-item-btn" data-tab="curriculum" onclick="switchNavTab('curriculum')">
@@ -3062,9 +3061,14 @@
           <span>Kurikulum Unit</span>
         </button>
 
-        <button class="nav-item-btn" data-tab="alphabet" onclick="switchNavTab('alphabet')" title="Materi Aksara &amp; 44 Konsonan Thai">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 17l4-10 4 10"/><path d="M9.5 13h5"/></svg>
-          <span>Aksara &amp; Alfabet</span>
+        <button class="nav-item-btn" data-tab="roleplay" onclick="switchNavTab('roleplay')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+          <span>Simulasi Roleplay</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="studio" onclick="switchNavTab('studio')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+          <span>Studio Bicara</span>
         </button>
 
         <div class="nav-section-title">Laboratorium Suara</div>
@@ -3110,8 +3114,8 @@
       <!-- MAIN STUDIO CONTENT -->
       <main class="stimuler-main">
 
-        <!-- 1. STUDIO BICARA TAB (HERO) -->
-        <section id="panel-studio" class="section-tab-panel active">
+        <!-- STUDIO BICARA TAB -->
+        <section id="panel-studio" class="section-tab-panel">
           <div class="studio-grid">
             <!-- Left: Practice Studio -->
             <div class="studio-panel">
@@ -3353,8 +3357,8 @@
           </div>
         </section>
 
-        <!-- 4. MATERI AKSARA & ALFABET THAI (SEPARATE DEDICATED MATERIAL) -->
-        <section id="panel-alphabet" class="section-tab-panel">
+        <!-- 1. MATERI AKSARA & ALFABET THAI (SEPARATE DEDICATED MATERIAL) -->
+        <section id="panel-alphabet" class="section-tab-panel active">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
             <div>
               <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -9973,7 +9977,7 @@
       }
     }
 
-    function enterLearningApp(targetTab = 'studio') {
+    function enterLearningApp(targetTab = 'alphabet') {
       playSynthSound('click');
       const portal = document.getElementById('learningPortal');
       if (portal) {
