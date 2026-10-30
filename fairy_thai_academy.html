@@ -1991,6 +1991,664 @@
       color: var(--text-muted);
     }
 
+    /* ==========================================================================
+       VOCABULARY & DAILY MISSION SYSTEM STYLES
+       ========================================================================== */
+    .vocab-badge-daily {
+      margin-left: auto;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--border-bright);
+      transition: all 0.2s;
+    }
+    .vocab-badge-daily.completed {
+      background: rgba(82, 183, 136, 0.2);
+      color: #52b788;
+      border-color: rgba(82, 183, 136, 0.4);
+    }
+
+    /* Daily Quest Bento Banner */
+    .vocab-daily-banner {
+      position: relative;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .daily-banner-glow {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .daily-banner-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .daily-banner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .daily-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      padding: 4px 12px;
+      background: var(--primary-light);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-bright);
+    }
+    .live-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--primary);
+      animation: pulseAnim 2s infinite;
+    }
+    .daily-date-chip {
+      color: var(--text-muted);
+      border-left: 1px solid var(--border-bright);
+      padding-left: 8px;
+      font-weight: 600;
+    }
+    .daily-status-tag {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .daily-status-tag.active {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.1);
+    }
+    .daily-status-tag.completed {
+      color: #52b788;
+      border-color: rgba(82, 183, 136, 0.4);
+      background: rgba(82, 183, 136, 0.12);
+    }
+
+    .daily-banner-main {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .daily-banner-main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .daily-banner-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .daily-banner-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      max-width: 620px;
+      line-height: 1.5;
+    }
+
+    .daily-quest-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .daily-quest-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quest-step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+    .quest-step-card.completed {
+      border-color: rgba(82, 183, 136, 0.4);
+      background: rgba(82, 183, 136, 0.08);
+    }
+    .quest-step-card.locked {
+      opacity: 0.72;
+    }
+    .step-num-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+    .quest-step-card.completed .step-num-icon {
+      background: #52b788;
+      color: #ffffff;
+    }
+    .step-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .step-progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .step-progress-row strong {
+      font-size: 13px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+    .step-hint {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .step-progress-bar {
+      width: 100%;
+      height: 5px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .step-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--radius-pill);
+      transition: width 0.3s ease;
+    }
+
+    /* Reward Box inside Banner */
+    .daily-reward-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+    .reward-title-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--amber);
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+    }
+    .reward-chips-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .reward-chip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 6px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+    .reward-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .btn-reset-quest {
+      font-size: 11px;
+      color: var(--text-dim);
+      padding: 4px;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .btn-reset-quest:hover {
+      color: var(--text);
+    }
+
+    /* Tab Bar & Switcher */
+    .vocab-tab-bar {
+      margin-bottom: 20px;
+    }
+    .badge-quiz-status {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      margin-left: 4px;
+    }
+
+    /* Mode 1: Word-by-Word Focus Card */
+    .vocab-focus-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .vocab-focus-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .vocab-card-tags-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+    .vocab-word-display {
+      text-align: center;
+      padding: 16px 0 10px 0;
+    }
+    .vocab-big-thai {
+      font-family: var(--font-thai);
+      font-size: 58px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      display: inline-block;
+      transition: transform 0.15s;
+    }
+    .vocab-big-thai:hover {
+      transform: scale(1.03);
+    }
+    .vocab-roman-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .vocab-roman-text {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .vocab-audio-circle-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: transform 0.15s;
+    }
+    .vocab-audio-circle-btn:active {
+      transform: scale(0.92);
+    }
+    .vocab-meaning-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .vocab-meaning-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+    .vocab-meaning-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .vocab-example-block {
+      background: var(--bg-card);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .vocab-ex-thai {
+      font-family: var(--font-thai);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .vocab-ex-thai:hover {
+      color: var(--primary);
+    }
+    .vocab-ex-indo {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .vocab-focus-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    /* Mode 2: Grid of Vocabulary Cards */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .vocab-grid-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.15s ease;
+    }
+    .vocab-grid-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    .vocab-grid-card.studied {
+      border-color: rgba(82, 183, 136, 0.4);
+      background: rgba(82, 183, 136, 0.04);
+    }
+    .vocab-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .vocab-grid-thai {
+      font-family: var(--font-thai);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      cursor: pointer;
+    }
+    .vocab-grid-thai:hover {
+      color: var(--primary);
+    }
+    .vocab-grid-roman {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .vocab-grid-meaning {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .vocab-grid-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    /* Mode 3: 10-Question Quiz System */
+    .vocab-locked-screen {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 48px 24px;
+      text-align: center;
+      max-width: 680px;
+      margin: 20px auto;
+      box-shadow: var(--shadow-card);
+    }
+    .locked-icon-shield {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      margin: 0 auto 16px auto;
+    }
+    .locked-progress-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+    }
+
+    .vocab-quiz-box {
+      max-width: 740px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-card);
+    }
+    .quiz-status-header {
+      margin-bottom: 24px;
+    }
+    .quiz-progress-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .quiz-badge-round {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+    .quiz-timer-score {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--amber);
+    }
+    .quiz-track-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .quiz-track-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--radius-pill);
+      transition: width 0.3s ease;
+    }
+
+    .vocab-question-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .quiz-prompt-header {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quiz-word-target {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .quiz-choices-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .quiz-choices-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .quiz-choice-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.15s ease;
+    }
+    .quiz-choice-btn:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+    }
+    .quiz-choice-btn:active {
+      transform: scale(0.98);
+    }
+    .quiz-choice-btn.correct {
+      border-color: #52b788;
+      background: rgba(82, 183, 136, 0.15) !important;
+      color: #52b788;
+    }
+    .quiz-choice-btn.wrong {
+      border-color: #fb7185;
+      background: rgba(251, 113, 133, 0.15) !important;
+      color: #fb7185;
+    }
+    .choice-key {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .choice-text {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .quiz-feedback-banner {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    /* Result Celebration Screen */
+    .vocab-result-screen {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px 24px;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-card);
+    }
+
     /* AI THAILAND HUB & ASSISTANT STYLES */
     .ai-hub-container {
       display: flex;
@@ -3061,6 +3719,12 @@
           <span>5 Nada &amp; Frasa</span>
         </button>
 
+        <button class="nav-item-btn" data-tab="vocabulary" onclick="switchNavTab('vocabulary')" title="Misi Harian Kosakata &amp; Kuis 10 Kata">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
+          <span>Kosakata &amp; Misi</span>
+          <span class="vocab-badge-daily" id="sidebarVocabBadge">10</span>
+        </button>
+
         <button class="nav-item-btn" data-tab="curriculum" onclick="switchNavTab('curriculum')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
           <span>Kurikulum Unit</span>
@@ -3524,6 +4188,173 @@
           </div>
         </section>
 
+        <!-- 3. KOSAKATA & MISI HARIAN TAB (VOCABULARY & 10-WORD DAILY QUEST) -->
+        <section id="panel-vocabulary" class="section-tab-panel">
+          <!-- TOP BENTO: DAILY MISSION HERO BANNER -->
+          <div class="vocab-daily-banner">
+            <div class="daily-banner-glow"></div>
+            <div class="daily-banner-content">
+              <div class="daily-banner-header">
+                <div class="daily-badge-pill">
+                  <span class="live-pulse-dot"></span>
+                  <span>MISI HARIAN KOSAKATA</span>
+                  <span class="daily-date-chip" id="vocabMissionDate">Hari Ini</span>
+                </div>
+                <div class="daily-status-tag" id="vocabMissionStatusTag">
+                  Belum Selesai (0/2 Syarat)
+                </div>
+              </div>
+
+              <div class="daily-banner-main">
+                <div class="daily-banner-info">
+                  <h2 class="daily-banner-title">Kuasai 10 Kosakata Inti &amp; Tuntaskan Kuis</h2>
+                  <p class="daily-banner-desc">
+                    Pelajari kata per kata dengan lafal penutur Bangkok. Setelah mempelajari minimal 10 kosakata hari ini, selesaikan kuis evaluasi 10 soal untuk klaim hadiah misi harian!
+                  </p>
+                  
+                  <!-- Two-Step Quest Checklist -->
+                  <div class="daily-quest-steps">
+                    <div class="quest-step-card" id="questStepWordsCard">
+                      <div class="step-num-icon" id="stepWordsIcon">1</div>
+                      <div class="step-text">
+                        <span class="step-label">Langkah 1: Pelajari Perkosa Kata</span>
+                        <div class="step-progress-row">
+                          <strong id="stepWordsCount">0 / 10 Kata</strong>
+                          <span class="step-hint" id="stepWordsHint">Min. 10 kata wajib dipelajari</span>
+                        </div>
+                        <div class="step-progress-bar">
+                          <div class="step-progress-fill" id="stepWordsFill" style="width:0%;"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="quest-step-card locked" id="questStepQuizCard">
+                      <div class="step-num-icon" id="stepQuizIcon">2</div>
+                      <div class="step-text">
+                        <span class="step-label">Langkah 2: Kuis Misi 10 Soal</span>
+                        <div class="step-progress-row">
+                          <strong id="stepQuizScore">Terkunci 🔒</strong>
+                          <span class="step-hint" id="stepQuizHint">Terbuka setelah 10 kata</span>
+                        </div>
+                        <div class="step-progress-bar">
+                          <div class="step-progress-fill" id="stepQuizFill" style="width:0%; background:var(--amber);"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Reward & Quick CTA Card -->
+                <div class="daily-reward-card">
+                  <span class="reward-title-badge">🏆 HADIAH MISI HARI INI</span>
+                  <div class="reward-chips-row">
+                    <div class="reward-chip"><span class="reward-icon">⚡</span><strong>+50 XP</strong></div>
+                    <div class="reward-chip"><span class="reward-icon">💎</span><strong>+20 Gems</strong></div>
+                    <div class="reward-chip"><span class="reward-icon">🔥</span><strong>+1 Streak</strong></div>
+                  </div>
+                  <div class="reward-cta-wrap">
+                    <button class="btn-stimuler-primary" id="btnVocabDailyAction" onclick="handleVocabDailyAction()">
+                      Mulai Pelajari 10 Kata ➔
+                    </button>
+                    <button class="btn-reset-quest" onclick="resetTodayVocabMission()" title="Mulai ulang misi hari ini jika ingin mengulang dari awal">
+                      🔄 Reset Misi Hari Ini
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-NAVIGATION / VIEW SWITCHER TABS -->
+          <div class="vocab-tab-bar">
+            <div class="filter-pills" style="margin:0;">
+              <button class="pill-filter active" id="tabBtnVocabFocus" onclick="switchVocabView('focus')">
+                🗂️ Pelajari Per Kata (Fokus Flashcard)
+              </button>
+              <button class="pill-filter" id="tabBtnVocabGrid" onclick="switchVocabView('grid')">
+                📋 Bank Kosakata (Daftar &amp; Kategori)
+              </button>
+              <button class="pill-filter" id="tabBtnVocabQuiz" onclick="switchVocabView('quiz')">
+                🎯 Kuis Misi 10 Soal <span class="badge-quiz-status" id="pillQuizStatus">🔒</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- VIEW 1: WORD-BY-WORD FOCUS / FLASHCARD (PELAJARI PER KATA) -->
+          <div class="vocab-view-container" id="vocabViewFocus">
+            <div class="vocab-focus-wrapper">
+              <div class="vocab-focus-card" id="vocabFocusCard">
+                <!-- Dynamically rendered word card -->
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW 2: VOCABULARY GRID (SEMUA KOSAKATA & FILTER KATEGORI) -->
+          <div class="vocab-view-container" id="vocabViewGrid" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+              <div class="filter-pills" id="vocabCategoryPills" style="margin:0;">
+                <button class="pill-filter active" onclick="filterVocabGrid('daily', this)">🎯 Misi Hari Ini (10)</button>
+                <button class="pill-filter" onclick="filterVocabGrid('all', this)">Semua (40+)</button>
+                <button class="pill-filter" onclick="filterVocabGrid('makan', this)">🍜 Kuliner &amp; Makanan</button>
+                <button class="pill-filter" onclick="filterVocabGrid('pasar', this)">🛍️ Belanja &amp; Uang</button>
+                <button class="pill-filter" onclick="filterVocabGrid('jalan', this)">🛺 Perjalanan &amp; Arah</button>
+                <button class="pill-filter" onclick="filterVocabGrid('dasar', this)">💬 Percakapan Dasar</button>
+              </div>
+              <div style="font-size:12px; font-family:var(--font-mono); color:var(--text-dim);" id="vocabGridCounter">
+                Menampilkan 10 kata
+              </div>
+            </div>
+
+            <div class="vocab-grid" id="vocabGridContainer">
+              <!-- Grid items rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- VIEW 3: 10-QUESTION DAILY QUIZ ARENA -->
+          <div class="vocab-view-container" id="vocabViewQuiz" style="display:none;">
+            <!-- Locked State Screen (shown if < 10 words studied) -->
+            <div class="vocab-locked-screen" id="vocabQuizLockedScreen">
+              <div class="locked-icon-shield">🔒</div>
+              <h3 style="font-size:22px; font-weight:800; margin-bottom:8px;">Kuis Misi Harian Belum Terbuka</h3>
+              <p style="font-size:14px; color:var(--text-muted); max-width:540px; margin:0 auto 20px auto; line-height:1.5;">
+                Sesuai aturan kurikulum, Anda harus mempelajari kosakata perkata minimal <strong>10 kata</strong> terlebih dahulu sebelum dapat menguji penguasaan di kuis harian.
+              </p>
+              <div class="locked-progress-wrap">
+                <span style="font-size:12px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono);">Progress Belajar Hari Ini:</span>
+                <strong id="lockedCountText" style="color:var(--primary); font-family:var(--font-mono);">0 / 10 Kata</strong>
+              </div>
+              <div style="margin-top:20px;">
+                <button class="btn-stimuler-primary" onclick="switchVocabView('focus')">
+                  Lanjut Pelajari Kosakata Per Kata ➔
+                </button>
+              </div>
+            </div>
+
+            <!-- Active 10-Question Quiz Box (shown if >= 10 words studied) -->
+            <div class="vocab-quiz-box" id="vocabQuizActiveBox" style="display:none;">
+              <div class="quiz-status-header">
+                <div class="quiz-progress-text">
+                  <span class="quiz-badge-round" id="quizQuestionIndexBadge">Soal 1 dari 10</span>
+                  <span class="quiz-timer-score" id="quizCurrentScoreBadge">Skor: 0 Benar</span>
+                </div>
+                <div class="quiz-track-bar">
+                  <div class="quiz-track-fill" id="quizProgressFill" style="width: 10%;"></div>
+                </div>
+              </div>
+
+              <!-- Question Card -->
+              <div class="vocab-question-card" id="vocabQuestionCard">
+                <!-- Dynamically generated question content -->
+              </div>
+            </div>
+
+            <!-- Quiz Result & Mission Completion Screen -->
+            <div class="vocab-result-screen" id="vocabQuizResultScreen" style="display:none;">
+              <!-- Dynamically rendered completion celebration -->
+            </div>
+          </div>
+        </section>
+
         <!-- 5. ANALITIK KELANCARAN TAB -->
         <section id="panel-analytics" class="section-tab-panel">
           <div style="margin-bottom:28px;">
@@ -3832,7 +4663,14 @@
       soundEnabled: true,
       speechRate: 1.0,
       speakerGender: 'female',
-      theme: 'dark'
+      theme: 'dark',
+      vocabDailyMission: {
+        date: '',
+        studiedWords: [],
+        quizCompleted: false,
+        quizScore: 0,
+        claimed: false
+      }
     };
 
     let appState = JSON.parse(localStorage.getItem('stimuler_thai_state') || JSON.stringify(DEFAULT_STATE));
@@ -3852,6 +4690,30 @@
       appState.userAvatar = '🍃';
     }
 
+    // Hydrate Daily Vocab Mission state
+    const todayMissionDateStr = new Date().toISOString().slice(0, 10);
+    if (!appState.vocabDailyMission || typeof appState.vocabDailyMission !== 'object') {
+      appState.vocabDailyMission = {
+        date: todayMissionDateStr,
+        studiedWords: [],
+        quizCompleted: false,
+        quizScore: 0,
+        claimed: false
+      };
+    } else if (appState.vocabDailyMission.date !== todayMissionDateStr) {
+      // New day: keep studied historical set or reset daily counter
+      appState.vocabDailyMission = {
+        date: todayMissionDateStr,
+        studiedWords: [],
+        quizCompleted: false,
+        quizScore: 0,
+        claimed: false
+      };
+    }
+    if (!Array.isArray(appState.vocabDailyMission.studiedWords)) {
+      appState.vocabDailyMission.studiedWords = [];
+    }
+
     function saveState() {
       localStorage.setItem('stimuler_thai_state', JSON.stringify(appState));
       // Persist to user accounts store if logged in
@@ -3867,7 +4729,8 @@
             xp: appState.xp,
             streak: appState.streak,
             completedLessons: appState.completedLessons,
-            unlockedLessons: appState.unlockedLessons
+            unlockedLessons: appState.unlockedLessons,
+            vocabDailyMission: appState.vocabDailyMission
           };
           localStorage.setItem('stimuler_thai_accounts', JSON.stringify(accounts));
         } catch(e) {}
@@ -3875,6 +4738,9 @@
       updateTopMetrics();
       if (typeof syncUserProfileUI === 'function') {
         syncUserProfileUI();
+      }
+      if (typeof updateVocabDailyMissionUI === 'function') {
+        updateVocabDailyMissionUI();
       }
       renderCurriculumNodes();
     }
@@ -5954,6 +6820,1259 @@
       document.querySelectorAll('#phrasebookCategoryPills .pill-filter').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       renderPhrasebook(cat);
+    }
+
+    /* ==========================================================================
+       7.5. VOCABULARY BANK & DAILY MISSION SYSTEM (10 WORDS & 10-QUESTION QUIZ)
+       ========================================================================== */
+    const THAI_VOCAB_BANK = [
+      // 10 KOSAKATA MISI HARIAN INTI (DAILY SET #1)
+      {
+        id: 'v1',
+        thai: 'สวัสดี',
+        roman: 'sà-wàt-dii',
+        meaning: 'Halo / Salam Sejahtera',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Ungkapan',
+        tone: 'Rendah - Datar (Low - Mid)',
+        exampleThai: 'สวัสดีครับ ยินดีที่ได้รู้จัก',
+        exampleRoman: 'sà-wàt-dii khráp, yin-dii thîi dâi rúu-jàk',
+        exampleMeaning: 'Halo, senang bisa berkenalan dengan Anda.',
+        isDaily: true
+      },
+      {
+        id: 'v2',
+        thai: 'ขอบคุณ',
+        roman: 'khɔ̀ɔp-khun',
+        meaning: 'Terima Kasih',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Ungkapan',
+        tone: 'Rendah - Datar (Low - Mid)',
+        exampleThai: 'ขอบคุณมากสำหรับความช่วยเหลือ',
+        exampleRoman: 'khɔ̀ɔp-khun mâak sǎm-ràp khwaam chûay-lǔea',
+        exampleMeaning: 'Terima kasih banyak atas bantuannya.',
+        isDaily: true
+      },
+      {
+        id: 'v3',
+        thai: 'ขอโทษ',
+        roman: 'khɔ̌ɔ-thôot',
+        meaning: 'Maaf / Permisi',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Ungkapan',
+        tone: 'Naik - Jatuh (Rising - Falling)',
+        exampleThai: 'ขอโทษครับ ผมมาสาย',
+        exampleRoman: 'khɔ̌ɔ-thôot khráp, phǒm maa sǎai',
+        exampleMeaning: 'Mohon maaf, saya datang terlambat.',
+        isDaily: true
+      },
+      {
+        id: 'v4',
+        thai: 'กิน',
+        roman: 'gin',
+        meaning: 'Makan',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Kerja',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'คุณอยากกินอะไรวันนี้',
+        exampleRoman: 'khun yàak gin a-rai wan-níi',
+        exampleMeaning: 'Kamu ingin makan apa hari ini?',
+        isDaily: true
+      },
+      {
+        id: 'v5',
+        thai: 'ดื่ม',
+        roman: 'dèum',
+        meaning: 'Minum',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Kerja',
+        tone: 'Rendah (Low Tone)',
+        exampleThai: 'ผมขอดื่มน้ำเปล่าเย็นๆ ครับ',
+        exampleRoman: 'phǒm khɔ̌ɔ dèum náam-plào yen-yen khráp',
+        exampleMeaning: 'Saya minta minum air putih dingin.',
+        isDaily: true
+      },
+      {
+        id: 'v6',
+        thai: 'น้ำ',
+        roman: 'náam',
+        meaning: 'Air / Minuman',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Benda',
+        tone: 'Tinggi (High Tone)',
+        exampleThai: 'ขอน้ำหนึ่งแก้วครับ',
+        exampleRoman: 'khɔ̌ɔ náam nèung gâew khráp',
+        exampleMeaning: 'Minta air satu gelas ya.',
+        isDaily: true
+      },
+      {
+        id: 'v7',
+        thai: 'อร่อย',
+        roman: 'a-rɔ̀y',
+        meaning: 'Enak / Lezat',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Sifat',
+        tone: 'Rendah - Rendah (Low - Low)',
+        exampleThai: 'ผัดไทยจานนี้อร่อยมาก',
+        exampleRoman: 'phàt-thai jaan níi a-rɔ̀y mâak',
+        exampleMeaning: 'Pad Thai di piring ini lezat sekali.',
+        isDaily: true
+      },
+      {
+        id: 'v8',
+        thai: 'เท่าไหร่',
+        roman: 'thâo-rài',
+        meaning: 'Berapa Harganya?',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Tanya',
+        tone: 'Jatuh - Rendah (Falling - Low)',
+        exampleThai: 'เสื้อตัวนี้ราคาเท่าไหร่ครับ',
+        exampleRoman: 'sûea dtua níi raa-khaa thâo-rài khráp',
+        exampleMeaning: 'Baju yang ini harganya berapa?',
+        isDaily: true
+      },
+      {
+        id: 'v9',
+        thai: 'ห้องน้ำ',
+        roman: 'hɔ̂ng-náam',
+        meaning: 'Toilet / Kamar Mandi',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Benda',
+        tone: 'Jatuh - Tinggi (Falling - High)',
+        exampleThai: 'ขอโทษครับ ห้องน้ำอยู่ที่ไหน',
+        exampleRoman: 'khɔ̌ɔ-thôot khráp, hɔ̂ng-náam yùu thîi-nǎi',
+        exampleMeaning: 'Permisi, toiletnya ada di sebelah mana?',
+        isDaily: true
+      },
+      {
+        id: 'v10',
+        thai: 'ชอบ',
+        roman: 'chɔ̂ɔp',
+        meaning: 'Suka / Gemar',
+        category: 'daily',
+        categoryLabel: '🎯 Misi Hari Ini',
+        pos: 'Kata Kerja',
+        tone: 'Jatuh (Falling Tone)',
+        exampleThai: 'ฉันชอบเรียนภาษาไทยมาก',
+        exampleRoman: 'chǎn chɔ̂ɔp rian phaa-sǎa thai mâak',
+        exampleMeaning: 'Saya sangat suka belajar bahasa Thai.',
+        isDaily: true
+      },
+
+      // KULINER & MAKANAN (MAKAN)
+      {
+        id: 'v11',
+        thai: 'ข้าว',
+        roman: 'khâao',
+        meaning: 'Nasi / Beras',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Benda',
+        tone: 'Jatuh (Falling Tone)',
+        exampleThai: 'ขอข้าวสวยสองจานครับ',
+        exampleRoman: 'khɔ̌ɔ khâao-sǔay sɔ̌ɔng jaan khráp',
+        exampleMeaning: 'Minta dua piring nasi putih hangat.',
+        isDaily: false
+      },
+      {
+        id: 'v12',
+        thai: 'เผ็ด',
+        roman: 'phèt',
+        meaning: 'Pedas',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Sifat',
+        tone: 'Rendah (Low Tone)',
+        exampleThai: 'ส้มตำจานนี้เผ็ดมากไหม',
+        exampleRoman: 'sôm-dtam jaan níi phèt mâak mǎi',
+        exampleMeaning: 'Apakah Som Tam ini sangat pedas?',
+        isDaily: false
+      },
+      {
+        id: 'v13',
+        thai: 'หวาน',
+        roman: 'wǎan',
+        meaning: 'Manis',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Sifat',
+        tone: 'Naik (Rising Tone)',
+        exampleThai: 'ชาไทยแก้วนี้หวานน้อยครับ',
+        exampleRoman: 'chaa thai gâew níi wǎan nɔ́ɔy khráp',
+        exampleMeaning: 'Teh Thai (Cha Yen) ini manisnya sedikit saja.',
+        isDaily: false
+      },
+      {
+        id: 'v14',
+        thai: 'ชา',
+        roman: 'chaa',
+        meaning: 'Teh',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Benda',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'ผมดื่มชาเขียวทุกเช้า',
+        exampleRoman: 'phǒm dèum chaa khǐao thúk cháo',
+        exampleMeaning: 'Saya minum teh hijau setiap pagi.',
+        isDaily: false
+      },
+      {
+        id: 'v15',
+        thai: 'กาแฟ',
+        roman: 'gaa-fae',
+        meaning: 'Kopi',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Benda',
+        tone: 'Datar - Datar (Mid - Mid)',
+        exampleThai: 'ขอกาแฟดำหนึ่งแก้ว',
+        exampleRoman: 'khɔ̌ɔ gaa-fae dam nèung gâew',
+        exampleMeaning: 'Minta satu gelas kopi hitam.',
+        isDaily: false
+      },
+      {
+        id: 'v16',
+        thai: 'ไก่',
+        roman: 'gài',
+        meaning: 'Ayam',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Benda',
+        tone: 'Rendah (Low Tone)',
+        exampleThai: 'ข้าวมันไก่ร้านนี้อร่อยที่สุด',
+        exampleRoman: 'khâao-man-gài ráan níi a-rɔ̀y thîi-sùt',
+        exampleMeaning: 'Nasi ayam (Khao Man Gai) warung ini paling enak.',
+        isDaily: false
+      },
+      {
+        id: 'v17',
+        thai: 'กุ้ง',
+        roman: 'gûng',
+        meaning: 'Udang',
+        category: 'makan',
+        categoryLabel: '🍜 Kuliner',
+        pos: 'Kata Benda',
+        tone: 'Jatuh (Falling Tone)',
+        exampleThai: 'ต้มยำกุ้งน้ำข้นชามนี้สดมาก',
+        exampleRoman: 'dtôm-yam-gûng náam khôn chaam níi sòt mâak',
+        exampleMeaning: 'Tom Yum udang kuah kental mangkuk ini sangat segar.',
+        isDaily: false
+      },
+
+      // BELANJA & UANG (PASAR)
+      {
+        id: 'v18',
+        thai: 'เงิน',
+        roman: 'ngoen',
+        meaning: 'Uang',
+        category: 'pasar',
+        categoryLabel: '🛍️ Belanja',
+        pos: 'Kata Benda',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'ที่นี่รับเงินสดหรือโอนเงินครับ',
+        exampleRoman: 'thîi nîi ráp ngoen-sòt rǔue oon ngoen khráp',
+        exampleMeaning: 'Di sini menerima uang tunai atau transfer?',
+        isDaily: false
+      },
+      {
+        id: 'v19',
+        thai: 'บาท',
+        roman: 'bàat',
+        meaning: 'Baht (Mata Uang Thai)',
+        category: 'pasar',
+        categoryLabel: '🛍️ Belanja',
+        pos: 'Satuan Uang',
+        tone: 'Rendah (Low Tone)',
+        exampleThai: 'ทั้งหมดราคาหนึ่งร้อยบาทครับ',
+        exampleRoman: 'tháng mòt raa-khaa nèung rɔ́ɔy bàat khráp',
+        exampleMeaning: 'Semuanya seharga 100 Baht.',
+        isDaily: false
+      },
+      {
+        id: 'v20',
+        thai: 'แพง',
+        roman: 'phaeng',
+        meaning: 'Mahal',
+        category: 'pasar',
+        categoryLabel: '🛍️ Belanja',
+        pos: 'Kata Sifat',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'อันนี้แพงเกินไป ลดได้ไหม',
+        exampleRoman: 'an níi phaeng goen pai, lót dâi mǎi',
+        exampleMeaning: 'Yang ini terlalu mahal, bisa kurang harganya?',
+        isDaily: false
+      },
+      {
+        id: 'v21',
+        thai: 'ถูก',
+        roman: 'thùuk',
+        meaning: 'Murah / Tepat',
+        category: 'pasar',
+        categoryLabel: '🛍️ Belanja',
+        pos: 'Kata Sifat',
+        tone: 'Rendah (Low Tone)',
+        exampleThai: 'ของชิ้นนี้ราคาถูกและมีคุณภาพ',
+        exampleRoman: 'khɔ̌ɔng chín níi raa-khaa thùuk láe mii khun-ná-phâap',
+        exampleMeaning: 'Barang ini murah dan berkualitas baik.',
+        isDaily: false
+      },
+      {
+        id: 'v22',
+        thai: 'ซื้อ',
+        roman: 'súue',
+        meaning: 'Membeli',
+        category: 'pasar',
+        categoryLabel: '🛍️ Belanja',
+        pos: 'Kata Kerja',
+        tone: 'Tinggi (High Tone)',
+        exampleThai: 'ฉันอยากซื้อของฝากให้เพื่อน',
+        exampleRoman: 'chǎn yàak súue khɔ̌ɔng-fàak hâi phûean',
+        exampleMeaning: 'Saya ingin membeli oleh-oleh untuk teman.',
+        isDaily: false
+      },
+      {
+        id: 'v23',
+        thai: 'ลด',
+        roman: 'lót',
+        meaning: 'Diskon / Potong Harga',
+        category: 'pasar',
+        categoryLabel: '🛍️ Belanja',
+        pos: 'Kata Kerja',
+        tone: 'Tinggi (High Tone)',
+        exampleThai: 'ลดหน่อยได้ไหมครับคนขายใจดี',
+        exampleRoman: 'lót nɔ̀ɔy dâi mǎi khráp khon khǎai jai-dii',
+        exampleMeaning: 'Bisa minta diskon sedikit ya penjual yang baik?',
+        isDaily: false
+      },
+
+      // PERJALANAN & ARAH (JALAN)
+      {
+        id: 'v24',
+        thai: 'ไป',
+        roman: 'pai',
+        meaning: 'Pergi',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Kata Kerja',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'เราจะไปตลาดนัดจตุจักรกัน',
+        exampleRoman: 'rao jà pai dtà-làat-nát jà-dtù-jàk gan',
+        exampleMeaning: 'Kita akan pergi ke Pasar Akhir Pekan Chatuchak.',
+        isDaily: false
+      },
+      {
+        id: 'v25',
+        thai: 'มา',
+        roman: 'maa',
+        meaning: 'Datang / Tiba',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Kata Kerja',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'ผมเพิ่งมาจากเมืองไทยเมื่อวาน',
+        exampleRoman: 'phǒm phôeng maa jàak mueang thai mûea-waan',
+        exampleMeaning: 'Saya baru saja datang dari Thailand kemarin.',
+        isDaily: false
+      },
+      {
+        id: 'v26',
+        thai: 'ที่ไหน',
+        roman: 'thîi-nǎi',
+        meaning: 'Di Mana?',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Kata Tanya',
+        tone: 'Jatuh - Naik (Falling - Rising)',
+        exampleThai: 'สถานีรถไฟฟ้าบีทีเอสอยู่ที่ไหน',
+        exampleRoman: 'sà-thǎa-nii rót-fai-fáa bts yùu thîi-nǎi',
+        exampleMeaning: 'Stasiun kereta BTS ada di sebelah mana?',
+        isDaily: false
+      },
+      {
+        id: 'v27',
+        thai: 'เลี้ยวซ้าย',
+        roman: 'líao sáai',
+        meaning: 'Belok Kiri',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Arah',
+        tone: 'Tinggi - Tinggi (High - High)',
+        exampleThai: 'เลี้ยวซ้ายตรงสี่แยกข้างหน้า',
+        exampleRoman: 'líao sáai dtrong sìi-yâek khâang-nâa',
+        exampleMeaning: 'Belok kiri tepat di perempatan depan.',
+        isDaily: false
+      },
+      {
+        id: 'v28',
+        thai: 'เลี้ยวขวา',
+        roman: 'líao khwǎa',
+        meaning: 'Belok Kanan',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Arah',
+        tone: 'Tinggi - Naik (High - Rising)',
+        exampleThai: 'ร้านอาหารอยู่ทางด้านขวามือ',
+        exampleRoman: 'ráan aa-hǎan yùu thaang dâan khwǎa mue',
+        exampleMeaning: 'Restoran berada di sisi sebelah kanan.',
+        isDaily: false
+      },
+      {
+        id: 'v29',
+        thai: 'ตรงไป',
+        roman: 'dtrong-pai',
+        meaning: 'Lurus ke Depan',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Arah',
+        tone: 'Datar - Datar (Mid - Mid)',
+        exampleThai: 'เดินตรงไปอีกประมาณหนึ่งร้อยเมตร',
+        exampleRoman: 'doen dtrong pai ìik bprà-maan nèung rɔ́ɔy méet',
+        exampleMeaning: 'Jalan lurus terus sekitar 100 meter lagi.',
+        isDaily: false
+      },
+      {
+        id: 'v30',
+        thai: 'โรงแรม',
+        roman: 'roong-raem',
+        meaning: 'Hotel / Penginapan',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Kata Benda',
+        tone: 'Datar - Datar (Mid - Mid)',
+        exampleThai: 'โรงแรมของเราอยู่ใกล้แม่น้ำเจ้าพระยา',
+        exampleRoman: 'roong-raem khɔ̌ɔng rao yùu glâi mâe-náam jâo-phrá-yaa',
+        exampleMeaning: 'Hotel kami terletak dekat Sungai Chao Phraya.',
+        isDaily: false
+      },
+      {
+        id: 'v31',
+        thai: 'สนามบิน',
+        roman: 'sà-nǎam-bin',
+        meaning: 'Bandara',
+        category: 'jalan',
+        categoryLabel: '🛺 Perjalanan',
+        pos: 'Kata Benda',
+        tone: 'Rendah - Naik - Datar',
+        exampleThai: 'ไปสนามบินสุวรรณภูมิใช้เวลากี่นาที',
+        exampleRoman: 'pai sà-nǎam-bin sù-wan-ná-phuum chái wee-laa gìi naa-thii',
+        exampleMeaning: 'Ke bandara Suvarnabhumi butuh waktu berapa menit?',
+        isDaily: false
+      },
+
+      // PERCAKAPAN DASAR & EMOSI (DASAR)
+      {
+        id: 'v32',
+        thai: 'ไม่เป็นไร',
+        roman: 'mâi pen rai',
+        meaning: 'Tidak Apa-apa / Sama-sama',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Ungkapan',
+        tone: 'Jatuh - Datar - Datar',
+        exampleThai: 'ไม่เป็นไรครับ ยินดีเสมอ',
+        exampleRoman: 'mâi pen rai khráp, yin-dii sà-mǒoe',
+        exampleMeaning: 'Tidak apa-apa, dengan senang hati selalu.',
+        isDaily: false
+      },
+      {
+        id: 'v33',
+        thai: 'ใช่',
+        roman: 'châi',
+        meaning: 'Ya / Benar',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Penegasan',
+        tone: 'Jatuh (Falling Tone)',
+        exampleThai: 'ใช่ครับ ผมมาจากอินโดนีเซีย',
+        exampleRoman: 'châi khráp, phǒm maa jàak in-doo-nii-sia',
+        exampleMeaning: 'Ya benar, saya berasal dari Indonesia.',
+        isDaily: false
+      },
+      {
+        id: 'v34',
+        thai: 'ไม่ใช่',
+        roman: 'mâi châi',
+        meaning: 'Bukan / Tidak Benar',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Penyangkalan',
+        tone: 'Jatuh - Jatuh (Falling - Falling)',
+        exampleThai: 'อันนี้ไม่ใช่ของผมครับ',
+        exampleRoman: 'an níi mâi châi khɔ̌ɔng phǒm khráp',
+        exampleMeaning: 'Barang yang ini bukan milik saya.',
+        isDaily: false
+      },
+      {
+        id: 'v35',
+        thai: 'พูด',
+        roman: 'phûut',
+        meaning: 'Bicara / Berkata',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Kata Kerja',
+        tone: 'Jatuh (Falling Tone)',
+        exampleThai: 'คุณพูดภาษาอังกฤษได้ไหม',
+        exampleRoman: 'khun phûut phaa-sǎa ang-grìt dâi mǎi',
+        exampleMeaning: 'Bisakah Anda berbicara bahasa Inggris?',
+        isDaily: false
+      },
+      {
+        id: 'v36',
+        thai: 'เข้าใจ',
+        roman: 'khâo-jai',
+        meaning: 'Mengerti / Paham',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Kata Kerja',
+        tone: 'Jatuh - Datar (Falling - Mid)',
+        exampleThai: 'ตอนนี้ผมเริ่มเข้าใจภาษาไทยแล้ว',
+        exampleRoman: 'dtɔɔn-níi phǒm rooem khâo-jai phaa-sǎa thai láew',
+        exampleMeaning: 'Sekarang saya mulai mengerti bahasa Thai.',
+        isDaily: false
+      },
+      {
+        id: 'v37',
+        thai: 'สวย',
+        roman: 'sǔay',
+        meaning: 'Cantik / Indah',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Kata Sifat',
+        tone: 'Naik (Rising Tone)',
+        exampleThai: 'วัดในกรุงเทพฯ สวยงามมาก',
+        exampleRoman: 'wát nai grung-thêep sǔay-ngaam mâak',
+        exampleMeaning: 'Kuil di Bangkok sangat indah.',
+        isDaily: false
+      },
+      {
+        id: 'v38',
+        thai: 'ดี',
+        roman: 'dii',
+        meaning: 'Bagus / Baik',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Kata Sifat',
+        tone: 'Datar (Mid Tone)',
+        exampleThai: 'วันนี้อากาศดีมากเลย',
+        exampleRoman: 'wan-níi aa-gàat dii mâak loei',
+        exampleMeaning: 'Hari ini cuacanya sangat bagus.',
+        isDaily: false
+      },
+      {
+        id: 'v39',
+        thai: 'เพื่อน',
+        roman: 'phûean',
+        meaning: 'Teman / Sahabat',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Kata Benda',
+        tone: 'Jatuh (Falling Tone)',
+        exampleThai: 'นี่คือเพื่อนสนิทของฉันจากกรุงเทพฯ',
+        exampleRoman: 'nîi khue phûean sà-nìt khɔ̌ɔng chǎn jàak grung-thêep',
+        exampleMeaning: 'Ini adalah sahabat karib saya dari Bangkok.',
+        isDaily: false
+      },
+      {
+        id: 'v40',
+        thai: 'สนุก',
+        roman: 'sà-nùk',
+        meaning: 'Seru / Menyenangkan',
+        category: 'dasar',
+        categoryLabel: '💬 Percakapan',
+        pos: 'Kata Sifat',
+        tone: 'Rendah - Rendah (Low - Low)',
+        exampleThai: 'การเรียนภาษาไทยสนุกมากจริงๆ',
+        exampleRoman: 'gaan rian phaa-sǎa thai sà-nùk mâak jing-jing',
+        exampleMeaning: 'Belajar bahasa Thai sungguh sangat menyenangkan!',
+        isDaily: false
+      }
+    ];
+
+    // State Variables for Vocabulary Module
+    let currentVocabFocusIndex = 0;
+    let currentVocabGridFilter = 'daily';
+    let currentVocabViewMode = 'focus'; // 'focus' | 'grid' | 'quiz'
+
+    // 10-Question Quiz State
+    let vocabQuizState = {
+      questions: [],
+      currentIndex: 0,
+      score: 0,
+      isAnswered: false,
+      selectedOpt: null
+    };
+
+    function getDailyVocabList() {
+      return THAI_VOCAB_BANK.filter(v => v.isDaily);
+    }
+
+    function getFilteredVocabList(category) {
+      if (category === 'daily') return getDailyVocabList();
+      if (category === 'all') return THAI_VOCAB_BANK;
+      return THAI_VOCAB_BANK.filter(v => v.category === category);
+    }
+
+    /* Initialize Vocabulary Module */
+    function initVocabularyDailyMission() {
+      updateVocabDailyMissionUI();
+      renderVocabFocusCard();
+      renderVocabGrid('daily');
+    }
+
+    /* Update Top Banner & Daily Progress Checklist */
+    function updateVocabDailyMissionUI() {
+      const studied = appState.vocabDailyMission.studiedWords || [];
+      const studiedCount = studied.length;
+      const isQuizDone = appState.vocabDailyMission.quizCompleted;
+
+      // Date Format
+      const dateEl = document.getElementById('vocabMissionDate');
+      if (dateEl) {
+        const d = new Date();
+        const options = { weekday: 'short', day: 'numeric', month: 'short' };
+        dateEl.textContent = d.toLocaleDateString('id-ID', options);
+      }
+
+      // Step 1: Words Counter & Progress
+      const countEl = document.getElementById('stepWordsCount');
+      const fillEl = document.getElementById('stepWordsFill');
+      const cardStep1 = document.getElementById('questStepWordsCard');
+      const iconStep1 = document.getElementById('stepWordsIcon');
+      if (countEl) countEl.textContent = `${studiedCount} / 10 Kata`;
+      if (fillEl) fillEl.style.width = `${Math.min(100, (studiedCount / 10) * 100)}%`;
+      if (cardStep1) cardStep1.classList.toggle('completed', studiedCount >= 10);
+      if (iconStep1) iconStep1.textContent = studiedCount >= 10 ? '✓' : '1';
+
+      // Step 2: Quiz Status
+      const quizScoreEl = document.getElementById('stepQuizScore');
+      const quizFillEl = document.getElementById('stepQuizFill');
+      const cardStep2 = document.getElementById('questStepQuizCard');
+      const iconStep2 = document.getElementById('stepQuizIcon');
+
+      if (quizScoreEl && quizFillEl && cardStep2 && iconStep2) {
+        if (isQuizDone) {
+          quizScoreEl.textContent = `Selesai (${appState.vocabDailyMission.quizScore || 10}/10) 🎉`;
+          quizFillEl.style.width = '100%';
+          quizFillEl.style.background = 'var(--primary)';
+          cardStep2.classList.add('completed');
+          cardStep2.classList.remove('locked');
+          iconStep2.textContent = '✓';
+        } else if (studiedCount >= 10) {
+          quizScoreEl.textContent = 'Siap Dikerjakan! ⚡';
+          quizFillEl.style.width = '0%';
+          cardStep2.classList.remove('locked', 'completed');
+          iconStep2.textContent = '2';
+        } else {
+          quizScoreEl.textContent = 'Terkunci 🔒';
+          quizFillEl.style.width = '0%';
+          cardStep2.classList.add('locked');
+          cardStep2.classList.remove('completed');
+          iconStep2.textContent = '2';
+        }
+      }
+
+      // Status Tag
+      const statusTag = document.getElementById('vocabMissionStatusTag');
+      if (statusTag) {
+        if (isQuizDone) {
+          statusTag.className = 'daily-status-tag completed';
+          statusTag.textContent = '🎉 Misi Tuntas (+50 XP, +20 Gems)';
+        } else if (studiedCount >= 10) {
+          statusTag.className = 'daily-status-tag active';
+          statusTag.textContent = '⚡ Kuis Terbuka (1/2 Selesai)';
+        } else {
+          statusTag.className = 'daily-status-tag';
+          statusTag.textContent = `Belum Selesai (${studiedCount}/10 Kata)`;
+        }
+      }
+
+      // Action CTA Button
+      const actionBtn = document.getElementById('btnVocabDailyAction');
+      if (actionBtn) {
+        if (isQuizDone) {
+          actionBtn.textContent = 'Misi Selesai! Ulangi Kuis 🔄';
+        } else if (studiedCount >= 10) {
+          actionBtn.textContent = 'Mulai Kuis 10 Soal Sekarang ➔';
+        } else {
+          actionBtn.textContent = `Lanjut Pelajari (${studiedCount}/10) ➔`;
+        }
+      }
+
+      // Locked Screen text
+      const lockedText = document.getElementById('lockedCountText');
+      if (lockedText) lockedText.textContent = `${studiedCount} / 10 Kata`;
+
+      // Sub-nav pill badge for quiz
+      const pillQuiz = document.getElementById('pillQuizStatus');
+      if (pillQuiz) {
+        pillQuiz.textContent = isQuizDone ? '✓' : (studiedCount >= 10 ? '⚡' : '🔒');
+      }
+
+      // Sidebar badge
+      const sideBadge = document.getElementById('sidebarVocabBadge');
+      if (sideBadge) {
+        if (isQuizDone) {
+          sideBadge.textContent = '✓ 10';
+          sideBadge.classList.add('completed');
+        } else if (studiedCount >= 10) {
+          sideBadge.textContent = '⚡ Kuis';
+          sideBadge.classList.remove('completed');
+        } else {
+          sideBadge.textContent = `${studiedCount}/10`;
+          sideBadge.classList.remove('completed');
+        }
+      }
+    }
+
+    /* Switch between Focus Flashcard, Grid, and Quiz views */
+    function switchVocabView(viewMode) {
+      playSynthSound('click');
+      currentVocabViewMode = viewMode;
+
+      const views = {
+        focus: document.getElementById('vocabViewFocus'),
+        grid: document.getElementById('vocabViewGrid'),
+        quiz: document.getElementById('vocabViewQuiz')
+      };
+      const buttons = {
+        focus: document.getElementById('tabBtnVocabFocus'),
+        grid: document.getElementById('tabBtnVocabGrid'),
+        quiz: document.getElementById('tabBtnVocabQuiz')
+      };
+
+      Object.keys(views).forEach(k => {
+        if (views[k]) views[k].style.display = (k === viewMode) ? 'block' : 'none';
+        if (buttons[k]) buttons[k].classList.toggle('active', k === viewMode);
+      });
+
+      if (viewMode === 'focus') {
+        renderVocabFocusCard();
+      } else if (viewMode === 'grid') {
+        renderVocabGrid(currentVocabGridFilter);
+      } else if (viewMode === 'quiz') {
+        handleOpenQuizView();
+      }
+    }
+
+    /* Word-by-Word Focus Card Renderer */
+    function renderVocabFocusCard() {
+      const container = document.getElementById('vocabFocusCard');
+      if (!container) return;
+
+      const dailyList = getDailyVocabList();
+      if (currentVocabFocusIndex < 0) currentVocabFocusIndex = 0;
+      if (currentVocabFocusIndex >= dailyList.length) currentVocabFocusIndex = dailyList.length - 1;
+
+      const word = dailyList[currentVocabFocusIndex];
+      const studied = appState.vocabDailyMission.studiedWords || [];
+      const isStudied = studied.includes(word.id);
+      const totalStudied = studied.length;
+
+      container.innerHTML = `
+        <div class="vocab-card-tags-row">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="daily-badge-pill" style="font-size:10px;">${word.categoryLabel}</span>
+            <span style="font-size:11px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono);">${word.pos}</span>
+          </div>
+          <span class="glyph-badge badge-mid" style="font-size:11px;">${word.tone}</span>
+        </div>
+
+        <div class="vocab-word-display">
+          <div class="vocab-big-thai" onclick="speakThai('${word.thai}')" title="Klik untuk mendengar suara penutur asli Bangkok">${word.thai}</div>
+          <div class="vocab-roman-row">
+            <span class="vocab-roman-text">${word.roman}</span>
+            <button class="vocab-audio-circle-btn" onclick="speakThai('${word.thai}')" title="Dengarkan pengucapan asli Bangkok">
+              🔊
+            </button>
+          </div>
+        </div>
+
+        <div class="vocab-meaning-box">
+          <div class="vocab-meaning-label">Arti Bahasa Indonesia:</div>
+          <div class="vocab-meaning-val">${word.meaning}</div>
+        </div>
+
+        <div class="vocab-example-block">
+          <div style="font-size:11px; font-weight:700; color:var(--text-dim); text-transform:uppercase; font-family:var(--font-mono); margin-bottom:4px;">
+            Contoh Kalimat Nyata:
+          </div>
+          <div class="vocab-ex-thai" onclick="speakThai('${word.exampleThai}')" title="Klik dengar kalimat penutur Bangkok">
+            <span>${word.exampleThai}</span>
+            <span style="font-size:14px; opacity:0.8;">🔊</span>
+          </div>
+          <div style="font-family:var(--font-mono); font-size:12px; color:var(--primary); font-weight:600;">${word.exampleRoman}</div>
+          <div class="vocab-ex-indo">${word.exampleMeaning}</div>
+        </div>
+
+        <div class="vocab-focus-nav-bar">
+          <button class="btn-audio-listen" onclick="prevVocabWord()" ${currentVocabFocusIndex === 0 ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
+            ⬅️ Sebelumnya
+          </button>
+
+          <div style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim); font-weight:700;">
+            Kata #${currentVocabFocusIndex + 1} dari ${dailyList.length} • Total Dipelajari: <span style="color:var(--primary);">${totalStudied}/10</span>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="btn-stimuler-primary" style="${isStudied ? 'background:#2d6a4f;' : ''}" onclick="markCurrentWordStudied('${word.id}')">
+              ${isStudied ? '✓ Sudah Dipahami (Lanjut ➔)' : '✓ Tandai Paham &amp; Lanjut ➔'}
+            </button>
+          </div>
+        </div>
+
+        ${totalStudied >= 10 ? `
+          <div style="margin-top:14px; padding:14px 18px; background:rgba(82, 183, 136, 0.12); border:1px solid rgba(82, 183, 136, 0.4); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-size:22px;">🎉</span>
+              <div>
+                <strong style="color:var(--text); font-size:14px;">Syarat Langkah 1 Terpenuhi!</strong>
+                <p style="font-size:12px; color:var(--text-muted); margin:0;">Anda telah mempelajari minimal 10 kosakata. Kuis Misi Harian siap dikerjakan!</p>
+              </div>
+            </div>
+            <button class="pill-filter" style="background:var(--primary); color:#ffffff; border-color:var(--primary); font-weight:800;" onclick="switchVocabView('quiz')">
+              Buka Kuis 10 Soal ➔
+            </button>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function prevVocabWord() {
+      playSynthSound('click');
+      if (currentVocabFocusIndex > 0) {
+        currentVocabFocusIndex--;
+        renderVocabFocusCard();
+      }
+    }
+
+    function nextVocabWord() {
+      playSynthSound('click');
+      const dailyList = getDailyVocabList();
+      if (currentVocabFocusIndex < dailyList.length - 1) {
+        currentVocabFocusIndex++;
+        renderVocabFocusCard();
+      }
+    }
+
+    function markCurrentWordStudied(wordId) {
+      if (!Array.isArray(appState.vocabDailyMission.studiedWords)) {
+        appState.vocabDailyMission.studiedWords = [];
+      }
+      const studied = appState.vocabDailyMission.studiedWords;
+      const isNew = !studied.includes(wordId);
+
+      if (isNew) {
+        studied.push(wordId);
+        playSynthSound('correct');
+        showToast('✓ Kosakata ditambahkan ke catatan harian Anda!');
+        if (studied.length === 10) {
+          playSynthSound('success');
+          showToast('🎉 Hebat! Anda telah menguasai 10 kosakata. Kuis Misi Harian kini TERBUKA!');
+        }
+      } else {
+        playSynthSound('click');
+      }
+
+      saveState();
+      updateVocabDailyMissionUI();
+
+      // Advance to next word
+      const dailyList = getDailyVocabList();
+      if (currentVocabFocusIndex < dailyList.length - 1) {
+        currentVocabFocusIndex++;
+      }
+      renderVocabFocusCard();
+    }
+
+    /* Vocabulary Grid Renderer */
+    function renderVocabGrid(category = 'daily') {
+      currentVocabGridFilter = category;
+      const container = document.getElementById('vocabGridContainer');
+      const counterEl = document.getElementById('vocabGridCounter');
+      if (!container) return;
+
+      const list = getFilteredVocabList(category);
+      if (counterEl) counterEl.textContent = `Menampilkan ${list.length} kosakata`;
+
+      const studied = appState.vocabDailyMission.studiedWords || [];
+
+      container.innerHTML = list.map(v => {
+        const isStudied = studied.includes(v.id);
+        return `
+          <div class="vocab-grid-card ${isStudied ? 'studied' : ''}">
+            <div class="vocab-card-top">
+              <div>
+                <div class="vocab-grid-thai" onclick="speakThai('${v.thai}')" title="Dengarkan pengucapan Bangkok">${v.thai}</div>
+                <div class="vocab-grid-roman">${v.roman}</div>
+              </div>
+              <button class="btn-audio-listen" style="padding:4px 8px; font-size:12px;" onclick="speakThai('${v.thai}')" title="Putar suara asli">
+                🔊
+              </button>
+            </div>
+
+            <div class="vocab-grid-meaning">
+              <strong>${v.meaning}</strong>
+              <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">${v.pos} • ${v.tone}</div>
+            </div>
+
+            <div class="vocab-grid-footer">
+              <span style="font-size:11px; font-family:var(--font-mono); color:var(--primary); font-weight:700;">${v.categoryLabel}</span>
+              <button class="pill-filter" style="${isStudied ? 'background:rgba(82, 183, 136, 0.15); color:#52b788; border-color:rgba(82, 183, 136, 0.4);' : ''} font-size:11px; padding:3px 10px;" onclick="toggleGridWordStudied('${v.id}')">
+                ${isStudied ? '✓ Dipelajari' : '+ Pelajari'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterVocabGrid(cat, btn) {
+      playSynthSound('click');
+      const pillsContainer = document.getElementById('vocabCategoryPills');
+      if (pillsContainer) {
+        pillsContainer.querySelectorAll('.pill-filter').forEach(p => p.classList.remove('active'));
+      }
+      if (btn) btn.classList.add('active');
+      renderVocabGrid(cat);
+    }
+
+    function toggleGridWordStudied(wordId) {
+      if (!Array.isArray(appState.vocabDailyMission.studiedWords)) {
+        appState.vocabDailyMission.studiedWords = [];
+      }
+      const studied = appState.vocabDailyMission.studiedWords;
+      const idx = studied.indexOf(wordId);
+      if (idx === -1) {
+        studied.push(wordId);
+        playSynthSound('correct');
+        showToast('✓ Kosakata ditambahkan ke target misi harian!');
+        if (studied.length === 10) {
+          playSynthSound('success');
+          showToast('🎉 Hebat! Anda telah menguasai 10 kosakata. Kuis Misi Harian TERBUKA!');
+        }
+      } else {
+        studied.splice(idx, 1);
+        playSynthSound('click');
+      }
+      saveState();
+      updateVocabDailyMissionUI();
+      renderVocabGrid(currentVocabGridFilter);
+    }
+
+    /* 10-Question Daily Vocab Quiz Engine */
+    function handleOpenQuizView() {
+      const studied = appState.vocabDailyMission.studiedWords || [];
+      const lockedScreen = document.getElementById('vocabQuizLockedScreen');
+      const activeBox = document.getElementById('vocabQuizActiveBox');
+      const resultScreen = document.getElementById('vocabQuizResultScreen');
+
+      if (studied.length < 10) {
+        if (lockedScreen) lockedScreen.style.display = 'block';
+        if (activeBox) activeBox.style.display = 'none';
+        if (resultScreen) resultScreen.style.display = 'none';
+      } else {
+        if (lockedScreen) lockedScreen.style.display = 'none';
+        if (resultScreen) resultScreen.style.display = 'none';
+        if (activeBox) activeBox.style.display = 'block';
+        startDailyVocabQuiz();
+      }
+    }
+
+    function startDailyVocabQuiz() {
+      const dailyWords = getDailyVocabList();
+      // Generate 10 randomized diverse questions based on daily words
+      const shuffledWords = [...dailyWords].sort(() => 0.5 - Math.random());
+
+      const questions = [];
+      for (let i = 0; i < 10; i++) {
+        const targetWord = shuffledWords[i % shuffledWords.length];
+        const otherWords = THAI_VOCAB_BANK.filter(v => v.id !== targetWord.id);
+        const distractorWords = otherWords.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+        // Variety of formats:
+        // 0-3: Thai -> Indonesian Meaning
+        // 4-6: Indonesian Meaning -> Thai Script
+        // 7-9: Listening Quiz (SpeakThai audio -> pick Thai + Meaning)
+        let qType = 'thai_to_meaning';
+        if (i >= 4 && i <= 6) qType = 'meaning_to_thai';
+        else if (i >= 7) qType = 'audio_listen';
+
+        let prompt = '';
+        let choices = [];
+        let correctChoiceIdx = 0;
+
+        if (qType === 'thai_to_meaning') {
+          prompt = `Apa arti dari kosakata Thai: <strong>${targetWord.thai}</strong> (${targetWord.roman})?`;
+          choices = [
+            { text: targetWord.meaning, isCorrect: true },
+            { text: distractorWords[0].meaning, isCorrect: false },
+            { text: distractorWords[1].meaning, isCorrect: false },
+            { text: distractorWords[2].meaning, isCorrect: false }
+          ];
+        } else if (qType === 'meaning_to_thai') {
+          prompt = `Manakah tulisan Thai yang tepat untuk arti: <strong>"${targetWord.meaning}"</strong>?`;
+          choices = [
+            { text: `${targetWord.thai} (${targetWord.roman})`, isCorrect: true },
+            { text: `${distractorWords[0].thai} (${distractorWords[0].roman})`, isCorrect: false },
+            { text: `${distractorWords[1].thai} (${distractorWords[1].roman})`, isCorrect: false },
+            { text: `${distractorWords[2].thai} (${distractorWords[2].roman})`, isCorrect: false }
+          ];
+        } else {
+          prompt = `🎧 Dengarkan audio penutur asli Bangkok berikut lalu pilih kosakata yang diucapkan:`;
+          choices = [
+            { text: `${targetWord.thai} — ${targetWord.meaning}`, isCorrect: true },
+            { text: `${distractorWords[0].thai} — ${distractorWords[0].meaning}`, isCorrect: false },
+            { text: `${distractorWords[1].thai} — ${distractorWords[1].meaning}`, isCorrect: false },
+            { text: `${distractorWords[2].thai} — ${distractorWords[2].meaning}`, isCorrect: false }
+          ];
+        }
+
+        // Shuffle choices and find correct index
+        choices = choices.sort(() => 0.5 - Math.random());
+        correctChoiceIdx = choices.findIndex(c => c.isCorrect);
+
+        questions.push({
+          targetWord,
+          type: qType,
+          prompt,
+          choices,
+          correctChoiceIdx
+        });
+      }
+
+      vocabQuizState = {
+        questions,
+        currentIndex: 0,
+        score: 0,
+        isAnswered: false,
+        selectedOpt: null
+      };
+
+      renderVocabQuizQuestion();
+    }
+
+    function renderVocabQuizQuestion() {
+      const q = vocabQuizState.questions[vocabQuizState.currentIndex];
+      if (!q) return;
+
+      vocabQuizState.isAnswered = false;
+      vocabQuizState.selectedOpt = null;
+
+      // Update counters
+      const badgeIndex = document.getElementById('quizQuestionIndexBadge');
+      const scoreBadge = document.getElementById('quizCurrentScoreBadge');
+      const progressFill = document.getElementById('quizProgressFill');
+
+      if (badgeIndex) badgeIndex.textContent = `Soal ${vocabQuizState.currentIndex + 1} dari 10`;
+      if (scoreBadge) scoreBadge.textContent = `Skor: ${vocabQuizState.score} Benar`;
+      if (progressFill) progressFill.style.width = `${((vocabQuizState.currentIndex + 1) / 10) * 100}%`;
+
+      const card = document.getElementById('vocabQuestionCard');
+      if (!card) return;
+
+      const isAudioType = q.type === 'audio_listen';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      card.innerHTML = `
+        <div class="quiz-prompt-header">Tantangan Kuis Kosakata #${vocabQuizState.currentIndex + 1}</div>
+        <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; line-height:1.4;">${q.prompt}</h3>
+
+        <div class="quiz-word-target">
+          ${isAudioType ? `
+            <button class="vocab-audio-circle-btn" style="width:64px; height:64px; font-size:26px;" onclick="speakThai('${q.targetWord.thai}')" title="Putar ulang suara penutur">
+              🔊
+            </button>
+            <div style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">Klik untuk memutar ulang audio</div>
+          ` : `
+            <div style="font-family:var(--font-thai); font-size:48px; font-weight:800; color:var(--primary); line-height:1.2; cursor:pointer;" onclick="speakThai('${q.targetWord.thai}')" title="Dengar lafal Bangkok">
+              ${q.targetWord.thai}
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-family:var(--font-mono); font-size:16px; color:var(--text); font-weight:700;">${q.targetWord.roman}</span>
+              <button class="btn-audio-listen" style="padding:2px 8px; font-size:11px;" onclick="speakThai('${q.targetWord.thai}')">🔊 Lafal</button>
+            </div>
+          `}
+        </div>
+
+        <div class="quiz-choices-grid" id="quizChoicesContainer">
+          ${q.choices.map((c, idx) => `
+            <button type="button" class="quiz-choice-btn" id="choiceBtn_${idx}" onclick="handleVocabQuizChoice(${idx})">
+              <span class="choice-key">${letters[idx]}</span>
+              <span class="choice-text">${c.text}</span>
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="quizFeedbackArea" style="min-height:20px;"></div>
+      `;
+
+      // Auto play audio if listening question
+      if (isAudioType) {
+        setTimeout(() => speakThai(q.targetWord.thai), 300);
+      }
+    }
+
+    function handleVocabQuizChoice(selectedIdx) {
+      if (vocabQuizState.isAnswered) return;
+      vocabQuizState.isAnswered = true;
+      vocabQuizState.selectedOpt = selectedIdx;
+
+      const q = vocabQuizState.questions[vocabQuizState.currentIndex];
+      const isCorrect = (selectedIdx === q.correctChoiceIdx);
+
+      const choiceBtns = document.querySelectorAll('.quiz-choice-btn');
+      choiceBtns.forEach((btn, idx) => {
+        btn.style.pointerEvents = 'none';
+        if (idx === q.correctChoiceIdx) {
+          btn.classList.add('correct');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      const feedbackArea = document.getElementById('quizFeedbackArea');
+      const scoreBadge = document.getElementById('quizCurrentScoreBadge');
+
+      if (isCorrect) {
+        vocabQuizState.score++;
+        playSynthSound('correct');
+        if (scoreBadge) scoreBadge.textContent = `Skor: ${vocabQuizState.score} Benar`;
+      } else {
+        playSynthSound('wrong');
+      }
+
+      // Always play Thai pronunciation of target word for auditory reinforcement
+      speakThai(q.targetWord.thai);
+
+      const isLastQuestion = (vocabQuizState.currentIndex === 9);
+
+      if (feedbackArea) {
+        feedbackArea.innerHTML = `
+          <div class="quiz-feedback-banner" style="border-left-color:${isCorrect ? '#52b788' : '#fb7185'};">
+            <div>
+              <div style="font-size:15px; font-weight:800; color:${isCorrect ? '#52b788' : '#fb7185'}; margin-bottom:3px;">
+                ${isCorrect ? '🎉 Benar Sekali!' : '⚠️ Belum Tepat!'}
+              </div>
+              <div style="font-size:13px; color:var(--text);">
+                <strong>${q.targetWord.thai}</strong> (${q.targetWord.roman}) = <em>${q.targetWord.meaning}</em>
+              </div>
+            </div>
+            <button class="btn-stimuler-primary" style="padding:10px 22px; font-size:13px;" onclick="nextVocabQuizQuestion()">
+              ${isLastQuestion ? 'Lihat Hasil Kuis ➔' : 'Soal Selanjutnya ➔'}
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function nextVocabQuizQuestion() {
+      playSynthSound('click');
+      if (vocabQuizState.currentIndex < 9) {
+        vocabQuizState.currentIndex++;
+        renderVocabQuizQuestion();
+      } else {
+        finishDailyVocabQuiz();
+      }
+    }
+
+    function finishDailyVocabQuiz() {
+      const activeBox = document.getElementById('vocabQuizActiveBox');
+      const resultScreen = document.getElementById('vocabQuizResultScreen');
+      if (activeBox) activeBox.style.display = 'none';
+      if (resultScreen) resultScreen.style.display = 'block';
+
+      const finalScore = vocabQuizState.score;
+      const isPassed = finalScore >= 7;
+
+      // Update state
+      appState.vocabDailyMission.quizCompleted = true;
+      appState.vocabDailyMission.quizScore = finalScore;
+
+      // Claim rewards if first time today
+      if (!appState.vocabDailyMission.claimed) {
+        appState.xp += 50;
+        appState.gems += 20;
+        appState.streak = Math.max(appState.streak, 1);
+        appState.vocabDailyMission.claimed = true;
+      }
+
+      saveState();
+      playSynthSound('success');
+
+      resultScreen.innerHTML = `
+        <div style="width:72px; height:72px; border-radius:50%; background:var(--primary-light); display:grid; place-items:center; font-size:36px; margin:0 auto 16px auto;">
+          ${isPassed ? '🏆' : '⭐'}
+        </div>
+        <span class="daily-badge-pill" style="margin-bottom:12px;">MISI HARIAN KOSAKATA TUNTAS</span>
+        <h2 style="font-size:26px; font-weight:800; margin-bottom:8px;">
+          ${isPassed ? 'Luar Biasa! Misi Harian Berhasil!' : 'Kuis Selesai! Pertahankan Latihan!'}
+        </h2>
+        <p style="font-size:14px; color:var(--text-muted); max-width:520px; margin:0 auto 20px auto;">
+          Anda telah menyelesaikan rangkaian belajar 10 kosakata dan menuntaskan 10 soal kuis evaluasi harian.
+        </p>
+
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; max-width:440px; margin:0 auto 24px auto;">
+          <div style="font-size:12px; font-weight:700; color:var(--text-dim); text-transform:uppercase; font-family:var(--font-mono); margin-bottom:6px;">
+            Skor Akhir Kuis
+          </div>
+          <div style="font-size:42px; font-weight:800; font-family:var(--font-mono); color:${isPassed ? 'var(--primary)' : 'var(--amber)'}; line-height:1;">
+            ${finalScore} / 10
+          </div>
+          <div style="font-size:13px; color:var(--text-muted); margin-top:6px;">
+            Akurasi Penguasaan: <strong>${finalScore * 10}%</strong>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:12px; margin-bottom:28px;">
+          <div class="reward-chip"><span class="reward-icon">⚡</span><strong>+50 XP Diklaim</strong></div>
+          <div class="reward-chip"><span class="reward-icon">💎</span><strong>+20 Gems Diklaim</strong></div>
+          <div class="reward-chip"><span class="reward-icon">🔥</span><strong>Streak Aktif</strong></div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <button class="btn-stimuler-primary" onclick="startDailyVocabQuiz()">
+            🔄 Ulangi Kuis 10 Soal
+          </button>
+          <button class="btn-audio-listen" onclick="switchVocabView('focus')">
+            📖 Review Kosakata
+          </button>
+          <button class="btn-audio-listen" onclick="switchNavTab('curriculum')">
+            📑 Lanjut ke Kurikulum Unit ➔
+          </button>
+        </div>
+      `;
+    }
+
+    function handleVocabDailyAction() {
+      playSynthSound('click');
+      const studied = appState.vocabDailyMission.studiedWords || [];
+      if (studied.length >= 10) {
+        switchVocabView('quiz');
+      } else {
+        switchVocabView('focus');
+      }
+    }
+
+    function resetTodayVocabMission() {
+      playSynthSound('click');
+      appState.vocabDailyMission.studiedWords = [];
+      appState.vocabDailyMission.quizCompleted = false;
+      appState.vocabDailyMission.quizScore = 0;
+      appState.vocabDailyMission.claimed = false;
+      saveState();
+      updateVocabDailyMissionUI();
+      renderVocabFocusCard();
+      renderVocabGrid(currentVocabGridFilter);
+      showToast('🔄 Misi harian kosakata telah direset untuk latihan baru!');
     }
 
     /* 7. LESSONS DATABASE & ARENA RUNNER (12 PROGRESSIVE UNITS / 48 MODULES) */
@@ -10037,6 +12156,11 @@
       document.querySelectorAll('.section-tab-panel').forEach(panel => {
         panel.classList.toggle('active', panel.id === `panel-${tabKey}`);
       });
+      if (tabKey === 'vocabulary') {
+        updateVocabDailyMissionUI();
+        if (currentVocabViewMode === 'focus') renderVocabFocusCard();
+        else if (currentVocabViewMode === 'grid') renderVocabGrid(currentVocabGridFilter);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -11016,6 +13140,7 @@
     renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
     initQaChat();
     initLearningPortal();
+    initVocabularyDailyMission();
   </script>
 </body>
 </html>
