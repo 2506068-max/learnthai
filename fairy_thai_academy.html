@@ -149,161 +149,318 @@
     }
 
     /* Header Nav */
+    /* ==========================================================================
+       APP HEADER NAV (EXECUTIVE, COMPACT & READABLE)
+       ========================================================================== */
     .top-header {
       position: sticky;
       top: 0;
-      z-index: 90;
-      background: rgba(9, 9, 11, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      z-index: 100;
+      background: #0d1410;
       border-bottom: 1px solid var(--border);
-      height: 68px;
+      height: 62px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 28px;
+      padding: 0 18px;
+      gap: 12px;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     [data-theme="light"] .top-header {
-      background: rgba(255, 255, 255, 0.88);
+      background: #f6f3eb;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.16);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .brand-cluster {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
       user-select: none;
+      flex-shrink: 0;
     }
     .brand-icon-box {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, var(--primary) 0%, #1d4ed8 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       display: grid;
       place-items: center;
-      box-shadow: 0 0 16px var(--primary-glow);
+      font-size: 18px;
+      box-shadow: 0 2px 10px var(--primary-glow);
+      flex-shrink: 0;
     }
-    .brand-icon-box svg {
-      width: 22px;
-      height: 22px;
-      fill: #ffffff;
+    .brand-titles {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
     }
     .brand-titles h1 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
       display: flex;
       align-items: center;
       gap: 6px;
+      margin: 0;
+      white-space: nowrap;
     }
     .brand-tag {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       padding: 2px 6px;
       border-radius: var(--radius-pill);
       background: var(--primary-light);
       color: var(--primary);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      border: 1px solid var(--border-bright);
+      line-height: 1;
+      white-space: nowrap;
     }
-    .brand-titles span {
+    .brand-titles .brand-subtitle {
       font-size: 11px;
       color: var(--text-muted);
       font-weight: 500;
-      display: block;
+      white-space: nowrap;
+      margin: 0;
+      line-height: 1.2;
+    }
+    @media (max-width: 1240px) {
+      .brand-titles .brand-subtitle {
+        display: none;
+      }
     }
 
     /* Header Metrics & Actions */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
-    .metric-badge {
-      display: flex;
+    /* Native Speaker Pill */
+    .metric-native-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
+      gap: 6px;
+      height: 34px;
+      padding: 0 10px;
       border-radius: var(--radius-pill);
       background: var(--bg-card);
       border: 1px solid var(--border);
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 11px;
       font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
       user-select: none;
     }
-    .metric-streak { color: var(--amber); }
-    .metric-xp { color: var(--primary); }
-    .metric-cefr {
-      background: var(--emerald-glow);
-      color: var(--emerald);
-      border-color: rgba(16, 185, 129, 0.25);
+    .metric-native-badge:hover {
+      border-color: var(--primary);
+      color: var(--text);
+    }
+    @media (max-width: 1120px) {
+      .metric-native-badge {
+        display: none;
+      }
     }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: var(--radius-md);
-      display: grid;
-      place-items: center;
+    /* Combined Stats Capsule */
+    .stats-group-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: var(--radius-pill);
       background: var(--bg-card);
       border: 1px solid var(--border);
-      color: var(--text-muted);
-      transition: all 0.15s;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      user-select: none;
+      white-space: nowrap;
     }
-    .icon-btn:hover {
-      color: var(--text);
-      background: var(--bg-card-hover);
-      border-color: var(--border-bright);
+    .stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
-    .icon-btn:active {
-      transform: scale(0.96);
+    .stat-chip.stat-cefr { color: var(--emerald); }
+    .stat-chip.stat-streak { color: var(--amber); }
+    .stat-chip.stat-xp { color: var(--primary); }
+    .stat-divider {
+      width: 1px;
+      height: 12px;
+      background: var(--border-bright);
     }
 
-    /* GENDER SPEAKER SWITCHER CONTROLS */
+    /* Gender Segmented Switch */
     .gender-segmented-control {
       display: inline-flex;
       align-items: center;
+      height: 34px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-pill);
-      padding: 3px;
-      gap: 3px;
+      padding: 2px;
+      gap: 2px;
+      box-sizing: border-box;
+      white-space: nowrap;
     }
     .gender-pill-btn {
+      height: 28px;
       background: transparent;
       border: 1px solid transparent;
-      padding: 5px 12px;
+      padding: 0 10px;
       border-radius: var(--radius-pill);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       font-family: var(--font-mono);
       color: var(--text-muted);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 4px;
+      white-space: nowrap;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .gender-pill-btn:hover {
       color: var(--text);
       background: var(--bg-card-hover);
     }
     .gender-pill-btn.active#headerGenderFemale {
-      background: rgba(244, 162, 97, 0.20);
+      background: rgba(244, 162, 97, 0.22);
+      color: #ea580c;
+      border-color: rgba(244, 162, 97, 0.4);
+      font-weight: 800;
+    }
+    [data-theme="dark"] .gender-pill-btn.active#headerGenderFemale {
       color: #f4a261;
       border-color: rgba(244, 162, 97, 0.45);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     .gender-pill-btn.active#headerGenderMale {
-      background: rgba(82, 183, 136, 0.20);
-      color: #52b788;
-      border-color: rgba(82, 183, 136, 0.45);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--border-bright);
+      font-weight: 800;
+    }
+
+    /* Utility Buttons Group */
+    .header-utils-group {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 2px;
+      gap: 2px;
+      box-sizing: border-box;
+    }
+    .icon-btn-compact {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 7px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .icon-btn-compact:hover {
+      color: var(--text);
+      background: var(--bg-card-hover);
+    }
+    .icon-btn-compact:active {
+      transform: scale(0.95);
+    }
+
+    /* User Profile Pill */
+    .user-profile-badge {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      gap: 7px;
+      padding: 0 8px 0 10px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 12px;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .user-profile-badge:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+    .profile-badge-avatar {
+      font-size: 15px;
+      line-height: 1;
+    }
+    .profile-badge-name {
+      font-weight: 700;
+      color: var(--text);
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .profile-logout-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+      margin-left: 2px;
+    }
+    .profile-logout-btn:hover {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.1);
+      transform: scale(1.08);
+    }
+
+    @media (max-width: 980px) {
+      .metric-native-badge { display: none; }
+      .brand-tag { display: none; }
+    }
+    @media (max-width: 820px) {
+      .gender-pill-btn { padding: 0 6px; font-size: 10px; }
+      .stats-group-pill .stat-chip.stat-cefr { display: none; }
+      .stats-group-pill .stat-divider:first-of-type { display: none; }
+    }
+    @media (max-width: 680px) {
+      .top-header { padding: 0 10px; gap: 6px; height: 56px; }
+      .profile-badge-name { display: none; }
+      .user-profile-badge { padding: 0 6px; }
+      .brand-icon-box { width: 30px; height: 30px; font-size: 15px; }
+      .brand-titles h1 { font-size: 14px; }
     }
 
     /* Main Container with Sidebar + Content */
@@ -1586,18 +1743,6 @@
       font-size: 13px;
       color: var(--text-muted);
     }
-    .metric-native-badge {
-      background: rgba(45, 106, 79, 0.2) !important;
-      border: 1px solid rgba(82, 183, 136, 0.45) !important;
-      color: var(--text) !important;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .metric-native-badge:hover {
-      background: rgba(45, 106, 79, 0.35) !important;
-      border-color: var(--emerald) !important;
-    }
 
     /* AI THAILAND HUB & ASSISTANT STYLES */
     .ai-hub-container {
@@ -2434,53 +2579,6 @@
       text-decoration: underline;
     }
 
-    /* Header Profile Badge */
-    .user-profile-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 12px;
-      border-radius: var(--radius-pill);
-      background: var(--bg-card);
-      border: 1px solid var(--border-bright);
-      cursor: pointer;
-      transition: all 0.18s ease;
-      font-size: 13px;
-    }
-
-    .user-profile-badge:hover {
-      border-color: var(--primary);
-      background: var(--bg-card-hover);
-    }
-
-    .profile-badge-avatar {
-      font-size: 16px;
-    }
-
-    .profile-badge-name {
-      font-weight: 700;
-      max-width: 110px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .profile-logout-btn {
-      background: none;
-      border: none;
-      font-size: 13px;
-      opacity: 0.6;
-      padding: 2px 4px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: opacity 0.18s, transform 0.18s;
-    }
-
-    .profile-logout-btn:hover {
-      opacity: 1;
-      transform: scale(1.15);
-    }
-
     /* Nav Rail User Card */
     .nav-user-card {
       margin-top: auto;
@@ -2757,39 +2855,42 @@
   <div class="app-shell">
     <!-- TOP HEADER -->
     <header class="top-header">
-      <div class="brand-cluster" onclick="openLearningPortal()" title="Kembali ke Portal Belajar">
-        <div class="brand-icon-box" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+      <div class="brand-cluster" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Portal Belajar">
+        <div class="brand-icon-box">
           🍃
         </div>
         <div class="brand-titles">
-          <h1 style="font-family:var(--font-display);">Mali's Thai Garden <span class="brand-tag">GHIBLI AI</span></h1>
-          <span>Taman Latihan Bicara & Kelancaran Bahasa Thailand</span>
+          <h1>Mali's Thai Garden <span class="brand-tag">GHIBLI AI</span></h1>
+          <span class="brand-subtitle">Taman Latihan Bicara &amp; Kelancaran Bahasa Thailand</span>
         </div>
       </div>
 
       <div class="header-actions">
         <!-- User Profile Pill -->
-        <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()" title="Profil Akun: Klik untuk melihat atau ganti akun">
+        <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()" title="Profil Akun Pembelajar (Klik untuk ganti akun)">
           <span class="profile-badge-avatar" id="headerUserAvatar">🍃</span>
           <span class="profile-badge-name" id="headerUserName">Pembelajar</span>
-          <button class="profile-logout-btn" onclick="event.stopPropagation(); handleStudentLogout();" title="Keluar / Ganti Akun">🚪</button>
+          <button class="profile-logout-btn" onclick="event.stopPropagation(); handleStudentLogout();" title="Ganti Akun / Keluar" aria-label="Ganti Akun">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </button>
         </div>
-        <button class="icon-btn" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Ikon Belajar">
-          🏠
-        </button>
-        <div class="metric-badge metric-native-badge" onclick="triggerCoachGreeting()" title="Penutur Asli: Bangkok Central Thai • Klik untuk mendengar sapaan Nong Mali">
-          <span>🇹🇭 Penutur Asli Bangkok</span>
+
+        <!-- Native Speaker Badge -->
+        <div class="metric-native-badge" onclick="triggerCoachGreeting()" title="Penutur Asli Bangkok • Klik untuk dengar sapaan">
+          <span>🇹🇭 Bangkok Thai</span>
         </div>
-        <div class="metric-badge metric-cefr" title="Tingkat Kelancaran CEFR Thai">
-          <span>🍃 CEFR A1.2</span>
+
+        <!-- Consolidated Stats Capsule -->
+        <div class="stats-group-pill" title="Level CEFR, Streak & XP Pembelajar">
+          <span class="stat-chip stat-cefr" title="Tingkat CEFR">🍃 A1.2</span>
+          <span class="stat-divider"></span>
+          <span class="stat-chip stat-streak" title="Streak Latihan"><span style="color:var(--amber);">🔥</span> <span id="headerStreak">1</span> Hari</span>
+          <span class="stat-divider"></span>
+          <span class="stat-chip stat-xp" title="Total XP Berbicara"><span style="color:var(--primary);">⚡</span> <span id="headerXp">65</span> XP</span>
         </div>
-        <div class="metric-badge metric-streak" title="Streak Latihan Harian">
-          <span>🔥</span> <span id="headerStreak">1</span> Hari
-        </div>
-        <div class="metric-badge metric-xp" title="Total XP Berbicara">
-          <span>⚡</span> <span id="headerXp">65</span> XP
-        </div>
-        <div class="gender-segmented-control" id="headerGenderSegmented" title="Pilih Gaya Bicara Penutur Asli: Pria (ครับ) atau Wanita (ค่ะ)">
+
+        <!-- Dual-Gender Voice Segmented Pill -->
+        <div class="gender-segmented-control" id="headerGenderSegmented" title="Pilih Gaya Bicara Penutur Asli: Wanita (ค่ะ) atau Pria (ครับ)">
           <button class="gender-pill-btn active" id="headerGenderFemale" onclick="setAppSpeakerGender('female')" title="Suara Penutur Asli Perempuan (ค่ะ/คะ)">
             <span>👩 Wanita (ค่ะ)</span>
           </button>
@@ -2797,15 +2898,19 @@
             <span>👨 Pria (ครับ)</span>
           </button>
         </div>
-        <button class="icon-btn" onclick="toggleSpeechRate()" id="rateToggleBtn" title="Kecepatan Bicara Penutur Asli (1.0x Normal / 0.8x Lambat)">
-          ⚡ 1.0x
-        </button>
-        <button class="icon-btn" onclick="toggleAudioEngine()" id="audioToggleBtn" title="Toggle Efek Suara">
-          🔊
-        </button>
-        <button class="icon-btn" onclick="toggleColorTheme()" title="Ubah Suasana Siang / Malam">
-          🏮
-        </button>
+
+        <!-- Compact Utility Actions Group -->
+        <div class="header-utils-group">
+          <button class="icon-btn-compact" onclick="toggleSpeechRate()" id="rateToggleBtn" title="Kecepatan Bicara (1.0x Normal / 0.8x Lambat)">
+            ⚡ 1.0x
+          </button>
+          <button class="icon-btn-compact" onclick="toggleAudioEngine()" id="audioToggleBtn" title="Toggle Efek Suara">
+            🔊
+          </button>
+          <button class="icon-btn-compact" onclick="toggleColorTheme()" title="Ubah Suasana Siang / Malam">
+            🏮
+          </button>
+        </div>
       </div>
     </header>
 
