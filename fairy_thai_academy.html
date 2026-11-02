@@ -5495,36 +5495,13 @@
           </button>
         </div>
 
-        <!-- Native Speaker Badge -->
-        <div class="metric-native-badge" onclick="triggerCoachGreeting()" title="Penutur Asli Bangkok • Klik untuk dengar sapaan">
-          <span>🇹🇭 Bangkok Thai</span>
-        </div>
-
-        <!-- Consolidated Stats Capsule -->
-        <div class="stats-group-pill" title="Level CEFR, Streak & XP Pembelajar">
-          <span class="stat-chip stat-cefr" title="Tingkat CEFR">🍃 A1.2</span>
-          <span class="stat-divider"></span>
-          <span class="stat-chip stat-streak" title="Streak Latihan"><span style="color:var(--amber);">🔥</span> <span id="headerStreak">1</span> Hari</span>
-          <span class="stat-divider"></span>
-          <span class="stat-chip stat-xp" title="Total XP Berbicara"><span style="color:var(--primary);">⚡</span> <span id="headerXp">65</span> XP</span>
-        </div>
-
-        <!-- Dual-Gender Voice Segmented Pill -->
-        <div class="gender-segmented-control" id="headerGenderSegmented" title="Pilih Gaya Bicara Penutur Asli: Wanita (ค่ะ) atau Pria (ครับ)">
-          <button class="gender-pill-btn active" id="headerGenderFemale" onclick="setAppSpeakerGender('female')" title="Suara Penutur Asli Perempuan (ค่ะ/คะ)">
-            <span>👩 Wanita (ค่ะ)</span>
-          </button>
-          <button class="gender-pill-btn" id="headerGenderMale" onclick="setAppSpeakerGender('male')" title="Suara Penutur Asli Laki-laki (ครับ)">
-            <span>👨 Pria (ครับ)</span>
-          </button>
-        </div>
-
-        <!-- Thai Font & Script Style Selector -->
+        <!-- Pilihan Ragam Tulisan Thailand (Thai Typography & Font Selector) -->
         <div class="thai-font-selector-wrap" id="headerThaiFontWrap" title="Pilih Ragam Tulisan Thailand (Gaya Font Aksara)">
-          <button class="thai-font-trigger-btn" id="headerThaiFontBtn" onclick="toggleThaiFontMenu(event)" aria-haspopup="true" aria-expanded="false" title="Ubah Ragam Gaya Tulisan Thai">
+          <button class="thai-font-trigger-btn" id="headerThaiFontBtn" onclick="toggleThaiFontMenu(event)" aria-haspopup="true" aria-expanded="false" title="Pilih Ragam Gaya Tulisan Thailand">
             <span style="font-size:13px;">🔤</span>
-            <span class="thai-font-current-label" id="currentThaiFontLabel">Berloop</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;opacity:0.75;"><polyline points="6 9 12 15 18 9"/></svg>
+            <span>Tulisan Thai:</span>
+            <span class="thai-font-current-label" id="currentThaiFontLabel" style="color:var(--primary); font-weight:800;">Berloop</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:11px;height:11px;opacity:0.8;"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="thai-font-dropdown" id="headerThaiFontDropdown">
             <div class="thai-font-dropdown-title">RAGAM TULISAN THAILAND</div>
@@ -5588,6 +5565,25 @@
               </button>
             </div>
           </div>
+        </div>
+
+        <!-- Consolidated Stats Capsule -->
+        <div class="stats-group-pill" title="Level CEFR, Streak & XP Pembelajar">
+          <span class="stat-chip stat-cefr" title="Tingkat CEFR">🍃 A1.2</span>
+          <span class="stat-divider"></span>
+          <span class="stat-chip stat-streak" title="Streak Latihan"><span style="color:var(--amber);">🔥</span> <span id="headerStreak">1</span> Hari</span>
+          <span class="stat-divider"></span>
+          <span class="stat-chip stat-xp" title="Total XP Berbicara"><span style="color:var(--primary);">⚡</span> <span id="headerXp">65</span> XP</span>
+        </div>
+
+        <!-- Dual-Gender Voice Segmented Pill -->
+        <div class="gender-segmented-control" id="headerGenderSegmented" title="Pilih Gaya Bicara Penutur Asli: Wanita (ค่ะ) atau Pria (ครับ)">
+          <button class="gender-pill-btn active" id="headerGenderFemale" onclick="setAppSpeakerGender('female')" title="Suara Penutur Asli Perempuan (ค่ะ/คะ)">
+            <span>👩 Wanita (ค่ะ)</span>
+          </button>
+          <button class="gender-pill-btn" id="headerGenderMale" onclick="setAppSpeakerGender('male')" title="Suara Penutur Asli Laki-laki (ครับ)">
+            <span>👨 Pria (ครับ)</span>
+          </button>
         </div>
 
         <!-- Compact Utility Actions Group -->
