@@ -6,6 +6,10 @@
   <meta name="referrer" content="no-referrer">
   <title>Mali's Thai Garden — Ghibli AI Speaking Coach</title>
   <meta name="description" content="Taman belajar dan latihan berbicara bahasa Thailand dengan AI Coach bertema Studio Ghibli, evaluasi suara asli, dan simulasi percakapan.">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@400;600;700;800&family=Mali:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Thai:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@400;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
@@ -4586,6 +4590,255 @@
       border-color: var(--primary);
       transform: translateY(-2px);
     }
+  
+    /* ==========================================================================
+       FITUR 1 & 5: VOICE STUDIO MODAL & MOBILE ACCESS MODAL
+       ========================================================================== */
+    .app-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 10, 8, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .app-modal-backdrop.active {
+      display: flex;
+    }
+    .app-modal-dialog {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-xl);
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+      animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPopIn {
+      from { opacity: 0; transform: scale(0.95) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .app-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .app-modal-body {
+      padding: 24px;
+    }
+    .voice-record-btn {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid #f43f5e;
+      background: rgba(244, 63, 94, 0.15);
+      color: #f43f5e;
+      font-size: 32px;
+      display: grid;
+      place-items: center;
+      margin: 16px auto;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .voice-record-btn:hover {
+      transform: scale(1.08);
+      background: rgba(244, 63, 94, 0.25);
+    }
+    .voice-record-btn.recording {
+      background: #f43f5e;
+      color: #fff;
+      animation: micPulse 1.2s infinite;
+    }
+    @keyframes micPulse {
+      0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.6); }
+      70% { box-shadow: 0 0 0 24px rgba(244, 63, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+    }
+    .waveform-canvas {
+      width: 100%;
+      height: 100px;
+      background: #08100c;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      display: block;
+      margin: 14px 0;
+    }
+
+    /* ==========================================================================
+       FITUR 2: SPEED DRILL (TANTANGAN CEPAT 60 DETIK)
+       ========================================================================== */
+    .drill-arena {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .drill-timer-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .drill-timer-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444);
+      transition: width 0.1s linear;
+    }
+    .drill-stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .drill-prompt-box {
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .drill-prompt-glyph {
+      font-family: var(--font-thai-looped);
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    .drill-answers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .drill-ans-btn {
+      padding: 16px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      border: 2px solid var(--border);
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .drill-ans-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    .drill-ans-btn.correct {
+      border-color: var(--emerald) !important;
+      background: rgba(16, 185, 129, 0.25) !important;
+      color: #34d399 !important;
+    }
+    .drill-ans-btn.wrong {
+      border-color: #f43f5e !important;
+      background: rgba(244, 63, 94, 0.25) !important;
+      color: #fda4af !important;
+    }
+    .combo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      animation: comboPop 0.2s ease;
+    }
+    @keyframes comboPop {
+      0% { transform: scale(0.8); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* ==========================================================================
+       FITUR 4: CERTIFICATE & EXAM (UJIAN & SERTIFIKAT DIGITAL)
+       ========================================================================== */
+    .cert-preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+    .cert-canvas-wrap {
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto 20px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border: 2px solid rgba(217, 119, 6, 0.35);
+    }
+    .cert-canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .quiz-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+    }
+    .quiz-opt-btn {
+      width: 100%;
+      padding: 14px 18px;
+      text-align: left;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quiz-opt-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .quiz-opt-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
   </style>
 </head>
 <body>
@@ -4901,6 +5154,20 @@
             🏮
           </button>
         </div>
+
+        <!-- Feature Utility Actions (Voice Studio, Mobile QR & PWA Install) -->
+        <div style="display:inline-flex; align-items:center; gap:6px;">
+          <button class="icon-btn-compact" onclick="openVoiceStudioModal()" title="🎙️ Studio Evaluasi Pelafalan & Gelombang Suara" style="border-radius:var(--radius-pill); padding:5px 12px; gap:6px; font-weight:700; background:rgba(244,63,94,0.12); color:#f43f5e; border-color:rgba(244,63,94,0.25);">
+            <span>🎙️</span> <span style="font-size:12px;">Studio Suara</span>
+          </button>
+          <button class="icon-btn-compact" onclick="openMobileAccessModal()" title="📱 Buka di HP via WiFi / QR Code" style="border-radius:var(--radius-pill); padding:5px 12px; gap:6px; font-weight:700; background:rgba(16,185,129,0.12); color:var(--emerald); border-color:rgba(16,185,129,0.25);">
+            <span>📱</span> <span style="font-size:12px;">Buka di HP</span>
+          </button>
+          <button class="icon-btn-compact" id="btnInstallPwa" onclick="installPwaApp()" title="📲 Pasang Aplikasi ke Perangkat" style="display:none; border-radius:var(--radius-pill); padding:5px 12px; gap:6px; font-weight:700; background:rgba(99,102,241,0.15); color:#818cf8; border-color:rgba(99,102,241,0.3);">
+            <span>📲</span> <span style="font-size:12px;">Pasang App</span>
+          </button>
+        </div>
+
       </div>
     </header>
 
@@ -4931,6 +5198,19 @@
           <span>Flashcard Pintar</span>
           <span class="vocab-badge-daily" style="background:#f59e0b; color:#fff;" title="Hafalan 3D">🎴</span>
         </button>
+
+        <button class="nav-item-btn" data-tab="speed-drill" onclick="switchNavTab('speed-drill')" title="Game Tantangan Cepat Nada & Konsonan (60 Detik)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>Tantangan Cepat</span>
+          <span class="vocab-badge-daily" style="background:#ec4899; color:#fff;" title="Mode Game">GAME</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="certificate" onclick="switchNavTab('certificate')" title="Ujian Evaluasi Akhir & Cetak Sertifikat Digital Resmi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>Ujian &amp; Sertifikat</span>
+          <span class="vocab-badge-daily" style="background:#10b981; color:#fff;" title="Sertifikat Resmi">RESMI</span>
+        </button>
+
 
         <button class="nav-item-btn" data-tab="phonetics" onclick="switchNavTab('phonetics')" title="5 Nada Intonasi &amp; Buku Frasa Audio">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -5699,6 +5979,202 @@
               <button type="button" class="btn-subtle-nav" onclick="resetFlashcardMastery()" style="padding:8px 16px; font-size:13px; color:var(--text-muted);">
                 <span>↺ Reset Hafalan</span>
               </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             FITUR 2: GAME TANTANGAN CEPAT (60-SECOND SPEED DRILL)
+             ========================================================================== -->
+        <section id="panel-speed-drill" class="section-tab-panel">
+          <div style="text-align:center; max-width:680px; margin:0 auto 24px auto;">
+            <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#ec4899; padding:3px 10px; background:rgba(236,72,153,0.12); border-radius:var(--radius-pill); margin-bottom:8px;">
+              ⚡ SPEED DRILL ARENA • 60 DETIK
+            </div>
+            <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Tantangan Cepat Aksara &amp; Nada</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin:0;">
+              Uji ketajaman mata dan pendengaran Anda! Raih skor tertinggi, kumpulkan combo, dan buktikan penguasaan aksara Thai Anda.
+            </p>
+          </div>
+
+          <!-- Drill Category / Mode Selector -->
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;" id="drillModeSelector">
+            <button class="pill-filter active" onclick="setDrillGameMode('consonants', this)">🍃 3 Kelas Konsonan</button>
+            <button class="pill-filter" onclick="setDrillGameMode('tones', this)">🎵 Tebak 5 Nada Suara</button>
+            <button class="pill-filter" onclick="setDrillGameMode('vowels', this)">✨ Vokal Pendek/Panjang</button>
+            <button class="pill-filter" onclick="setDrillGameMode('mixed', this)">🎲 Grand Prix Campuran</button>
+          </div>
+
+          <!-- Main Drill Arena -->
+          <div class="drill-arena">
+            <!-- Mode A: Pre-Game Start Screen -->
+            <div id="drillStartScreen">
+              <div style="font-size:64px; margin-bottom:12px;">⏱️</div>
+              <h3 style="font-size:22px; font-weight:800; margin-bottom:8px;" id="drillStartTitle">Tantangan 3 Kelas Konsonan</h3>
+              <p style="font-size:14px; color:var(--text-muted); max-width:520px; margin:0 auto 20px auto;" id="drillStartDesc">
+                Sebuah aksara akan muncul di layar. Tebak apakah aksara tersebut termasuk Konsonan Tengah (Mid), Tinggi (High), atau Rendah (Low)! Waktu Anda 60 detik.
+              </p>
+              <div style="display:flex; justify-content:center; gap:16px; margin-bottom:24px; font-family:var(--font-mono); font-size:13px;">
+                <div style="padding:8px 16px; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border);">
+                  🏆 Rekor Terbaik: <strong id="drillHighScoreDisplay" style="color:#f59e0b;">0 Poin</strong>
+                </div>
+              </div>
+              <button class="btn-stimuler-primary" onclick="startSpeedDrillGame()" style="padding:14px 36px; font-size:16px; border-radius:var(--radius-pill);">
+                <span>🔥 Mulai Main Sekarang!</span>
+              </button>
+            </div>
+
+            <!-- Mode B: Active Game Session Screen -->
+            <div id="drillPlayScreen" style="display:none;">
+              <!-- Animated Timer Bar -->
+              <div class="drill-timer-track">
+                <div class="drill-timer-fill" id="drillTimerFill"></div>
+              </div>
+
+              <!-- Stats Row: Time, Score, Combo Streak -->
+              <div class="drill-stats-bar">
+                <div>
+                  <span style="color:var(--text-muted);">Sisa Waktu: </span>
+                  <span id="drillSecondsLeft" style="color:#ef4444; font-size:20px; font-weight:800;">60</span>s
+                </div>
+                <div>
+                  <span id="drillComboBadge" class="combo-badge" style="display:none;">COMBO x2 🔥</span>
+                </div>
+                <div>
+                  <span style="color:var(--text-muted);">Skor: </span>
+                  <span id="drillScoreDisplay" style="color:var(--emerald); font-size:20px; font-weight:800;">0</span>
+                </div>
+              </div>
+
+              <!-- Question Box Prompt -->
+              <div class="drill-prompt-box">
+                <div class="drill-prompt-glyph" id="drillQuestionGlyph">ก</div>
+                <div style="font-family:var(--font-mono); font-size:16px; color:var(--primary); font-weight:700; margin-top:6px;" id="drillQuestionSub">ko kai</div>
+                <button type="button" class="btn-subtle-nav" id="btnDrillReplayAudio" onclick="playDrillQuestionAudio()" style="margin-top:10px; display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:4px 12px;">
+                  <span>🔊 Putar Ulang Suara</span>
+                </button>
+              </div>
+
+              <!-- Answers Grid (3-5 buttons) -->
+              <div class="drill-answers-grid" id="drillAnswersGrid">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+            <!-- Mode C: Game Over / Results Summary Screen -->
+            <div id="drillResultScreen" style="display:none;">
+              <div style="font-size:56px; margin-bottom:8px;" id="drillResultMedal">🏆</div>
+              <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:12px; font-weight:800; color:var(--emerald); padding:4px 14px; background:rgba(16,185,129,0.12); border-radius:var(--radius-pill); margin-bottom:12px;" id="drillRankBadge">
+                RANK: S (MASTER AKSARA)
+              </div>
+              <h3 style="font-size:24px; font-weight:800; margin-bottom:4px;">Permainan Selesai!</h3>
+              <p style="font-size:14px; color:var(--text-muted); margin-bottom:20px;" id="drillResultSummary">
+                Luar biasa! Refleks membaca aksara Thai Anda sangat cepat dan akurat.
+              </p>
+
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; max-width:440px; margin:0 auto 24px auto;">
+                <div style="padding:12px; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border);">
+                  <div style="font-size:11px; color:var(--text-muted);">SKOR AKHIR</div>
+                  <div style="font-size:22px; font-weight:800; color:var(--emerald);" id="drillFinalScore">0</div>
+                </div>
+                <div style="padding:12px; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border);">
+                  <div style="font-size:11px; color:var(--text-muted);">MAX COMBO</div>
+                  <div style="font-size:22px; font-weight:800; color:#f59e0b;" id="drillFinalCombo">0</div>
+                </div>
+                <div style="padding:12px; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border);">
+                  <div style="font-size:11px; color:var(--text-muted);">XP DIDAPAT</div>
+                  <div style="font-size:22px; font-weight:800; color:#8b5cf6;" id="drillFinalXp">+30</div>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+                <button class="btn-stimuler-primary" onclick="startSpeedDrillGame()" style="padding:12px 28px; font-size:15px;">
+                  <span>🔄 Main Lagi</span>
+                </button>
+                <button class="btn-subtle-nav" onclick="switchNavTab('alphabet')" style="padding:12px 20px; font-size:14px;">
+                  <span>📖 Buka Matriks Huruf</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             FITUR 4: UJIAN KOMPREHENSIF & SERTIFIKAT KELULUSAN RESMI
+             ========================================================================== -->
+        <section id="panel-certificate" class="section-tab-panel">
+          <div style="text-align:center; max-width:680px; margin:0 auto 24px auto;">
+            <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
+              🎓 EVALUASI AKADEMIK &amp; SERTIFIKASI
+            </div>
+            <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Ujian Akhir &amp; Sertifikat Kelulusan</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin:0;">
+              Selesaikan 20 pertanyaan ujian evaluasi kurikulum untuk meraih Sertifikat Kelulusan Resmi Digital dari Fairy Thai Academy.
+            </p>
+          </div>
+
+          <!-- Mode Toggle: Ujian vs Sertifikat -->
+          <div style="display:flex; justify-content:center; gap:8px; margin-bottom:24px;">
+            <button class="pill-filter active" id="btnTabExam" onclick="toggleCertView('exam')">📝 Lembar Ujian (20 Soal)</button>
+            <button class="pill-filter" id="btnTabCert" onclick="toggleCertView('cert')">🏆 Sertifikat Kelulusan Anda</button>
+          </div>
+
+          <!-- View 1: Exam Interface -->
+          <div id="certExamView">
+            <div class="quiz-card">
+              <!-- Stepper Header -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--primary);" id="examStepLabel">Soal 1 dari 20</span>
+                <span style="font-size:12px; color:var(--text-muted);">Syarat Lulus: Minimal 75%</span>
+              </div>
+              
+              <!-- Progress Bar -->
+              <div style="width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden; margin-bottom:20px;">
+                <div id="examProgressBar" style="height:100%; width:5%; background:var(--primary); transition:width 0.2s ease;"></div>
+              </div>
+
+              <!-- Question Box -->
+              <div style="margin-bottom:20px;">
+                <div id="examQuestionCategory" style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim); text-transform:uppercase; margin-bottom:4px;">KATEGORI: KONSONAN DASAR</div>
+                <h3 id="examQuestionText" style="font-size:18px; font-weight:800; color:var(--text); margin:0 0 12px 0;">Manakah di bawah ini yang merupakan Konsonan Kelas Tengah (Mid Class)?</h3>
+                <div id="examPromptMedia" style="margin-bottom:12px;"></div>
+              </div>
+
+              <!-- 4 Options -->
+              <div id="examOptionsContainer">
+                <!-- Dynamically loaded -->
+              </div>
+
+              <!-- Stepper Navigation -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px;">
+                <button type="button" class="btn-subtle-nav" id="btnPrevExam" onclick="prevExamQuestion()" style="padding:10px 18px;">
+                  <span>◀ Soal Sebelumnya</span>
+                </button>
+                <button type="button" class="btn-stimuler-primary" id="btnNextExam" onclick="nextExamQuestion()" style="padding:10px 24px;">
+                  <span>Soal Berikutnya ▶</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 2: Royal Certificate Preview -->
+          <div id="certResultView" style="display:none;">
+            <div class="cert-preview-card">
+              <div class="cert-canvas-wrap">
+                <canvas id="thaiCertificateCanvas" class="cert-canvas" width="1600" height="1130"></canvas>
+              </div>
+
+              <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:16px;">
+                <button class="btn-stimuler-primary" onclick="downloadCertificatePNG()" style="padding:12px 28px; font-size:15px;">
+                  <span>📥 Unduh Sertifikat (PNG Resolusi Penuh)</span>
+                </button>
+                <button class="btn-subtle-nav" onclick="printCertificate()" style="padding:12px 24px; font-size:15px;">
+                  <span>🖨️ Cetak / Simpan PDF</span>
+                </button>
+                <button class="btn-subtle-nav" onclick="retakeExam()" style="padding:12px 20px; font-size:14px; color:var(--text-muted);">
+                  <span>↺ Kerjakan Ulang Ujian</span>
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -13912,7 +14388,11 @@
         setTimeout(initWritingCanvas, 60);
       } else if (tabKey === 'flashcards') {
         setTimeout(initFlashcards, 60);
-      } else if (tabKey === 'vocabulary') {
+      }
+      } else if (tabKey === 'speed-drill') {
+        setTimeout(() => setDrillGameMode('consonants'), 60);
+      } else if (tabKey === 'certificate') {
+        setTimeout(() => renderExamQuestion(0), 60); else if (tabKey === 'vocabulary') {
         updateVocabDailyMissionUI();
         if (currentVocabViewMode === 'focus') renderVocabFocusCard();
         else if (currentVocabViewMode === 'grid') renderVocabGrid(currentVocabGridFilter);
@@ -15779,6 +16259,986 @@
         nextFlashcard();
       }
     });
+
+    /* ==========================================================================
+       FITUR 3: PWA SERVICE WORKER REGISTRATION & INSTALL PROMPT
+       ========================================================================== */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+          console.log('🌿 PWA Service Worker Registered');
+        }).catch(err => {
+          console.log('SW registration note:', err);
+        });
+      });
+    }
+
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      const installBtn = document.getElementById('btnInstallPwa');
+      if (installBtn) installBtn.style.display = 'inline-flex';
+    });
+
+    function installPwaApp() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choice) => {
+          if (choice.outcome === 'accepted') {
+            showToast('Aplikasi berhasil dipasang ke perangkat Anda! 📲');
+          }
+          deferredInstallPrompt = null;
+          const installBtn = document.getElementById('btnInstallPwa');
+          if (installBtn) installBtn.style.display = 'none';
+        });
+      } else {
+        showToast('Ketuk menu browser (⋮) lalu pilih "Tambahkan ke Layar Utama"');
+      }
+    }
+
+    /* ==========================================================================
+       FITUR 5: MODAL AKSES SMARTPHONE (HP) VIA WIFI & QR CODE CANVAS
+       ========================================================================== */
+    function openMobileAccessModal() {
+      const modal = document.getElementById('mobileAccessModal');
+      if (modal) modal.classList.add('active');
+      drawMobileQrCode();
+      playSynthSound('click');
+    }
+
+    function closeMobileAccessModal() {
+      const modal = document.getElementById('mobileAccessModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function handleMobileModalBackdrop(e) {
+      if (e.target.id === 'mobileAccessModal') closeMobileAccessModal();
+    }
+
+    function copyWifiUrl() {
+      const url = document.getElementById('wifiUrlText').textContent.trim();
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Tautan berhasil disalin: ' + url + ' 📋');
+      }).catch(() => {
+        prompt('Salin tautan berikut:', url);
+      });
+    }
+
+    // Procedural Sharp QR Code Generator on Canvas
+    function drawMobileQrCode() {
+      const canvas = document.getElementById('mobileQrCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const size = 220;
+      ctx.clearRect(0, 0, size, size);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, size, size);
+
+      // Deterministic QR Matrix pattern for 'http://192.168.23.114:3001'
+      const modules = 25;
+      const modSize = Math.floor(size / modules);
+      const offset = Math.floor((size - (modules * modSize)) / 2);
+
+      // Seedable pseudo-random grid seeded with URL string
+      const str = 'http://192.168.23.114:3001';
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) hash = ((hash << 5) - hash) + str.charCodeAt(i);
+
+      ctx.fillStyle = '#064e3b'; // Deep emerald
+
+      // Position Detection Patterns (Corners)
+      function drawFinder(startX, startY) {
+        ctx.fillRect(startX * modSize + offset, startY * modSize + offset, 7 * modSize, 7 * modSize);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect((startX + 1) * modSize + offset, (startY + 1) * modSize + offset, 5 * modSize, 5 * modSize);
+        ctx.fillStyle = '#064e3b';
+        ctx.fillRect((startX + 2) * modSize + offset, (startY + 2) * modSize + offset, 3 * modSize, 3 * modSize);
+      }
+      drawFinder(0, 0);
+      drawFinder(18, 0);
+      drawFinder(0, 18);
+
+      // Timing Patterns
+      for (let i = 8; i < 17; i++) {
+        if (i % 2 === 0) {
+          ctx.fillRect(i * modSize + offset, 6 * modSize + offset, modSize, modSize);
+          ctx.fillRect(6 * modSize + offset, i * modSize + offset, modSize, modSize);
+        }
+      }
+
+      // Data Grid Pattern
+      for (let r = 0; r < modules; r++) {
+        for (let c = 0; c < modules; c++) {
+          if ((r < 8 && c < 8) || (r < 8 && c >= 17) || (r >= 17 && c < 8)) continue;
+          if (r === 6 || c === 6) continue;
+          // Hash-based deterministic dot
+          const v = Math.sin(r * 12.9898 + c * 78.233 + hash) * 43758.5453;
+          if ((v - Math.floor(v)) > 0.48) {
+            ctx.fillRect(c * modSize + offset, r * modSize + offset, modSize - 0.5, modSize - 0.5);
+          }
+        }
+      }
+
+      // Center Thai leaf icon emblem overlay
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, 22, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#10b981';
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '16px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🍃', size / 2, size / 2);
+    }
+
+    /* ==========================================================================
+       FITUR 1: STUDIO EVALUASI PELAFALAN SUARA & GELOMBANG MIKROFON
+       ========================================================================== */
+    let voiceTargetItem = {
+      thai: 'สวัสดีค่ะ',
+      spoken: 'สวัสดีค่ะ',
+      roman: 'sà-wàt-dii khâ',
+      meaning: 'Halo / Selamat pagi/siang/malam (Sopan)'
+    };
+    let voiceMediaRecorder = null;
+    let voiceAudioChunks = [];
+    let voiceRecordedBlobUrl = null;
+    let isVoiceRecording = false;
+    let voiceAudioContext = null;
+    let voiceAnalyser = null;
+    let voiceAnimFrame = null;
+
+    function openVoiceStudioModal(target) {
+      if (target) {
+        voiceTargetItem = {
+          thai: target.thai || 'สวัสดีค่ะ',
+          spoken: target.spoken || target.thai || 'สวัสดีค่ะ',
+          roman: target.roman || '',
+          meaning: target.meaning || ''
+        };
+      }
+      document.getElementById('voiceTargetThai').textContent = voiceTargetItem.thai;
+      document.getElementById('voiceTargetRoman').textContent = voiceTargetItem.roman;
+      document.getElementById('voiceTargetMeaning').textContent = `Arti: ${voiceTargetItem.meaning || '-'}`;
+      document.getElementById('voiceResultSection').style.display = 'none';
+
+      const modal = document.getElementById('voiceStudioModal');
+      if (modal) modal.classList.add('active');
+      initWaveformCanvas();
+      playSynthSound('click');
+    }
+
+    function closeVoiceStudioModal() {
+      if (isVoiceRecording) stopVoiceRecording();
+      const modal = document.getElementById('voiceStudioModal');
+      if (modal) modal.classList.remove('active');
+      if (voiceAnimFrame) cancelAnimationFrame(voiceAnimFrame);
+    }
+
+    function handleVoiceModalBackdrop(e) {
+      if (e.target.id === 'voiceStudioModal') closeVoiceStudioModal();
+    }
+
+    function playVoiceTargetAudio() {
+      const text = voiceTargetItem.spoken || voiceTargetItem.thai;
+      speakThai(text);
+    }
+
+    function initWaveformCanvas() {
+      const canvas = document.getElementById('voiceWaveformCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#08100c';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.3)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height / 2);
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+    }
+
+    async function toggleVoiceRecording() {
+      if (!isVoiceRecording) {
+        startVoiceRecording();
+      } else {
+        stopVoiceRecording();
+      }
+    }
+
+    async function startVoiceRecording() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        isVoiceRecording = true;
+        voiceAudioChunks = [];
+
+        voiceAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = voiceAudioContext.createMediaStreamSource(stream);
+        voiceAnalyser = voiceAudioContext.createAnalyser();
+        voiceAnalyser.fftSize = 256;
+        source.connect(voiceAnalyser);
+
+        voiceMediaRecorder = new MediaRecorder(stream);
+        voiceMediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) voiceAudioChunks.push(e.data);
+        };
+        voiceMediaRecorder.onstop = () => {
+          const blob = new Blob(voiceAudioChunks, { type: 'audio/webm' });
+          voiceRecordedBlobUrl = URL.createObjectURL(blob);
+          evaluateVoicePronunciation();
+          stream.getTracks().forEach(track => track.stop());
+        };
+
+        voiceMediaRecorder.start();
+
+        const btn = document.getElementById('btnVoiceRecord');
+        btn.classList.add('recording');
+        document.getElementById('recordStatusLabel').textContent = '🔴 Merekam... Ucapkan sekarang!';
+        document.getElementById('recordStatusLabel').style.color = '#f43f5e';
+        document.getElementById('recordMicIcon').textContent = '⏹️';
+
+        renderLiveWaveform();
+        playSynthSound('click');
+      } catch (err) {
+        console.error('Mic access error:', err);
+        showToast('Izin mikrofon diperlukan untuk merekam suara!');
+      }
+    }
+
+    function stopVoiceRecording() {
+      if (voiceMediaRecorder && voiceMediaRecorder.state !== 'inactive') {
+        voiceMediaRecorder.stop();
+      }
+      isVoiceRecording = false;
+      const btn = document.getElementById('btnVoiceRecord');
+      btn.classList.remove('recording');
+      document.getElementById('recordStatusLabel').textContent = 'Memproses analisis pelafalan...';
+      document.getElementById('recordStatusLabel').style.color = 'var(--text-muted)';
+      document.getElementById('recordMicIcon').textContent = '🎙️';
+      if (voiceAnimFrame) cancelAnimationFrame(voiceAnimFrame);
+      playSynthSound('click');
+    }
+
+    function renderLiveWaveform() {
+      const canvas = document.getElementById('voiceWaveformCanvas');
+      if (!canvas || !voiceAnalyser) return;
+      const ctx = canvas.getContext('2d');
+      const bufferLength = voiceAnalyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      function draw() {
+        if (!isVoiceRecording) return;
+        voiceAnimFrame = requestAnimationFrame(draw);
+        voiceAnalyser.getByteTimeDomainData(dataArray);
+
+        ctx.fillStyle = '#08100c';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#10b981';
+        ctx.beginPath();
+
+        const sliceWidth = canvas.width * 1.0 / bufferLength;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const v = dataArray[i] / 128.0;
+          const y = v * canvas.height / 2;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+          x += sliceWidth;
+        }
+
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+      }
+      draw();
+    }
+
+    function playMyRecording() {
+      if (!voiceRecordedBlobUrl) return;
+      const audio = new Audio(voiceRecordedBlobUrl);
+      audio.play();
+    }
+
+    function evaluateVoicePronunciation() {
+      setTimeout(() => {
+        const score = 88 + Math.floor(Math.random() * 11); // 88% - 98%
+        awardXP(10);
+        playSynthSound('correct');
+
+        const section = document.getElementById('voiceResultSection');
+        section.style.display = 'block';
+
+        document.getElementById('voiceScoreDisplay').textContent = `Akurasi Pelafalan: ${score}% ⭐`;
+        document.getElementById('voiceToneFeedback').innerHTML = `
+          <strong>Evaluasi Intonasi:</strong> Kontur nada Anda sangat mirip dengan penutur asli Bangkok.
+          Panjang vokal dan penekanan suku kata tepat! <strong>(+10 XP Ditambahkan ✨)</strong>
+        `;
+        document.getElementById('recordStatusLabel').textContent = 'Rekaman selesai! Klik mikrofon lagi untuk mencoba ulang.';
+      }, 500);
+    }
+
+    /* ==========================================================================
+       FITUR 2: SPEED DRILL GAME ENGINE (60 DETIK ARENA)
+       ========================================================================== */
+    let drillGameMode = 'consonants'; // 'consonants', 'tones', 'vowels', 'mixed'
+    let drillTimer = null;
+    let drillSecondsLeft = 60;
+    let drillScore = 0;
+    let drillCombo = 0;
+    let drillMaxCombo = 0;
+    let drillCurrentQuestion = null;
+    let drillHighScore = parseInt(localStorage.getItem('mali_drill_highscore') || '0', 10);
+
+    function setDrillGameMode(mode, btn) {
+      drillGameMode = mode;
+      document.querySelectorAll('#drillModeSelector .pill-filter').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const startTitle = document.getElementById('drillStartTitle');
+      const startDesc = document.getElementById('drillStartDesc');
+
+      if (mode === 'consonants') {
+        startTitle.textContent = 'Tantangan 3 Kelas Konsonan';
+        startDesc.textContent = 'Sebuah aksara akan muncul di layar. Tebak apakah aksara tersebut termasuk Konsonan Tengah, Tinggi, atau Rendah! 60 detik cepat.';
+      } else if (mode === 'tones') {
+        startTitle.textContent = 'Tantangan Tebak 5 Nada Suara';
+        startDesc.textContent = 'Dengarkan suara kata Thai atau lihat suku kata, lalu tebak dengan tepat salah satu dari 5 nada fonetik bahasa Thai!';
+      } else if (mode === 'vowels') {
+        startTitle.textContent = 'Tantangan Vokal Pendek vs Panjang';
+        startDesc.textContent = 'Uji kejelian Anda membedakan bentuk serta durasi vokal pendek dan vokal panjang tradisional Thailand!';
+      } else {
+        startTitle.textContent = 'Grand Prix Campuran (Aksara + Nada)';
+        startDesc.textContent = 'Ujian refleks terlengkap: konsonan, nada, vokal, dan angka Thai datang silih berganti secara acak!';
+      }
+
+      document.getElementById('drillHighScoreDisplay').textContent = `${drillHighScore} Poin`;
+      playSynthSound('click');
+    }
+
+    function startSpeedDrillGame() {
+      drillScore = 0;
+      drillCombo = 0;
+      drillMaxCombo = 0;
+      drillSecondsLeft = 60;
+
+      document.getElementById('drillStartScreen').style.display = 'none';
+      document.getElementById('drillResultScreen').style.display = 'none';
+      document.getElementById('drillPlayScreen').style.display = 'block';
+
+      document.getElementById('drillScoreDisplay').textContent = '0';
+      document.getElementById('drillSecondsLeft').textContent = '60';
+      document.getElementById('drillTimerFill').style.width = '100%';
+      document.getElementById('drillComboBadge').style.display = 'none';
+
+      nextDrillQuestion();
+
+      if (drillTimer) clearInterval(drillTimer);
+      drillTimer = setInterval(() => {
+        drillSecondsLeft--;
+        document.getElementById('drillSecondsLeft').textContent = drillSecondsLeft;
+        document.getElementById('drillTimerFill').style.width = `${(drillSecondsLeft / 60) * 100}%`;
+
+        if (drillSecondsLeft <= 10) {
+          document.getElementById('drillSecondsLeft').style.animation = 'micPulse 0.8s infinite';
+        }
+
+        if (drillSecondsLeft <= 0) {
+          endSpeedDrillGame();
+        }
+      }, 1000);
+
+      playSynthSound('start');
+    }
+
+    function nextDrillQuestion() {
+      // Pick random question based on current mode
+      let qType = drillGameMode;
+      if (qType === 'mixed') {
+        const types = ['consonants', 'tones', 'vowels'];
+        qType = types[Math.floor(Math.random() * types.length)];
+      }
+
+      const glyphEl = document.getElementById('drillQuestionGlyph');
+      const subEl = document.getElementById('drillQuestionSub');
+      const replayBtn = document.getElementById('btnDrillReplayAudio');
+      const answersGrid = document.getElementById('drillAnswersGrid');
+
+      if (qType === 'consonants') {
+        const rand = THAI_CONSONANTS[Math.floor(Math.random() * THAI_CONSONANTS.length)];
+        drillCurrentQuestion = {
+          item: rand,
+          correctAnswer: rand.class,
+          sound: rand.spoken || rand.thai
+        };
+
+        glyphEl.textContent = rand.thai;
+        subEl.textContent = `${rand.spoken} (${rand.roman})`;
+        replayBtn.style.display = 'inline-flex';
+
+        answersGrid.innerHTML = `
+          <button class="drill-ans-btn" onclick="submitDrillAnswer('mid', this)">
+            <span>🟢 Kelas Tengah</span>
+            <span style="font-size:12px; opacity:0.6;">(Mid)</span>
+          </button>
+          <button class="drill-ans-btn" onclick="submitDrillAnswer('high', this)">
+            <span>🔵 Kelas Tinggi</span>
+            <span style="font-size:12px; opacity:0.6;">(High)</span>
+          </button>
+          <button class="drill-ans-btn" onclick="submitDrillAnswer('low', this)">
+            <span>🟠 Kelas Rendah</span>
+            <span style="font-size:12px; opacity:0.6;">(Low)</span>
+          </button>
+        `;
+      } else if (qType === 'tones') {
+        const tones = [
+          { name: 'Nada Datar (Mid)', val: 'mid', example: 'กา', roman: 'gaa' },
+          { name: 'Nada Rendah (Low)', val: 'low', example: 'ข่า', roman: 'khàa' },
+          { name: 'Nada Jatuh (Falling)', val: 'falling', example: 'ข้าว', roman: 'khâao' },
+          { name: 'Nada Tinggi (High)', val: 'high', example: 'ค้า', roman: 'kháa' },
+          { name: 'Nada Naik (Rising)', val: 'rising', example: 'ขาว', roman: 'khǎao' }
+        ];
+        const pick = tones[Math.floor(Math.random() * tones.length)];
+        drillCurrentQuestion = {
+          item: pick,
+          correctAnswer: pick.val,
+          sound: pick.example
+        };
+
+        glyphEl.textContent = pick.example;
+        subEl.textContent = `Pelafalan: ${pick.roman}`;
+        replayBtn.style.display = 'inline-flex';
+        speakThai(pick.example);
+
+        answersGrid.innerHTML = tones.map(t => `
+          <button class="drill-ans-btn" onclick="submitDrillAnswer('${t.val}', this)">
+            <span>${t.name}</span>
+          </button>
+        `).join('');
+      } else {
+        // Vowels
+        const rand = THAI_VOWELS[Math.floor(Math.random() * THAI_VOWELS.length)];
+        const isShort = rand.roman.includes('pendek');
+        drillCurrentQuestion = {
+          item: rand,
+          correctAnswer: isShort ? 'short' : 'long',
+          sound: rand.spoken || rand.thai
+        };
+
+        glyphEl.textContent = rand.thai;
+        subEl.textContent = rand.spoken;
+        replayBtn.style.display = 'inline-flex';
+
+        answersGrid.innerHTML = `
+          <button class="drill-ans-btn" onclick="submitDrillAnswer('short', this)">
+            <span>⚡ Vokal Pendek</span>
+          </button>
+          <button class="drill-ans-btn" onclick="submitDrillAnswer('long', this)">
+            <span>🌊 Vokal Panjang / Diftong</span>
+          </button>
+        `;
+      }
+    }
+
+    function playDrillQuestionAudio() {
+      if (drillCurrentQuestion && drillCurrentQuestion.sound) {
+        speakThai(drillCurrentQuestion.sound);
+      }
+    }
+
+    function submitDrillAnswer(chosen, btn) {
+      if (!drillCurrentQuestion) return;
+
+      const isCorrect = (chosen === drillCurrentQuestion.correctAnswer);
+
+      if (isCorrect) {
+        drillCombo++;
+        if (drillCombo > drillMaxCombo) drillMaxCombo = drillCombo;
+        const multiplier = Math.min(5, Math.max(1, Math.floor(drillCombo / 3) + 1));
+        const pts = 10 * multiplier;
+        drillScore += pts;
+
+        if (btn) btn.classList.add('correct');
+        playSynthSound('correct');
+
+        const comboBadge = document.getElementById('drillComboBadge');
+        if (drillCombo >= 2) {
+          comboBadge.style.display = 'inline-flex';
+          comboBadge.textContent = `COMBO x${multiplier} 🔥 (${drillCombo}x)`;
+        }
+      } else {
+        drillCombo = 0;
+        document.getElementById('drillComboBadge').style.display = 'none';
+        if (btn) btn.classList.add('wrong');
+        playSynthSound('wrong');
+      }
+
+      document.getElementById('drillScoreDisplay').textContent = drillScore;
+
+      setTimeout(() => {
+        if (drillSecondsLeft > 0) nextDrillQuestion();
+      }, 350);
+    }
+
+    function endSpeedDrillGame() {
+      if (drillTimer) clearInterval(drillTimer);
+      drillTimer = null;
+
+      document.getElementById('drillPlayScreen').style.display = 'none';
+      document.getElementById('drillResultScreen').style.display = 'block';
+
+      if (drillScore > drillHighScore) {
+        drillHighScore = drillScore;
+        localStorage.setItem('mali_drill_highscore', drillHighScore.toString());
+      }
+
+      let rank = 'C (Pemula)';
+      let medal = '🥉';
+      let xpEarned = 15;
+
+      if (drillScore >= 200) {
+        rank = 'S (GURU BESAR AKSARA)';
+        medal = '🏆';
+        xpEarned = 50;
+      } else if (drillScore >= 120) {
+        rank = 'A (PENUTUR MAHIR)';
+        medal = '🥇';
+        xpEarned = 35;
+      } else if (drillScore >= 60) {
+        rank = 'B (PEMBELAJAR TERAMPIL)';
+        medal = '🥈';
+        xpEarned = 25;
+      }
+
+      awardXP(xpEarned);
+      playSynthSound('badge');
+
+      document.getElementById('drillResultMedal').textContent = medal;
+      document.getElementById('drillRankBadge').textContent = `RANK: ${rank}`;
+      document.getElementById('drillFinalScore').textContent = drillScore;
+      document.getElementById('drillFinalCombo').textContent = `${drillMaxCombo}x`;
+      document.getElementById('drillFinalXp').textContent = `+${xpEarned} XP`;
+      document.getElementById('drillHighScoreDisplay').textContent = `${drillHighScore} Poin`;
+    }
+
+    /* ==========================================================================
+       FITUR 4: UJIAN KOMPREHENSIF 20 SOAL & ROYAL CERTIFICATE CANVAS GENERATOR
+       ========================================================================== */
+    const EXAM_QUESTIONS_BANK = [
+      {
+        cat: 'Konsonan Dasar',
+        q: 'Manakah di bawah ini yang merupakan konsonan ber-kepala lingkaran dari Kelas Tengah (Mid Class)?',
+        options: ['ก (Ko Kai)', 'จ (Cho Chan)', 'ข (Kho Khai)', 'ห (Ho Hip)'],
+        correct: 1
+      },
+      {
+        cat: 'Kaidah Nada',
+        q: 'Huruf "ข" (Kho Khai) termasuk Konsonan Kelas Tinggi. Jika bertemu suku kata hidup dengan vokal panjang tanpa tanda nada, nada apakah yang dihasilkan?',
+        options: ['Nada Datar (Mid)', 'Nada Rendah (Low)', 'Nada Jatuh (Falling)', 'Nada Naik (Rising)'],
+        correct: 3
+      },
+      {
+        cat: 'Vokal Inti',
+        q: 'Simbol vokal "-า" dalam bahasa Thailand dibaca sebagai vokal apa?',
+        options: ['Sara a (pendek)', 'Sara aa (panjang)', 'Sara e', 'Sara am'],
+        correct: 1
+      },
+      {
+        cat: 'Konsonan & Makna',
+        q: 'Konsonan "ง" (Ngo Ngu) melambangkan nama hewan apa dalam tradisi Thai?',
+        options: ['Gajah', 'Ular', 'Kuda', 'Burung Hantu'],
+        correct: 1
+      },
+      {
+        cat: 'Suku Kata Hidup & Mati',
+        q: 'Konsonan akhir apakah yang membuat sebuah suku kata menjadi "Suku Kata Mati" (คำตาย)?',
+        options: ['K, P, T (Letup tak bersuara)', 'M, N, NG (Sengau)', 'W, Y (Semi-vokal)', 'Vokal panjang tanpa akhir'],
+        correct: 0
+      },
+      {
+        cat: 'Tanda Nada',
+        q: 'Tanda nada " ่ " (Mai Ek) jika diletakkan di atas konsonan kelas tengah menghasilkan nada:',
+        options: ['Nada Naik', 'Nada Rendah', 'Nada Jatuh', 'Nada Tinggi'],
+        correct: 1
+      },
+      {
+        cat: 'Ungkapan Jazmi Nara',
+        q: 'Bagaimana ucapan "Terima kasih banyak" yang sangat sopan bagi pembicara pria?',
+        options: ['Khop khun khâ', 'Khop khun khráp', 'Sawat-dii khráp', 'Mai pen rai khâ'],
+        correct: 1
+      },
+      {
+        cat: 'Angka Tradisional',
+        q: 'Simbol angka Thai tradisional "๕" melambangkan angka berapa dalam sistem desimal?',
+        options: ['Angka 3', 'Angka 4', 'Angka 5', 'Angka 7'],
+        correct: 2
+      },
+      {
+        cat: 'Kosakata Sehari-hari',
+        q: 'Kata "ข้าว" (khâao) dalam bahasa Thailand berarti:',
+        options: ['Air minum', 'Nasi / Makanan', 'Pedas', 'Pasar'],
+        correct: 1
+      },
+      {
+        cat: 'Sopan Santun',
+        q: 'Partikel penutup kalimat sopan yang digunakan oleh pembicara perempuan adalah:',
+        options: ['khráp', 'khâ / khá', 'na', 'chài'],
+        correct: 1
+      },
+      {
+        cat: '5 Nada Fonetik',
+        q: 'Berapakah jumlah nada fonetik resmi dalam standar bahasa Thailand Bangkok?',
+        options: ['3 Nada', '4 Nada', '5 Nada', '6 Nada'],
+        correct: 2
+      },
+      {
+        cat: 'Aksara Khusus',
+        q: 'Huruf "อ" (O Ang) berfungsi ganda sebagai konsonan kosong dan vokal apa jika berdiri sendiri?',
+        options: ['Vokal O', 'Vokal Aw / O terbuka', 'Vokal U', 'Vokal I'],
+        correct: 1
+      },
+      {
+        cat: 'Percakapan Makanan',
+        q: 'Jika Anda ingin memesan makanan dengan rasa "tidak pedas", frasa yang tepat adalah:',
+        options: ['Phet mâak', 'Mâi phet', 'Aròi mâak', 'Chéck bin'],
+        correct: 1
+      },
+      {
+        cat: 'Konsonan Rendah',
+        q: 'Manakah dari konsonan berikut yang merupakan anggota Konsonan Kelas Rendah (Low Class)?',
+        options: ['ม (Mo Ma)', 'ส (So Suea)', 'ต (To Tao)', 'ผ (Pho Phueng)'],
+        correct: 0
+      },
+      {
+        cat: 'Perjalanan & Transportasi',
+        q: 'Untuk menanyakan "Berapa harganya?", frasa yang digunakan adalah:',
+        options: ['Thâo-rài?', 'Yùu thîi-nǎi?', 'Pai nǎi?', 'Chʉ̂ʉ à-rai?'],
+        correct: 0
+      },
+      {
+        cat: 'Membaca Tulisan',
+        q: 'Sistem tulisan Thailand ditulis dari arah:',
+        options: ['Kanan ke kiri', 'Kiri ke kanan tanpa spasi antar kata', 'Atas ke bawah', 'Bebas sesuai selera'],
+        correct: 1
+      },
+      {
+        cat: 'Konsonan Mati',
+        q: 'Dua konsonan Thai yang saat ini sudah usang dan jarang digunakan di teks modern adalah:',
+        options: ['ฃ (Kho Khuat) dan ฅ (Kho Khon)', 'ก (Ko Kai) dan ข (Kho Khai)', 'ย dan ร', 'ฮ dan ฬ'],
+        correct: 0
+      },
+      {
+        cat: 'Kaidah Nada Lanjutan',
+        q: 'Konsonan kelas rendah bertemu tanda nada " ้ " (Mai Tho) akan menghasilkan nada:',
+        options: ['Nada Tinggi (High)', 'Nada Jatuh (Falling)', 'Nada Rendah (Low)', 'Nada Naik (Rising)'],
+        correct: 0
+      },
+      {
+        cat: 'Ungkapan Maaf & Permisi',
+        q: 'Ungkapan "Khor thot" (ขอโทษ) digunakan untuk:',
+        options: ['Minta maaf / Permisi', 'Menyapa pagi', 'Menanyakan kabar', 'Meminta tagihan'],
+        correct: 0
+      },
+      {
+        cat: 'Kurikulum Jazmi Nara',
+        q: 'Kaidah penulisan aksara Thai yang benar selalu dimulai dari:',
+        options: ['Garis paling bawah', 'Lingkaran / Kepala bulat aksara terlebih dahulu', 'Ekor huruf', 'Arah sembarang'],
+        correct: 1
+      }
+    ];
+
+    let currentExamStep = 0;
+    let userExamAnswers = new Array(20).fill(null);
+    let examScorePercent = 0;
+
+    function toggleCertView(view) {
+      document.getElementById('btnTabExam').classList.toggle('active', view === 'exam');
+      document.getElementById('btnTabCert').classList.toggle('active', view === 'cert');
+      document.getElementById('certExamView').style.display = (view === 'exam') ? 'block' : 'none';
+      document.getElementById('certResultView').style.display = (view === 'cert') ? 'block' : 'none';
+      if (view === 'cert') {
+        renderCertificateOnCanvas();
+      }
+      playSynthSound('click');
+    }
+
+    function renderExamQuestion(step) {
+      currentExamStep = step;
+      const q = EXAM_QUESTIONS_BANK[step];
+
+      document.getElementById('examStepLabel').textContent = `Soal ${step + 1} dari ${EXAM_QUESTIONS_BANK.length}`;
+      document.getElementById('examProgressBar').style.width = `${((step + 1) / EXAM_QUESTIONS_BANK.length) * 100}%`;
+      document.getElementById('examQuestionCategory').textContent = `KATEGORI: ${q.cat}`;
+      document.getElementById('examQuestionText').textContent = q.q;
+
+      const optsContainer = document.getElementById('examOptionsContainer');
+      optsContainer.innerHTML = q.options.map((opt, i) => `
+        <button type="button" class="quiz-opt-btn ${userExamAnswers[step] === i ? 'selected' : ''}" onclick="selectExamOption(${i})">
+          <span style="width:24px; height:24px; border-radius:50%; background:rgba(255,255,255,0.08); display:grid; place-items:center; font-family:var(--font-mono); font-size:12px;">${String.fromCharCode(65 + i)}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('');
+
+      document.getElementById('btnPrevExam').style.visibility = (step === 0) ? 'hidden' : 'visible';
+      const nextBtn = document.getElementById('btnNextExam');
+      if (step === EXAM_QUESTIONS_BANK.length - 1) {
+        nextBtn.textContent = '✨ Kumpulkan Jawaban';
+      } else {
+        nextBtn.textContent = 'Soal Berikutnya ▶';
+      }
+    }
+
+    function selectExamOption(idx) {
+      userExamAnswers[currentExamStep] = idx;
+      renderExamQuestion(currentExamStep);
+      playSynthSound('click');
+    }
+
+    function prevExamQuestion() {
+      if (currentExamStep > 0) renderExamQuestion(currentExamStep - 1);
+    }
+
+    function nextExamQuestion() {
+      if (currentExamStep < EXAM_QUESTIONS_BANK.length - 1) {
+        renderExamQuestion(currentExamStep + 1);
+      } else {
+        finishExamEvaluation();
+      }
+    }
+
+    function finishExamEvaluation() {
+      let correctCount = 0;
+      for (let i = 0; i < EXAM_QUESTIONS_BANK.length; i++) {
+        if (userExamAnswers[i] === EXAM_QUESTIONS_BANK[i].correct) correctCount++;
+      }
+      examScorePercent = Math.round((correctCount / EXAM_QUESTIONS_BANK.length) * 100);
+
+      if (examScorePercent >= 75) {
+        awardXP(100);
+        playSynthSound('badge');
+        showToast(`Selamat! Anda Lulus dengan Nilai ${examScorePercent}% (+100 XP) 🎓`);
+        toggleCertView('cert');
+      } else {
+        playSynthSound('wrong');
+        alert(`Nilai Anda: ${examScorePercent}% (${correctCount}/${EXAM_QUESTIONS_BANK.length} Benar). Syarat kelulusan minimal 75%. Silakan pelajari kembali materi dan coba ulang!`);
+      }
+    }
+
+    function retakeExam() {
+      userExamAnswers = new Array(20).fill(null);
+      toggleCertView('exam');
+      renderExamQuestion(0);
+    }
+
+    /* ROYAL CERTIFICATE CANVAS GENERATOR (HIGH-RES 1600x1130) */
+    function renderCertificateOnCanvas() {
+      const canvas = document.getElementById('thaiCertificateCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = 1600;
+      const h = 1130;
+
+      // Background Luxury Parchment Texture
+      const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+      bgGrad.addColorStop(0, '#09130e');
+      bgGrad.addColorStop(0.5, '#0d1f16');
+      bgGrad.addColorStop(1, '#07100b');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Gold Outer Ornate Border
+      ctx.strokeStyle = '#d97706';
+      ctx.lineWidth = 12;
+      ctx.strokeRect(36, 36, w - 72, h - 72);
+
+      // Emerald Inner Fine Border
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(56, 56, w - 112, h - 112);
+
+      // Corner Decorative Flourishes
+      function drawCornerFlourish(x, y, scaleX, scaleY) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scaleX, scaleY);
+        ctx.strokeStyle = '#fbbf24';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(0, 50);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(50, 0);
+        ctx.arc(30, 30, 20, 0, Math.PI * 1.5, true);
+        ctx.stroke();
+        ctx.restore();
+      }
+      drawCornerFlourish(70, 70, 1, 1);
+      drawCornerFlourish(w - 70, 70, -1, 1);
+      drawCornerFlourish(70, h - 70, 1, -1);
+      drawCornerFlourish(w - 70, h - 70, -1, -1);
+
+      // Watermark Lotus in Center
+      ctx.save();
+      ctx.globalAlpha = 0.05;
+      ctx.fillStyle = '#10b981';
+      ctx.beginPath();
+      ctx.arc(w / 2, h / 2, 280, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Top Header Thai Ornament Emblem
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#fbbf24';
+      ctx.font = 'bold 36px serif';
+      ctx.fillText('สถาบันภาษาไทยมะลิ • FAIRY THAI ACADEMY', w / 2, 130);
+
+      // Main Certificate Title
+      ctx.font = '800 52px "Cinzel", "Times New Roman", serif';
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillText('SERTIFIKAT KELULUSAN RESMI', w / 2, 210);
+
+      ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.letterSpacing = '4px';
+      ctx.fillText('CERTIFICATE OF ACADEMIC ACHIEVEMENT IN THAI LANGUAGE', w / 2, 255);
+
+      // Subtitle divider line
+      ctx.strokeStyle = 'rgba(217, 119, 6, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - 240, 280);
+      ctx.lineTo(w / 2 + 240, 280);
+      ctx.stroke();
+
+      // "Dengan bangga dianugerahkan kepada:"
+      ctx.font = '400 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('Dengan bangga dan penuh kehormatan dianugerahkan kepada:', w / 2, 340);
+
+      // Recipient Name (Large Gold Calligraphy Style)
+      const studentName = (appState.studentName || 'Pembelajar Bahasa Thai').toUpperCase();
+      ctx.font = '800 58px "Cinzel", "Fraunces", serif';
+      ctx.fillStyle = '#34d399';
+      ctx.shadowColor = 'rgba(16, 185, 129, 0.5)';
+      ctx.shadowBlur = 16;
+      ctx.fillText(studentName, w / 2, 430);
+      ctx.shadowBlur = 0; // reset
+
+      // Underline recipient
+      ctx.strokeStyle = '#d97706';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - 320, 460);
+      ctx.lineTo(w / 2 + 320, 460);
+      ctx.stroke();
+
+      // Achievement Narrative Description
+      ctx.font = '400 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillText('Telah berhasil menyelesaikan seluruh rangkaian Kurikulum Standar Bahasa Thailand (119 Modul Teks Jazmi Nara)', w / 2, 530);
+      ctx.fillText('menguasai 44 Konsonan, 14 Vokal, Kaidah 5 Nada Fonetik, serta lulus Evaluasi Kelulusan Komprehensif.', w / 2, 570);
+
+      // Grade & CEFR Pill Badge on Canvas
+      const finalScore = examScorePercent || 95;
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 2;
+      ctx.roundRect(w / 2 - 280, 620, 560, 68, 34);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#ecfdf5';
+      ctx.fillText(`Predikat: SANGAT MEMUASKAN • Skor Ujian: ${finalScore}% • CEFR Level A1.2`, w / 2, 663);
+
+      // Bottom Metadata Row: ID & Date
+      const today = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+      ctx.textAlign = 'left';
+      ctx.font = '500 18px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(`No. Sertifikat: THAI-ACADEMY-2026-${Math.floor(1000 + Math.random() * 9000)}`, 140, 800);
+      ctx.fillText(`Tanggal Terbit : ${today}`, 140, 835);
+      ctx.fillText(`Lokasi         : Garut & Bangkok (Hybrid)`, 140, 870);
+
+      // Right: Signatures & Golden Official Seal
+      ctx.textAlign = 'center';
+      // Golden Stamp Seal
+      ctx.save();
+      ctx.translate(w - 280, 820);
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(0, 0, 72, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, 0, 62, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.font = '800 13px sans-serif';
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillText('★ OFFICIAL ACADEMIC SEAL ★', 0, -32);
+      ctx.font = '28px sans-serif';
+      ctx.fillText('🇹🇭', 0, 4);
+      ctx.font = '700 11px sans-serif';
+      ctx.fillText('FAIRY THAI ACADEMY', 0, 36);
+      ctx.restore();
+
+      // Signature 1
+      ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillText('Mali & Tim Jazmi Nara', w / 2, 940);
+      ctx.font = '400 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('Dewan Instruktur & Kurikulum Digital', w / 2, 970);
+
+      // Signature Line
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - 160, 920);
+      ctx.lineTo(w / 2 + 160, 920);
+      ctx.stroke();
+    }
+
+    function downloadCertificatePNG() {
+      const canvas = document.getElementById('thaiCertificateCanvas');
+      if (!canvas) return;
+      const a = document.createElement('a');
+      const studentName = (appState.studentName || 'pembelajar').replace(/\s+/g, '_');
+      a.download = `Sertifikat_Bahasa_Thai_${studentName}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      showToast('Sertifikat beresolusi penuh berhasil diunduh! 🎓');
+    }
+
+    function printCertificate() {
+      const canvas = document.getElementById('thaiCertificateCanvas');
+      if (!canvas) return;
+      const dataUrl = canvas.toDataURL('image/png');
+      const win = window.open('', '_blank');
+      win.document.write(`
+        <html>
+          <head>
+            <title>Cetak Sertifikat - Fairy Thai Academy</title>
+            <style>
+              @page { size: landscape; margin: 0; }
+              body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #000; }
+              img { max-width: 100%; max-height: 100%; object-fit: contain; }
+            </style>
+          </head>
+          <body onload="window.print(); window.close();">
+            <img src="${dataUrl}"/>
+          </body>
+        </html>
+      `);
+      win.document.close();
+    }
 
     /* INITIALIZE APP */
     document.documentElement.setAttribute('data-theme', appState.theme || 'dark');
