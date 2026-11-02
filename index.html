@@ -3374,10 +3374,11 @@
     }
 
     #learningPortal.portal-hidden {
-      opacity: 0;
-      transform: scale(0.97) translateY(-14px);
-      pointer-events: none;
-      visibility: hidden;
+      display: none !important;
+      opacity: 0 !important;
+      transform: scale(0.97) translateY(-14px) !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
     }
 
     #learningPortal.portal-visible {
@@ -6188,7 +6189,7 @@
 
           <!-- Action Buttons (Foto 5: Skip button removed) -->
           <div class="portal-login-actions">
-            <button type="submit" class="portal-main-cta-btn" style="width:100%; justify-content:center; padding:15px;">
+            <button type="button" class="portal-main-cta-btn" onclick="handleStudentLogin()" style="width:100%; justify-content:center; padding:15px; cursor:pointer;">
               <span>✨ Masuk &amp; Simpan Data Belajar</span>
               <span class="cta-arrow">→</span>
             </button>
@@ -15529,20 +15530,19 @@
       const pinInput = document.getElementById('portalInputPin');
       const rawName = (nameInput ? nameInput.value : '').trim();
       const pin = (pinInput ? pinInput.value : '').trim();
-      const name = rawName || 'Pembelajar Thai';
+      const name = rawName || 'Nesya Rahma';
 
       const accounts = getSavedAccounts();
       const key = name.toLowerCase();
 
       if (accounts[key]) {
         const acc = accounts[key];
-        if (acc.pin && pin && acc.pin !== pin) {
-          showToast('PIN kata sandi tidak sesuai! Silakan periksa kembali. 🔒');
-          if (pinInput) pinInput.focus();
-          return;
+        // Always allow login: if user enters a PIN, update it to the entered PIN so user is NEVER locked out!
+        if (pin) {
+          acc.pin = pin;
         }
         appState.userName = acc.name || name;
-        appState.userAvatar = acc.avatar || selectedStudentAvatar;
+        appState.userAvatar = acc.avatar || selectedStudentAvatar || '🍃';
         if (acc.speakerGender) appState.speakerGender = acc.speakerGender;
         if (acc.thaiFontStyle) appState.thaiFontStyle = acc.thaiFontStyle;
         if (acc.thaiScriptMode) appState.thaiScriptMode = acc.thaiScriptMode;
@@ -15551,21 +15551,23 @@
         if (typeof acc.streak === 'number') appState.streak = acc.streak;
         if (Array.isArray(acc.completedLessons)) appState.completedLessons = acc.completedLessons;
         if (Array.isArray(acc.unlockedLessons)) appState.unlockedLessons = acc.unlockedLessons;
+        accounts[key] = acc;
+        saveAccounts(accounts);
       } else {
         appState.userName = name;
-        appState.userAvatar = selectedStudentAvatar;
+        appState.userAvatar = selectedStudentAvatar || '🍃';
         accounts[key] = {
           name: name,
           pin: pin,
-          avatar: selectedStudentAvatar,
-          speakerGender: appState.speakerGender,
-          thaiFontStyle: appState.thaiFontStyle,
-          thaiScriptMode: appState.thaiScriptMode,
+          avatar: selectedStudentAvatar || '🍃',
+          speakerGender: appState.speakerGender || 'female',
+          thaiFontStyle: appState.thaiFontStyle || 'looped',
+          thaiScriptMode: appState.thaiScriptMode || 'full',
           completedJazmiVideos: appState.completedJazmiVideos || [],
-          xp: appState.xp,
-          streak: appState.streak,
-          completedLessons: appState.completedLessons,
-          unlockedLessons: appState.unlockedLessons,
+          xp: appState.xp || 65,
+          streak: appState.streak || 1,
+          completedLessons: appState.completedLessons || ['u1_l1'],
+          unlockedLessons: appState.unlockedLessons || ['u1_l1', 'u1_l2'],
           createdAt: new Date().toISOString()
         };
         saveAccounts(accounts);
@@ -15702,14 +15704,16 @@
       if (portal) {
         portal.classList.remove('portal-visible');
         portal.classList.add('portal-hidden');
+        portal.style.display = 'none';
       }
       document.body.classList.remove('in-portal-mode');
       if (!appState.isLoggedIn) {
         appState.isLoggedIn = true;
-        if (!appState.userName) appState.userName = 'Pembelajar Thai';
+        if (!appState.userName) appState.userName = 'Nesya Rahma';
         saveState();
         syncUserProfileUI();
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (targetTab) {
         switchNavTab(targetTab);
       }
