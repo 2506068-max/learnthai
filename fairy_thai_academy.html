@@ -5288,6 +5288,16 @@
       font-family: var(--font-main);
     }
 
+    
+    @keyframes lotusPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+    .floating-ai-trigger.pulse-active {
+      animation: lotusPulse 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
     .floating-ai-trigger {
       display: flex;
       align-items: center;
@@ -19891,6 +19901,46 @@
     let floatActiveTab = 'chat';
     let currentSongFilter = 'all';
 
+    let floatIsDragging = false;
+    let floatHasMoved = false;
+    let floatDragStartX = 0;
+    let floatDragStartY = 0;
+    let floatDragStartTime = 0;
+    let floatInitialLeft = 0;
+    let floatInitialTop = 0;
+    let floatLastTapHandled = 0;
+
+    function executeNongMaliActivation() {
+      playSynthSound('click');
+
+      // Dismiss learning portal if open
+      const portal = document.getElementById('learningPortal');
+      if (portal && portal.classList.contains('portal-visible')) {
+        portal.classList.remove('portal-visible');
+        portal.classList.add('portal-hidden');
+        document.body.classList.remove('in-portal-mode');
+      }
+
+      // Close mobile drawer if open
+      toggleMobileDrawer(false);
+
+      // Switch to AI Hub (Nong Mali)
+      switchNavTab('ai-hub');
+
+      // Trigger Nong Mali Bangkok voice greeting & toast
+      triggerCoachGreeting();
+
+      // Scroll smoothly to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Visual feedback on the floating lotus button
+      const trigger = document.getElementById('floatingAiBtn');
+      if (trigger) {
+        trigger.classList.add('pulse-active');
+        setTimeout(() => trigger.classList.remove('pulse-active'), 400);
+      }
+    }
+
     function initFloatingAiWidget() {
       const container = document.getElementById('floatingAiWidget');
       const trigger = document.getElementById('floatingAiBtn');
@@ -19912,17 +19962,22 @@
         adjustFloatingFlyoutPosition(boundedLeft, boundedTop);
       }
 
-      // Mouse Dragging
+      // Mouse Dragging (Desktop)
       trigger.addEventListener('mousedown', (e) => {
         if (e.button !== 0) return;
         startFloatDrag(e.clientX, e.clientY);
         const onMouseMove = (moveEvt) => {
           onFloatDragMove(moveEvt.clientX, moveEvt.clientY);
         };
-        const onMouseUp = () => {
+        const onMouseUp = (upEvt) => {
           document.removeEventListener('mousemove', onMouseMove);
           document.removeEventListener('mouseup', onMouseUp);
           endFloatDrag();
+          const dist = Math.hypot(upEvt.clientX - floatDragStartX, upEvt.clientY - floatDragStartY);
+          if (dist < 12 && (Date.now() - floatDragStartTime < 500)) {
+            floatLastTapHandled = Date.now();
+            executeNongMaliActivation();
+          }
         };
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
@@ -19933,31 +19988,38 @@
         if (e.touches.length !== 1) return;
         const t = e.touches[0];
         startFloatDrag(t.clientX, t.clientY);
+
         const onTouchMove = (moveEvt) => {
           if (moveEvt.touches.length === 1) {
             onFloatDragMove(moveEvt.touches[0].clientX, moveEvt.touches[0].clientY);
           }
         };
-        const onTouchEnd = () => {
+
+        const onTouchEnd = (endEvt) => {
           document.removeEventListener('touchmove', onTouchMove);
           document.removeEventListener('touchend', onTouchEnd);
           endFloatDrag();
+
+          const duration = Date.now() - floatDragStartTime;
+          // If tap was short (< 350ms) or movement was tiny (< 15px), activate Nong Mali immediately!
+          if (!floatHasMoved || duration < 350) {
+            floatLastTapHandled = Date.now();
+            executeNongMaliActivation();
+          }
         };
+
         document.addEventListener('touchmove', onTouchMove, { passive: true });
         document.addEventListener('touchend', onTouchEnd);
       }, { passive: true });
 
-      // Click to trigger Nong Mali (berfungsi persis seperti Nong Mali di sidebar menu)
+      // Fallback Click Event
       trigger.addEventListener('click', (e) => {
-        if (floatHasMoved) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (Date.now() - floatLastTapHandled < 600) return;
+        if (!floatHasMoved) {
+          executeNongMaliActivation();
         }
-        // Berfungsi persis seperti Nong Mali di sidebar menu: buka AI Hub & bunyikan salam hangat
-        switchNavTab('ai-hub');
-        triggerCoachGreeting();
-        toggleMobileDrawer(false);
       });
 
       // Render default chat & songs
@@ -19972,6 +20034,7 @@
       floatHasMoved = false;
       floatDragStartX = cx;
       floatDragStartY = cy;
+      floatDragStartTime = Date.now();
       floatInitialLeft = rect.left;
       floatInitialTop = rect.top;
       container.classList.add('dragging');
@@ -19982,9 +20045,12 @@
       const dx = cx - floatDragStartX;
       const dy = cy - floatDragStartY;
 
-      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+      // Only mark as dragged if moved more than 15px (prevents micro-jitter from blocking taps)
+      if (Math.hypot(dx, dy) > 15) {
         floatHasMoved = true;
       }
+
+      if (!floatHasMoved) return; // Don't shift layout on tiny taps
 
       const container = document.getElementById('floatingAiWidget');
       const rect = container.getBoundingClientRect();
@@ -20011,11 +20077,14 @@
       if (!floatIsDragging) return;
       floatIsDragging = false;
       const container = document.getElementById('floatingAiWidget');
-      container.classList.remove('dragging');
-
-      const rect = container.getBoundingClientRect();
-      localStorage.setItem('mali_ai_pos_left', Math.round(rect.left));
-      localStorage.setItem('mali_ai_pos_top', Math.round(rect.top));
+      if (container) {
+        container.classList.remove('dragging');
+        const rect = container.getBoundingClientRect();
+        if (floatHasMoved) {
+          localStorage.setItem('mali_ai_pos_left', Math.round(rect.left));
+          localStorage.setItem('mali_ai_pos_top', Math.round(rect.top));
+        }
+      }
     }
 
     function adjustFloatingFlyoutPosition(left, top) {
