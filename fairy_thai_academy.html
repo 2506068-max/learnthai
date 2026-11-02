@@ -335,15 +335,65 @@
         display: none;
       }
     }
-    .portal-close-corner-btn {
+    .portal-top-bar {
       position: absolute;
-      top: 20px;
-      right: 24px;
+      top: 16px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+    .portal-top-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      opacity: 0.88;
+    }
+    .portal-top-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .portal-theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      color: var(--text);
       padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 12.5px;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+    .portal-theme-toggle-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    [data-theme="light"] .portal-theme-toggle-btn {
+      background: #ffffff;
+      border-color: rgba(45, 106, 79, 0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .portal-close-corner-btn {
+      position: static;
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--primary);
+      padding: 8px 18px;
       border-radius: var(--radius-pill);
       font-size: 13px;
       font-weight: 700;
@@ -353,12 +403,59 @@
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
     .portal-close-corner-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: var(--primary);
+      color: #022c22;
+      border-color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+    }
+    .portal-theme-segmented {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      gap: 3px;
+    }
+    .portal-theme-pill {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.18s ease;
+      font-family: var(--font-sans);
+    }
+    .portal-theme-pill:hover {
+      color: var(--text);
+    }
+    .portal-theme-pill.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--border-bright);
+      font-weight: 800;
+    }
+    [data-theme="dark"] .portal-theme-pill.active#themePillDark {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--primary);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    [data-theme="light"] .portal-theme-pill.active#themePillLight {
+      background: #ffffff;
+      color: #ea580c;
+      border: 1px solid rgba(234, 88, 12, 0.3);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
     /* Combined Stats Capsule */
@@ -5172,10 +5269,23 @@
        LEARNING PORTAL: INTRODUCTORY LEARNING GATEWAY & ICON
        ========================================================================== -->
   <div id="learningPortal" class="portal-visible">
-    <button type="button" class="portal-close-corner-btn" onclick="enterLearningApp('alphabet')" title="Tutup Portal & Buka Matriks 44 Aksara Thai">
-      ✕ Buka Matriks Aksara
-    </button>
-    <div class="portal-inner">
+    <div class="portal-top-bar">
+      <div class="portal-top-brand">
+        <span style="font-size:18px;">🍃</span>
+        <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; font-weight:700;">Mali's Thai Academy</span>
+      </div>
+      <div class="portal-top-actions">
+        <button type="button" class="portal-theme-toggle-btn" id="portalThemeToggleBtn" onclick="toggleColorTheme()" title="Ubah Suasana (Mode Gelap / Terang)">
+          <span id="portalThemeIcon">🏮</span>
+          <span id="portalThemeLabel">Mode Malam</span>
+        </button>
+        <button type="button" class="portal-close-corner-btn" onclick="enterLearningApp('alphabet')" title="Lewati Login & Langsung Masuk ke Matriks Aksara">
+          <span>⚡ Lewati &amp; Langsung Belajar</span>
+          <span style="font-size:14px;">→</span>
+        </button>
+      </div>
+    </div>
+    <div class="portal-inner" style="margin-top:36px;">
       <!-- Centered Learning Emblem / Icon -->
       <div class="learning-icon-container">
         <div class="learning-icon-halo"></div>
@@ -5216,14 +5326,26 @@
       <!-- LOGIN / STUDENT PROFILE CARD -->
       <div class="portal-login-card" id="portalLoginCard">
         <div class="portal-login-header">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="font-size:18px;">🔐</span>
               <h3 style="font-size:16px; font-weight:800; margin:0;" id="portalLoginTitle">Masuk ke Akun Pembelajar</h3>
             </div>
-            <span class="portal-badge-sm" id="portalLoginBadge">PROFIL BELAJAR</span>
+
+            <!-- THEME SWITCHER DIRECTLY ON TOP OF LOGIN CARD -->
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div class="portal-theme-segmented" title="Pilihan Mode Tampilan (Gelap / Terang)">
+                <button type="button" class="portal-theme-pill active" id="themePillDark" onclick="setAppTheme('dark')" title="Mode Gelap (Malam)">
+                  🌙 Gelap
+                </button>
+                <button type="button" class="portal-theme-pill" id="themePillLight" onclick="setAppTheme('light')" title="Mode Terang (Siang)">
+                  ☀️ Terang
+                </button>
+              </div>
+              <span class="portal-badge-sm" id="portalLoginBadge">PROFIL</span>
+            </div>
           </div>
-          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0 0;">
+          <p style="font-size:12px; color:var(--text-muted); margin:6px 0 0 0;">
             Simpan kemajuan materi, perolehan XP nada, streak harian, dan modul yang sudah Anda kuasai.
           </p>
         </div>
@@ -5254,7 +5376,7 @@
             <div class="portal-field-group">
               <label for="portalInputName" class="portal-label">NAMA PEMBELAJAR / PANGGILAN *</label>
               <div class="portal-input-wrap">
-                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (misal: Nesya / Zaldy)" required autocomplete="name">
+                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (opsional, misal: Nesya / Zaldy)" autocomplete="name">
                 <span class="portal-input-icon">👤</span>
               </div>
             </div>
@@ -5476,7 +5598,7 @@
           <button class="icon-btn-compact" onclick="toggleAudioEngine()" id="audioToggleBtn" title="Toggle Efek Suara">
             🔊
           </button>
-          <button class="icon-btn-compact" onclick="toggleColorTheme()" title="Ubah Suasana Siang / Malam">
+          <button class="icon-btn-compact" id="headerThemeBtn" onclick="toggleColorTheme()" title="Ubah Suasana Siang / Malam">
             🏮
           </button>
         </div>
@@ -14627,14 +14749,9 @@
     function handleStudentLogin() {
       const nameInput = document.getElementById('portalInputName');
       const pinInput = document.getElementById('portalInputPin');
-      const name = (nameInput ? nameInput.value : '').trim();
+      const rawName = (nameInput ? nameInput.value : '').trim();
       const pin = (pinInput ? pinInput.value : '').trim();
-
-      if (!name) {
-        showToast('Silakan tuliskan nama Anda terlebih dahulu! ✍️');
-        if (nameInput) nameInput.focus();
-        return;
-      }
+      const name = rawName || 'Pembelajar Thai';
 
       const accounts = getSavedAccounts();
       const key = name.toLowerCase();
@@ -14809,6 +14926,12 @@
         portal.classList.add('portal-hidden');
       }
       document.body.classList.remove('in-portal-mode');
+      if (!appState.isLoggedIn) {
+        appState.isLoggedIn = true;
+        if (!appState.userName) appState.userName = 'Pembelajar Thai';
+        saveState();
+        syncUserProfileUI();
+      }
       if (targetTab) {
         switchNavTab(targetTab);
       }
@@ -14914,13 +15037,40 @@
       setTimeout(() => toast.classList.remove('show'), 2800);
     }
 
+    function applyColorTheme(theme) {
+      if (theme !== 'light' && theme !== 'dark') theme = 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-theme', theme);
+      appState.theme = theme;
+      
+      const portalIcon = document.getElementById('portalThemeIcon');
+      const portalLabel = document.getElementById('portalThemeLabel');
+      if (portalIcon) portalIcon.textContent = theme === 'dark' ? '🏮' : '☀️';
+      if (portalLabel) portalLabel.textContent = theme === 'dark' ? 'Mode Malam' : 'Mode Siang';
+
+      const pillDark = document.getElementById('themePillDark');
+      const pillLight = document.getElementById('themePillLight');
+      if (pillDark) pillDark.classList.toggle('active', theme === 'dark');
+      if (pillLight) pillLight.classList.toggle('active', theme === 'light');
+
+      const headerBtn = document.getElementById('headerThemeBtn');
+      if (headerBtn) headerBtn.textContent = theme === 'dark' ? '🏮' : '☀️';
+    }
+
     function toggleColorTheme() {
       const current = document.documentElement.getAttribute('data-theme') || 'dark';
       const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      appState.theme = next;
+      applyColorTheme(next);
       saveState();
-      showToast(next === 'dark' ? '🏮 Suasana Hutan Berbintang (Malam)' : '🍃 Suasana Padang Rumput (Siang)');
+      playSynthSound('click');
+      showToast(next === 'dark' ? '🏮 Suasana Hutan Berbintang (Malam)' : '☀️ Suasana Padang Rumput (Siang)');
+    }
+
+    function setAppTheme(theme) {
+      applyColorTheme(theme);
+      saveState();
+      playSynthSound('click');
+      showToast(theme === 'dark' ? '🏮 Suasana Hutan Berbintang (Malam)' : '☀️ Suasana Padang Rumput (Siang)');
     }
 
     function toggleAudioEngine() {
@@ -18259,7 +18409,7 @@
     }
 
     /* INITIALIZE APP */
-    document.documentElement.setAttribute('data-theme', appState.theme || 'dark');
+    applyColorTheme(appState.theme || 'dark');
     applyThaiFontStyle(appState.thaiFontStyle || 'looped');
     applyThaiScriptMode(appState.thaiScriptMode || 'full');
     document.getElementById('audioToggleBtn').textContent = appState.soundEnabled ? '🔊' : '🔇';
