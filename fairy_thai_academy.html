@@ -874,11 +874,21 @@
 
     .nav-section-title {
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--text-dim);
-      padding: 16px 16px 6px 16px;
+      padding: 16px 14px 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .nav-section-title .section-icon {
+      font-size: 13px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .ai-coach-pill {
@@ -5618,20 +5628,17 @@
     <div class="app-body">
       <!-- LEFT NAV RAIL -->
       <aside class="stimuler-nav-rail">
-        <div class="nav-section-title">Navigasi Utama</div>
+        <div class="nav-section-title"><span class="section-icon">🧭</span> Navigasi Utama</div>
         <button class="nav-item-btn" id="navBtnPortal" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Ikon Belajar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
           <span>Portal Belajar</span>
         </button>
 
-        <div class="nav-section-title">Materi &amp; Latihan</div>
+        <div class="nav-section-title"><span class="section-icon">📚</span> Materi &amp; Kurikulum</div>
         <button class="nav-item-btn active" data-tab="alphabet" onclick="switchNavTab('alphabet')" title="Materi Aksara &amp; 44 Konsonan Thai">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 17l4-10 4 10"/><path d="M9.5 13h5"/></svg>
           <span>Aksara &amp; Alfabet</span>
         </button>
-
-
-
 
         <button class="nav-item-btn" data-tab="phonetics" onclick="switchNavTab('phonetics')" title="5 Nada Intonasi &amp; Buku Frasa Audio">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -5655,6 +5662,7 @@
           <span class="vocab-badge-daily" style="background:var(--primary); color:#fff;" title="119 Modul Tertulis Lengkap">119</span>
         </button>
 
+        <div class="nav-section-title"><span class="section-icon">🎯</span> Latihan &amp; Praktik</div>
         <button class="nav-item-btn" data-tab="writing" onclick="switchNavTab('writing')" title="Latihan Menulis Aksara Thai (Kanvas Digital)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
           <span>Latihan Tulis</span>
@@ -5691,6 +5699,7 @@
           <span class="vocab-badge-daily" style="background:#f59e0b; color:#fff;" title="12 Medali">12</span>
         </button>
 
+        <div class="nav-section-title"><span class="section-icon">🎙️</span> Suara &amp; Percakapan</div>
         <button class="nav-item-btn" data-tab="roleplay" onclick="switchNavTab('roleplay')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
           <span>Simulasi Roleplay</span>
@@ -5701,13 +5710,12 @@
           <span>Studio Bicara</span>
         </button>
 
-        <div class="nav-section-title">Laboratorium Suara</div>
         <button class="nav-item-btn" data-tab="analytics" onclick="switchNavTab('analytics')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
           <span>Analitik Kelancaran</span>
         </button>
 
-        <div class="nav-section-title">Asisten Cerdas</div>
+        <div class="nav-section-title"><span class="section-icon">🤖</span> Asisten Cerdas</div>
         <button class="nav-item-btn" data-tab="ai-hub" onclick="switchNavTab('ai-hub')">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg>
           <span>AI Thailand Hub</span>
@@ -5729,10 +5737,9 @@
         <div class="nav-user-card" id="navUserCard" onclick="openLearningPortal()" title="Klik untuk mengelola profil / ganti akun">
           <div class="nav-user-avatar" id="navUserAvatar">🍃</div>
           <div class="nav-user-info">
-            <strong id="navUserName">Pembelajar Thai</strong>
-            <small id="navUserLevel">Tingkat A1 • Masuk</small>
+            <div class="nav-user-name" id="navUserName">Nesya Rahma</div>
+            <div class="nav-user-tag" id="navUserLevel">A1.2 • Level Pemula</div>
           </div>
-          <span class="nav-logout-btn" onclick="event.stopPropagation(); handleStudentLogout();" title="Keluar Akun">🚪</span>
         </div>
       </aside>
 
