@@ -1,4 +1,4 @@
-/* JAZMI NARA - COMPLETE WRITTEN CURRICULUM (PARTS I - IV • 119 MODULES • MATERI 01-90)
+/* COMPLETE WRITTEN CURRICULUM (PARTS I - IV • 119 MODULES • MATERI 01-90)
  * Pure Written Learning Content with Interactive Audio & Writing Worksheets.
  * No YouTube videos, no iframes, no video player dependencies.
  */
@@ -2957,11 +2957,11 @@ const JAZMI_CURRICULUM_DATA = [
         "badgeClass": "badge-lesson",
         "icon": "🏆",
         "isGame": false,
-        "summary": "Kulminasi kelulusan seluruh kurikulum Jazmi Nara (Materi 01 sampai 90): Menyusun narasi cerita lengkap tentang diri Anda, hobi, dan aktivitas di Thailand.",
+        "summary": "Kulminasi kelulusan seluruh kurikulum tertulis (Materi 01 sampai 90): Menyusun narasi cerita lengkap tentang diri Anda, hobi, dan aktivitas di Thailand.",
         "keyPoints": [
           "Penyatuan materi Aksara, Kaidah Nada, Tata Bahasa SVO, Waktu, dan Emosi",
           "Kemampuan mandiri membaca, mendengarkan, dan mengekspresikan gagasan dalam bahasa Thai",
-          "Selamat! Anda telah menuntaskan seluruh 90 materi kurikulum resmi Jazmi Nara!"
+          "Selamat! Anda telah menuntaskan seluruh 90 materi kurikulum resmi Bahasa Thailand!"
         ],
         "thaiSample": {
           "thai": "ยินดีด้วยครับ คุณเก่งมาก",

@@ -50,7 +50,7 @@ Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai 
 * 🥭 **Beli Buah Tropis di Pasar Malam** *(Penjual Buah Mae Somjit 👩)*: Beli mangga manis Nam Dok Mai, minta dipotongkan dalam boks, dan kelapa muda wangi.
 
 ### 4. 📚 Buku Pembelajaran Tertulis Lengkap (Jazmi Nara • 119 Modul Tulis & Latihan Part I - IV)
-Integrasi kurikulum tertulis murni dari seri **"Learning Thai from Zero"** karya kreator Jazmi Nara, mencakup 119 modul materi tertulis dari Materi [01] sampai [90] lengkap dengan tombol audio pengucapan kata asli, rumus tata bahasa, tabel acuan, latihan kuis mandiri, dan lembar kerja menulis aksara (tanpa video YouTube):
+Integrasi kurikulum tertulis murni dari seri **"Learning Thai from Zero"** berjenjang, mencakup 119 modul materi tertulis dari Materi [01] sampai [90] lengkap dengan tombol audio pengucapan kata asli, rumus tata bahasa, tabel acuan, latihan kuis mandiri, dan lembar kerja menulis aksara (tanpa video YouTube):
 * **Part I: Mengenal Aksara dan Ketentuan Bacanya (31 Modul • Materi 01-12)**:
   * 44 Konsonan, konsonan aktif/pasif, tips menghafal, 5 versi latihan tebak konsonan.
   * Aksara vokal, posisi penulisan, 2 latihan melatinkan kata (Easy).
