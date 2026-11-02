@@ -5630,6 +5630,31 @@
           <span>Aksara &amp; Alfabet</span>
         </button>
 
+
+
+
+        <button class="nav-item-btn" data-tab="phonetics" onclick="switchNavTab('phonetics')" title="5 Nada Intonasi &amp; Buku Frasa Audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          <span>5 Nada &amp; Frasa</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="vocabulary" onclick="switchNavTab('vocabulary')" title="Misi Harian Kosakata &amp; Kuis 10 Kata">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
+          <span>Kosakata &amp; Misi</span>
+          <span class="vocab-badge-daily" id="sidebarVocabBadge">10</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="curriculum" onclick="switchNavTab('curriculum')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          <span>Kurikulum Unit</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="jazmi-series" onclick="switchNavTab('jazmi-series')" title="Buku Materi Tertulis (Part I s/d IV • Materi 01-90)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Materi Tulis (01-90)</span>
+          <span class="vocab-badge-daily" style="background:var(--primary); color:#fff;" title="119 Modul Tertulis Lengkap">119</span>
+        </button>
+
         <button class="nav-item-btn" data-tab="writing" onclick="switchNavTab('writing')" title="Latihan Menulis Aksara Thai (Kanvas Digital)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
           <span>Latihan Tulis</span>
@@ -5664,30 +5689,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
           <span>Medali &amp; Trofi</span>
           <span class="vocab-badge-daily" style="background:#f59e0b; color:#fff;" title="12 Medali">12</span>
-        </button>
-
-
-
-        <button class="nav-item-btn" data-tab="phonetics" onclick="switchNavTab('phonetics')" title="5 Nada Intonasi &amp; Buku Frasa Audio">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-          <span>5 Nada &amp; Frasa</span>
-        </button>
-
-        <button class="nav-item-btn" data-tab="vocabulary" onclick="switchNavTab('vocabulary')" title="Misi Harian Kosakata &amp; Kuis 10 Kata">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
-          <span>Kosakata &amp; Misi</span>
-          <span class="vocab-badge-daily" id="sidebarVocabBadge">10</span>
-        </button>
-
-        <button class="nav-item-btn" data-tab="curriculum" onclick="switchNavTab('curriculum')">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-          <span>Kurikulum Unit</span>
-        </button>
-
-        <button class="nav-item-btn" data-tab="jazmi-series" onclick="switchNavTab('jazmi-series')" title="Buku Materi Tertulis (Part I s/d IV • Materi 01-90)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span>Materi Tulis (01-90)</span>
-          <span class="vocab-badge-daily" style="background:var(--primary); color:#fff;" title="119 Modul Tertulis Lengkap">119</span>
         </button>
 
         <button class="nav-item-btn" data-tab="roleplay" onclick="switchNavTab('roleplay')">
