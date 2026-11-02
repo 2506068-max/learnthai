@@ -5274,6 +5274,462 @@
       font-family: var(--font-mono);
     }
 
+  
+/* ==========================================================================
+       FITUR: FLOATING DRAGGABLE AI ASSISTANT (BUKU PINTAR AI & PENCARIAN LAGU)
+       ========================================================================== */
+    .floating-ai-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      touch-action: none;
+      user-select: none;
+      font-family: var(--font-main);
+    }
+
+    .floating-ai-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 7px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), 0 0 20px var(--primary-glow);
+      cursor: grab;
+      transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .floating-ai-trigger:hover {
+      border-color: var(--emerald);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 28px var(--primary-glow);
+      transform: translateY(-2px);
+    }
+
+    .floating-ai-trigger:active, .floating-ai-container.dragging .floating-ai-trigger {
+      cursor: grabbing;
+      transform: scale(0.97);
+    }
+
+    .floating-ai-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      position: relative;
+      box-shadow: 0 3px 12px rgba(45, 106, 79, 0.4);
+      flex-shrink: 0;
+    }
+
+    .floating-book-icon {
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .floating-ai-trigger:hover .floating-book-icon {
+      transform: rotate(-6deg) scale(1.1);
+    }
+
+    .floating-ai-online-ping {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      width: 10px;
+      height: 10px;
+      background: #10b981;
+      border: 2px solid var(--bg-card);
+      border-radius: 50%;
+      animation: pulsePing 2s infinite ease-in-out;
+    }
+
+    @keyframes pulsePing {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.7; }
+    }
+
+    .floating-ai-pill-label {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      text-align: left;
+    }
+
+    .floating-ai-pill-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .floating-ai-pill-subtitle {
+      font-size: 9.5px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    /* Floating Window / Flyout Modal */
+    .floating-ai-window {
+      position: absolute;
+      bottom: 56px;
+      right: 0;
+      width: 410px;
+      max-width: calc(100vw - 32px);
+      height: 560px;
+      max-height: calc(100vh - 90px);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(82, 183, 136, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: flyoutSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100000;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    @keyframes flyoutSlideUp {
+      from { opacity: 0; transform: translateY(14px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .floating-ai-header {
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .floating-ai-header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .floating-ai-header-icon {
+      font-size: 20px;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .floating-ai-header-brand h4 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .floating-ai-header-brand span {
+      font-size: 10px;
+      color: var(--emerald);
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .floating-ai-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .floating-ai-action-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      transition: all 0.15s ease;
+    }
+
+    .floating-ai-action-btn:hover {
+      color: var(--text);
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+
+    .floating-ai-tabs-bar {
+      display: flex;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 4px 10px 0 10px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .floating-ai-tab {
+      padding: 7px 11px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+
+    .floating-ai-tab:hover {
+      color: var(--text);
+    }
+
+    .floating-ai-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .floating-tab-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .floating-chat-stream {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .floating-chips-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding: 8px 12px 4px 12px;
+      scrollbar-width: none;
+      flex-shrink: 0;
+    }
+    .floating-chips-row::-webkit-scrollbar { display: none; }
+
+    .floating-chip {
+      padding: 3px 9px;
+      font-size: 10.5px;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .floating-chip:hover {
+      border-color: var(--primary);
+      color: var(--text);
+      background: var(--bg-card-hover);
+    }
+
+    .floating-input-wrap {
+      padding: 8px 12px 12px 12px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .floating-text-input {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .floating-text-input:focus {
+      border-color: var(--primary);
+    }
+
+    .floating-send-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .floating-send-btn:hover {
+      background: var(--primary-dark);
+      transform: scale(1.04);
+    }
+
+    /* Song Result Cards */
+    .song-result-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-md);
+      padding: 11px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 6px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+
+    .song-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .song-title-thai {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+      font-family: var(--font-thai);
+      line-height: 1.2;
+    }
+
+    .song-artist-tag {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    .song-vibe-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: rgba(167, 139, 250, 0.16);
+      color: #c4b5fd;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      white-space: nowrap;
+    }
+
+    .song-lyrics-quote {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 5px 9px;
+      border-left: 2px solid var(--primary);
+      background: var(--bg-surface);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      line-height: 1.35;
+    }
+
+    .song-actions-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .song-play-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      background: #ef4444;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      transition: all 0.18s ease;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+    }
+
+    .song-play-btn:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.45);
+    }
+
+    .song-spotify-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      background: #10b981;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      transition: all 0.18s ease;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    .song-spotify-btn:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+
+    .song-listen-tts-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: var(--radius-pill);
+      font-size: 10.5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .song-listen-tts-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
   </style>
   <script src="thai_dictionary_data.js"></script>
 </head>
@@ -5730,7 +6186,7 @@
         <!-- AI Coach Card Pill -->
         <div class="ai-coach-pill" onclick="switchNavTab('ai-hub'); triggerCoachGreeting();" title="Buka Asisten AI Nong Mali">
           <div class="ai-avatar" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);">
-            🍃
+            📖
             <div class="ai-online-dot"></div>
           </div>
           <div class="ai-coach-info">
@@ -15893,9 +16349,10 @@
       container.innerHTML = qaChatHistory.map(msg => `
         <div class="qa-msg-bubble ${msg.sender}">
           <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">
-            ${msg.sender === 'user' ? '👤 Anda' : '🍃 Nong Mali AI'}
+            ${msg.sender === 'user' ? '👤 Anda' : '📖 Buku Pintar AI'}
           </div>
           <div style="white-space:pre-line;">${msg.text}</div>
+          ${msg.songCards && typeof renderSongCardsHtml === 'function' ? renderSongCardsHtml(msg.songCards) : ''}
           ${msg.thaiAudioText ? `
             <div style="margin-top:10px;">
               <button class="btn-audio-listen" onclick="speakThai('${msg.thaiAudioText}')" title="Dengarkan pengucapan penutur asli Bangkok">
@@ -15907,6 +16364,9 @@
       `).join('');
 
       container.scrollTop = container.scrollHeight;
+      if (typeof renderFloatingChatMessages === 'function') {
+        renderFloatingChatMessages();
+      }
     }
 
     function sendQuickQaPrompt(promptText) {
@@ -15939,9 +16399,9 @@
       }
     }
 
-    async function sendQaMessage() {
+    async function sendQaMessage(overrideText) {
       const input = document.getElementById('qaInputField');
-      const text = input.value.trim();
+      const text = (typeof overrideText === 'string' ? overrideText : (input ? input.value : '')).trim();
       if (!text) return;
 
       // Add user message
@@ -15949,22 +16409,69 @@
         sender: 'user',
         text: text
       });
-      input.value = '';
+      if (input && typeof overrideText !== 'string') input.value = '';
       renderQaChatMessages();
+
+      // Check if query is about songs / music
+      const lowerText = text.toLowerCase();
+      const songKeywords = ['lagu', 'musik', 'music', 'song', 'playlist', 'nyanyi', 'three man down', 'tilly birds', 'scrubb', 'nont tanont', 'palmy', 'jeff satur', 'bowkylion', 'ink waruntorn', 'getsunova', 'bodyslam', 'milli', 'ost', 'soundtrack', 'phum viphurit', 'pop pongkool', 'bird thongchai'];
+      const isSongQuery = songKeywords.some(kw => lowerText.includes(kw));
+
+      if (isSongQuery && typeof THAI_SONGS_DATABASE !== 'undefined') {
+        let matches = THAI_SONGS_DATABASE.filter(s => 
+          s.titleRoman.toLowerCase().includes(lowerText) ||
+          s.titleThai.toLowerCase().includes(lowerText) ||
+          s.artist.toLowerCase().includes(lowerText) ||
+          s.vibe.toLowerCase().includes(lowerText) ||
+          s.category.toLowerCase().includes(lowerText) ||
+          lowerText.includes(s.artist.toLowerCase()) ||
+          lowerText.includes(s.titleRoman.toLowerCase())
+        );
+        if (!matches.length) {
+          matches = THAI_SONGS_DATABASE.slice(0, 3);
+        } else {
+          matches = matches.slice(0, 4);
+        }
+        setTimeout(() => {
+          qaChatHistory.push({
+            sender: 'bot',
+            text: `Berikut adalah rekomendasi lagu Thailand pilihan terbaik beserta link akses langsung untuk Anda dengarkan sekarang: 🎵👇`,
+            songCards: matches,
+            thaiAudioText: matches[0] ? matches[0].titleThai : 'เพลงไทย'
+          });
+          renderQaChatMessages();
+          playSynthSound('success');
+        }, 300);
+        return;
+      }
 
       // Show typing indicator
       const container = document.getElementById('qaChatMessages');
       const typingEl = document.createElement('div');
       typingEl.className = 'qa-msg-bubble bot';
       typingEl.id = 'qaTypingIndicator';
-      typingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">🍃 Nong Mali sedang berpikir & menyiapkan jawaban...</span>`;
-      container.appendChild(typingEl);
-      container.scrollTop = container.scrollHeight;
+      typingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">📖 Buku Pintar AI sedang berpikir & menyiapkan jawaban...</span>`;
+      if (container) {
+        container.appendChild(typingEl);
+        container.scrollTop = container.scrollHeight;
+      }
+
+      const floatContainer = document.getElementById('floatingChatMessages');
+      if (floatContainer) {
+        const floatTypingEl = document.createElement('div');
+        floatTypingEl.className = 'qa-msg-bubble bot';
+        floatTypingEl.id = 'floatingQaTypingIndicator';
+        floatTypingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">📖 Buku Pintar AI sedang berpikir & menyiapkan jawaban...</span>`;
+        floatContainer.appendChild(floatTypingEl);
+        floatContainer.scrollTop = floatContainer.scrollHeight;
+      }
 
       // Process query
       setTimeout(async () => {
         const indicator = document.getElementById('qaTypingIndicator');
         if (indicator) indicator.remove();
+        const floatIndicator = document.getElementById('floatingQaTypingIndicator');
+        if (floatIndicator) floatIndicator.remove();
 
         const lowerText = text.toLowerCase();
         let bestMatch = null;
@@ -18412,6 +18919,692 @@
       `).join('');
     }
 
+    /* ==========================================================================
+       FITUR: DATABASE LAGU THAILAND POPULER & SEARCH ENGINE
+       ========================================================================== */
+    const THAI_SONGS_DATABASE = [
+      {
+        id: 'song-1',
+        titleThai: 'ฝนตกไหม',
+        titleRoman: 'Fon Tok Mai',
+        titleMeaning: 'Apakah Hujan Turun di Sana?',
+        artist: 'Three Man Down',
+        category: 'indie',
+        vibe: 'Melankolis / Rindu',
+        lyrics: 'ฝนตกอีกแล้ว เหม่อมองฟ้า คิดถึงเธอ...',
+        lyricsId: 'Hujan turun lagi, melamun menatap langit memikirkanmu...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=F_fDcf6J5e0',
+        spotifyUrl: 'https://open.spotify.com/search/Three%20Man%20Down%20Fon%20Tok%20Mai',
+        audioText: 'ฝนตกไหม'
+      },
+      {
+        id: 'song-2',
+        titleThai: 'คิดแต่ไม่ถึง',
+        titleRoman: 'Khit Tae Mai Thueng',
+        titleMeaning: 'Memikirkanmu Tapi Tak Pernah Sampai',
+        artist: 'Tilly Birds',
+        category: 'pop',
+        vibe: 'Pop Hits Viral',
+        lyrics: 'คิดแต่ไม่ถึง คิด คิดแต่ไม่ถึงเธอ...',
+        lyricsId: 'Memikirkanmu tapi tak sampai, tak pernah sampai padamu...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=sU1H4kC03sE',
+        spotifyUrl: 'https://open.spotify.com/search/Tilly%20Birds%20Khit%20Tae%20Mai%20Thueng',
+        audioText: 'คิดแต่ไม่ถึง'
+      },
+      {
+        id: 'song-3',
+        titleThai: 'คู่กัน',
+        titleRoman: 'Khuu Kan (Together)',
+        titleMeaning: 'Ditakdirkan Bersama',
+        artist: 'Scrubb',
+        category: 'ost',
+        vibe: 'Indie Pop / OST 2gether The Series',
+        lyrics: 'ถ้าหากว่าเธอไม่เคยได้เจอ... เราคงเป็นคู่กัน',
+        lyricsId: 'Jika kau belum pernah bertemu... kita mungkin ditakdirkan bersama',
+        youtubeUrl: 'https://www.youtube.com/watch?v=gT8oB9i8aZg',
+        spotifyUrl: 'https://open.spotify.com/search/Scrubb%20Khuu%20Kan',
+        audioText: 'คู่กัน'
+      },
+      {
+        id: 'song-4',
+        titleThai: 'พิง',
+        titleRoman: 'Phing (Lean On)',
+        titleMeaning: 'Bersandar',
+        artist: 'NONT TANONT',
+        category: 'ost',
+        vibe: 'Balada Romantis Mengharukan',
+        lyrics: 'หากเธอเหนื่อยนัก ให้พิงที่ไหล่ฉัน...',
+        lyricsId: 'Jika engkau merasa lelah, bersandarlah di bahuku...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=b0wX3Z6B7qM',
+        spotifyUrl: 'https://open.spotify.com/search/NONT%20TANONT%20Phing',
+        audioText: 'พิง'
+      },
+      {
+        id: 'song-5',
+        titleThai: 'โต๊ะริม',
+        titleRoman: 'Tok Rim (Melt)',
+        titleMeaning: 'Meja di Sudut',
+        artist: 'NONT TANONT',
+        category: 'pop',
+        vibe: 'R&B Pop Ceria / Viral TikTok',
+        lyrics: 'เธอทำให้ฉันละลาย ด้วยรอยยิ้มหวานนั้น...',
+        lyricsId: 'Kau membuatku meleleh dengan senyuman manismu...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=eLw1Qx-7sB0',
+        spotifyUrl: 'https://open.spotify.com/search/NONT%20TANONT%20Melt',
+        audioText: 'โต๊ะริม'
+      },
+      {
+        id: 'song-6',
+        titleThai: 'ซ่อนกลิ่น',
+        titleRoman: 'Sorn Klin',
+        titleMeaning: 'Aroma yang Tersembunyi',
+        artist: 'Palmy',
+        category: 'ballad',
+        vibe: 'Folk Pop Puitis Legendaris',
+        lyrics: 'คงเก็บเอาไว้ในความทรงจำ ไม่ให้ใครรู้...',
+        lyricsId: 'Kusimpan rapi dalam kenangan agar tak seorang pun tahu...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=R9e8Z7n7E4Y',
+        spotifyUrl: 'https://open.spotify.com/search/Palmy%20Sorn%20Klin',
+        audioText: 'ซ่อนกลิ่น'
+      },
+      {
+        id: 'song-7',
+        titleThai: 'Fade (ลืมแทบไม่ไหว)',
+        titleRoman: 'Lueam Thaep Mai Wai',
+        titleMeaning: 'Hampir Mustahil Melupakanmu',
+        artist: 'Jeff Satur',
+        category: 'ballad',
+        vibe: 'Sinematik Emosional',
+        lyrics: 'กาลเวลาไม่เคยช่วยให้ลืมเธอ...',
+        lyricsId: 'Waktu yang berlalu tak pernah sanggup membuatku lupa...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=UqQY9_0s9I4',
+        spotifyUrl: 'https://open.spotify.com/search/Jeff%20Satur%20Fade',
+        audioText: 'ลืมแทบไม่ไหว'
+      },
+      {
+        id: 'song-8',
+        titleThai: 'สายตาหลอกกันไม่ได้',
+        titleRoman: 'Sai Dtaa Lork Kan Mai Dai',
+        titleMeaning: 'Tatapan Mata Tak Bisa Berbohong',
+        artist: 'Ink Waruntorn',
+        category: 'pop',
+        vibe: 'Synth-Pop Imut & Ceria',
+        lyrics: 'สายตาเธอบอกฉันว่าเธอรักกัน...',
+        lyricsId: 'Sorot matamu mengatakan kepadaku bahwa kau mencintaiku...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=e85H2yQh6uE',
+        spotifyUrl: 'https://open.spotify.com/search/Ink%20Waruntorn%20Eyes%20Dont%20Lie',
+        audioText: 'สายตาหลอกกันไม่ได้'
+      },
+      {
+        id: 'song-9',
+        titleThai: 'วาดไว้',
+        titleRoman: 'Waat Wai (Recall)',
+        titleMeaning: 'Lukisan Kenangan Masa Depan',
+        artist: 'BOWKYLION',
+        category: 'ballad',
+        vibe: 'Balada Emosional Populer',
+        lyrics: 'ที่เธอเคยวาดไว้ อนาคตที่เราจะมีกัน...',
+        lyricsId: 'Hal yang pernah kau lukiskan, masa depan yang kelak kita jalani...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=bLd_Z6F9g98',
+        spotifyUrl: 'https://open.spotify.com/search/BOWKYLION%20Recall',
+        audioText: 'วาดไว้'
+      },
+      {
+        id: 'song-10',
+        titleThai: 'ไกลแค่ไหนคือใกล้',
+        titleRoman: 'Glai Khae Nai Khue Klai',
+        titleMeaning: 'Seberapa Jauh Kah Dekat Itu?',
+        artist: 'Getsunova',
+        category: 'indie',
+        vibe: 'Pop Rock Klasik Terpopuler',
+        lyrics: 'อีกไกลแค่ไหน จนกว่าฉันจะใกล้ บอกที...',
+        lyricsId: 'Berapa jauh lagi sampai aku bisa dekat denganmu, katakanlah...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=28R8sS6u3rA',
+        spotifyUrl: 'https://open.spotify.com/search/Getsunova%20How%20Far%20Is%20Near',
+        audioText: 'ไกลแค่ไหนคือใกล้'
+      },
+      {
+        id: 'song-11',
+        titleThai: 'แสงสุดท้าย',
+        titleRoman: 'Saeng Sut Thai',
+        titleMeaning: 'Cahaya Terakhir',
+        artist: 'Bodyslam',
+        category: 'indie',
+        vibe: 'Rock Motivasi & Semangat Hidup',
+        lyrics: 'ตราบใดที่ยังมีลมหายใจ จะก้าวต่อไป...',
+        lyricsId: 'Selama nafas masih berhembus, aku akan terus melangkah...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=b4N3t5z_UQE',
+        spotifyUrl: 'https://open.spotify.com/search/Bodyslam%20Saeng%20Sut%20Thai',
+        audioText: 'แสงสุดท้าย'
+      },
+      {
+        id: 'song-12',
+        titleThai: 'ทุกนาทีที่สวยงาม',
+        titleRoman: 'Thuk Naa-thii Thii Suay-ngaam',
+        titleMeaning: 'Setiap Menit yang Sangat Indah',
+        artist: 'NONT TANONT',
+        category: 'pop',
+        vibe: 'Hangat & Menenteramkan Hati',
+        lyrics: 'ทุกนาทีที่สวยงาม คือช่วงเวลาที่ได้มีเธอ...',
+        lyricsId: 'Setiap menit yang indah adalah saat-saat aku bersamamu...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=nC8-g0w8xU4',
+        spotifyUrl: 'https://open.spotify.com/search/NONT%20TANONT%20Always%20With%20Me',
+        audioText: 'ทุกนาทีที่สวยงาม'
+      },
+      {
+        id: 'song-13',
+        titleThai: 'พักก่อน',
+        titleRoman: 'Phak Gorn',
+        titleMeaning: 'Istirahat Dulu Dong',
+        artist: 'MILLI',
+        category: 'pop',
+        vibe: 'Hip Hop / Bahasa Gaul Gaul Remaja',
+        lyrics: 'พักผ่อนนะน้องนะ พักก่อนคนดี...',
+        lyricsId: 'Istirahatlah wahai adik, istirahat dulu ya orang baik...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=Qx8w3kYj6tA',
+        spotifyUrl: 'https://open.spotify.com/search/MILLI%20Phak%20Gorn',
+        audioText: 'พักก่อน'
+      },
+      {
+        id: 'song-14',
+        titleThai: 'Lover Boy',
+        titleRoman: 'Lover Boy',
+        titleMeaning: 'Lelaki Idaman',
+        artist: 'Phum Viphurit',
+        category: 'indie',
+        vibe: 'Neo-Soul Summer Santai',
+        lyrics: 'Wandering the streets tonight, looking for you...',
+        lyricsId: 'Menyusuri jalanan malam ini, mencari keberadaanmu...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=8HnLRrQ3RS4',
+        spotifyUrl: 'https://open.spotify.com/search/Phum%20Viphurit%20Lover%20Boy',
+        audioText: 'เลิฟเวอร์บอย'
+      },
+      {
+        id: 'song-15',
+        titleThai: 'ทุกวันได้ไหม',
+        titleRoman: 'Thuk Wan Dai Mai',
+        titleMeaning: 'Bolehkah Bersamamu Setiap Hari?',
+        artist: 'NUM KALA ft. Bird Thongchai',
+        category: 'ballad',
+        vibe: 'Balada Hangat Duet Legendaris',
+        lyrics: 'แค่อยากจะขอมีเธออยู่ตรงนี้ทุกวัน...',
+        lyricsId: 'Hanya ingin memohon kehadiranmu di sini setiap hari...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=b114VqO3V10',
+        spotifyUrl: 'https://open.spotify.com/search/NUM%20KALA%20Bird%20Thongchai',
+        audioText: 'ทุกวันได้ไหม'
+      },
+      {
+        id: 'song-16',
+        titleThai: 'สลักจิต',
+        titleRoman: 'Salakjit',
+        titleMeaning: 'Terukir Abadi di Lubuk Jiwa',
+        artist: 'Pop Pongkool ft. Da Endorphine',
+        category: 'ballad',
+        vibe: 'Duet Pop Balada Megah',
+        lyrics: 'สลักไว้ในใจลึกซึ้ง ตลอดกาล...',
+        lyricsId: 'Terukir begitu dalam di relung jiwaku untuk selamanya...',
+        youtubeUrl: 'https://www.youtube.com/watch?v=o0h845m3x2A',
+        spotifyUrl: 'https://open.spotify.com/search/Pop%20Pongkool%20Salakjit',
+        audioText: 'สลักจิต'
+      }
+    ];
+
+    /* ==========================================================================
+       FITUR: FLOATING DRAGGABLE WIDGET CONTROLLER
+       ========================================================================== */
+    let floatIsDragging = false;
+    let floatDragStartX = 0;
+    let floatDragStartY = 0;
+    let floatInitialLeft = 0;
+    let floatInitialTop = 0;
+    let floatHasMoved = false;
+    let floatActiveTab = 'chat';
+    let currentSongFilter = 'all';
+
+    function initFloatingAiWidget() {
+      const container = document.getElementById('floatingAiWidget');
+      const trigger = document.getElementById('floatingAiBtn');
+      if (!container || !trigger) return;
+
+      // Restore position from localStorage
+      const savedLeft = localStorage.getItem('mali_ai_pos_left');
+      const savedTop = localStorage.getItem('mali_ai_pos_top');
+      if (savedLeft !== null && savedTop !== null) {
+        const pad = 12;
+        const maxL = window.innerWidth - 60;
+        const maxT = window.innerHeight - 60;
+        const boundedLeft = Math.max(pad, Math.min(Number(savedLeft), maxL));
+        const boundedTop = Math.max(pad, Math.min(Number(savedTop), maxT));
+        container.style.left = boundedLeft + 'px';
+        container.style.top = boundedTop + 'px';
+        container.style.bottom = 'auto';
+        container.style.right = 'auto';
+        adjustFloatingFlyoutPosition(boundedLeft, boundedTop);
+      }
+
+      // Mouse Dragging
+      trigger.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        startFloatDrag(e.clientX, e.clientY);
+        const onMouseMove = (moveEvt) => {
+          onFloatDragMove(moveEvt.clientX, moveEvt.clientY);
+        };
+        const onMouseUp = () => {
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+          endFloatDrag();
+        };
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+
+      // Touch Dragging (Mobile)
+      trigger.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        const t = e.touches[0];
+        startFloatDrag(t.clientX, t.clientY);
+        const onTouchMove = (moveEvt) => {
+          if (moveEvt.touches.length === 1) {
+            onFloatDragMove(moveEvt.touches[0].clientX, moveEvt.touches[0].clientY);
+          }
+        };
+        const onTouchEnd = () => {
+          document.removeEventListener('touchmove', onTouchMove);
+          document.removeEventListener('touchend', onTouchEnd);
+          endFloatDrag();
+        };
+        document.addEventListener('touchmove', onTouchMove, { passive: true });
+        document.addEventListener('touchend', onTouchEnd);
+      }, { passive: true });
+
+      // Click to toggle (if not dragged)
+      trigger.addEventListener('click', (e) => {
+        if (floatHasMoved) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        toggleFloatingAiWindow();
+      });
+
+      // Render default chat & songs
+      renderFloatingChatMessages();
+      renderFloatingSongList(THAI_SONGS_DATABASE);
+    }
+
+    function startFloatDrag(cx, cy) {
+      const container = document.getElementById('floatingAiWidget');
+      const rect = container.getBoundingClientRect();
+      floatIsDragging = true;
+      floatHasMoved = false;
+      floatDragStartX = cx;
+      floatDragStartY = cy;
+      floatInitialLeft = rect.left;
+      floatInitialTop = rect.top;
+      container.classList.add('dragging');
+    }
+
+    function onFloatDragMove(cx, cy) {
+      if (!floatIsDragging) return;
+      const dx = cx - floatDragStartX;
+      const dy = cy - floatDragStartY;
+
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+        floatHasMoved = true;
+      }
+
+      const container = document.getElementById('floatingAiWidget');
+      const rect = container.getBoundingClientRect();
+      const pad = 10;
+
+      let newLeft = floatInitialLeft + dx;
+      let newTop = floatInitialTop + dy;
+
+      const maxLeft = window.innerWidth - rect.width - pad;
+      const maxTop = window.innerHeight - rect.height - pad;
+
+      newLeft = Math.max(pad, Math.min(newLeft, maxLeft));
+      newTop = Math.max(pad, Math.min(newTop, maxTop));
+
+      container.style.left = newLeft + 'px';
+      container.style.top = newTop + 'px';
+      container.style.bottom = 'auto';
+      container.style.right = 'auto';
+
+      adjustFloatingFlyoutPosition(newLeft, newTop);
+    }
+
+    function endFloatDrag() {
+      if (!floatIsDragging) return;
+      floatIsDragging = false;
+      const container = document.getElementById('floatingAiWidget');
+      container.classList.remove('dragging');
+
+      const rect = container.getBoundingClientRect();
+      localStorage.setItem('mali_ai_pos_left', Math.round(rect.left));
+      localStorage.setItem('mali_ai_pos_top', Math.round(rect.top));
+    }
+
+    function adjustFloatingFlyoutPosition(left, top) {
+      const win = document.getElementById('floatingAiWindow');
+      if (!win) return;
+
+      const isTopHalf = top < 350;
+      const isLeftHalf = left < 430;
+
+      if (isTopHalf) {
+        win.style.top = '54px';
+        win.style.bottom = 'auto';
+      } else {
+        win.style.bottom = '56px';
+        win.style.top = 'auto';
+      }
+
+      if (isLeftHalf) {
+        win.style.left = '0';
+        win.style.right = 'auto';
+      } else {
+        win.style.right = '0';
+        win.style.left = 'auto';
+      }
+    }
+
+    function toggleFloatingAiWindow(forceState) {
+      const win = document.getElementById('floatingAiWindow');
+      if (!win) return;
+
+      const isCurrentlyOpen = win.style.display !== 'none';
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : !isCurrentlyOpen;
+
+      if (shouldOpen) {
+        const container = document.getElementById('floatingAiWidget');
+        const rect = container.getBoundingClientRect();
+        adjustFloatingFlyoutPosition(rect.left, rect.top);
+        win.style.display = 'flex';
+        playSynthSound('click');
+        setTimeout(() => {
+          const input = document.getElementById('floatingChatInput');
+          if (input) input.focus();
+        }, 100);
+      } else {
+        win.style.display = 'none';
+        playSynthSound('click');
+      }
+    }
+
+    function setFloatingAiTab(tab) {
+      floatActiveTab = tab;
+      document.querySelectorAll('.floating-ai-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.floating-tab-body').forEach(b => b.style.display = 'none');
+
+      if (tab === 'chat') {
+        const btn = document.getElementById('tabBtnFloatChat');
+        const body = document.getElementById('floatTabChat');
+        if (btn) btn.classList.add('active');
+        if (body) body.style.display = 'flex';
+        renderFloatingChatMessages();
+      } else if (tab === 'song') {
+        const btn = document.getElementById('tabBtnFloatSong');
+        const body = document.getElementById('floatTabSong');
+        if (btn) btn.classList.add('active');
+        if (body) body.style.display = 'flex';
+        renderFloatingSongList(THAI_SONGS_DATABASE);
+      } else if (tab === 'trans') {
+        const btn = document.getElementById('tabBtnFloatTrans');
+        const body = document.getElementById('floatTabTrans');
+        if (btn) btn.classList.add('active');
+        if (body) body.style.display = 'flex';
+      }
+      playSynthSound('click');
+    }
+
+    function openFullAiHub() {
+      toggleFloatingAiWindow(false);
+      switchNavTab('ai-hub');
+    }
+
+    /* ==========================================================================
+       FITUR: CHAT & PENCARIAN LAGU DI DALAM FLOATING WIDGET
+       ========================================================================== */
+    function renderFloatingChatMessages() {
+      const container = document.getElementById('floatingChatMessages');
+      if (!container) return;
+
+      if (!qaChatHistory || !qaChatHistory.length) {
+        container.innerHTML = `
+          <div class="qa-msg-bubble bot">
+            <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">📖 Buku Pintar AI Nong Mali</div>
+            <div>Halo! Saya asisten pintar AI bahasa & musik Thailand Anda. 🎵<br><br>Tanyakan apa saja seputar lagu Thai, budaya, kosakata, atau minta rekomendasi playlist!</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = qaChatHistory.map(msg => `
+        <div class="qa-msg-bubble ${msg.sender}">
+          <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); margin-bottom:3px; font-family:var(--font-mono);">
+            ${msg.sender === 'user' ? '👤 Anda' : '📖 Buku Pintar AI'}
+          </div>
+          <div style="white-space:pre-line; font-size:12.5px; line-height:1.45;">${msg.text}</div>
+          ${msg.songCards ? renderSongCardsHtml(msg.songCards) : ''}
+          ${msg.thaiAudioText ? `
+            <div style="margin-top:8px;">
+              <button class="song-listen-tts-btn" onclick="speakThai('${msg.thaiAudioText}')" title="Dengar Pengucapan Bangkok">
+                🔊 Dengar Suara Asli: "${msg.thaiAudioText}"
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function renderSongCardsHtml(songs) {
+      if (!Array.isArray(songs) || !songs.length) return '';
+      return songs.map(s => `
+        <div class="song-result-card">
+          <div class="song-header-row">
+            <div>
+              <div class="song-title-thai">${s.titleThai} (${s.titleRoman})</div>
+              <div class="song-artist-tag">🎤 ${s.artist} • <em>${s.titleMeaning}</em></div>
+            </div>
+            <span class="song-vibe-badge">${s.vibe || 'Thai Hits'}</span>
+          </div>
+          ${s.lyrics ? `
+            <div class="song-lyrics-quote">
+              "${s.lyrics}"<br>
+              <span style="opacity:0.85; font-size:11px;">Arti: ${s.lyricsId}</span>
+            </div>
+          ` : ''}
+          <div class="song-actions-row">
+            <a href="${s.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="song-play-btn" title="Buka video klip resmi di YouTube">
+              ▶️ Buka di YouTube ↗
+            </a>
+            ${s.spotifyUrl ? `
+              <a href="${s.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="song-spotify-btn" title="Dengarkan di Spotify">
+                🎧 Spotify ↗
+              </a>
+            ` : ''}
+            <button type="button" class="song-listen-tts-btn" onclick="speakThai('${s.audioText || s.titleThai}')" title="Dengar lafal judul lagu">
+              🔊 Lafal Judul
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function sendFloatingPrompt(text) {
+      const input = document.getElementById('floatingChatInput');
+      if (input) input.value = text;
+      sendFloatingChatMessage();
+    }
+
+    async function sendFloatingChatMessage() {
+      const input = document.getElementById('floatingChatInput');
+      const text = (input ? input.value : '').trim();
+      if (!text) return;
+      if (input) input.value = '';
+      sendQaMessage(text);
+    }
+
+    function triggerFloatingMic() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Browser belum mendukung mikrofon input suara.');
+        return;
+      }
+      try {
+        const recog = new SpeechRecognition();
+        recog.lang = 'id-ID';
+        recog.interimResults = false;
+        showToast('🎙️ Mendengarkan pertanyaan atau lagu...');
+        recog.onresult = (evt) => {
+          const spoken = evt.results[0][0].transcript;
+          const input = document.getElementById('floatingChatInput');
+          if (input) input.value = spoken;
+          sendFloatingChatMessage();
+        };
+        recog.onerror = () => {
+          showToast('Suara tidak tertangkap jelas.');
+        };
+        recog.start();
+      } catch (err) {
+        showToast('Mikrofon tidak dapat diakses.');
+      }
+    }
+
+    /* Dedicated Song Search Tab */
+    function filterSongCategory(cat, btn) {
+      currentSongFilter = cat;
+      document.querySelectorAll('#songFilterPills .pill-filter').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const q = (document.getElementById('floatingSongInput').value || '').toLowerCase().trim();
+      filterAndRenderSongs(cat, q);
+      playSynthSound('click');
+    }
+
+    function onFloatingSongSearch(query) {
+      const q = (query || '').toLowerCase().trim();
+      filterAndRenderSongs(currentSongFilter, q);
+    }
+
+    function filterAndRenderSongs(cat = currentSongFilter, q = '') {
+      let filtered = THAI_SONGS_DATABASE;
+      if (cat !== 'all') {
+        filtered = filtered.filter(s => s.category === cat);
+      }
+      if (q) {
+        filtered = filtered.filter(s => 
+          s.titleThai.toLowerCase().includes(q) ||
+          s.titleRoman.toLowerCase().includes(q) ||
+          s.titleMeaning.toLowerCase().includes(q) ||
+          s.artist.toLowerCase().includes(q) ||
+          s.vibe.toLowerCase().includes(q)
+        );
+      }
+
+      const container = document.getElementById('floatingSongListContainer');
+      if (!container) return;
+
+      if (!filtered.length) {
+        const ytSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(q + ' thai song')}`;
+        const spotifySearchUrl = `https://open.spotify.com/search/${encodeURIComponent(q + ' thai')}`;
+        container.innerHTML = `
+          <div style="padding:16px; text-align:center; background:var(--bg-card); border-radius:var(--radius-md); border:1px solid var(--border);">
+            <div style="font-size:28px; margin-bottom:8px;">🔍</div>
+            <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px;">Cari Lagu: "${q}"</div>
+            <p style="font-size:11.5px; color:var(--text-muted); margin-bottom:12px;">Lagu tidak ada di daftar favorit lokal, namun Anda bisa langsung membukanya di YouTube atau Spotify:</p>
+            <div style="display:flex; justify-content:center; gap:8px;">
+              <a href="${ytSearchUrl}" target="_blank" rel="noopener noreferrer" class="song-play-btn">
+                ▶️ Cari di YouTube ↗
+              </a>
+              <a href="${spotifySearchUrl}" target="_blank" rel="noopener noreferrer" class="song-spotify-btn">
+                🎧 Cari di Spotify ↗
+              </a>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      renderFloatingSongList(filtered);
+    }
+
+    function renderFloatingSongList(list) {
+      const container = document.getElementById('floatingSongListContainer');
+      if (!container) return;
+      container.innerHTML = renderSongCardsHtml(list);
+    }
+
+    /* Floating Quick Translator */
+    function clearFloatTranslator() {
+      const input = document.getElementById('floatTransInput');
+      const box = document.getElementById('floatTransResultBox');
+      if (input) input.value = '';
+      if (box) box.style.display = 'none';
+    }
+
+    function triggerFloatTransMic() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Browser belum mendukung Speech Recognition.');
+        return;
+      }
+      try {
+        const recog = new SpeechRecognition();
+        recog.lang = 'id-ID';
+        recog.interimResults = false;
+        showToast('🎙️ Ucapkan kalimat bahasa Indonesia...');
+        recog.onresult = (evt) => {
+          const spoken = evt.results[0][0].transcript;
+          const input = document.getElementById('floatTransInput');
+          if (input) input.value = spoken;
+          performFloatTranslation();
+        };
+        recog.onerror = () => showToast('Suara tidak tertangkap.');
+        recog.start();
+      } catch (e) {
+        showToast('Mikrofon tidak dapat diakses.');
+      }
+    }
+
+    async function performFloatTranslation() {
+      const input = document.getElementById('floatTransInput');
+      const text = (input ? input.value : '').trim();
+      if (!text) return;
+
+      const resultBox = document.getElementById('floatTransResultBox');
+      const resultText = document.getElementById('floatTransThaiText');
+      if (resultBox) resultBox.style.display = 'block';
+      if (resultText) resultText.textContent = 'Menerjemahkan... 🍃';
+
+      try {
+        const transUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=th&dt=t&q=${encodeURIComponent(text)}`;
+        const tResp = await fetch(transUrl);
+        const tData = await tResp.json();
+        const thaiVer = tData && tData[0] ? tData[0].map(s => s[0]).join('') : '';
+
+        if (resultText) resultText.textContent = thaiVer || 'ขอบคุณครับ';
+        if (thaiVer) speakThai(thaiVer);
+      } catch (err) {
+        if (resultText) resultText.textContent = 'Gagal menerjemahkan (periksa koneksi internet)';
+      }
+    }
+
+    function searchSongFromTranslation() {
+      const resultText = document.getElementById('floatTransThaiText');
+      const text = resultText ? resultText.textContent.trim() : '';
+      if (!text) return;
+      setFloatingAiTab('song');
+      const songInput = document.getElementById('floatingSongInput');
+      if (songInput) {
+        songInput.value = text;
+        onFloatingSongSearch(text);
+      }
+    }
+
     /* INITIALIZE APP */
     applyColorTheme(appState.theme || 'dark');
     applyThaiFontStyle(appState.thaiFontStyle || 'looped');
@@ -18429,6 +19622,7 @@
     renderJazmiGrid();
     renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
     initQaChat();
+    initFloatingAiWidget();
     initLearningPortal();
     initVocabularyDailyMission();
     initFlashcards('all');
@@ -18436,5 +19630,120 @@
     initDictionary();
     renderAchievementsGrid();
   </script>
+
+  <!-- ==========================================================================
+       FITUR: FLOATING DRAGGABLE AI ASSISTANT WIDGET (BUKU PINTAR AI & PENCARIAN LAGU)
+       ========================================================================== -->
+  <div id="floatingAiWidget" class="floating-ai-container">
+    <!-- Floating Trigger Pill (Draggable) -->
+    <div id="floatingAiBtn" class="floating-ai-trigger" title="Buku Pintar AI & Musik Thai (Tahan & geser untuk memindahkan posisi)" aria-label="Buka Asisten Pintar AI">
+      <div class="floating-ai-icon-box">
+        <span class="floating-book-icon">📖</span>
+        <span class="floating-ai-online-ping"></span>
+      </div>
+      <div class="floating-ai-pill-label">
+        <span class="floating-ai-pill-title">Buku AI <span>✨</span></span>
+        <span class="floating-ai-pill-subtitle">Tanya &amp; Cari Lagu</span>
+      </div>
+    </div>
+
+    <!-- Floating AI Flyout Dialog Window -->
+    <div id="floatingAiWindow" class="floating-ai-window" style="display:none;">
+      <!-- Flyout Header -->
+      <div class="floating-ai-header">
+        <div class="floating-ai-header-brand">
+          <div class="floating-ai-header-icon">📖</div>
+          <div>
+            <h4>Buku Pintar AI &amp; Musik</h4>
+            <span>● Online • Tanya Jawab &amp; Cari Lagu</span>
+          </div>
+        </div>
+        <div class="floating-ai-header-actions">
+          <button type="button" class="floating-ai-action-btn" onclick="openFullAiHub()" title="Buka Layar Penuh AI Hub">⛶</button>
+          <button type="button" class="floating-ai-action-btn" onclick="toggleFloatingAiWindow(false)" title="Tutup (Esc)">✕</button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="floating-ai-tabs-bar">
+        <button type="button" class="floating-ai-tab active" id="tabBtnFloatChat" onclick="setFloatingAiTab('chat')">
+          <span>💬</span> Tanya AI
+        </button>
+        <button type="button" class="floating-ai-tab" id="tabBtnFloatSong" onclick="setFloatingAiTab('song')">
+          <span>🎵</span> Cari Lagu
+        </button>
+        <button type="button" class="floating-ai-tab" id="tabBtnFloatTrans" onclick="setFloatingAiTab('trans')">
+          <span>🌐</span> Terjemah
+        </button>
+      </div>
+
+      <!-- TAB 1: TANYA AI & REKOMENDASI -->
+      <div id="floatTabChat" class="floating-tab-body">
+        <div class="floating-chips-row">
+          <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Rekomendasi lagu Thai pop terpopuler')">🎵 Pop Hits</button>
+          <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Lagu Three Man Down yang enak untuk didengar')">🎸 Three Man Down</button>
+          <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Lagu soundtrack drama serial Thai populer')">🎬 OST Serial</button>
+          <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Rekomendasi lagu galau Thailand')">💔 Lagu Galau</button>
+          <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Etika berpakaian di kuil Thailand')">🛕 Etika Kuil</button>
+          <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Rekomendasi kuliner halal di Bangkok')">🍜 Halal Bangkok</button>
+        </div>
+
+        <div id="floatingChatMessages" class="floating-chat-stream">
+          <!-- Rendered via JS -->
+        </div>
+
+        <div class="floating-input-wrap">
+          <button type="button" class="icon-btn-compact" onclick="triggerFloatingMic()" title="Gunakan Suara (Mikrofon)" style="border-radius:50%; width:34px; height:34px;">🎙️</button>
+          <input type="text" id="floatingChatInput" class="floating-text-input" placeholder="Tanya AI atau cari lagu Thai..." onkeydown="if(event.key==='Enter') sendFloatingChatMessage()">
+          <button type="button" class="floating-send-btn" onclick="sendFloatingChatMessage()" title="Kirim Pesan">➤</button>
+        </div>
+      </div>
+
+      <!-- TAB 2: CARI LAGU THAI LANGSUNG -->
+      <div id="floatTabSong" class="floating-tab-body" style="display:none;">
+        <div style="padding:10px 14px 6px 14px; background:var(--bg-card); border-bottom:1px solid var(--border);">
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="floatingSongInput" class="floating-text-input" placeholder="Ketik judul lagu / artis (Three Man Down, Scrubb, Tilly Birds...)" oninput="onFloatingSongSearch(this.value)">
+            <button type="button" class="floating-send-btn" onclick="onFloatingSongSearch(document.getElementById('floatingSongInput').value)" title="Cari Lagu">🔍</button>
+          </div>
+          <div style="display:flex; gap:4px; margin-top:8px; overflow-x:auto; scrollbar-width:none;" id="songFilterPills">
+            <button type="button" class="pill-filter active" onclick="filterSongCategory('all', this)" style="font-size:10.5px; padding:2px 8px;">Semua</button>
+            <button type="button" class="pill-filter" onclick="filterSongCategory('pop', this)" style="font-size:10.5px; padding:2px 8px;">Pop Hits</button>
+            <button type="button" class="pill-filter" onclick="filterSongCategory('ost', this)" style="font-size:10.5px; padding:2px 8px;">OST Drama</button>
+            <button type="button" class="pill-filter" onclick="filterSongCategory('indie', this)" style="font-size:10.5px; padding:2px 8px;">Indie / Santai</button>
+            <button type="button" class="pill-filter" onclick="filterSongCategory('ballad', this)" style="font-size:10.5px; padding:2px 8px;">Galau / Ballad</button>
+          </div>
+        </div>
+
+        <div id="floatingSongListContainer" class="floating-chat-stream" style="padding-top:8px;">
+          <!-- Song cards rendered via JS -->
+        </div>
+      </div>
+
+      <!-- TAB 3: PENERJEMAH SUARA CEPAT -->
+      <div id="floatTabTrans" class="floating-tab-body" style="display:none; padding:12px 14px; overflow-y:auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:11px; font-weight:700; color:var(--emerald); font-family:var(--font-mono);">🇮🇩 Indonesia ⇄ 🇹🇭 Thailand</span>
+          <button type="button" class="btn-subtle-nav" onclick="clearFloatTranslator()" style="font-size:11px; padding:2px 8px;">Bersihkan</button>
+        </div>
+        <textarea id="floatTransInput" class="custom-input" rows="3" placeholder="Ketik kalimat atau tekan mikrofon..." style="width:100%; font-size:12.5px; border-radius:var(--radius-md); resize:none; padding:10px;"></textarea>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+          <button type="button" class="icon-btn-compact" onclick="triggerFloatTransMic()" title="Bicara Bahasa Indonesia" style="border-radius:50%; width:32px; height:32px;">🎙️</button>
+          <button type="button" class="btn-stimuler-primary" onclick="performFloatTranslation()" style="padding:6px 16px; font-size:12px;">Terjemahkan ✨</button>
+        </div>
+        <div id="floatTransResultBox" style="margin-top:12px; display:none;">
+          <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border-bright); border-radius:var(--radius-md);">
+            <div style="font-size:10px; font-weight:700; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">HASIL TERJEMAHAN:</div>
+            <div id="floatTransThaiText" style="font-size:16px; font-weight:700; color:var(--text); font-family:var(--font-thai); margin-bottom:6px;"></div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" class="song-listen-tts-btn" id="btnSpeakFloatTrans" onclick="speakThai(document.getElementById('floatTransThaiText').textContent)">🔊 Dengar Penutur Asli</button>
+              <button type="button" class="song-listen-tts-btn" onclick="searchSongFromTranslation()">🎵 Cari Lagu dengan Kata Ini</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
