@@ -59,6 +59,20 @@ class ThaiAppRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'audio/mpeg')
             self.end_headers()
             return
+        if parsed.path.startswith('/audio/'):
+            parts = parsed.path.strip('/').split('/')
+            if len(parts) >= 3:
+                gender, filename = parts[1], parts[2]
+                pregen = os.path.join('audio', gender, filename)
+                cached = os.path.join('audio_cache', gender, filename)
+                serve_path = pregen if os.path.exists(pregen) else (cached if os.path.exists(cached) else None)
+                if serve_path and os.path.exists(serve_path):
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'audio/mpeg')
+                    self.send_header('Content-Length', str(os.path.getsize(serve_path)))
+                    self.send_header('Cache-Control', 'public, max-age=31536000')
+                    self.end_headers()
+                    return
         super().do_HEAD()
 
     def do_GET(self):
@@ -68,6 +82,27 @@ class ThaiAppRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Location', '/fairy_thai_academy.html')
             self.end_headers()
             return
+
+        if parsed.path.startswith('/audio/'):
+            parts = parsed.path.strip('/').split('/')
+            if len(parts) >= 3:
+                gender, filename = parts[1], parts[2]
+                pregen = os.path.join('audio', gender, filename)
+                cached = os.path.join('audio_cache', gender, filename)
+                serve_path = pregen if os.path.exists(pregen) else (cached if os.path.exists(cached) else None)
+                if serve_path and os.path.exists(serve_path):
+                    try:
+                        with open(serve_path, 'rb') as f:
+                            data = f.read()
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'audio/mpeg')
+                        self.send_header('Content-Length', str(len(data)))
+                        self.send_header('Cache-Control', 'public, max-age=31536000')
+                        self.end_headers()
+                        self.wfile.write(data)
+                        return
+                    except Exception as e:
+                        print(f"Error serving audio file {serve_path}: {e}")
 
         if parsed.path == '/api/tts':
             query = urllib.parse.parse_qs(parsed.query)

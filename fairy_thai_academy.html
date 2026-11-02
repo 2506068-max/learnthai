@@ -6136,16 +6136,23 @@
       const encoded = encodeURIComponent(targetText);
 
       // Audio Endpoints Tiered Architecture:
-      // Tier 1: Pre-rendered Studio Audio (th-TH-NiwatNeural Male / th-TH-PremwadeeNeural Female)
-      const staticAudioUrl = `audio/${targetGender}/${hash}.mp3`;
-
-      // Tier 2: Real-time Neural TTS Endpoint via Local Server
+      // Tier 1: Real-time Neural TTS Endpoint via Local Server (/api/tts auto-serves pregen studio audio or generates dynamic neural audio)
       const serverTtsUrl = `/api/tts?text=${encoded}&gender=${targetGender}`;
+
+      // Tier 2: Static Pre-rendered Studio Audio
+      const staticAudioUrl = `audio/${targetGender}/${hash}.mp3`;
 
       // Tier 4: Direct Google TTS streaming with no-referrer
       const googleTtsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=th&client=tw-ob`;
 
       function playAudioUrl(url, onFail, isAcousticFallback = false) {
+        let triggered = false;
+        function triggerFail(err) {
+          if (triggered) return;
+          triggered = true;
+          if (onFail) onFail(err);
+        }
+
         try {
           const audio = new Audio();
           currentThaiAudio = audio;
@@ -6171,21 +6178,20 @@
           }
 
           audio.onended = finishAudio;
-          audio.onerror = () => {
-            if (onFail) onFail();
+          audio.onerror = (e) => {
+            triggerFail(e);
           };
 
           audio.src = url;
           const playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch((err) => {
-              console.warn("Audio play failed, proceeding to fallback:", err);
-              if (onFail) onFail();
+              if (err && err.name === 'AbortError') return; // Cancelled intentionally
+              triggerFail(err);
             });
           }
         } catch (err) {
-          console.warn("Audio instantiation error:", err);
-          if (onFail) onFail();
+          triggerFail(err);
         }
       }
 
@@ -6220,14 +6226,27 @@
         finishAudio();
       }
 
-      // CASCADE: Tier 1 (Static MP3) -> Tier 2 (Server Neural TTS) -> Tier 3 (SpeechSynthesis) -> Tier 4 (Google TTS) -> Tier 4b (SoundOfText)
-      playAudioUrl(staticAudioUrl, () => {
+      // CASCADE WITH SEAMLESS FALLBACK:
+      // When on HTTP: /api/tts is primary (it checks pre-rendered audio, cache, and generates via Neural TTS without 404)
+      const isHttp = window.location.protocol.startsWith('http');
+      if (isHttp) {
         playAudioUrl(serverTtsUrl, () => {
-          fallbackSpeechSynthesis(targetText, finishAudio, targetGender, () => {
-            playAudioUrl(googleTtsUrl, trySoundOfTextFallback, true);
+          playAudioUrl(staticAudioUrl, () => {
+            fallbackSpeechSynthesis(targetText, finishAudio, targetGender, () => {
+              playAudioUrl(googleTtsUrl, trySoundOfTextFallback, true);
+            });
           });
         });
-      });
+      } else {
+        // Direct file:// mode: try pre-rendered local static file, then dev server, then speech synthesis
+        playAudioUrl(staticAudioUrl, () => {
+          playAudioUrl(`http://localhost:3001/api/tts?text=${encoded}&gender=${targetGender}`, () => {
+            fallbackSpeechSynthesis(targetText, finishAudio, targetGender, () => {
+              playAudioUrl(googleTtsUrl, trySoundOfTextFallback, true);
+            });
+          });
+        });
+      }
     }
 
     /* TIER 3: WEB SPEECH SYNTHESIS ENGINE (FAIL-SAFE WITH TRUE GENDER SEPARATION) */
@@ -13210,17 +13229,28 @@
       const gender = appState.speakerGender || 'female';
       const icon = document.getElementById('portalAudioIcon');
       if (icon) icon.textContent = '⏳';
-      const audio = new Audio(`audio/${gender}/sawatdee.mp3`);
-      audio.referrerPolicy = 'no-referrer';
-      audio.onended = () => { if (icon) icon.textContent = '🔊'; };
-      audio.onerror = () => {
+      let triggered = false;
+      const onFail = () => {
+        if (triggered) return;
+        triggered = true;
         if (icon) icon.textContent = '🔊';
-        speakThai(gender === 'male' ? 'สวัสดีครับ ยินดีต้อนรับครับ' : 'สวัสดีค่ะ ยินดีต้อนรับค่ะ');
+        speakThai(gender === 'male' ? 'สวัสดีครับ ยินดีต้อนรับครับ' : 'สวัสดีค่ะ ยินดีต้อนรับค่ะ', gender);
       };
-      audio.play().catch(() => {
-        if (icon) icon.textContent = '🔊';
-        speakThai(gender === 'male' ? 'สวัสดีครับ ยินดีต้อนรับครับ' : 'สวัสดีค่ะ ยินดีต้อนรับค่ะ');
-      });
+      try {
+        const audio = new Audio(`audio/${gender}/sawatdee.mp3`);
+        audio.referrerPolicy = 'no-referrer';
+        audio.onended = () => { if (icon) icon.textContent = '🔊'; };
+        audio.onerror = onFail;
+        const p = audio.play();
+        if (p !== undefined) {
+          p.catch((err) => {
+            if (err && err.name === 'AbortError') return;
+            onFail();
+          });
+        }
+      } catch (e) {
+        onFail();
+      }
     }
 
     function initLearningPortal() {
