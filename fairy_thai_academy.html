@@ -6173,7 +6173,7 @@
             <div class="portal-field-group">
               <label for="portalInputName" class="portal-label">NAMA PEMBELAJAR / AKUN *</label>
               <div class="portal-input-wrap">
-                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (misal: Nesya)" required autocomplete="name">
+                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (misal: Nesya)" autocomplete="name">
                 <span class="portal-input-icon">👤</span>
               </div>
             </div>
@@ -6181,7 +6181,7 @@
             <div class="portal-field-group">
               <label for="portalInputPin" class="portal-label">KATA SANDI / PIN *</label>
               <div class="portal-input-wrap">
-                <input type="password" id="portalInputPin" class="portal-text-input" placeholder="Buat PIN 4 digit (misal: 1234)" maxlength="20" required autocomplete="current-password">
+                <input type="password" id="portalInputPin" class="portal-text-input" placeholder="Buat PIN 4 digit (misal: 1234)" maxlength="20" autocomplete="current-password">
                 <span class="portal-input-icon">🔑</span>
               </div>
             </div>
@@ -6189,7 +6189,7 @@
 
           <!-- Action Buttons (Foto 5: Skip button removed) -->
           <div class="portal-login-actions">
-            <button type="button" class="portal-main-cta-btn" onclick="handleStudentLogin()" style="width:100%; justify-content:center; padding:15px; cursor:pointer;">
+            <button type="submit" class="portal-main-cta-btn" onclick="handleStudentLogin()" style="width:100%; justify-content:center; padding:15px; cursor:pointer;">
               <span>✨ Masuk &amp; Simpan Data Belajar</span>
               <span class="cta-arrow">→</span>
             </button>
@@ -8312,13 +8312,19 @@
     });
 
     function updateTopMetrics() {
-      document.getElementById('headerStreak').textContent = appState.streak;
-      document.getElementById('headerXp').textContent = appState.xp;
-      const rateBtn = document.getElementById('rateToggleBtn');
-      if (rateBtn) {
-        rateBtn.textContent = (appState.speechRate === 0.82) ? '🐢 0.8x' : '⚡ 1.0x';
+      try {
+        const streakEl = document.getElementById('headerStreak');
+        const xpEl = document.getElementById('headerXp');
+        if (streakEl) streakEl.textContent = appState.streak;
+        if (xpEl) xpEl.textContent = appState.xp;
+        const rateBtn = document.getElementById('rateToggleBtn');
+        if (rateBtn) {
+          rateBtn.textContent = (appState.speechRate === 0.82) ? '🐢 0.8x' : '⚡ 1.0x';
+        }
+        updateGenderControls();
+      } catch (e) {
+        console.warn('Top metrics update warning:', e);
       }
-      updateGenderControls();
     }
 
     function toggleSpeechRate() {
@@ -15526,59 +15532,64 @@
     }
 
     function handleStudentLogin() {
-      const nameInput = document.getElementById('portalInputName');
-      const pinInput = document.getElementById('portalInputPin');
-      const rawName = (nameInput ? nameInput.value : '').trim();
-      const pin = (pinInput ? pinInput.value : '').trim();
-      const name = rawName || 'Nesya Rahma';
+      try {
+        const nameInput = document.getElementById('portalInputName');
+        const pinInput = document.getElementById('portalInputPin');
+        const rawName = (nameInput ? nameInput.value : '').trim();
+        const pin = (pinInput ? pinInput.value : '').trim();
+        const name = rawName || 'Nesya Rahma';
 
-      const accounts = getSavedAccounts();
-      const key = name.toLowerCase();
+        const accounts = getSavedAccounts();
+        const key = name.toLowerCase();
 
-      if (accounts[key]) {
-        const acc = accounts[key];
-        // Always allow login: if user enters a PIN, update it to the entered PIN so user is NEVER locked out!
-        if (pin) {
-          acc.pin = pin;
+        if (accounts[key]) {
+          const acc = accounts[key];
+          // Always allow login: if user enters a PIN, update it to the entered PIN so user is NEVER locked out!
+          if (pin) {
+            acc.pin = pin;
+          }
+          appState.userName = acc.name || name;
+          appState.userAvatar = acc.avatar || selectedStudentAvatar || '🍃';
+          if (acc.speakerGender) appState.speakerGender = acc.speakerGender;
+          if (acc.thaiFontStyle) appState.thaiFontStyle = acc.thaiFontStyle;
+          if (acc.thaiScriptMode) appState.thaiScriptMode = acc.thaiScriptMode;
+          if (Array.isArray(acc.completedJazmiVideos)) appState.completedJazmiVideos = acc.completedJazmiVideos;
+          if (typeof acc.xp === 'number') appState.xp = acc.xp;
+          if (typeof acc.streak === 'number') appState.streak = acc.streak;
+          if (Array.isArray(acc.completedLessons)) appState.completedLessons = acc.completedLessons;
+          if (Array.isArray(acc.unlockedLessons)) appState.unlockedLessons = acc.unlockedLessons;
+          accounts[key] = acc;
+          saveAccounts(accounts);
+        } else {
+          appState.userName = name;
+          appState.userAvatar = selectedStudentAvatar || '🍃';
+          accounts[key] = {
+            name: name,
+            pin: pin,
+            avatar: selectedStudentAvatar || '🍃',
+            speakerGender: appState.speakerGender || 'female',
+            thaiFontStyle: appState.thaiFontStyle || 'looped',
+            thaiScriptMode: appState.thaiScriptMode || 'full',
+            completedJazmiVideos: appState.completedJazmiVideos || [],
+            xp: appState.xp || 65,
+            streak: appState.streak || 1,
+            completedLessons: appState.completedLessons || ['u1_l1'],
+            unlockedLessons: appState.unlockedLessons || ['u1_l1', 'u1_l2'],
+            createdAt: new Date().toISOString()
+          };
+          saveAccounts(accounts);
         }
-        appState.userName = acc.name || name;
-        appState.userAvatar = acc.avatar || selectedStudentAvatar || '🍃';
-        if (acc.speakerGender) appState.speakerGender = acc.speakerGender;
-        if (acc.thaiFontStyle) appState.thaiFontStyle = acc.thaiFontStyle;
-        if (acc.thaiScriptMode) appState.thaiScriptMode = acc.thaiScriptMode;
-        if (Array.isArray(acc.completedJazmiVideos)) appState.completedJazmiVideos = acc.completedJazmiVideos;
-        if (typeof acc.xp === 'number') appState.xp = acc.xp;
-        if (typeof acc.streak === 'number') appState.streak = acc.streak;
-        if (Array.isArray(acc.completedLessons)) appState.completedLessons = acc.completedLessons;
-        if (Array.isArray(acc.unlockedLessons)) appState.unlockedLessons = acc.unlockedLessons;
-        accounts[key] = acc;
-        saveAccounts(accounts);
-      } else {
-        appState.userName = name;
-        appState.userAvatar = selectedStudentAvatar || '🍃';
-        accounts[key] = {
-          name: name,
-          pin: pin,
-          avatar: selectedStudentAvatar || '🍃',
-          speakerGender: appState.speakerGender || 'female',
-          thaiFontStyle: appState.thaiFontStyle || 'looped',
-          thaiScriptMode: appState.thaiScriptMode || 'full',
-          completedJazmiVideos: appState.completedJazmiVideos || [],
-          xp: appState.xp || 65,
-          streak: appState.streak || 1,
-          completedLessons: appState.completedLessons || ['u1_l1'],
-          unlockedLessons: appState.unlockedLessons || ['u1_l1', 'u1_l2'],
-          createdAt: new Date().toISOString()
-        };
-        saveAccounts(accounts);
-      }
 
-      appState.isLoggedIn = true;
-      saveState();
-      syncUserProfileUI();
-      playSynthSound('success');
-      showToast(`Selamat datang, ${appState.userName}! Selamat belajar 🇹🇭`);
-      enterLearningApp('alphabet');
+        appState.isLoggedIn = true;
+        saveState();
+        syncUserProfileUI();
+        try { playSynthSound('success'); } catch(e) {}
+        showToast(`Selamat datang, ${appState.userName}! Selamat belajar 🇹🇭`);
+        enterLearningApp('alphabet');
+      } catch (err) {
+        console.error('Error during handleStudentLogin, forcing app entry:', err);
+        enterLearningApp('alphabet');
+      }
     }
 
     function handleGuestLogin() {
@@ -15687,9 +15698,10 @@
     }
 
     function openLearningPortal() {
-      playSynthSound('click');
+      try { playSynthSound('click'); } catch(e) {}
       const portal = document.getElementById('learningPortal');
       if (portal) {
+        portal.style.display = 'flex';
         portal.classList.remove('portal-hidden');
         portal.classList.add('portal-visible');
         document.body.classList.add('in-portal-mode');
@@ -15760,6 +15772,7 @@
         if (portal) {
           portal.classList.remove('portal-visible');
           portal.classList.add('portal-hidden');
+          portal.style.display = 'none';
         }
         document.body.classList.remove('in-portal-mode');
         switchNavTab('alphabet');
@@ -15767,6 +15780,7 @@
         // Not logged in: show welcoming portal
         document.body.classList.add('in-portal-mode');
         if (portal) {
+          portal.style.display = 'flex';
           portal.classList.remove('portal-hidden');
           portal.classList.add('portal-visible');
         }
@@ -15815,10 +15829,17 @@
     }
 
     function showToast(msg) {
-      const toast = document.getElementById('stimulerToast');
-      document.getElementById('toastMsg').textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2800);
+      try {
+        const toast = document.getElementById('stimulerToast');
+        const msgElem = document.getElementById('toastMsg');
+        if (msgElem) msgElem.textContent = msg;
+        if (toast) {
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2800);
+        }
+      } catch (e) {
+        console.warn('Toast display warning:', e);
+      }
     }
 
     function applyColorTheme(theme) {
