@@ -5424,8 +5424,8 @@
       overflow: hidden;
       animation: flyoutSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 100000;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
     }
 
     @keyframes flyoutSlideUp {
@@ -5934,18 +5934,29 @@
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        width: 280px !important;
-        max-width: 82vw !important;
-        height: 100vh !important;
+        bottom: 0 !important;
+        width: 290px !important;
+        max-width: 85vw !important;
+        height: 100% !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
         z-index: 100000 !important;
         background: #fdfbf7 !important;
         transform: translateX(-100%) !important;
         transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
         box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18) !important;
-        padding: 0 0 50px 0 !important;
-        overflow-y: auto !important;
+        padding: 0 0 140px 0 !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior-y: contain !important;
+        touch-action: pan-y !important;
         display: flex !important;
+        flex-direction: column !important;
         border-right: 1.5px solid var(--border-bright) !important;
+      }
+      .stimuler-nav-rail > * {
+        flex-shrink: 0 !important;
       }
       .stimuler-nav-rail.mobile-open {
         transform: translateX(0) !important;
@@ -6053,7 +6064,7 @@
       <!-- Portal Title (Learn Thai with @purelynes -> Direct Instagram Link) -->
       <h1 class="portal-title">
         <a href="https://www.instagram.com/purelynes/" target="_blank" rel="noopener noreferrer" style="color:var(--text); text-decoration:none; display:inline-block; transition:transform 0.18s ease;" title="Kunjungi Akun Instagram @purelynes">
-          <span>Learn Thai with </span><span class="purelynes-handle" style="background: linear-gradient(135deg, #833ab4 0%, #e1306c 45%, #fd1d1d 75%, #f77737 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: #e1306c; font-weight: 800;">@purelynes</span>
+          <span>Learn Thai with </span><span class="purelynes-handle" style="color: var(--primary, #2d6a4f); font-weight: 800; transition: color 0.18s ease;">@purelynes</span>
         </a>
       </h1>
       <div class="portal-thai-subtitle">สวนภาษาไทยของมะลิ • ยินดีต้อนรับสู่การเรียนรู้</div>
@@ -7732,14 +7743,52 @@
               </div>
 
               <div class="filter-pills" id="aiHubModePills">
-                <button class="pill-filter active" onclick="switchAiHubMode('translate', this)">🌐 Penerjemah Pintar</button>
-                <button class="pill-filter" onclick="switchAiHubMode('search', this)">🔍 Ensiklopedia & Wisata</button>
+                <button class="pill-filter active" onclick="switchAiHubMode('media', this)">🎵🎬 Cari Lagu & Tontonan</button>
                 <button class="pill-filter" onclick="switchAiHubMode('chat', this)">💬 Tanya Seputar Thailand</button>
+                <button class="pill-filter" onclick="switchAiHubMode('translate', this)">🌐 Penerjemah Pintar</button>
+                <button class="pill-filter" onclick="switchAiHubMode('search', this)">🔍 Ensiklopedia & Wisata</button>
+              </div>
+            </div>
+
+            <!-- SUB-VIEW 0: CARI LAGU & TONTONAN EDUKATIF THAILAND -->
+            <div id="aiTool-media" class="ai-tool-view active">
+              <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-xl); padding:20px; margin-bottom:20px; box-shadow:var(--shadow-sm);">
+                <div style="margin-bottom:14px;">
+                  <h3 style="margin:0 0 6px 0; font-size:18px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:22px;">🎵🎬</span> Cari Lagu Thailand & Tontonan Edukatif
+                  </h3>
+                  <p style="margin:0; font-size:13.5px; color:var(--text-muted); line-height:1.45;">
+                    Temukan lagu hits Thailand terpopuler serta video edukasi pilihan (kartun anak dengan kosakata pemula yang pelan & jelas, vlog kuliner & budaya, serial drama, dan kanal belajar) dengan <strong>link akses langsung ke YouTube & Spotify</strong>!
+                  </p>
+                </div>
+
+                <!-- Media Search Bar -->
+                <div style="display:flex; gap:10px; margin-bottom:14px;">
+                  <input type="text" id="aiMediaSearchInput" class="encyclo-input" placeholder="🔍 Cari lagu (Three Man Down, Tilly Birds...), kartun pemula (Peppa Pig, Chuggington), kanal belajar YouTube, OST drama..." onkeyup="if(event.key==='Enter') executeAiMediaSearch()">
+                  <button type="button" class="btn-stimuler-primary" onclick="executeAiMediaSearch()" style="white-space:nowrap; padding:0 22px;">
+                    Cari
+                  </button>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="filter-pills" id="aiMediaCategoryPills">
+                  <button type="button" class="pill-filter active" onclick="filterAiMediaCategory('all', this)">Semua (25+)</button>
+                  <button type="button" class="pill-filter" onclick="filterAiMediaCategory('song', this)">🎵 Lagu Pop & Hits</button>
+                  <button type="button" class="pill-filter" onclick="filterAiMediaCategory('cartoon', this)">📺 Kartun & Animasi (Pemula)</button>
+                  <button type="button" class="pill-filter" onclick="filterAiMediaCategory('learning', this)">📚 Kanal Belajar YouTube</button>
+                  <button type="button" class="pill-filter" onclick="filterAiMediaCategory('doc', this)">🍛 Dokumenter & Wisata</button>
+                  <button type="button" class="pill-filter" onclick="filterAiMediaCategory('drama', this)">🎬 Serial Drama & OST</button>
+                </div>
+              </div>
+
+              <!-- Media Cards Grid -->
+              <div id="aiMediaCardsGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap:16px;">
+                <!-- Dynamically rendered via JS -->
               </div>
             </div>
 
             <!-- SUB-VIEW 1: TRANSLATOR -->
-            <div id="aiTool-translate" class="ai-tool-view active">
+            <div id="aiTool-translate" class="ai-tool-view">
               <div class="translator-card">
                 <div class="trans-header-bar">
                   <div class="trans-lang-select">
@@ -7882,6 +7931,12 @@
                   </button>
                   <button class="speech-chip" onclick="sendQuickQaPrompt('Cara memberi salam Wai yang benar dan artinya?')">
                     🙏 Makna Salam Wai
+                  </button>
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Rekomendasi lagu hits Thailand yang enak untuk belajar')">
+                    🎵 Lagu Hits Populer
+                  </button>
+                  <button class="speech-chip" onclick="sendQuickQaPrompt('Rekomendasi kartun dan video edukatif bahasa Thailand untuk pemula')">
+                    📺 Tontonan Edukatif Pemula
                   </button>
                   <button class="speech-chip" onclick="sendQuickQaPrompt('Berapa estimasi biaya makan street food sehari di Thailand?')">
                     🍜 Biaya Kuliner Sehari
@@ -15654,6 +15709,7 @@
     /* 8. NAVIGATION, THEME & UI HELPERS */
     function switchNavTab(tabKey) {
       playSynthSound('click');
+      toggleMobileDrawer(false);
       const portal = document.getElementById('learningPortal');
       if (portal && portal.classList.contains('portal-visible')) {
         portal.classList.remove('portal-visible');
@@ -15666,6 +15722,7 @@
       document.querySelectorAll('.section-tab-panel').forEach(panel => {
         panel.classList.toggle('active', panel.id === `panel-${tabKey}`);
       });
+      if (tabKey === 'ai-hub') { setTimeout(() => renderAiMediaCards(THAI_MEDIA_DATABASE), 60); }
       if (tabKey === 'writing') {
         setTimeout(initWritingCanvas, 60);
       } else if (tabKey === 'flashcards') {
@@ -16313,6 +16370,7 @@
 
       if (cat === 'all') {
         renderEncyclopediaCards(THAILAND_ENCYCLOPEDIA);
+    renderAiMediaCards(THAI_MEDIA_DATABASE);
       } else {
         const filtered = THAILAND_ENCYCLOPEDIA.filter(item => item.category === cat);
         renderEncyclopediaCards(filtered);
@@ -16613,32 +16671,39 @@
       if (input && typeof overrideText !== 'string') input.value = '';
       renderQaChatMessages();
 
-      // Check if query is about songs / music
+      // Check if query is about songs / music / educational shows / cartoons / YouTube
       const lowerText = text.toLowerCase();
-      const songKeywords = ['lagu', 'musik', 'music', 'song', 'playlist', 'nyanyi', 'three man down', 'tilly birds', 'scrubb', 'nont tanont', 'palmy', 'jeff satur', 'bowkylion', 'ink waruntorn', 'getsunova', 'bodyslam', 'milli', 'ost', 'soundtrack', 'phum viphurit', 'pop pongkool', 'bird thongchai'];
-      const isSongQuery = songKeywords.some(kw => lowerText.includes(kw));
+      const mediaKeywords = ['lagu', 'musik', 'music', 'song', 'playlist', 'nyanyi', 'tontonan', 'nonton', 'kartun', 'animasi', 'film', 'serial', 'drama', 'youtube', 'kanal', 'video', 'edukasi', 'edukatif', 'peppa', 'chuggington', 'mod', 'thaipod', 'three man down', 'tilly birds', 'scrubb', 'nont tanont', 'ost', 'soundtrack'];
+      const isMediaHit = mediaKeywords.some(kw => lowerText.includes(kw));
 
-      if (isSongQuery && typeof THAI_SONGS_DATABASE !== 'undefined') {
-        let matches = THAI_SONGS_DATABASE.filter(s => 
-          s.titleRoman.toLowerCase().includes(lowerText) ||
-          s.titleThai.toLowerCase().includes(lowerText) ||
-          s.artist.toLowerCase().includes(lowerText) ||
-          s.vibe.toLowerCase().includes(lowerText) ||
-          s.category.toLowerCase().includes(lowerText) ||
-          lowerText.includes(s.artist.toLowerCase()) ||
-          lowerText.includes(s.titleRoman.toLowerCase())
+      if (isMediaHit && typeof THAI_MEDIA_DATABASE !== 'undefined') {
+        let matches = THAI_MEDIA_DATABASE.filter(m => 
+          m.titleRoman.toLowerCase().includes(lowerText) ||
+          m.titleThai.toLowerCase().includes(lowerText) ||
+          (m.titleMeaning && m.titleMeaning.toLowerCase().includes(lowerText)) ||
+          (m.artist && m.artist.toLowerCase().includes(lowerText)) ||
+          (m.description && m.description.toLowerCase().includes(lowerText)) ||
+          m.category.toLowerCase().includes(lowerText) ||
+          lowerText.includes(m.category) ||
+          lowerText.includes(m.titleRoman.toLowerCase())
         );
+
         if (!matches.length) {
-          matches = THAI_SONGS_DATABASE.slice(0, 3);
+          if (lowerText.includes('kartun') || lowerText.includes('animasi') || lowerText.includes('tontonan')) {
+            matches = THAI_MEDIA_DATABASE.filter(m => m.category === 'cartoon' || m.category === 'learning').slice(0, 4);
+          } else {
+            matches = THAI_MEDIA_DATABASE.slice(0, 4);
+          }
         } else {
           matches = matches.slice(0, 4);
         }
+
         setTimeout(() => {
           qaChatHistory.push({
             sender: 'bot',
-            text: `Berikut adalah rekomendasi lagu Thailand pilihan terbaik beserta link akses langsung untuk Anda dengarkan sekarang: 🎵👇`,
+            text: `Sawatdee kha! 🪷 Berikut adalah rekomendasi lagu & tontonan edukatif Thailand terbaik pilihan Nong Mali lengkap dengan link akses langsung ke YouTube & Spotify: 👇`,
             songCards: matches,
-            thaiAudioText: matches[0] ? matches[0].titleThai : 'เพลงไทย'
+            thaiAudioText: matches[0] ? matches[0].titleThai : 'สื่อการเรียนรู้ภาษาไทย'
           });
           renderQaChatMessages();
           playSynthSound('success');
@@ -19123,6 +19188,397 @@
     /* ==========================================================================
        FITUR: DATABASE LAGU THAILAND POPULER & SEARCH ENGINE
        ========================================================================== */
+    
+    /* ==========================================================================
+       DATABASE & FITUR: PENCARIAN LAGU & TONTONAN EDUKATIF THAILAND
+       ========================================================================== */
+    const THAI_MEDIA_DATABASE = [
+      // 1. LAGU POP & HITS THAILAND
+      {
+        id: 'media-s1',
+        category: 'song',
+        level: 'Pop Hits / Melankolis',
+        titleThai: 'ฝนตกไหม',
+        titleRoman: 'Fon Tok Mai',
+        titleMeaning: 'Apakah Hujan Turun di Sana?',
+        artist: 'Three Man Down',
+        description: 'Lagu viral Thailand paling ikonik. Kosakata: ฝน (hujan), ตก (turun), คิดถึง (rindu), ฟ้า (langit). Lirik: "ฝนตกอีกแล้ว เหม่อมองฟ้า คิดถึงเธอ..."',
+        youtubeUrl: 'https://www.youtube.com/watch?v=F_fDcf6J5e0',
+        spotifyUrl: 'https://open.spotify.com/search/Three%20Man%20Down%20Fon%20Tok%20Mai',
+        audioText: 'ฝนตกไหม'
+      },
+      {
+        id: 'media-s2',
+        category: 'song',
+        level: 'Pop Hits Viral',
+        titleThai: 'คิดแต่ไม่ถึง',
+        titleRoman: 'Khit Tae Mai Thueng',
+        titleMeaning: 'Memikirkanmu Tapi Tak Pernah Sampai',
+        artist: 'Tilly Birds',
+        description: 'Lagu pop indie dengan pengucapan kata "คิด" (berpikir/merasa) yang berulang-ulang, sangat bagus untuk melatih artikulasi nada Tinggi.',
+        youtubeUrl: 'https://www.youtube.com/watch?v=sU1H4kC03sE',
+        spotifyUrl: 'https://open.spotify.com/search/Tilly%20Birds%20Khit%20Tae%20Mai%20Thueng',
+        audioText: 'คิดแต่ไม่ถึง'
+      },
+      {
+        id: 'media-s3',
+        category: 'song',
+        level: 'Balada Romantis Mengharukan',
+        titleThai: 'โต๊ะริม',
+        titleRoman: 'Tok Rim (Melt)',
+        titleMeaning: 'Meja di Sudut',
+        artist: 'NONT TANONT',
+        description: 'Hits romantis lembut dengan tempo vokal santai. Kosakata tatapan mata (สายตา), senyuman (รอยยิ้ม), dan lumer/meleleh (ละลาย).',
+        youtubeUrl: 'https://www.youtube.com/watch?v=b4N34xH2t9U',
+        spotifyUrl: 'https://open.spotify.com/search/NONT%20TANONT%20Tok%20Rim',
+        audioText: 'โต๊ะริม'
+      },
+      {
+        id: 'media-s4',
+        category: 'song',
+        level: 'OST Drama Romantis',
+        titleThai: 'พิง',
+        titleRoman: 'Phing (Lean On)',
+        titleMeaning: 'Bersandar',
+        artist: 'NONT TANONT (OST Krachao Seeda)',
+        description: 'Balada emosional dengan tempo lambat, memudahkan pendengar menangkap akhir nada dan konsonan mati Thailand.',
+        youtubeUrl: 'https://www.youtube.com/watch?v=b0wX3Z6B7qM',
+        spotifyUrl: 'https://open.spotify.com/search/NONT%20TANONT%20Phing',
+        audioText: 'พิง'
+      },
+      {
+        id: 'media-s5',
+        category: 'song',
+        level: 'Indie Pop / Soundtrack Serial',
+        titleThai: 'คู่กัน',
+        titleRoman: 'Khuu Kan (Together)',
+        titleMeaning: 'Ditakdirkan Bersama',
+        artist: 'Scrubb (OST 2gether The Series)',
+        description: 'Lagu soundtrack serial paling terkenal di Asia Tenggara. Melodi gitar akustik ceria dengan kosakata percakapan kasual sehari-hari.',
+        youtubeUrl: 'https://www.youtube.com/watch?v=gT8oB9i8aZg',
+        spotifyUrl: 'https://open.spotify.com/search/Scrubb%20Khuu%20Kan',
+        audioText: 'คู่กัน'
+      },
+      {
+        id: 'media-s6',
+        category: 'song',
+        level: 'Synth-Pop Lembut',
+        titleThai: 'สายตาหลอกกันไม่ได้',
+        titleRoman: 'Saai-taa Lork Kan Mai Dai',
+        titleMeaning: 'Sorot Mata Tak Bisa Berbohong',
+        artist: 'Ink Waruntorn',
+        description: 'Penyanyi wanita Thailand berkarakter vokal jernih dan manis. Sangat ideal untuk melatih pendengaran intonasi wanita Bangkok.',
+        youtubeUrl: 'https://www.youtube.com/watch?v=bB20U5m6DCE',
+        spotifyUrl: 'https://open.spotify.com/search/Ink%20Waruntorn%20Eyes%20Dont%20Lie',
+        audioText: 'สายตาหลอกกันไม่ได้'
+      },
+      {
+        id: 'media-s7',
+        category: 'song',
+        level: 'City Pop / Nada Santai',
+        titleThai: 'รู้งี้เป็นแฟนกันตั้งนานแล้ว',
+        titleRoman: 'Ruu Ngi Pen Faen Kan Tang Naan Laew (Safe Zone)',
+        titleMeaning: 'Tahu Gini Sudah Jadi Pacar Sejak Dulu',
+        artist: 'Billkin & PP Krit',
+        description: 'Duet hits paling populer dengan irama groovy. Penuh frasa percakapan modern anak muda Bangkok (รู้งี้, ตั้งนานแล้ว, แฟน).',
+        youtubeUrl: 'https://www.youtube.com/watch?v=UqQc9h5R4_Y',
+        spotifyUrl: 'https://open.spotify.com/search/Billkin%20PP%20Krit%20Safe%20Zone',
+        audioText: 'รู้งี้เป็นแฟนกันตั้งนานแล้ว'
+      },
+      {
+        id: 'media-s8',
+        category: 'song',
+        level: 'Pop Rock Klasik',
+        titleThai: 'ไกลแค่ไหนคือใกล้',
+        titleRoman: 'Klai Khae Nai Khue Klai',
+        titleMeaning: 'Seberapa Jauh Kah Dekat Itu?',
+        artist: 'Getsunova',
+        description: 'Lagu legendaris yang membedakan bunyi konsonan vokal ไกล (klai = jauh) dan ใกล้ (klai tone jatuh = dekat). Latihan nada paling ampuh!',
+        youtubeUrl: 'https://www.youtube.com/watch?v=mO_FpXyQ0v0',
+        spotifyUrl: 'https://open.spotify.com/search/Getsunova%20Klai%20Khae%20Nai',
+        audioText: 'ไกลแค่ไหนคือใกล้'
+      },
+
+      // 2. KARTUN & ANIMASI EDUKATIF (PEMULA: BICARA PELAN & JELAS)
+      {
+        id: 'media-c1',
+        category: 'cartoon',
+        level: 'Level 1: Pemula (A1)',
+        titleThai: 'เปปป้าพิก (Peppa Pig Thailand Dub)',
+        titleRoman: 'Peppa Pig Phaak Phasa Thai',
+        titleMeaning: 'Peppa Pig Sulih Suara Bahasa Thailand',
+        artist: 'Official Peppa Pig Thai',
+        description: 'Tontonan nomor 1 yang paling direkomendasikan guru bahasa Thai untuk pemula! Kalimat pendek, repetitif, intonasi sopan, dan topik keluarga sehari-hari.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=peppa+pig+thai+dub+official',
+        spotifyUrl: '',
+        audioText: 'เปปป้าพิก ภาษาไทย'
+      },
+      {
+        id: 'media-c2',
+        category: 'cartoon',
+        level: 'Level 1: Pemula (A1)',
+        titleThai: 'ชักกิงตัน เมืองรถไฟมหาสนุก',
+        titleRoman: 'Chuggington Mueang Rot Fai Maha Sanuk',
+        titleMeaning: 'Chuggington Petualangan Kereta Api',
+        artist: 'Thai Animation Dub',
+        description: 'Animasi edukasi dengan pengucapan nama warna, angka, arah jalan (kiri, kanan, lurus), dan kata kerja dasar dalam bahasa Thai baku.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=chuggington+thai+dub',
+        spotifyUrl: '',
+        audioText: 'ชักกิงตัน เมืองรถไฟ'
+      },
+      {
+        id: 'media-c3',
+        category: 'cartoon',
+        level: 'Level 2: Menengah (A2)',
+        titleThai: 'พระมหาชนก แอนิเมชัน',
+        titleRoman: 'Phra Mahajanaka Animation',
+        titleMeaning: 'Kisah Sang Mahajanaka (Animasi Nasional)',
+        artist: 'SIPA Thailand Official',
+        description: 'Animasi layar lebar karya agung Kerajaan Thailand tentang ketabahan menyeberangi lautan samudra. Mengasah kosakata budaya dan sastra mulia.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=mahajanaka+animation+thai',
+        spotifyUrl: '',
+        audioText: 'พระมหาชนก แอนิเมชัน'
+      },
+      {
+        id: 'media-c4',
+        category: 'cartoon',
+        level: 'Level 1-2: Cerita Anak Bergambar',
+        titleThai: 'นิทานอีสปและนิทานพื้นบ้านไทย',
+        titleRoman: 'Nithan Aesop & Nithan Phuen-ban Thai',
+        titleMeaning: 'Dongeng Fabel Aesop Bahasa Thailand Bergambar',
+        artist: 'KidsDee Storytelling Channel',
+        description: 'Kumpulan dongeng bergambar dengan teks bahasa Thai berjalan (subtitle asli) dan narasi suara dongeng yang ramah anak dan mudah ditiru.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=thai+aesop+fables+kidsdee',
+        spotifyUrl: '',
+        audioText: 'นิทานอีสป ภาษาไทย'
+      },
+
+      // 3. KANAL BELAJAR BAHASA THAILAND DI YOUTUBE
+      {
+        id: 'media-l1',
+        category: 'learning',
+        level: 'Semua Level (A1 - B2)',
+        titleThai: 'เรียนภาษาไทยกับครูมด',
+        titleRoman: 'Learn Thai with Mod',
+        titleMeaning: 'Belajar Bahasa Thailand Bersama Guru Mod',
+        artist: 'Kru Mod & Pear (Bangkok)',
+        description: 'Kanal edukasi YouTube terfavorit dunia! Mengupas tuntas etika bahasa gaul, perbedaan pria vs wanita, cara pesan makanan di Bangkok, dan nada fonetik.',
+        youtubeUrl: 'https://www.youtube.com/@ThaiwithMod',
+        spotifyUrl: '',
+        audioText: 'เรียนภาษาไทยกับครูมด'
+      },
+      {
+        id: 'media-l2',
+        category: 'learning',
+        level: 'Struktur Pelajaran Terpandu',
+        titleThai: 'ไทยพ็อด 101 (ThaiPod101)',
+        titleRoman: 'ThaiPod101 Video Lessons',
+        titleMeaning: 'Pelajaran Video Praktis Situasi Harian',
+        artist: 'Innovative Language Thai',
+        description: 'Ratusan video simulasi percakapan nyata: di bandara Suvarnabhumi, naik taksi Bangkok, menawar di pasar Chatuchak, dan etika kuil.',
+        youtubeUrl: 'https://www.youtube.com/@ThaiPod101',
+        spotifyUrl: '',
+        audioText: 'ไทยพ็อด หนึ่งศูนย์หนึ่ง'
+      },
+      {
+        id: 'media-l3',
+        category: 'learning',
+        level: 'Fokus Baca & Nada',
+        titleThai: 'กล้วยไทย (BananaThai)',
+        titleRoman: 'BananaThai by Kru Smuk',
+        titleMeaning: 'Belajar Baca Aksara & Nada Mudah',
+        artist: 'Teacher Smuk',
+        description: 'Kanal spesialis trik cepat membaca tulisan Thai modern tanpa loop, membedakan 5 nada intonasi, dan rahasia lancar berbicara.',
+        youtubeUrl: 'https://www.youtube.com/@BananaThai',
+        spotifyUrl: '',
+        audioText: 'กล้วยไทย ภาษาไทย'
+      },
+      {
+        id: 'media-l4',
+        category: 'learning',
+        level: 'Latihan Listening Natural',
+        titleThai: 'ครูวี สอนภาษาไทย',
+        titleRoman: 'Kru Wee Teach Thai',
+        titleMeaning: 'Latihan Menyimak Percakapan Asli',
+        artist: 'Kru Wee Official',
+        description: 'Tips menyimak percakapan cepat penutur asli, intonasi partikel kasual (นะ, คะ, ครับ, หรอ), dan frasa percakapan kantor / kuliah.',
+        youtubeUrl: 'https://www.youtube.com/@KruWeeTeachThai',
+        spotifyUrl: '',
+        audioText: 'ครูวี สอนภาษาไทย'
+      },
+
+      // 4. DOKUMENTER BUDAYA, WISATA & KULINER
+      {
+        id: 'media-d1',
+        category: 'doc',
+        level: 'Bahasa Baku Jernih (B1)',
+        titleThai: 'ไทยพีบีเอส: สารคดีวัฒนธรรมไทย',
+        titleRoman: 'Thai PBS Culture & Life Documentary',
+        titleMeaning: 'Dokumenter Resmi Budaya & Kehidupan Thailand',
+        artist: 'Thai PBS Public Television',
+        description: 'Standar bahasa Thailand Central Bangkok paling resmi, anggun, dan artikulasi sempurna. Belajar sejarah kerajaan, kuil Wat Pho, dan tradisi lokal.',
+        youtubeUrl: 'https://www.youtube.com/@ThaiPBS',
+        spotifyUrl: '',
+        audioText: 'สารคดีไทยพีบีเอส'
+      },
+      {
+        id: 'media-d2',
+        category: 'doc',
+        level: 'Kosakata Kuliner & Pasar',
+        titleThai: 'มาร์ก วีนส์ ตะลุยอาหารริมทางกรุงเทพฯ',
+        titleRoman: 'Mark Wiens: Bangkok Street Food',
+        titleMeaning: 'Jelajah Kuliner & Kosakata Makanan Bangkok',
+        artist: 'Mark Wiens Travel',
+        description: 'Video petualangan kuliner dengan interaksi langsung bersama koki lokal. Kosakata pedas (เผ็ด), bumbu daun kemangi (กะเพรา), dan kuah tom yum.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=mark+wiens+bangkok+thai+food',
+        spotifyUrl: '',
+        audioText: 'อาหารริมทางกรุงเทพฯ'
+      },
+
+      // 5. SERIAL DRAMA SITUASIONAL (PERCAKAPAN ALAMI)
+      {
+        id: 'media-dr1',
+        category: 'drama',
+        level: 'Sinematik & Emosional',
+        titleThai: 'แปลรักฉันด้วยใจเธอ',
+        titleRoman: 'I Told Sunset About You',
+        titleMeaning: 'Terjemahkan Cintaku dengan Hatimu',
+        artist: 'Nadao Bangkok',
+        description: 'Serial drama sinematik tentang 2 sahabat di Phuket yang saling membantu belajar ujian masuk universitas. Dialog emosional yang menyentuh.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=i+told+sunset+about+you+official',
+        spotifyUrl: 'https://open.spotify.com/search/I%20Told%20Sunset%20About%20You%20OST',
+        audioText: 'แปลรักฉันด้วยใจเธอ'
+      },
+      {
+        id: 'media-dr2',
+        category: 'drama',
+        level: 'Bahasa Gaul Kampus & Santai',
+        titleThai: 'แค่เพื่อนครับเพื่อน (Bad Buddy)',
+        titleRoman: 'Bad Buddy The Series',
+        titleMeaning: 'Hanya Teman Biasa Kok',
+        artist: 'GMMTV Official',
+        description: 'Serial drama komedi situasi remaja kampus. Sangat kaya akan partikel akhir santai (วะ, โว้ย, ปะ, นะ), intonasi humor, dan dialek Bangkok modern.',
+        youtubeUrl: 'https://www.youtube.com/results?search_query=bad+buddy+series+gmmtv',
+        spotifyUrl: 'https://open.spotify.com/search/Bad%20Buddy%20OST',
+        audioText: 'แค่เพื่อนครับเพื่อน'
+      }
+    ];
+
+    let currentMediaCategory = 'all';
+
+    function getMediaCategoryBadge(cat) {
+      switch(cat) {
+        case 'song': return '🎵 Lagu Hits';
+        case 'cartoon': return '📺 Kartun Edukatif';
+        case 'learning': return '📚 Kanal Belajar';
+        case 'doc': return '🍛 Dokumenter';
+        case 'drama': return '🎬 Serial Drama';
+        default: return '✨ Media Edukasi';
+      }
+    }
+
+    function renderAiMediaCards(list) {
+      const container = document.getElementById('aiMediaCardsGrid');
+      if (!container) return;
+
+      if (!list || !list.length) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding:40px 20px; background:var(--bg-card); border:1px dashed var(--border); border-radius:var(--radius-xl);">
+            <div style="font-size:36px; margin-bottom:8px;">🔍</div>
+            <h4 style="margin:0 0 6px 0; font-size:16px;">Tidak ada tontonan atau lagu yang cocok</h4>
+            <p style="margin:0; font-size:13px; color:var(--text-muted);">Coba cari dengan kata kunci lain (contoh: "Three Man Down", "kartun", "belajar", "Peppa").</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(m => `
+        <div class="song-result-card" style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px; display:flex; flex-direction:column; justify-content:space-between; gap:12px; transition:transform 0.18s, box-shadow 0.18s; box-shadow:0 4px 14px rgba(0,0,0,0.04);">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px;">
+              <span style="font-size:11px; font-weight:800; padding:3px 8px; border-radius:var(--radius-pill); background:rgba(45, 106, 79, 0.12); color:var(--primary); font-family:var(--font-mono);">
+                ${getMediaCategoryBadge(m.category)}
+              </span>
+              <span style="font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:var(--radius-pill); background:rgba(0,0,0,0.05); color:var(--text-dim);">
+                ${m.level || 'Umum'}
+              </span>
+            </div>
+            <div style="font-size:16px; font-weight:800; color:var(--text); font-family:var(--font-thai); line-height:1.25; margin-bottom:3px;">
+              ${m.titleThai}
+            </div>
+            <div style="font-size:13px; font-weight:700; color:var(--primary); margin-bottom:4px;">
+              ${m.titleRoman} ${m.titleMeaning ? '• ' + m.titleMeaning : ''}
+            </div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+              👤 <strong>${m.artist || m.channel || 'Official'}</strong>
+            </div>
+            <p style="font-size:12.5px; color:var(--text); line-height:1.45; margin:0 0 10px 0; background:var(--bg-surface); padding:8px 10px; border-radius:var(--radius-sm); border-left:3px solid var(--primary);">
+              ${m.description}
+            </p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding-top:4px;">
+            <a href="${m.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="song-play-btn" style="background:#dc2626; color:#ffffff; font-weight:700; font-size:12px; padding:7px 12px; border-radius:var(--radius-pill); text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(220,38,38,0.25);" title="Tonton di YouTube">
+              ▶️ Buka di YouTube ↗
+            </a>
+            ${m.spotifyUrl ? `
+              <a href="${m.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="song-spotify-btn" style="background:#10b981; color:#ffffff; font-weight:700; font-size:12px; padding:7px 12px; border-radius:var(--radius-pill); text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(16,185,129,0.25);" title="Dengar di Spotify">
+                🎧 Spotify ↗
+              </a>
+            ` : ''}
+            <button type="button" class="song-listen-tts-btn" onclick="speakThai('${m.audioText || m.titleThai}')" style="background:var(--bg-card); border:1px solid var(--border); color:var(--text); font-size:11.5px; font-weight:600; padding:6px 10px; border-radius:var(--radius-pill); cursor:pointer;" title="Dengar Pengucapan Suara Asli Bangkok">
+              🔊 Dengar Suara
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterAiMediaCategory(category, btn) {
+      currentMediaCategory = category;
+      document.querySelectorAll('#aiMediaCategoryPills .pill-filter').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      playSynthSound('click');
+
+      const input = document.getElementById('aiMediaSearchInput');
+      const query = input ? input.value.trim().toLowerCase() : '';
+
+      let filtered = THAI_MEDIA_DATABASE;
+      if (category !== 'all') {
+        filtered = filtered.filter(m => m.category === category);
+      }
+      if (query) {
+        filtered = filtered.filter(m => {
+          return m.titleThai.includes(query) ||
+                 m.titleRoman.toLowerCase().includes(query) ||
+                 (m.titleMeaning && m.titleMeaning.toLowerCase().includes(query)) ||
+                 (m.artist && m.artist.toLowerCase().includes(query)) ||
+                 (m.description && m.description.toLowerCase().includes(query));
+        });
+      }
+      renderAiMediaCards(filtered);
+    }
+
+    function executeAiMediaSearch() {
+      const input = document.getElementById('aiMediaSearchInput');
+      const query = input ? input.value.trim().toLowerCase() : '';
+      playSynthSound('click');
+
+      let filtered = THAI_MEDIA_DATABASE;
+      if (currentMediaCategory !== 'all') {
+        filtered = filtered.filter(m => m.category === currentMediaCategory);
+      }
+      if (query) {
+        filtered = filtered.filter(m => {
+          return m.titleThai.includes(query) ||
+                 m.titleRoman.toLowerCase().includes(query) ||
+                 (m.titleMeaning && m.titleMeaning.toLowerCase().includes(query)) ||
+                 (m.artist && m.artist.toLowerCase().includes(query)) ||
+                 (m.description && m.description.toLowerCase().includes(query));
+        });
+      }
+      renderAiMediaCards(filtered);
+    }
+
     const THAI_SONGS_DATABASE = [
       {
         id: 'song-1',
@@ -19418,14 +19874,17 @@
         document.addEventListener('touchend', onTouchEnd);
       }, { passive: true });
 
-      // Click to toggle (if not dragged)
+      // Click to trigger Nong Mali (berfungsi persis seperti Nong Mali di sidebar menu)
       trigger.addEventListener('click', (e) => {
         if (floatHasMoved) {
           e.preventDefault();
           e.stopPropagation();
           return;
         }
-        toggleFloatingAiWindow();
+        // Berfungsi persis seperti Nong Mali di sidebar menu: buka AI Hub & bunyikan salam hangat
+        switchNavTab('ai-hub');
+        triggerCoachGreeting();
+        toggleMobileDrawer(false);
       });
 
       // Render default chat & songs
@@ -19817,7 +20276,12 @@
       const shouldOpen = typeof open === 'boolean' ? open : !drawer.classList.contains('mobile-open');
       drawer.classList.toggle('mobile-open', shouldOpen);
       if (backdrop) backdrop.style.display = shouldOpen ? 'block' : 'none';
-      if (shouldOpen) playSynthSound('click');
+      if (shouldOpen) {
+        document.body.style.overflow = 'hidden';
+        playSynthSound('click');
+      } else {
+        document.body.style.overflow = '';
+      }
     }
 
     function switchNavTabMobile(tabId, btn) {
