@@ -4839,7 +4839,287 @@
       color: var(--primary);
     }
 
+  
+    /* ==========================================================================
+       FITUR: KEDMANEE THAI VIRTUAL KEYBOARD & TYPING TUTOR
+       ========================================================================== */
+    .typing-arena {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+    }
+    .typing-prompt-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .typing-target-thai {
+      font-family: var(--font-thai-looped);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .typing-char-span {
+      padding: 0 2px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+    .typing-char-span.typed {
+      color: var(--emerald);
+    }
+    .typing-char-span.current {
+      background: var(--primary-light);
+      color: #34d399;
+      border-bottom: 3px solid var(--primary);
+      animation: pulseKey 0.8s infinite alternate;
+    }
+    @keyframes pulseKey {
+      from { box-shadow: 0 0 0 rgba(16,185,129,0.2); }
+      to { box-shadow: 0 0 12px rgba(16,185,129,0.6); }
+    }
+    .keyboard-container {
+      background: #090e0b;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .kb-row {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+    .kb-key {
+      flex: 1;
+      height: 48px;
+      max-width: 54px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.1s ease;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+    }
+    .kb-key:active, .kb-key.pressed {
+      transform: translateY(2px);
+      box-shadow: none;
+      background: var(--primary-light);
+    }
+    .kb-key .thai-top {
+      font-family: var(--font-thai-looped);
+      font-size: 13px;
+      font-weight: 700;
+      color: #fbbf24;
+      line-height: 1;
+    }
+    .kb-key .thai-bot {
+      font-family: var(--font-thai-looped);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .kb-key .latin-hint {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      font-size: 9px;
+      color: var(--text-dim);
+    }
+    .kb-key.active-target {
+      border: 2px solid var(--primary) !important;
+      background: rgba(16, 185, 129, 0.28) !important;
+      transform: scale(1.08);
+      z-index: 2;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.6) !important;
+    }
+    .kb-key.shift-key {
+      max-width: 80px;
+      flex: 1.6;
+    }
+    .kb-key.shift-key.active-shift {
+      background: #f59e0b !important;
+      color: #000 !important;
+      border-color: #fbbf24 !important;
+    }
+    .kb-key.space-key {
+      max-width: 280px;
+      flex: 5;
+    }
+
+    /* ==========================================================================
+       FITUR: ACHIEVEMENTS & TROPHY SHOWCASE (12 MEDALI RESMI)
+       ========================================================================== */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .achievement-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .achievement-card.locked {
+      opacity: 0.55;
+      filter: grayscale(0.8);
+    }
+    .achievement-card.unlocked {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, var(--bg-card) 100%);
+    }
+    .achieve-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .achievement-card.unlocked .achieve-icon-box {
+      border-color: var(--primary);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
+    }
+    .achieve-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .achieve-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .achieve-status-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+    }
+    .achieve-status-badge.unlocked {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .achieve-status-badge.locked {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-dim);
+    }
+
+    /* ==========================================================================
+       FITUR: KAMUS PRAKTIS THAI - INDONESIA (1000+ KATA)
+       ========================================================================== */
+    .dict-search-bar-wrap {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .dict-search-input {
+      flex: 1;
+      min-width: 260px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 12px 20px 12px 44px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .dict-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+    .dict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+    .dict-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.18s ease;
+    }
+    .dict-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .dict-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .dict-thai {
+      font-family: var(--font-thai-looped);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .dict-roman {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .dict-id {
+      font-size: 13.5px;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .dict-tone-rule {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
   </style>
+  <script src="thai_dictionary_data.js"></script>
 </head>
 <body>
   <!-- GHIBLI AMBIENT FIREFLY CANVAS -->
@@ -5210,6 +5490,25 @@
           <span>Ujian &amp; Sertifikat</span>
           <span class="vocab-badge-daily" style="background:#10b981; color:#fff;" title="Sertifikat Resmi">RESMI</span>
         </button>
+
+        <button class="nav-item-btn" data-tab="typing" onclick="switchNavTab('typing')" title="Latihan Mengetik Keyboard Thai Kedmanee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M7 16h10"/></svg>
+          <span>Latihan Mengetik</span>
+          <span class="vocab-badge-daily" style="background:#0ea5e9; color:#fff;" title="Kedmanee Tutor">TUTOR</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="dictionary" onclick="switchNavTab('dictionary')" title="Kamus Praktis Thai - Indonesia (1.000+ Kosakata)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Kamus Praktis</span>
+          <span class="vocab-badge-daily" style="background:#10b981; color:#fff;" title="Kamus Audio">1000+</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="achievements" onclick="switchNavTab('achievements')" title="Galeri Medali &amp; Trofi Prestasi Belajar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          <span>Medali &amp; Trofi</span>
+          <span class="vocab-badge-daily" style="background:#f59e0b; color:#fff;" title="12 Medali">12</span>
+        </button>
+
 
 
         <button class="nav-item-btn" data-tab="phonetics" onclick="switchNavTab('phonetics')" title="5 Nada Intonasi &amp; Buku Frasa Audio">
@@ -6096,6 +6395,131 @@
                 </button>
               </div>
             </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             FITUR: PAPAN KETIK VIRTUAL & TYPING TUTOR (KEDMANEE LAYOUT)
+             ========================================================================== -->
+        <section id="panel-typing" class="section-tab-panel">
+          <div style="text-align:center; max-width:680px; margin:0 auto 20px auto;">
+            <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#0ea5e9; padding:3px 10px; background:rgba(14,165,233,0.12); border-radius:var(--radius-pill); margin-bottom:8px;">
+              ⌨️ THAI KEDMANEE TYPING TUTOR
+            </div>
+            <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Latihan Mengetik Aksara Thai</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin:0;">
+              Latih refleks jari Anda mengetik aksara Thai dengan layout resmi Kedmanee. Ikuti panduan tombol yang menyala hijau di layar!
+            </p>
+          </div>
+
+          <!-- Difficulty Level Selector -->
+          <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px; flex-wrap:wrap;" id="typingLevelSelector">
+            <button class="pill-filter active" onclick="setTypingLevel(1, this)">🌱 Level 1: Konsonan Tengah</button>
+            <button class="pill-filter" onclick="setTypingLevel(2, this)">🌿 Level 2: Konsonan + Vokal</button>
+            <button class="pill-filter" onclick="setTypingLevel(3, this)">🍜 Level 3: Kata Kuliner &amp; Belanja</button>
+            <button class="pill-filter" onclick="setTypingLevel(4, this)">💬 Level 4: Frasa Sopan Sehari-hari</button>
+            <button class="pill-filter" onclick="setTypingLevel(5, this)">⚡ Level 5: Kalimat Lengkap Bangkok</button>
+          </div>
+
+          <!-- Typing Arena -->
+          <div class="typing-arena">
+            <!-- Stats Bar: WPM, Akurasi, Streak -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; font-family:var(--font-mono); font-size:13px; font-weight:700;">
+              <div>Kecepatan: <span id="typingWpmDisplay" style="color:#0ea5e9; font-size:18px;">0</span> WPM</div>
+              <div>Akurasi: <span id="typingAccuracyDisplay" style="color:var(--emerald); font-size:18px;">100%</span></div>
+              <div>Kemajuan: <span id="typingWordCountDisplay" style="color:#f59e0b; font-size:18px;">1/10</span> Kata</div>
+            </div>
+
+            <!-- Target Word Prompt Card -->
+            <div class="typing-prompt-card">
+              <div class="typing-target-thai" id="typingTargetContainer">
+                <!-- Injected spans for current character highlighting -->
+              </div>
+              <div style="font-family:var(--font-mono); font-size:16px; color:var(--primary); font-weight:700;" id="typingTargetRoman">sà-wàt-dii</div>
+              <div style="font-size:13px; color:var(--text-muted); margin-top:4px;" id="typingTargetMeaning">Arti: Halo / Selamat pagi/siang/malam</div>
+              <button type="button" class="btn-subtle-nav" onclick="playCurrentTypingAudio()" style="margin-top:10px; display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:4px 12px;">
+                <span>🔊 Dengar Pengucapan</span>
+              </button>
+            </div>
+
+            <!-- On-Screen Virtual Thai Kedmanee Keyboard -->
+            <div class="keyboard-container" id="thaiVirtualKeyboard">
+              <!-- Dynamically populated 4 rows of Thai Kedmanee Keys -->
+            </div>
+
+            <div style="margin-top:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <span style="font-size:12px; color:var(--text-dim); font-family:var(--font-mono);">
+                💡 Ketik langsung di keyboard fisik laptop Anda atau klik tombol pada layar!
+              </span>
+              <button class="btn-subtle-nav" onclick="nextTypingWord(true)" style="font-size:13px; padding:6px 14px;">
+                <span>Lewati Kata ⏭️</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             FITUR: KAMUS PRAKTIS THAI - INDONESIA (1.000+ KATA ESENSIAL)
+             ========================================================================== -->
+        <section id="panel-dictionary" class="section-tab-panel">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; flex-wrap:wrap; gap:16px;">
+            <div>
+              <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
+                📖 KAMUS AUDIO PRAKTIS
+              </div>
+              <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Kamus Cepat Thai - Indonesia</h2>
+              <p style="font-size:14px; color:var(--text-muted); max-width:720px; margin:0;">
+                Cari kata apa pun dalam bahasa Indonesia, aksara Thai, atau ejaan latin. Lengkap dengan cara baca fonetik, kaidah nada, dan tombol audio penutur Bangkok.
+              </p>
+            </div>
+            <div class="stats-group-pill">
+              <span class="stat-chip" style="color:var(--emerald);" id="dictTotalCountBadge">📚 100+ Entri</span>
+            </div>
+          </div>
+
+          <!-- Search Input & Filters -->
+          <div class="dict-search-bar-wrap">
+            <div style="position:relative; flex:1;">
+              <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:16px; pointer-events:none; opacity:0.6;">🔍</span>
+              <input type="text" id="dictSearchInput" class="dict-search-input" placeholder="Cari kata: makan, terima kasih, hotel, air, murah, pad thai..." oninput="onDictSearch(this.value)">
+            </div>
+          </div>
+
+          <!-- Category Pills -->
+          <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:16px;" id="dictCategoryPills">
+            <button class="pill-filter active" onclick="setDictCategory('all', this)">Semua Kategori</button>
+            <button class="pill-filter" onclick="setDictCategory('sapaan', this)">👋 Sapaan &amp; Sopan</button>
+            <button class="pill-filter" onclick="setDictCategory('kuliner', this)">🍜 Makanan &amp; Minuman</button>
+            <button class="pill-filter" onclick="setDictCategory('belanja', this)">🛍️ Belanja &amp; Tawar</button>
+            <button class="pill-filter" onclick="setDictCategory('transportasi', this)">🚖 Transport &amp; Arah</button>
+            <button class="pill-filter" onclick="setDictCategory('waktu', this)">🔢 Angka &amp; Waktu</button>
+            <button class="pill-filter" onclick="setDictCategory('orang', this)">👥 Orang &amp; Keluarga</button>
+            <button class="pill-filter" onclick="setDictCategory('aktivitas', this)">🏃 Kata Kerja Harian</button>
+          </div>
+
+          <!-- Dictionary Grid -->
+          <div class="dict-grid" id="dictGridContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             FITUR: SISTEM MEDALI & TROFI PRESTASI BELAJAR (12 PENCAPAIAN)
+             ========================================================================== -->
+        <section id="panel-achievements" class="section-tab-panel">
+          <div style="text-align:center; max-width:680px; margin:0 auto 24px auto;">
+            <div style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#f59e0b; padding:3px 10px; background:rgba(245,158,11,0.12); border-radius:var(--radius-pill); margin-bottom:8px;">
+              🏆 GALERI PENGHARGAAN &amp; PRESTASI
+            </div>
+            <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Medali Kehormatan Pembelajar</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin:0;">
+              Raih 12 medali penghargaan dengan menuntaskan berbagai modul latihan, kanvas tulis, flashcard, dan tantangan kecepatan.
+            </p>
+          </div>
+
+          <!-- Achievements Grid -->
+          <div class="achievements-grid" id="achievementsGridContainer">
+            <!-- Dynamically populated 12 badges -->
           </div>
         </section>
 
@@ -14388,11 +14812,17 @@
         setTimeout(initWritingCanvas, 60);
       } else if (tabKey === 'flashcards') {
         setTimeout(initFlashcards, 60);
-      }
       } else if (tabKey === 'speed-drill') {
         setTimeout(() => setDrillGameMode('consonants'), 60);
       } else if (tabKey === 'certificate') {
-        setTimeout(() => renderExamQuestion(0), 60); else if (tabKey === 'vocabulary') {
+        setTimeout(() => renderExamQuestion(0), 60);
+      } else if (tabKey === 'typing') {
+        setTimeout(() => { renderVirtualKeyboard(); setTypingLevel(1); }, 60);
+      } else if (tabKey === 'dictionary') {
+        setTimeout(initDictionary, 60);
+      } else if (tabKey === 'achievements') {
+        setTimeout(renderAchievementsGrid, 60);
+      } else if (tabKey === 'vocabulary') {
         updateVocabDailyMissionUI();
         if (currentVocabViewMode === 'focus') renderVocabFocusCard();
         else if (currentVocabViewMode === 'grid') renderVocabGrid(currentVocabGridFilter);
@@ -17240,6 +17670,519 @@
       win.document.close();
     }
 
+    /* ==========================================================================
+       FITUR: KEDMANEE THAI KEYBOARD ENGINE & TYPING TUTOR
+       ========================================================================== */
+    const KEDMANEE_LAYOUT = [
+      // Row 1 (Numbers Row)
+      [
+        { normal: '_', shift: '%', latin: '`' },
+        { normal: 'ๅ', shift: '+', latin: '1' },
+        { normal: '/', shift: '๑', latin: '2' },
+        { normal: '_', shift: '๒', latin: '3' },
+        { normal: 'ภ', shift: '๓', latin: '4' },
+        { normal: 'ถ', shift: '๔', latin: '5' },
+        { normal: 'ุ', shift: 'ู', latin: '6' },
+        { normal: 'ึ', shift: '฿', latin: '7' },
+        { normal: 'ค', shift: '๕', latin: '8' },
+        { normal: 'ต', shift: '๖', latin: '9' },
+        { normal: 'จ', shift: '๗', latin: '0' },
+        { normal: 'ข', shift: '๘', latin: '-' },
+        { normal: 'ช', shift: '๙', latin: '=' }
+      ],
+      // Row 2 (QWERTY Row)
+      [
+        { normal: 'ๆ', shift: '๐', latin: 'q' },
+        { normal: 'ไ', shift: '"', latin: 'w' },
+        { normal: 'ำ', shift: 'ฎ', latin: 'e' },
+        { normal: 'พ', shift: 'ฑ', latin: 'r' },
+        { normal: 'ะ', shift: 'ธ', latin: 't' },
+        { normal: 'ั', shift: 'ํ', latin: 'y' },
+        { normal: 'ี', shift: '๊', latin: 'u' },
+        { normal: 'ร', shift: 'ณ', latin: 'i' },
+        { normal: 'น', shift: 'ฯ', latin: 'o' },
+        { normal: 'ย', shift: 'ญ', latin: 'p' },
+        { normal: 'บ', shift: 'ฐ', latin: '[' },
+        { normal: 'ล', shift: ',', latin: ']' },
+        { normal: 'ฃ', shift: 'ฅ', latin: '\\' }
+      ],
+      // Row 3 (Home Row)
+      [
+        { normal: 'ฟ', shift: 'ฤ', latin: 'a' },
+        { normal: 'ห', shift: 'ฆ', latin: 's' },
+        { normal: 'ก', shift: 'ฏ', latin: 'd' },
+        { normal: 'ด', shift: 'โ', latin: 'f' },
+        { normal: 'เ', shift: 'ฌ', latin: 'g' },
+        { normal: '้', shift: '็', latin: 'h' },
+        { normal: '่', shift: '๋', latin: 'j' },
+        { normal: 'า', shift: 'ษ', latin: 'k' },
+        { normal: 'ส', shift: 'ศ', latin: 'l' },
+        { normal: 'ว', shift: 'ซ', latin: ';' },
+        { normal: 'ง', shift: '.', latin: '\'' }
+      ],
+      // Row 4 (Bottom Row)
+      [
+        { normal: 'ผ', shift: '(', latin: 'z' },
+        { normal: 'ป', shift: ')', latin: 'x' },
+        { normal: 'แ', shift: 'ฉ', latin: 'c' },
+        { normal: 'อ', shift: 'ฮ', latin: 'v' },
+        { normal: 'ิ', shift: 'ฺ', latin: 'b' },
+        { normal: 'ื', shift: '์', latin: 'n' },
+        { normal: 'ท', shift: '?', latin: 'm' },
+        { normal: 'ม', shift: 'ฒ', latin: ',' },
+        { normal: 'ใ', shift: 'ฬ', latin: '.' },
+        { normal: 'ฝ', shift: 'ฦ', latin: '/' }
+      ]
+    ];
+
+    const TYPING_LEVELS_DATA = {
+      1: [
+        { thai: 'กา', roman: 'gaa', meaning: 'Gagak' },
+        { thai: 'จาน', roman: 'jaan', meaning: 'Piring' },
+        { thai: 'เด็ก', roman: 'dèk', meaning: 'Anak-anak' },
+        { thai: 'เต่า', roman: 'dtào', meaning: 'Kura-kura' },
+        { thai: 'ใบไม้', roman: 'bai-mái', meaning: 'Daun' },
+        { thai: 'ปลา', roman: 'bplaa', meaning: 'Ikan' },
+        { thai: 'อ่าง', roman: 'àang', meaning: 'Baskom' }
+      ],
+      2: [
+        { thai: 'ข้าว', roman: 'khâao', meaning: 'Nasi / Makanan pokok' },
+        { thai: 'น้ำ', roman: 'nám', meaning: 'Air' },
+        { thai: 'มา', roman: 'maa', meaning: 'Datang' },
+        { thai: 'ไป', roman: 'bpai', meaning: 'Pergi' },
+        { thai: 'ดี', roman: 'dii', meaning: 'Bagus / Baik' },
+        { thai: 'มี', roman: 'mii', meaning: 'Punya / Ada' },
+        { thai: 'กิน', roman: 'gin', meaning: 'Makan' }
+      ],
+      3: [
+        { thai: 'ผัดไทย', roman: 'phàt-thai', meaning: 'Pad Thai' },
+        { thai: 'ส้มตำ', roman: 'sôm-dtam', meaning: 'Som Tam' },
+        { thai: 'ชาเย็น', roman: 'chaa-yen', meaning: 'Teh susu dingin' },
+        { thai: 'กาแฟ', roman: 'gaa-fɛɛ', meaning: 'Kopi' },
+        { thai: 'เท่าไหร่', roman: 'thâo-rài', meaning: 'Berapa harganya?' },
+        { thai: 'ลดได้ไหม', roman: 'lót dâi mǎi', meaning: 'Bisa diskon?' }
+      ],
+      4: [
+        { thai: 'สวัสดีค่ะ', roman: 'sà-wàt-dii khâ', meaning: 'Halo (Sopan Wanita)' },
+        { thai: 'ขอบคุณครับ', roman: 'khɔ̀ɔp-khun khráp', meaning: 'Terima kasih (Sopan Pria)' },
+        { thai: 'ขอโทษค่ะ', roman: 'khɔ̌ɔ-thôot khâ', meaning: 'Maaf / Permisi' },
+        { thai: 'ไม่เป็นไร', roman: 'mâi bpen rai', meaning: 'Tidak apa-apa' },
+        { thai: 'สบายดีไหม', roman: 'sà-baai-dii mǎi', meaning: 'Apa kabar?' }
+      ],
+      5: [
+        { thai: 'ยินดีต้อนรับสู่สวนภาษาไทย', roman: 'yin-dii dtɔ̂ɔn-ráp sùu sǔan phaa-sǎa-thai', meaning: 'Selamat datang di taman bahasa Thai!' },
+        { thai: 'พูดภาษาไทยได้นิดหน่อยค่ะ', roman: 'phûut phaa-sǎa-thai dâi nít-nɔ̀ɔi khâ', meaning: 'Bisa bicara bahasa Thai sedikit.' },
+        { thai: 'รักภาษาไทยมากครับ', roman: 'rák phaa-sǎa-thai mâak khráp', meaning: 'Sangat menyukai bahasa Thai.' }
+      ]
+    };
+
+    let typingCurrentLevel = 1;
+    let typingWordIndex = 0;
+    let typingCharIndex = 0;
+    let typingTotalKeystrokes = 0;
+    let typingCorrectKeystrokes = 0;
+    let typingStartTime = null;
+
+    function renderVirtualKeyboard() {
+      const container = document.getElementById('thaiVirtualKeyboard');
+      if (!container) return;
+
+      container.innerHTML = KEDMANEE_LAYOUT.map((row, rIdx) => `
+        <div class="kb-row">
+          ${rIdx === 3 ? '<div class="kb-key shift-key" id="kbKeyShiftL" onclick="toggleVirtualShift()"><span>Shift ⇧</span></div>' : ''}
+          ${row.map(k => `
+            <div class="kb-key" data-normal="${k.normal}" data-shift="${k.shift}" data-latin="${k.latin}" onclick="handleVirtualKeyClick('${k.normal}', '${k.shift}')">
+              <span class="latin-hint">${k.latin.toUpperCase()}</span>
+              <span class="thai-top">${k.shift}</span>
+              <span class="thai-bot">${k.normal}</span>
+            </div>
+          `).join('')}
+          ${rIdx === 3 ? '<div class="kb-key shift-key" id="kbKeyShiftR" onclick="toggleVirtualShift()"><span>Shift ⇧</span></div>' : ''}
+        </div>
+      `).join('') + `
+        <div class="kb-row" style="margin-top:2px;">
+          <div class="kb-key space-key" onclick="handleVirtualKeyClick(' ', ' ')">
+            <span style="font-size:11px; opacity:0.7;">SPASI</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function setTypingLevel(lvl, btn) {
+      typingCurrentLevel = lvl;
+      typingWordIndex = 0;
+      typingCharIndex = 0;
+      typingTotalKeystrokes = 0;
+      typingCorrectKeystrokes = 0;
+      typingStartTime = null;
+
+      document.querySelectorAll('#typingLevelSelector .pill-filter').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      loadTypingWord();
+      playSynthSound('click');
+    }
+
+    function loadTypingWord() {
+      const words = TYPING_LEVELS_DATA[typingCurrentLevel] || TYPING_LEVELS_DATA[1];
+      if (typingWordIndex >= words.length) typingWordIndex = 0;
+
+      const item = words[typingWordIndex];
+      typingCharIndex = 0;
+
+      // Render Prompt Spans
+      const container = document.getElementById('typingTargetContainer');
+      if (container) {
+        container.innerHTML = item.thai.split('').map((ch, idx) => `
+          <span class="typing-char-span ${idx === 0 ? 'current' : ''}" id="typingChar_${idx}">${ch}</span>
+        `).join('');
+      }
+
+      document.getElementById('typingTargetRoman').textContent = item.roman;
+      document.getElementById('typingTargetMeaning').textContent = `Arti: ${item.meaning}`;
+      document.getElementById('typingWordCountDisplay').textContent = `${typingWordIndex + 1}/${words.length} Kata`;
+
+      highlightNextKeyboardKey();
+    }
+
+    function highlightNextKeyboardKey() {
+      const words = TYPING_LEVELS_DATA[typingCurrentLevel] || TYPING_LEVELS_DATA[1];
+      const item = words[typingWordIndex];
+      if (!item) return;
+
+      const targetChar = item.thai[typingCharIndex];
+
+      // Clear all active highlights
+      document.querySelectorAll('.kb-key').forEach(k => {
+        k.classList.remove('active-target');
+        k.classList.remove('active-shift');
+      });
+
+      if (!targetChar) return;
+
+      // Find key matching targetChar
+      let matchedKey = null;
+      let needShift = false;
+
+      document.querySelectorAll('.kb-key').forEach(k => {
+        if (k.getAttribute('data-normal') === targetChar) {
+          matchedKey = k;
+          needShift = false;
+        } else if (k.getAttribute('data-shift') === targetChar) {
+          matchedKey = k;
+          needShift = true;
+        }
+      });
+
+      if (matchedKey) {
+        matchedKey.classList.add('active-target');
+        if (needShift) {
+          const shiftL = document.getElementById('kbKeyShiftL');
+          const shiftR = document.getElementById('kbKeyShiftR');
+          if (shiftL) shiftL.classList.add('active-shift');
+          if (shiftR) shiftR.classList.add('active-shift');
+        }
+      }
+    }
+
+    function handleTypingInputChar(char) {
+      if (!typingStartTime) typingStartTime = Date.now();
+      typingTotalKeystrokes++;
+
+      const words = TYPING_LEVELS_DATA[typingCurrentLevel] || TYPING_LEVELS_DATA[1];
+      const item = words[typingWordIndex];
+      if (!item) return;
+
+      const targetChar = item.thai[typingCharIndex];
+
+      if (char === targetChar) {
+        typingCorrectKeystrokes++;
+        playTypewriterSound(true);
+
+        const currentSpan = document.getElementById(`typingChar_${typingCharIndex}`);
+        if (currentSpan) {
+          currentSpan.classList.remove('current');
+          currentSpan.classList.add('typed');
+        }
+
+        typingCharIndex++;
+
+        if (typingCharIndex >= item.thai.length) {
+          // Word completed!
+          awardXP(10);
+          playSynthSound('correct');
+          showToast(`Mantap! Kata "${item.thai}" selesai (+10 XP) 🎉`);
+          checkAchievements();
+
+          setTimeout(() => {
+            nextTypingWord(false);
+          }, 350);
+        } else {
+          const nextSpan = document.getElementById(`typingChar_${typingCharIndex}`);
+          if (nextSpan) nextSpan.classList.add('current');
+          highlightNextKeyboardKey();
+        }
+      } else {
+        playTypewriterSound(false);
+        const currentSpan = document.getElementById(`typingChar_${typingCharIndex}`);
+        if (currentSpan) {
+          currentSpan.style.color = '#ef4444';
+          setTimeout(() => {
+            currentSpan.style.color = '';
+          }, 250);
+        }
+      }
+
+      updateTypingMetrics();
+    }
+
+    function handleVirtualKeyClick(normal, shift) {
+      handleTypingInputChar(normal);
+    }
+
+    function toggleVirtualShift() {
+      // Toggle visual display of shift
+      playSynthSound('click');
+    }
+
+    function nextTypingWord(manual = false) {
+      const words = TYPING_LEVELS_DATA[typingCurrentLevel] || TYPING_LEVELS_DATA[1];
+      typingWordIndex++;
+      if (typingWordIndex >= words.length) {
+        typingWordIndex = 0;
+        showToast('Level ' + typingCurrentLevel + ' selesai! Naik level yuk 🚀');
+      }
+      loadTypingWord();
+      if (manual) playSynthSound('click');
+    }
+
+    function playCurrentTypingAudio() {
+      const words = TYPING_LEVELS_DATA[typingCurrentLevel] || TYPING_LEVELS_DATA[1];
+      const item = words[typingWordIndex];
+      if (item) speakThai(item.thai);
+    }
+
+    function playTypewriterSound(isCorrect) {
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.connect(gain);
+        gain.connect(actx.destination);
+
+        if (isCorrect) {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(600, actx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(800, actx.currentTime + 0.05);
+          gain.gain.setValueAtTime(0.12, actx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, actx.currentTime + 0.05);
+        } else {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, actx.currentTime);
+          gain.gain.setValueAtTime(0.18, actx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, actx.currentTime + 0.1);
+        }
+
+        osc.start();
+        osc.stop(actx.currentTime + 0.1);
+      } catch (_) {}
+    }
+
+    function updateTypingMetrics() {
+      if (!typingStartTime) return;
+      const elapsedMin = (Date.now() - typingStartTime) / 60000;
+      const wpm = Math.round((typingCorrectKeystrokes / 5) / (elapsedMin || 0.01)) || 0;
+      const acc = Math.round((typingCorrectKeystrokes / (typingTotalKeystrokes || 1)) * 100);
+
+      document.getElementById('typingWpmDisplay').textContent = wpm;
+      document.getElementById('typingAccuracyDisplay').textContent = `${acc}%`;
+
+      if (wpm >= 25) {
+        awardAchievement('achieve_typing_speed');
+      }
+    }
+
+    // Physical Keyboard Listener
+    window.addEventListener('keydown', (e) => {
+      const typingPanel = document.getElementById('panel-typing');
+      if (!typingPanel || !typingPanel.classList.contains('active')) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      // Prevent page scrolling on space
+      if (e.key === ' ') e.preventDefault();
+
+      // Find matching Thai character for physical key press
+      const latinKey = e.key.toLowerCase();
+      let thaiChar = null;
+
+      for (const row of KEDMANEE_LAYOUT) {
+        for (const k of row) {
+          if (k.latin.toLowerCase() === latinKey) {
+            thaiChar = e.shiftKey ? k.shift : k.normal;
+            break;
+          }
+        }
+        if (thaiChar) break;
+      }
+
+      // If user is directly typing with Thai IME keyboard input
+      if (/[\u0E00-\u0E7F]/.test(e.key)) {
+        thaiChar = e.key;
+      }
+
+      if (thaiChar) {
+        handleTypingInputChar(thaiChar);
+      }
+    });
+
+    /* ==========================================================================
+       FITUR: ACHIEVEMENTS & TROPHY SHOWCASE ENGINE (12 PENCAPAIAN)
+       ========================================================================== */
+    const ACHIEVEMENTS_LIST = [
+      { id: 'achieve_step1', title: 'Langkah Pertama', desc: 'Selesaikan atau buka materi pertama Anda di akademi.', icon: '🌱', xp: 10 },
+      { id: 'achieve_44_consonants', title: 'Penakluk 44 Konsonan', desc: 'Buka dan dengarkan semua 44 konsonan resmi Thai.', icon: '🔤', xp: 25 },
+      { id: 'achieve_calligraphy', title: 'Pakar Kaligrafi Digital', desc: 'Raih akurasi kanvas tulis aksara di atas 90%.', icon: '✍️', xp: 20 },
+      { id: 'achieve_5_tones', title: 'Telinga Musikal 5 Nada', desc: 'Latih kepekaan 5 nada di laboratorium akustik.', icon: '🎵', xp: 20 },
+      { id: 'achieve_flashcard_master', title: 'Master Flashcard SRS', desc: 'Kuasai minimal 15 kartu hafalan di Flashcard Pintar.', icon: '🎴', xp: 30 },
+      { id: 'achieve_speed_100', title: 'Refleks Kilat 100 Poin', desc: 'Raih skor minimal 100 di arena Speed Drill 60 Detik.', icon: '⚡', xp: 35 },
+      { id: 'achieve_speed_s_rank', title: 'Guru Besar S-Rank', desc: 'Raih skor 200+ (Rank S) di Speed Drill Arena.', icon: '🏆', xp: 50 },
+      { id: 'achieve_voice_studio', title: 'Penutur Bangkok Asli', desc: 'Lakukan evaluasi pelafalan di Studio Suara Mikrofon.', icon: '🎙️', xp: 25 },
+      { id: 'achieve_typing_speed', title: 'Jari Lincah Kedmanee', desc: 'Capai kecepatan mengetik 25+ WPM di Typing Tutor.', icon: '⌨️', xp: 30 },
+      { id: 'achieve_jazmi_reader', title: 'Kutu Buku Jazmi Nara', desc: 'Baca minimal 5 modul teks kurikulum Jazmi Nara.', icon: '📖', xp: 35 },
+      { id: 'achieve_exam_cumlaude', title: 'Lulusan Kehormatan', desc: 'Lulus Ujian Evaluasi Akhir dengan nilai minimal 75%.', icon: '🎓', xp: 50 },
+      { id: 'achieve_streak_3', title: 'Semangat Membara 3 Hari', desc: 'Pertahankan streak latihan belajar selama 3 hari beruntun.', icon: '🔥', xp: 40 }
+    ];
+
+    let unlockedAchievements = new Set(JSON.parse(localStorage.getItem('mali_unlocked_badges') || '["achieve_step1"]'));
+
+    function renderAchievementsGrid() {
+      const container = document.getElementById('achievementsGridContainer');
+      if (!container) return;
+
+      container.innerHTML = ACHIEVEMENTS_LIST.map(a => {
+        const isUnlocked = unlockedAchievements.has(a.id);
+        return `
+          <div class="achievement-card ${isUnlocked ? 'unlocked' : 'locked'}">
+            <div class="achieve-icon-box">${a.icon}</div>
+            <div style="flex:1;">
+              <div class="achieve-title">${a.title}</div>
+              <div class="achieve-desc">${a.desc}</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="achieve-status-badge ${isUnlocked ? 'unlocked' : 'locked'}">
+                  ${isUnlocked ? '✓ TERBUKA' : '🔒 TERKUNCI'}
+                </span>
+                <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary);">+${a.xp} XP</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function awardAchievement(id) {
+      if (unlockedAchievements.has(id)) return;
+      const item = ACHIEVEMENTS_LIST.find(a => a.id === id);
+      if (!item) return;
+
+      unlockedAchievements.add(id);
+      localStorage.setItem('mali_unlocked_badges', JSON.stringify(Array.from(unlockedAchievements)));
+      awardXP(item.xp);
+      playSynthSound('badge');
+
+      showToast(`🏆 PRESTASI TERBUKA: "${item.title}" (+${item.xp} XP)!`);
+      renderAchievementsGrid();
+    }
+
+    function checkAchievements() {
+      // Check flashcards
+      if (typeof flashcardMasteredSet !== 'undefined' && flashcardMasteredSet.size >= 15) {
+        awardAchievement('achieve_flashcard_master');
+      }
+      // Check exam
+      if (typeof examScorePercent !== 'undefined' && examScorePercent >= 75) {
+        awardAchievement('achieve_exam_cumlaude');
+      }
+    }
+
+    /* ==========================================================================
+       FITUR: KAMUS PRAKTIS THAI - INDONESIA (1.000+ KATA ESENSIAL)
+       ========================================================================== */
+    let currentDictCategory = 'all';
+    let currentDictQuery = '';
+
+    function initDictionary() {
+      renderDictionary('all', '');
+    }
+
+    function setDictCategory(cat, btn) {
+      currentDictCategory = cat;
+      document.querySelectorAll('#dictCategoryPills .pill-filter').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderDictionary(currentDictCategory, currentDictQuery);
+      playSynthSound('click');
+    }
+
+    function onDictSearch(val) {
+      currentDictQuery = (val || '').toLowerCase().trim();
+      renderDictionary(currentDictCategory, currentDictQuery);
+    }
+
+    function renderDictionary(cat = currentDictCategory, q = currentDictQuery) {
+      const container = document.getElementById('dictGridContainer');
+      if (!container) return;
+
+      if (typeof THAI_DICTIONARY === 'undefined' || !THAI_DICTIONARY.length) {
+        container.innerHTML = '<div style="padding:24px; text-align:center; color:var(--text-muted);">Memuat kamus...</div>';
+        return;
+      }
+
+      let filtered = THAI_DICTIONARY;
+      if (cat !== 'all') {
+        filtered = filtered.filter(item => item.cat === cat);
+      }
+
+      if (q) {
+        filtered = filtered.filter(item => 
+          (item.thai && item.thai.toLowerCase().includes(q)) ||
+          (item.roman && item.roman.toLowerCase().includes(q)) ||
+          (item.id && item.id.toLowerCase().includes(q))
+        );
+      }
+
+      document.getElementById('dictTotalCountBadge').textContent = `📚 ${filtered.length} Entri Ditemukan`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding:48px 20px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border);">
+            <div style="font-size:36px; margin-bottom:10px;">🔍</div>
+            <h4 style="font-size:16px; font-weight:700; margin-bottom:4px;">Tidak ada kata yang cocok dengan "${q}"</h4>
+            <p style="font-size:13px; color:var(--text-muted);">Coba gunakan kata kunci lain dalam bahasa Indonesia atau ejaan latin.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="dict-card">
+          <div>
+            <div class="dict-card-top">
+              <span class="dict-thai">${item.thai}</span>
+              <button type="button" class="icon-btn-compact" onclick="speakThai('${item.thai}')" title="Dengar Suara Penutur Bangkok" style="border-radius:50%; width:32px; height:32px;">🔊</button>
+            </div>
+            <div class="dict-roman">${item.roman}</div>
+            <div class="dict-id">${item.id}</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid var(--border);">
+            <span class="dict-tone-rule">🎵 ${item.tone}</span>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-subtle-nav" onclick="jumpToWritingChar('${item.thai[0]}')" title="Latih tulis aksara ini di Kanvas" style="font-size:11px; padding:3px 8px;">✍️</button>
+              <button class="btn-subtle-nav" onclick="openVoiceStudioModal({thai:'${item.thai}', roman:'${item.roman}', meaning:'${item.id}'})" title="Latih pelafalan di Studio Suara" style="font-size:11px; padding:3px 8px;">🎙️</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
     /* INITIALIZE APP */
     document.documentElement.setAttribute('data-theme', appState.theme || 'dark');
     applyThaiFontStyle(appState.thaiFontStyle || 'looped');
@@ -17260,6 +18203,9 @@
     initLearningPortal();
     initVocabularyDailyMission();
     initFlashcards('all');
+    renderVirtualKeyboard();
+    initDictionary();
+    renderAchievementsGrid();
   </script>
 </body>
 </html>
