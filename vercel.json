@@ -7,7 +7,7 @@
   ],
   "functions": {
     "api/tts.js": {
-      "includeFiles": ["audio/**", "audio_cache/**"]
+      "includeFiles": "{audio,audio_cache}/**"
     }
   },
   "headers": [
