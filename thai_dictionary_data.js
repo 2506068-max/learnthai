@@ -166,3 +166,4 @@ const THAI_DICTIONARY = [
 ];
 
 console.log('🌿 Thai Dictionary loaded with ' + THAI_DICTIONARY.length + ' essential terms');
+
