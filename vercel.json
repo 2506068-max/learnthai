@@ -5,6 +5,11 @@
     { "source": "/", "destination": "/fairy_thai_academy.html" },
     { "source": "/index.html", "destination": "/fairy_thai_academy.html" }
   ],
+  "functions": {
+    "api/tts.js": {
+      "includeFiles": ["audio/**", "audio_cache/**"]
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

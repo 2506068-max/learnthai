@@ -28,23 +28,38 @@ module.exports = (req, res) => {
 
   const hash = fnv1a(text);
   const targetGender = gender === 'male' ? 'male' : 'female';
+  const filename = `${hash}.mp3`;
   
-  // Check if static audio file exists in audio_cache or audio
-  const cachePath = path.join(process.cwd(), 'audio_cache', targetGender, `${hash}.mp3`);
-  const pregenPath = path.join(process.cwd(), 'audio', targetGender, `${hash}.mp3`);
+  // Check all possible locations where static audio files might reside
+  const possiblePaths = [
+    path.join(process.cwd(), 'audio_cache', targetGender, filename),
+    path.join(process.cwd(), 'audio', targetGender, filename),
+    path.resolve(__dirname, '..', 'audio_cache', targetGender, filename),
+    path.resolve(__dirname, '..', 'audio', targetGender, filename),
+    path.join(__dirname, 'audio_cache', targetGender, filename),
+    path.join(__dirname, 'audio', targetGender, filename)
+  ];
 
   let filePath = null;
-  if (fs.existsSync(cachePath)) {
-    filePath = cachePath;
-  } else if (fs.existsSync(pregenPath)) {
-    filePath = pregenPath;
+  for (const p of possiblePaths) {
+    try {
+      if (fs.existsSync(p)) {
+        filePath = p;
+        break;
+      }
+    } catch (e) {}
   }
 
   if (filePath) {
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-    const stream = fs.createReadStream(filePath);
-    return stream.pipe(res);
+    try {
+      const data = fs.readFileSync(filePath);
+      res.setHeader('Content-Type', 'audio/mpeg');
+      res.setHeader('Content-Length', data.length);
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      return res.end(data);
+    } catch (err) {
+      console.error('Error reading audio file:', err);
+    }
   }
 
   // Fallback: Redirect to high-quality Google TTS streaming audio
