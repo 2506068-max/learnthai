@@ -14,7 +14,7 @@ if sys.platform == 'win32':
     if hasattr(sys.stderr, 'reconfigure'):
         sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
-def find_available_port(preferred: int = 3000) -> int:
+def find_available_port(preferred: int = 3001) -> int:
     port = preferred
     while port < 65535:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -24,7 +24,7 @@ def find_available_port(preferred: int = 3000) -> int:
         port += 1
     return preferred
 
-PORT = int(os.environ.get('PORT', find_available_port(3000)))
+PORT = int(os.environ.get('PORT', find_available_port(3001)))
 MALE_VOICE = 'th-TH-NiwatNeural'
 FEMALE_VOICE = 'th-TH-PremwadeeNeural'
 
