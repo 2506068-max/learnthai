@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
   <title>Mali's Thai</title>
   <meta name="description" content="Taman belajar dan latihan berbicara bahasa Thailand dengan AI Coach bertema Studio Ghibli, evaluasi suara asli, dan simulasi percakapan.">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#10b981">
+  <meta name="theme-color" content="#f6f3eb">
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
   <link rel="apple-touch-icon" href="/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,37 +17,37 @@
     /* ==========================================================================
        STUDIO GHIBLI DESIGN SYSTEM TOKENS — ENCHANTED CEDAR FOREST & MEADOW
        ========================================================================== */
-    :root, [data-theme="dark"] {
-      --bg: #0d1410;
-      --bg-surface: #131e18;
-      --bg-card: #18261f;
-      --bg-card-hover: #203228;
-      --bg-elevated: #293f33;
-      --border: rgba(116, 198, 157, 0.14);
-      --border-bright: rgba(116, 198, 157, 0.26);
-      --border-focus: #52b788;
+    :root, [data-theme="light"], [data-theme="dark"] {
+      --bg: #f6f3eb;
+      --bg-surface: #ffffff;
+      --bg-card: #fdfbf7;
+      --bg-card-hover: #f3efe5;
+      --bg-elevated: #e9e3d5;
+      --border: rgba(45, 106, 79, 0.12);
+      --border-bright: rgba(45, 106, 79, 0.22);
+      --border-focus: #2d6a4f;
 
-      --text: #edf6f0;
-      --text-muted: #9ab4a3;
-      --text-dim: #678371;
+      --text: #202c24;
+      --text-muted: #536b5c;
+      --text-dim: #7f9988;
 
-      --primary: #52b788;
-      --primary-dark: #40916c;
-      --primary-glow: rgba(82, 183, 136, 0.22);
-      --primary-light: rgba(82, 183, 136, 0.14);
+      --primary: #2d6a4f;
+      --primary-dark: #1b4332;
+      --primary-glow: rgba(45, 106, 79, 0.18);
+      --primary-light: rgba(45, 106, 79, 0.1);
 
-      --emerald: #52b788;
-      --emerald-glow: rgba(82, 183, 136, 0.2);
-      --emerald-dark: #2d6a4f;
+      --emerald: #2d6a4f;
+      --emerald-glow: rgba(45, 106, 79, 0.16);
+      --emerald-dark: #1b4332;
 
-      --amber: #f59e0b;
-      --amber-glow: rgba(245, 158, 11, 0.2);
+      --amber: #d97706;
+      --amber-glow: rgba(217, 119, 6, 0.16);
 
-      --rose: #fb7185;
-      --rose-glow: rgba(251, 113, 133, 0.2);
+      --rose: #e11d48;
+      --rose-glow: rgba(225, 29, 72, 0.16);
 
-      --purple: #a78bfa;
-      --purple-glow: rgba(167, 139, 250, 0.2);
+      --purple: #7c3aed;
+      --purple-glow: rgba(124, 58, 237, 0.16);
 
       --font-display: 'Fraunces', Georgia, serif;
       --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -64,8 +64,8 @@
       --radius-xl: 24px;
       --radius-pill: 9999px;
 
-      --shadow-card: 0 4px 24px rgba(7, 14, 10, 0.45);
-      --shadow-glow: 0 0 32px rgba(82, 183, 136, 0.25);
+      --shadow-card: 0 4px 24px rgba(45, 106, 79, 0.08);
+      --shadow-glow: 0 0 32px rgba(45, 106, 79, 0.15);
     }
 
     [data-theme="light"] {
@@ -200,7 +200,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: #0d1410;
+      background: #f6f3eb;
       border-bottom: 1px solid var(--border);
       height: 62px;
       display: flex;
@@ -838,7 +838,7 @@
       top: 62px;
       height: calc(100vh - 62px);
       overflow-y: auto;
-      background: #0d1410;
+      background: #f6f3eb;
     }
     [data-theme="light"] .stimuler-nav-rail {
       background: #f6f3eb;
@@ -3359,7 +3359,7 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: #0d1410;
+      background: #f6f3eb;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -5730,7 +5730,185 @@
       color: var(--primary);
       border-color: var(--primary);
     }
-  </style>
+  
+
+    /* ==========================================================================
+       FITUR: MOBILE SMARTPHONE ADAPTATION (BOTTOM NAV & OFFCANVAS DRAWER)
+       ========================================================================== */
+    .mobile-menu-toggle-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      font-size: 18px;
+      color: var(--text);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .mobile-menu-toggle-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(253, 251, 247, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-bright);
+      box-shadow: 0 -4px 20px rgba(45, 106, 79, 0.08);
+      z-index: 99990;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    .mobile-nav-btn {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px 2px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .mobile-nav-btn .m-icon {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.15s ease;
+    }
+    .mobile-nav-btn .m-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .mobile-nav-btn.active {
+      color: var(--primary);
+    }
+    .mobile-nav-btn.active .m-icon {
+      transform: scale(1.15);
+    }
+
+    .mobile-drawer-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 99995;
+      animation: fadeInBackdrop 0.2s ease;
+    }
+
+    @keyframes fadeInBackdrop {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .mobile-drawer-header {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+    }
+    .mobile-drawer-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-toggle-btn {
+        display: flex;
+      }
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      .stimuler-nav-rail {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 290px !important;
+        max-width: 82vw !important;
+        height: 100vh !important;
+        z-index: 100000 !important;
+        background: #fdfbf7 !important;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25) !important;
+        padding: 0 0 40px 0 !important;
+        overflow-y: auto !important;
+      }
+      .stimuler-nav-rail.mobile-open {
+        transform: translateX(0) !important;
+      }
+      .stimuler-nav-rail.mobile-open .nav-item-btn span,
+      .stimuler-nav-rail.mobile-open .nav-section-title,
+      .stimuler-nav-rail.mobile-open .ai-coach-info,
+      .stimuler-nav-rail.mobile-open .nav-user-info {
+        display: block !important;
+      }
+      .mobile-drawer-header {
+        display: flex;
+      }
+      .stimuler-main {
+        padding: 14px 12px 95px 12px !important;
+      }
+      .header-feature-btn {
+        display: none !important;
+      }
+      .floating-ai-container {
+        bottom: 74px !important;
+        right: 14px !important;
+      }
+      .floating-ai-window {
+        width: calc(100vw - 20px) !important;
+        max-height: calc(100vh - 140px) !important;
+        right: 0 !important;
+        left: auto !important;
+      }
+      .portal-login-card {
+        padding: 18px 14px !important;
+      }
+      .portal-form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+    }
+
+</style>
   <script src="thai_dictionary_data.js"></script>
 </head>
 <body>
@@ -5743,89 +5921,50 @@
   <div id="learningPortal" class="portal-visible">
     <div class="portal-top-bar">
       <div class="portal-top-brand">
-        <span style="font-size:18px;">🍃</span>
-        <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; font-weight:700;">Mali's Thai</span>
-      </div>
-      <div class="portal-top-actions">
-        <button type="button" class="portal-theme-toggle-btn" id="portalThemeToggleBtn" onclick="toggleColorTheme()" title="Ubah Suasana (Mode Gelap / Terang)">
-          <span id="portalThemeIcon">🏮</span>
-          <span id="portalThemeLabel">Mode Malam</span>
-        </button>
-        <button type="button" class="portal-close-corner-btn" onclick="enterLearningApp('alphabet')" title="Lewati Login & Langsung Masuk ke Matriks Aksara">
-          <span>⚡ Lewati &amp; Langsung Belajar</span>
-          <span style="font-size:14px;">→</span>
-        </button>
+        <span style="font-size:20px;">📖</span>
+        <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; font-weight:700;">Mali's Thai</span>
       </div>
     </div>
-    <div class="portal-inner" style="margin-top:36px;">
-      <!-- Centered Learning Emblem / Icon -->
+    <div class="portal-inner" style="margin-top:28px;">
+      <!-- Centered Learning Emblem (FOTO 1: Logo Buku AI 📖) -->
       <div class="learning-icon-container">
         <div class="learning-icon-halo"></div>
-        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="enterLearningApp('alphabet')" title="Klik untuk Mulai Belajar">
-          <svg class="portal-book-svg" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="bookGrad" x1="12" y1="20" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#52b788"/>
-                <stop offset="100%" stop-color="#2d6a4f"/>
-              </linearGradient>
-            </defs>
-            <!-- Orbit circles & spark rays -->
-            <circle cx="36" cy="36" r="32" stroke="rgba(116, 198, 157, 0.22)" stroke-width="1.5" stroke-dasharray="4 4"/>
-            <path d="M36 4v5M36 63v5M4 36h5M63 36h5" stroke="rgba(116, 198, 157, 0.45)" stroke-width="2" stroke-linecap="round"/>
-            <!-- Open Book of Knowledge -->
-            <path d="M36 24v28" stroke="#edf6f0" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M14 47c7-3 15-3 22 2V21c-8-4-15-4-22-1v27z" fill="url(#bookGrad)" stroke="#edf6f0" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M58 47c-7-3-15-3-22 2V21c8-4 15-4 22-1v27z" fill="url(#bookGrad)" stroke="#edf6f0" stroke-width="2" stroke-linejoin="round"/>
-            <!-- Bookmark Ribbon -->
-            <path d="M36 24v16l3.5-2.5 3.5 2.5V24" fill="#f59e0b"/>
-            <!-- Sprouting Thai Jasmine Leaf -->
-            <path d="M36 10c-5 6-3 11 0 13 3-2 5-7 0-13z" fill="#52b788"/>
-          </svg>
-          <div class="learning-icon-thai-char" title="Huruf Pertama Abjad Thailand: ก (Ko Kai)">ก</div>
+        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="document.getElementById('portalInputName').focus()" title="Mali's Thai - Buku Pintar AI Belajar Bahasa Thailand" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%); border-radius: 28px; box-shadow: 0 16px 36px rgba(45, 106, 79, 0.38); display: flex; align-items: center; justify-content: center; width: 110px; height: 110px; position: relative; cursor: pointer;">
+          <span style="font-size: 52px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); display: inline-block;">📖</span>
+          <span class="floating-ai-online-ping" style="top: 8px; right: 8px; width: 12px; height: 12px;"></span>
         </div>
       </div>
 
-      <!-- Badge & Welcoming Headers -->
-      <div class="portal-badge-pill">
-        <span>🍃 AKADEMI BAHASA THAILAND • BANGKOK CENTRAL</span>
-      </div>
+      <!-- Badge Link (FOTO 3: Learn Thai with @purelynes -> Direct Instagram Link) -->
+      <a href="https://www.instagram.com/purelynes/" target="_blank" rel="noopener noreferrer" class="portal-badge-pill" style="text-decoration:none; cursor:pointer;" title="Kunjungi Akun Instagram Resmi @purelynes">
+        <span>📸 Learn Thai with @purelynes ↗</span>
+      </a>
+
       <h1 class="portal-title">Taman Belajar Bahasa Thailand</h1>
       <div class="portal-thai-subtitle">สวนภาษาไทยของมะลิ • ยินดีต้อนรับสู่การเรียนรู้</div>
       <p class="portal-desc">
-        Mulai petualangan belajar bahasa Thailand dari dasar hingga lancar. Latih kepekaan 5 nada fonetik, dengarkan audio penutur asli Bangkok berkualitas studio, dan ikuti kurikulum interaktif berjenjang.
+        Mulai petualangan belajar bahasa Thailand dari dasar hingga lancar. Latih kepekaan 5 nada fonetik, dengarkan audio penutur asli Bangkok, cari lagu-lagu populer Thailand, dan ikuti kurikulum interaktif berjenjang.
       </p>
 
-      <!-- LOGIN / STUDENT PROFILE CARD -->
+      <!-- LOGIN / STUDENT PROFILE CARD (FOTO 4: Akun & PIN Saja) -->
       <div class="portal-login-card" id="portalLoginCard">
         <div class="portal-login-header">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="font-size:18px;">🔐</span>
-              <h3 style="font-size:16px; font-weight:800; margin:0;" id="portalLoginTitle">Masuk ke Akun Pembelajar</h3>
+              <h3 style="font-size:16px; font-weight:800; margin:0;" id="portalLoginTitle">Akun Pembelajar</h3>
             </div>
-
-            <!-- THEME SWITCHER DIRECTLY ON TOP OF LOGIN CARD -->
-            <div style="display:flex; align-items:center; gap:8px;">
-              <div class="portal-theme-segmented" title="Pilihan Mode Tampilan (Gelap / Terang)">
-                <button type="button" class="portal-theme-pill active" id="themePillDark" onclick="setAppTheme('dark')" title="Mode Gelap (Malam)">
-                  🌙 Gelap
-                </button>
-                <button type="button" class="portal-theme-pill" id="themePillLight" onclick="setAppTheme('light')" title="Mode Terang (Siang)">
-                  ☀️ Terang
-                </button>
-              </div>
-              <span class="portal-badge-sm" id="portalLoginBadge">PROFIL</span>
-            </div>
+            <span class="portal-badge-sm" id="portalLoginBadge">DATA TERSIMPAN</span>
           </div>
           <p style="font-size:12px; color:var(--text-muted); margin:6px 0 0 0;">
-            Simpan kemajuan materi, perolehan XP nada, streak harian, dan modul yang sudah Anda kuasai.
+            Buat akun dan PIN untuk menyimpan data belajar, kemajuan materi, perolehan XP, dan modul yang sudah Anda kuasai.
           </p>
         </div>
 
-        <!-- Mode A: Returning User Account Card (Displayed if already logged in) -->
+        <!-- Mode A: Returning User Account Card -->
         <div id="portalReturningUserView" style="display:none;">
           <div class="returning-user-box">
-            <div class="returning-avatar" id="returningUserAvatar">🍃</div>
+            <div class="returning-avatar" id="returningUserAvatar">📖</div>
             <div class="returning-info">
               <div style="font-size:11px; font-family:var(--font-mono); color:var(--primary); font-weight:700;">AKUN AKTIF</div>
               <h4 style="font-size:17px; font-weight:800; margin:2px 0;" id="returningUserName">Pembelajar Thai</h4>
@@ -5842,114 +5981,54 @@
           </div>
         </div>
 
-        <!-- Mode B: Active Login / Register Form -->
+        <!-- Mode B: Active Login / Register Form (HANYA Nama & PIN) -->
         <form id="portalLoginForm" onsubmit="event.preventDefault(); handleStudentLogin();" style="display:block;">
-          <div class="portal-form-grid">
+          <div class="portal-form-grid" style="grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
             <div class="portal-field-group">
-              <label for="portalInputName" class="portal-label">NAMA PEMBELAJAR / PANGGILAN *</label>
+              <label for="portalInputName" class="portal-label">NAMA PEMBELAJAR / AKUN *</label>
               <div class="portal-input-wrap">
-                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (opsional, misal: Nesya / Zaldy)" autocomplete="name">
+                <input type="text" id="portalInputName" class="portal-text-input" placeholder="Tuliskan nama Anda (misal: Nesya)" required autocomplete="name">
                 <span class="portal-input-icon">👤</span>
               </div>
             </div>
 
             <div class="portal-field-group">
-              <label for="portalInputPin" class="portal-label">KATA SANDI / PIN (OPSIONAL)</label>
+              <label for="portalInputPin" class="portal-label">KATA SANDI / PIN *</label>
               <div class="portal-input-wrap">
-                <input type="password" id="portalInputPin" class="portal-text-input" placeholder="PIN opsional (misal: 1234)" maxlength="20" autocomplete="current-password">
+                <input type="password" id="portalInputPin" class="portal-text-input" placeholder="Buat PIN 4 digit (misal: 1234)" maxlength="20" required autocomplete="current-password">
                 <span class="portal-input-icon">🔑</span>
               </div>
             </div>
           </div>
 
-          <!-- Avatar Picker -->
-          <div class="portal-avatar-section">
-            <label class="portal-label">PILIH AVATAR PEMBELAJAR:</label>
-            <div class="portal-avatar-row" id="portalAvatarRow">
-              <button type="button" class="avatar-pick-btn active" data-avatar="🍃" onclick="selectStudentAvatar('🍃', this)" title="Nong Mali (Roh Hutan)">🍃</button>
-              <button type="button" class="avatar-pick-btn" data-avatar="🐘" onclick="selectStudentAvatar('🐘', this)" title="Chang Noi (Gajah Chiang Mai)">🐘</button>
-              <button type="button" class="avatar-pick-btn" data-avatar="🛺" onclick="selectStudentAvatar('🛺', this)" title="Pii Somchai (Petualang Bangkok)">🛺</button>
-              <button type="button" class="avatar-pick-btn" data-avatar="🌸" onclick="selectStudentAvatar('🌸', this)" title="Dok Bua (Bunga Teratai)">🌸</button>
-              <button type="button" class="avatar-pick-btn" data-avatar="🐯" onclick="selectStudentAvatar('🐯', this)" title="Sua Noi (Harimau Gesit)">🐯</button>
-              <button type="button" class="avatar-pick-btn" data-avatar="🦉" onclick="selectStudentAvatar('🦉', this)" title="Nok Hook (Burung Hantu Bijak)">🦉</button>
-            </div>
-          </div>
-
-          <!-- Native Voice Gender Selector & Greeting Audio Test -->
-          <div class="portal-gender-section">
-            <label class="portal-label">GAYA BICARA PENUTUR ASLI:</label>
-            <div class="portal-gender-pills">
-              <button type="button" class="portal-gender-btn active" id="portalGenderFemale" onclick="setPortalGender('female')" title="Gaya Bicara Sopan Wanita (ค่ะ/คะ)">
-                <span class="p-icon">👩</span>
-                <div>
-                  <strong>Wanita (ค่ะ / khâ)</strong>
-                  <small>Premwadee • Melodis</small>
-                </div>
-              </button>
-              <button type="button" class="portal-gender-btn" id="portalGenderMale" onclick="setPortalGender('male')" title="Gaya Bicara Sopan Pria (ครับ)">
-                <span class="p-icon">👨</span>
-                <div>
-                  <strong>Pria (ครับ / khráp)</strong>
-                  <small>Niwat • Berwibawa</small>
-                </div>
-              </button>
-              <button type="button" class="portal-test-audio-btn" onclick="playPortalGreetingAudio()" title="Dengarkan Contoh Sapaan Penutur Asli">
-                <span id="portalAudioIcon">🔊</span>
-                <span>Dengar Sapaan</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
+          <!-- Action Buttons (Foto 5: Skip button removed) -->
           <div class="portal-login-actions">
             <button type="submit" class="portal-main-cta-btn" style="width:100%; justify-content:center; padding:15px;">
-              <span>✨ Masuk & Mulai Belajar</span>
+              <span>✨ Masuk &amp; Simpan Data Belajar</span>
               <span class="cta-arrow">→</span>
             </button>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="portal-guest-btn" onclick="handleGuestLogin()">
-                ⚡ Masuk Cepat sebagai Tamu (Guest)
-              </button>
-              <span style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">
-                Kemajuan tersimpan otomatis di browser
+            <div style="text-align:center; margin-top:10px;">
+              <span style="font-size:11.5px; color:var(--text-dim); font-family:var(--font-mono);">
+                🔒 Data belajar Anda disimpan secara otomatis dan aman di browser dengan Akun &amp; PIN ini.
               </span>
             </div>
           </div>
         </form>
       </div>
 
-      <!-- QUICK FEATURE LAUNCHERS IN PORTAL -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; width:100%; margin-top:20px;">
-        <div class="portal-feature-card" onclick="enterLearningApp('writing')">
-          <div style="font-size:28px; margin-bottom:6px;">✍️</div>
-          <div style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:2px;">Kanvas Tulis Digital</div>
-          <div style="font-size:11px; color:var(--text-muted);">Latihan tracing goresan aksara Thai</div>
-        </div>
-        <div class="portal-feature-card" onclick="enterLearningApp('flashcards')">
-          <div style="font-size:28px; margin-bottom:6px;">🎴</div>
-          <div style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:2px;">Flashcard Pintar (SRS)</div>
-          <div style="font-size:11px; color:var(--text-muted);">Uji hafalan aksara & kartu 3D</div>
-        </div>
-        <div class="portal-feature-card" onclick="enterLearningApp('alphabet')">
-          <div style="font-size:28px; margin-bottom:6px;">🍃</div>
-          <div style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:2px;">Matriks 44 Aksara</div>
-          <div style="font-size:11px; color:var(--text-muted);">3 Kelas Nada & sebutan asli Bangkok</div>
-        </div>
-        <div class="portal-feature-card" onclick="enterLearningApp('jazmi-series')">
-          <div style="font-size:28px; margin-bottom:6px;">📖</div>
-          <div style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:2px;">119 Modul Teks</div>
-          <div style="font-size:11px; color:var(--text-muted);">Kurikulum lengkap 119 modul</div>
-        </div>
-      </div>
+      <!-- FOTO 2: 4 Feature cards REMOVED completely! -->
     </div>
   </div>
 
   <div class="app-shell">
     <!-- TOP HEADER -->
     <header class="top-header">
-      <div class="brand-cluster" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Portal Belajar">
-        <div class="brand-icon-box">
-          🍃
+              <button type="button" class="mobile-menu-toggle-btn" id="mobileHeaderMenuBtn" onclick="toggleMobileDrawer(true)" title="Buka Menu Lengkap">
+          ☰
+        </button>
+        <div class="brand-cluster" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Portal Belajar">
+        <div class="brand-icon-box" title="Buku Belajar Mali's Thai">
+          📖
         </div>
         <div class="brand-titles">
           <h1 style="font-size:18px; font-weight:800; letter-spacing:-0.02em; margin:0;">Mali's Thai</h1>
@@ -6065,9 +6144,7 @@
           <button class="icon-btn-compact" onclick="toggleAudioEngine()" id="audioToggleBtn" title="Toggle Efek Suara">
             🔊
           </button>
-          <button class="icon-btn-compact" id="headerThemeBtn" onclick="toggleColorTheme()" title="Ubah Suasana Siang / Malam">
-            🏮
-          </button>
+
         </div>
 
         <!-- Feature Utility Actions (Voice Studio, Mobile QR & PWA Install) -->
@@ -6090,6 +6167,15 @@
     <div class="app-body">
       <!-- LEFT NAV RAIL -->
       <aside class="stimuler-nav-rail">
+      <!-- Mobile Drawer Close Header -->
+      <div class="mobile-drawer-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">📖</span>
+          <strong style="font-size:14.5px; color:var(--text); font-weight:800;">Mali's Thai Menu</strong>
+        </div>
+        <button type="button" class="mobile-drawer-close-btn" onclick="toggleMobileDrawer(false)" title="Tutup Menu">✕</button>
+      </div>
+
         <div class="nav-section-title"><span class="section-icon">🧭</span> Navigasi Utama</div>
         <button class="nav-item-btn" id="navBtnPortal" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Ikon Belajar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px;"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
@@ -7812,7 +7898,7 @@
       soundEnabled: true,
       speechRate: 1.0,
       speakerGender: 'female',
-      theme: 'dark',
+      theme: 'light',
       thaiFontStyle: 'looped',
       thaiScriptMode: 'full',
       completedJazmiVideos: [],
@@ -15497,10 +15583,10 @@
     }
 
     function applyColorTheme(theme) {
-      if (theme !== 'light' && theme !== 'dark') theme = 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-      document.body.setAttribute('data-theme', theme);
-      appState.theme = theme;
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.body.setAttribute('data-theme', 'light');
+      appState.theme = 'light';
+      localStorage.setItem('mali_app_theme', 'light');
       
       const portalIcon = document.getElementById('portalThemeIcon');
       const portalLabel = document.getElementById('portalThemeLabel');
@@ -19605,8 +19691,30 @@
       }
     }
 
+    
+    /* ==========================================================================
+       FITUR: MOBILE SMARTPHONE NAVIGATION LOGIC
+       ========================================================================== */
+    function toggleMobileDrawer(open) {
+      const drawer = document.querySelector('.stimuler-nav-rail');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      if (!drawer) return;
+      const shouldOpen = typeof open === 'boolean' ? open : !drawer.classList.contains('mobile-open');
+      drawer.classList.toggle('mobile-open', shouldOpen);
+      if (backdrop) backdrop.style.display = shouldOpen ? 'block' : 'none';
+      if (shouldOpen) playSynthSound('click');
+    }
+
+    function switchNavTabMobile(tabId, btn) {
+      switchNavTab(tabId);
+      toggleMobileDrawer(false);
+      document.querySelectorAll('.mobile-nav-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+
     /* INITIALIZE APP */
-    applyColorTheme(appState.theme || 'dark');
+    applyColorTheme('light');
     applyThaiFontStyle(appState.thaiFontStyle || 'looped');
     applyThaiScriptMode(appState.thaiScriptMode || 'full');
     document.getElementById('audioToggleBtn').textContent = appState.soundEnabled ? '🔊' : '🔇';
@@ -19744,6 +19852,35 @@
       </div>
     </div>
   </div>
+
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM NAVIGATION & DRAWER BACKDROP (SMARTPHONE ADAPTED)
+       ========================================================================== -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="toggleMobileDrawer(false)"></div>
+
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button type="button" class="mobile-nav-btn active" data-tab="alphabet" onclick="switchNavTabMobile('alphabet', this)">
+      <span class="m-icon">🔤</span>
+      <span class="m-label">Aksara</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-tab="tones" onclick="switchNavTabMobile('tones', this)">
+      <span class="m-icon">🎵</span>
+      <span class="m-label">5 Nada</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-tab="jazmi-series" onclick="switchNavTabMobile('jazmi-series', this)">
+      <span class="m-icon">📚</span>
+      <span class="m-label">Materi</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-tab="writing" onclick="switchNavTabMobile('writing', this)">
+      <span class="m-icon">✍️</span>
+      <span class="m-label">Tulis</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" onclick="toggleMobileDrawer(true)">
+      <span class="m-icon">☰</span>
+      <span class="m-label">Menu</span>
+    </button>
+  </nav>
 
 </body>
 </html>
