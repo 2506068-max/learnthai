@@ -45,3 +45,4 @@ print(f"Consonant PDF magic header: {c_head}")
 with open(vowel_pdf, 'rb') as f:
     v_head = f.read(20)
 print(f"Vowel PDF magic header: {v_head}")
+
