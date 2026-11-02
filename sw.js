@@ -1,11 +1,10 @@
-const CACHE_NAME = 'mali-thai-academy-v1';
+const CACHE_NAME = 'mali-thai-academy-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/fairy_thai_academy.html',
   '/manifest.json',
-  '/icon.svg',
-  'https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sarabun:wght@400;600;700&family=Noto+Sans+Thai:wght@400;600;700&family=Kanit:wght@400;600&family=Mali:wght@400;600&family=JetBrains+Mono:wght@500;700&display=swap'
+  '/icon.svg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -49,7 +48,27 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Stale-while-revalidate for HTML and static assets
+  // Handle navigation requests (Network-first with offline fallback)
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(event.request).then((res) => {
+            return res || caches.match('/fairy_thai_academy.html') || caches.match('/');
+          });
+        })
+    );
+    return;
+  }
+
+  // Stale-while-revalidate for static assets
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request).then((networkResponse) => {
@@ -64,4 +83,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-

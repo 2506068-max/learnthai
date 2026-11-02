@@ -1,8 +1,9 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "rewrites": [
     { "source": "/", "destination": "/fairy_thai_academy.html" },
+    { "source": "/fairy_thai_academy", "destination": "/fairy_thai_academy.html" },
     { "source": "/index.html", "destination": "/fairy_thai_academy.html" }
   ],
   "functions": {
