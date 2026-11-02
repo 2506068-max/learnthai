@@ -5289,18 +5289,44 @@
     }
 
     .floating-ai-trigger {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 6px 14px 6px 7px;
-      background: var(--bg-card);
-      border: 1.5px solid var(--primary);
-      border-radius: var(--radius-pill);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), 0 0 20px var(--primary-glow);
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      padding: 0;
+      background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);
+      border: 2.5px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(45, 106, 79, 0.42), 0 0 18px var(--primary-glow);
       cursor: grab;
-      transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      transition: box-shadow 0.2s ease, transform 0.18s ease, border-color 0.2s ease;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    .floating-ai-trigger:hover {
+      box-shadow: 0 12px 32px rgba(45, 106, 79, 0.55), 0 0 24px var(--primary-glow);
+      transform: translateY(-2px) scale(1.06);
+    }
+
+    .floating-ai-trigger:active, .floating-ai-container.dragging .floating-ai-trigger {
+      cursor: grabbing;
+      transform: scale(0.95);
+    }
+
+    .floating-lotus-icon {
+      font-size: 26px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .floating-ai-trigger:hover .floating-lotus-icon {
+      transform: scale(1.12) rotate(6deg);
     }
 
     .floating-ai-trigger:hover {
@@ -5921,16 +5947,16 @@
   <div id="learningPortal" class="portal-visible">
     <div class="portal-top-bar">
       <div class="portal-top-brand">
-        <span style="font-size:20px;">📖</span>
+        <span style="font-size:20px;">🪷</span>
         <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; font-weight:700;">Mali's Thai</span>
       </div>
     </div>
     <div class="portal-inner" style="margin-top:28px;">
-      <!-- Centered Learning Emblem (FOTO 1: Logo Buku AI 📖) -->
+      <!-- Centered Learning Emblem (Logo Teratai Nong Mali 🪷) -->
       <div class="learning-icon-container">
         <div class="learning-icon-halo"></div>
-        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="document.getElementById('portalInputName').focus()" title="Mali's Thai - Buku Pintar AI Belajar Bahasa Thailand" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%); border-radius: 28px; box-shadow: 0 16px 36px rgba(45, 106, 79, 0.38); display: flex; align-items: center; justify-content: center; width: 110px; height: 110px; position: relative; cursor: pointer;">
-          <span style="font-size: 52px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); display: inline-block;">📖</span>
+        <div class="learning-icon-emblem" id="portalLearningEmblem" onclick="document.getElementById('portalInputName').focus()" title="Mali's Thai - Taman Belajar Bahasa Thailand" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%); border-radius: 28px; box-shadow: 0 16px 36px rgba(45, 106, 79, 0.38); display: flex; align-items: center; justify-content: center; width: 110px; height: 110px; position: relative; cursor: pointer;">
+          <span style="font-size: 52px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); display: inline-block;">🪷</span>
           <span class="floating-ai-online-ping" style="top: 8px; right: 8px; width: 12px; height: 12px;"></span>
         </div>
       </div>
@@ -5964,7 +5990,7 @@
         <!-- Mode A: Returning User Account Card -->
         <div id="portalReturningUserView" style="display:none;">
           <div class="returning-user-box">
-            <div class="returning-avatar" id="returningUserAvatar">📖</div>
+            <div class="returning-avatar" id="returningUserAvatar">🪷</div>
             <div class="returning-info">
               <div style="font-size:11px; font-family:var(--font-mono); color:var(--primary); font-weight:700;">AKUN AKTIF</div>
               <h4 style="font-size:17px; font-weight:800; margin:2px 0;" id="returningUserName">Pembelajar Thai</h4>
@@ -6027,8 +6053,8 @@
           ☰
         </button>
         <div class="brand-cluster" onclick="openLearningPortal()" title="Kembali ke Layar Pembuka / Portal Belajar">
-        <div class="brand-icon-box" title="Buku Belajar Mali's Thai">
-          📖
+        <div class="brand-icon-box" title="Mali's Thai">
+          🪷
         </div>
         <div class="brand-titles">
           <h1 style="font-size:18px; font-weight:800; letter-spacing:-0.02em; margin:0;">Mali's Thai</h1>
@@ -6170,7 +6196,7 @@
       <!-- Mobile Drawer Close Header -->
       <div class="mobile-drawer-header">
         <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:20px;">📖</span>
+          <span style="font-size:20px;">🪷</span>
           <strong style="font-size:14.5px; color:var(--text); font-weight:800;">Mali's Thai Menu</strong>
         </div>
         <button type="button" class="mobile-drawer-close-btn" onclick="toggleMobileDrawer(false)" title="Tutup Menu">✕</button>
@@ -6272,7 +6298,7 @@
         <!-- AI Coach Card Pill -->
         <div class="ai-coach-pill" onclick="switchNavTab('ai-hub'); triggerCoachGreeting();" title="Buka Asisten AI Nong Mali">
           <div class="ai-avatar" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);">
-            📖
+            🪷
             <div class="ai-online-dot"></div>
           </div>
           <div class="ai-coach-info">
@@ -16435,7 +16461,7 @@
       container.innerHTML = qaChatHistory.map(msg => `
         <div class="qa-msg-bubble ${msg.sender}">
           <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">
-            ${msg.sender === 'user' ? '👤 Anda' : '📖 Buku Pintar AI'}
+            ${msg.sender === 'user' ? '👤 Anda' : '🪷 Nong Mali AI'}
           </div>
           <div style="white-space:pre-line;">${msg.text}</div>
           ${msg.songCards && typeof renderSongCardsHtml === 'function' ? renderSongCardsHtml(msg.songCards) : ''}
@@ -16536,7 +16562,7 @@
       const typingEl = document.createElement('div');
       typingEl.className = 'qa-msg-bubble bot';
       typingEl.id = 'qaTypingIndicator';
-      typingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">📖 Buku Pintar AI sedang berpikir & menyiapkan jawaban...</span>`;
+      typingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">🪷 Nong Mali sedang berpikir & menyiapkan jawaban...</span>`;
       if (container) {
         container.appendChild(typingEl);
         container.scrollTop = container.scrollHeight;
@@ -16547,7 +16573,7 @@
         const floatTypingEl = document.createElement('div');
         floatTypingEl.className = 'qa-msg-bubble bot';
         floatTypingEl.id = 'floatingQaTypingIndicator';
-        floatTypingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">📖 Buku Pintar AI sedang berpikir & menyiapkan jawaban...</span>`;
+        floatTypingEl.innerHTML = `<span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">🪷 Nong Mali sedang berpikir & menyiapkan jawaban...</span>`;
         floatContainer.appendChild(floatTypingEl);
         floatContainer.scrollTop = floatContainer.scrollHeight;
       }
@@ -19459,8 +19485,8 @@
       if (!qaChatHistory || !qaChatHistory.length) {
         container.innerHTML = `
           <div class="qa-msg-bubble bot">
-            <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">📖 Buku Pintar AI Nong Mali</div>
-            <div>Halo! Saya asisten pintar AI bahasa & musik Thailand Anda. 🎵<br><br>Tanyakan apa saja seputar lagu Thai, budaya, kosakata, atau minta rekomendasi playlist!</div>
+            <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">🪷 Nong Mali AI</div>
+            <div>Halo! Saya Nong Mali, asisten pintar AI bahasa & musik Thailand Anda. 🎵<br><br>Tanyakan apa saja seputar lagu Thai, budaya, kosakata, atau minta rekomendasi playlist!</div>
           </div>
         `;
         return;
@@ -19469,7 +19495,7 @@
       container.innerHTML = qaChatHistory.map(msg => `
         <div class="qa-msg-bubble ${msg.sender}">
           <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); margin-bottom:3px; font-family:var(--font-mono);">
-            ${msg.sender === 'user' ? '👤 Anda' : '📖 Buku Pintar AI'}
+            ${msg.sender === 'user' ? '👤 Anda' : '🪷 Nong Mali AI'}
           </div>
           <div style="white-space:pre-line; font-size:12.5px; line-height:1.45;">${msg.text}</div>
           ${msg.songCards ? renderSongCardsHtml(msg.songCards) : ''}
@@ -19743,15 +19769,11 @@
        FITUR: FLOATING DRAGGABLE AI ASSISTANT WIDGET (BUKU PINTAR AI & PENCARIAN LAGU)
        ========================================================================== -->
   <div id="floatingAiWidget" class="floating-ai-container">
-    <!-- Floating Trigger Pill (Draggable) -->
-    <div id="floatingAiBtn" class="floating-ai-trigger" title="Buku Pintar AI & Musik Thai (Tahan & geser untuk memindahkan posisi)" aria-label="Buka Asisten Pintar AI">
+    <!-- Floating Trigger Avatar (Draggable, Circular Nong Mali, Just the Lotus Logo) -->
+    <div id="floatingAiBtn" class="floating-ai-trigger" title="Nong Mali AI (Tahan &amp; geser untuk memindahkan posisi)" aria-label="Buka Asisten Nong Mali AI">
       <div class="floating-ai-icon-box">
-        <span class="floating-book-icon">📖</span>
+        <span class="floating-lotus-icon">🪷</span>
         <span class="floating-ai-online-ping"></span>
-      </div>
-      <div class="floating-ai-pill-label">
-        <span class="floating-ai-pill-title">Buku AI <span>✨</span></span>
-        <span class="floating-ai-pill-subtitle">Tanya &amp; Cari Lagu</span>
       </div>
     </div>
 
@@ -19760,9 +19782,9 @@
       <!-- Flyout Header -->
       <div class="floating-ai-header">
         <div class="floating-ai-header-brand">
-          <div class="floating-ai-header-icon">📖</div>
+          <div class="floating-ai-header-icon">🪷</div>
           <div>
-            <h4>Buku Pintar AI &amp; Musik</h4>
+            <h4>Nong Mali AI</h4>
             <span>● Online • Tanya Jawab &amp; Cari Lagu</span>
           </div>
         </div>
@@ -19775,7 +19797,7 @@
       <!-- Navigation Tabs -->
       <div class="floating-ai-tabs-bar">
         <button type="button" class="floating-ai-tab active" id="tabBtnFloatChat" onclick="setFloatingAiTab('chat')">
-          <span>💬</span> Tanya AI
+          <span>💬</span> Tanya Nong Mali
         </button>
         <button type="button" class="floating-ai-tab" id="tabBtnFloatSong" onclick="setFloatingAiTab('song')">
           <span>🎵</span> Cari Lagu
