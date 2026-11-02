@@ -2,7 +2,7 @@
 <html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
   <title>Mali's Thai</title>
   <meta name="description" content="Taman belajar dan latihan berbicara bahasa Thailand dengan AI Coach bertema Studio Ghibli, evaluasi suara asli, dan simulasi percakapan.">
@@ -5759,7 +5759,7 @@
   
 
     /* ==========================================================================
-       FITUR: MOBILE SMARTPHONE ADAPTATION (BOTTOM NAV & OFFCANVAS DRAWER)
+       FITUR: MOBILE SMARTPHONE ADAPTATION (PRECISE MOBILE VIEW & NO BLUR)
        ========================================================================== */
     .mobile-menu-toggle-btn {
       display: none;
@@ -5788,12 +5788,10 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 60px;
-      background: rgba(253, 251, 247, 0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid var(--border-bright);
-      box-shadow: 0 -4px 20px rgba(45, 106, 79, 0.08);
+      height: 56px;
+      background: #ffffff;
+      border-top: 1px solid rgba(45, 106, 79, 0.16);
+      box-shadow: 0 -2px 14px rgba(0, 0, 0, 0.06);
       z-index: 99990;
       justify-content: space-around;
       align-items: center;
@@ -5807,7 +5805,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: 2px;
       background: transparent;
       border: none;
       color: var(--text-muted);
@@ -5817,12 +5815,12 @@
       touch-action: manipulation;
     }
     .mobile-nav-btn .m-icon {
-      font-size: 19px;
+      font-size: 18px;
       line-height: 1;
       transition: transform 0.15s ease;
     }
     .mobile-nav-btn .m-label {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
       letter-spacing: -0.01em;
       line-height: 1;
@@ -5834,6 +5832,7 @@
       transform: scale(1.15);
     }
 
+    /* Clean Solid Backdrop - NO BLUR */
     .mobile-drawer-backdrop {
       display: none;
       position: fixed;
@@ -5841,11 +5840,11 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.32);
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
       z-index: 99995;
-      animation: fadeInBackdrop 0.2s ease;
+      animation: fadeInBackdrop 0.18s ease;
     }
 
     @keyframes fadeInBackdrop {
@@ -5857,9 +5856,9 @@
       display: none;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border);
-      background: var(--bg-card);
+      background: #fdfbf7;
       flex-shrink: 0;
     }
     .mobile-drawer-close-btn {
@@ -5867,7 +5866,7 @@
       height: 32px;
       border-radius: 50%;
       border: 1px solid var(--border);
-      background: var(--bg-surface);
+      background: #ffffff;
       color: var(--text);
       display: grid;
       place-items: center;
@@ -5875,27 +5874,78 @@
       cursor: pointer;
     }
 
-    @media (max-width: 768px) {
+    /* PRECISE MOBILE PHONE LAYOUT - NEVER LOOKS LIKE DESKTOP MODE */
+    @media (max-width: 900px) {
+      /* Force mobile layout for screens under 900px (tablets & all phones) */
+      html, body {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+      }
+      .app-shell, .app-body {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        display: block !important;
+      }
+
+      /* Header compact styling */
+      .top-header {
+        height: 52px !important;
+        padding: 0 10px !important;
+        gap: 6px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
       .mobile-menu-toggle-btn {
-        display: flex;
+        display: flex !important;
       }
-      .mobile-bottom-nav {
-        display: flex;
+      .brand-titles h1 {
+        font-size: 15px !important;
       }
+      .brand-icon-box {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 16px !important;
+      }
+
+      /* Hide excessive desktop controls from header on mobile */
+      .stats-group-pill,
+      .gender-segmented-control,
+      .header-feature-btn,
+      .metric-native-badge,
+      .header-utils-group {
+        display: none !important;
+      }
+
+      .profile-badge-name {
+        display: none !important;
+      }
+      .user-profile-badge {
+        padding: 3px 6px !important;
+      }
+      .thai-font-trigger-btn {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+      }
+
+      /* Sidebar is OFF-CANVAS DRAWER, NOT taking 80px space */
       .stimuler-nav-rail {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        width: 290px !important;
+        width: 280px !important;
         max-width: 82vw !important;
         height: 100vh !important;
         z-index: 100000 !important;
         background: #fdfbf7 !important;
-        transform: translateX(-100%);
-        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25) !important;
-        padding: 0 0 40px 0 !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18) !important;
+        padding: 0 0 50px 0 !important;
         overflow-y: auto !important;
+        display: flex !important;
+        border-right: 1.5px solid var(--border-bright) !important;
       }
       .stimuler-nav-rail.mobile-open {
         transform: translateX(0) !important;
@@ -5906,35 +5956,74 @@
       .stimuler-nav-rail.mobile-open .nav-user-info {
         display: block !important;
       }
+      .stimuler-nav-rail .nav-item-btn {
+        padding: 11px 16px !important;
+        font-size: 13.5px !important;
+        width: 100% !important;
+      }
       .mobile-drawer-header {
-        display: flex;
+        display: flex !important;
       }
+
+      /* Main container: Takes 100% full width, no right whitespace */
       .stimuler-main {
-        padding: 14px 12px 95px 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px 10px 80px 10px !important;
+        box-sizing: border-box !important;
       }
-      .header-feature-btn {
-        display: none !important;
+
+      /* Bottom Nav visible */
+      .mobile-bottom-nav {
+        display: flex !important;
       }
+
+      /* Alphabet Matrix: Fills mobile screen in 3 clean columns */
+      .alphabet-cards-matrix {
+        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+      }
+      .glyph-card {
+        padding: 10px 6px !important;
+      }
+      .glyph-thai {
+        font-size: 32px !important;
+      }
+
+      /* Bento classes: 1 column full width */
+      .class-guide-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        width: 100% !important;
+      }
+
+      /* Floating Nong Mali button: sits above bottom nav */
       .floating-ai-container {
-        bottom: 74px !important;
-        right: 14px !important;
+        bottom: 66px !important;
+        right: 12px !important;
       }
       .floating-ai-window {
-        width: calc(100vw - 20px) !important;
-        max-height: calc(100vh - 140px) !important;
+        width: calc(100vw - 16px) !important;
+        max-width: 380px !important;
+        max-height: calc(100vh - 125px) !important;
         right: 0 !important;
         left: auto !important;
+        background: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22) !important;
       }
+
       .portal-login-card {
-        padding: 18px 14px !important;
+        padding: 16px 12px !important;
       }
       .portal-form-grid {
         grid-template-columns: 1fr !important;
         gap: 10px !important;
       }
     }
-
-</style>
+  </style>
   <script src="thai_dictionary_data.js"></script>
 </head>
 <body>
