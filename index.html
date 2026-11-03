@@ -6075,15 +6075,20 @@
         right: 12px !important;
       }
       .floating-ai-window {
-        width: calc(100vw - 16px) !important;
-        max-width: 380px !important;
-        max-height: calc(100vh - 125px) !important;
-        right: 0 !important;
-        left: auto !important;
+        position: fixed !important;
+        bottom: 74px !important;
+        left: 10px !important;
+        right: 10px !important;
+        width: auto !important;
+        max-width: none !important;
+        height: 76vh !important;
+        max-height: calc(100vh - 120px) !important;
         background: #ffffff !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28) !important;
+        z-index: 100000 !important;
       }
 
       .portal-login-card {
@@ -6094,7 +6099,117 @@
         gap: 10px !important;
       }
     }
-  </style>
+  
+    /* ==========================================================================
+       FITUR: FLOATING AI SMART SEARCH CARDS & MODAL STYLES
+       ========================================================================== */
+    .float-result-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      transition: all 0.16s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .float-result-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 16px rgba(45, 106, 79, 0.12);
+      transform: translateY(-1px);
+    }
+    .float-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .float-tag-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .float-tag-badge.song {
+      background: rgba(45, 106, 79, 0.12);
+      color: #2d6a4f;
+    }
+    .float-tag-badge.cartoon {
+      background: rgba(247, 127, 0, 0.14);
+      color: #c25e00;
+    }
+    .float-tag-badge.vocab {
+      background: rgba(37, 99, 235, 0.12);
+      color: #1d4ed8;
+    }
+    .float-tag-badge.consonant {
+      background: rgba(147, 51, 234, 0.12);
+      color: #7e22ce;
+    }
+    .float-btn-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+    .float-action-btn-yt {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: #dc2626;
+      color: #ffffff !important;
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+    .float-action-btn-yt:hover {
+      opacity: 0.9;
+    }
+    .float-action-btn-sp {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: #10b981;
+      color: #ffffff !important;
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+    .float-action-btn-sp:hover {
+      opacity: 0.9;
+    }
+    .float-action-btn-audio {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .float-action-btn-audio:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+</style>
   <script src="thai_dictionary_data.js"></script>
 </head>
 <body>
@@ -19894,8 +20009,9 @@
       }
     ];
 
+
     /* ==========================================================================
-       FITUR: FLOATING DRAGGABLE WIDGET CONTROLLER
+       FITUR: FLOATING DRAGGABLE AI ASSISTANT & SMART SEARCH CONTROLLER
        ========================================================================== */
     let floatIsDragging = false;
     let floatDragStartX = 0;
@@ -19904,8 +20020,8 @@
     let floatInitialLeft = 0;
     let floatInitialTop = 0;
     let floatHasMoved = false;
-    let floatActiveTab = 'chat';
-    let currentSongFilter = 'all';
+    let floatActiveTab = 'search';
+    let currentFloatSearchCategory = 'all';
     let floatLastTapHandled = 0;
 
     function executeNongMaliActivation() {
@@ -19916,20 +20032,15 @@
       if (portal && portal.classList.contains('portal-visible')) {
         portal.classList.remove('portal-visible');
         portal.classList.add('portal-hidden');
+        portal.style.display = 'none';
         document.body.classList.remove('in-portal-mode');
       }
 
       // Close mobile drawer if open
       toggleMobileDrawer(false);
 
-      // Switch to AI Hub (Nong Mali)
-      switchNavTab('ai-hub');
-
-      // Trigger Nong Mali Bangkok voice greeting & toast
-      triggerCoachGreeting();
-
-      // Scroll smoothly to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Toggle the floating AI Search window!
+      toggleFloatingAiWindow();
 
       // Visual feedback on the floating lotus button
       const trigger = document.getElementById('floatingAiBtn');
@@ -19944,20 +20055,22 @@
       const trigger = document.getElementById('floatingAiBtn');
       if (!container || !trigger) return;
 
-      // Restore position from localStorage
-      const savedLeft = localStorage.getItem('mali_ai_pos_left');
-      const savedTop = localStorage.getItem('mali_ai_pos_top');
-      if (savedLeft !== null && savedTop !== null) {
-        const pad = 12;
-        const maxL = window.innerWidth - 60;
-        const maxT = window.innerHeight - 60;
-        const boundedLeft = Math.max(pad, Math.min(Number(savedLeft), maxL));
-        const boundedTop = Math.max(pad, Math.min(Number(savedTop), maxT));
-        container.style.left = boundedLeft + 'px';
-        container.style.top = boundedTop + 'px';
-        container.style.bottom = 'auto';
-        container.style.right = 'auto';
-        adjustFloatingFlyoutPosition(boundedLeft, boundedTop);
+      // Restore position from localStorage on desktop (keep default on mobile)
+      if (window.innerWidth > 900) {
+        const savedLeft = localStorage.getItem('mali_ai_pos_left');
+        const savedTop = localStorage.getItem('mali_ai_pos_top');
+        if (savedLeft !== null && savedTop !== null) {
+          const pad = 12;
+          const maxL = window.innerWidth - 60;
+          const maxT = window.innerHeight - 60;
+          const boundedLeft = Math.max(pad, Math.min(Number(savedLeft), maxL));
+          const boundedTop = Math.max(pad, Math.min(Number(savedTop), maxT));
+          container.style.left = boundedLeft + 'px';
+          container.style.top = boundedTop + 'px';
+          container.style.bottom = 'auto';
+          container.style.right = 'auto';
+          adjustFloatingFlyoutPosition(boundedLeft, boundedTop);
+        }
       }
 
       // Mouse Dragging (Desktop)
@@ -19999,7 +20112,7 @@
           endFloatDrag();
 
           const duration = Date.now() - floatDragStartTime;
-          // If tap was short (< 350ms) or movement was tiny (< 15px), activate Nong Mali immediately!
+          // If tap was short (< 350ms) or movement was tiny (< 15px), activate Nong Mali Search immediately!
           if (!floatHasMoved || duration < 350) {
             floatLastTapHandled = Date.now();
             executeNongMaliActivation();
@@ -20020,9 +20133,30 @@
         }
       });
 
-      // Render default chat & songs
+      // Close when clicking outside on desktop/mobile
+      document.addEventListener('click', (e) => {
+        const win = document.getElementById('floatingAiWindow');
+        const trig = document.getElementById('floatingAiBtn');
+        if (win && win.style.display !== 'none') {
+          if (!win.contains(e.target) && !trig.contains(e.target)) {
+            toggleFloatingAiWindow(false);
+          }
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const win = document.getElementById('floatingAiWindow');
+          if (win && win.style.display !== 'none') {
+            toggleFloatingAiWindow(false);
+          }
+        }
+      });
+
+      // Render default search results & chat
+      renderFloatingUnifiedResults('');
       renderFloatingChatMessages();
-      renderFloatingSongList(THAI_SONGS_DATABASE);
     }
 
     function startFloatDrag(cx, cy) {
@@ -20053,56 +20187,49 @@
       const container = document.getElementById('floatingAiWidget');
       const rect = container.getBoundingClientRect();
       const pad = 10;
+      let newL = floatInitialLeft + dx;
+      let newT = floatInitialTop + dy;
 
-      let newLeft = floatInitialLeft + dx;
-      let newTop = floatInitialTop + dy;
+      newL = Math.max(pad, Math.min(newL, window.innerWidth - rect.width - pad));
+      newT = Math.max(pad, Math.min(newT, window.innerHeight - rect.height - pad));
 
-      const maxLeft = window.innerWidth - rect.width - pad;
-      const maxTop = window.innerHeight - rect.height - pad;
-
-      newLeft = Math.max(pad, Math.min(newLeft, maxLeft));
-      newTop = Math.max(pad, Math.min(newTop, maxTop));
-
-      container.style.left = newLeft + 'px';
-      container.style.top = newTop + 'px';
+      container.style.left = newL + 'px';
+      container.style.top = newT + 'px';
       container.style.bottom = 'auto';
       container.style.right = 'auto';
 
-      adjustFloatingFlyoutPosition(newLeft, newTop);
+      adjustFloatingFlyoutPosition(newL, newT);
     }
 
     function endFloatDrag() {
       if (!floatIsDragging) return;
       floatIsDragging = false;
       const container = document.getElementById('floatingAiWidget');
-      if (container) {
-        container.classList.remove('dragging');
+      container.classList.remove('dragging');
+
+      if (floatHasMoved && window.innerWidth > 900) {
         const rect = container.getBoundingClientRect();
-        if (floatHasMoved) {
-          localStorage.setItem('mali_ai_pos_left', Math.round(rect.left));
-          localStorage.setItem('mali_ai_pos_top', Math.round(rect.top));
-        }
+        localStorage.setItem('mali_ai_pos_left', Math.round(rect.left));
+        localStorage.setItem('mali_ai_pos_top', Math.round(rect.top));
       }
     }
 
     function adjustFloatingFlyoutPosition(left, top) {
+      if (window.innerWidth <= 900) return; // On mobile, CSS handles positioning as fixed card
       const win = document.getElementById('floatingAiWindow');
       if (!win) return;
 
-      const isTopHalf = top < 350;
-      const isLeftHalf = left < 430;
-
-      if (isTopHalf) {
-        win.style.top = '54px';
+      if (top < 380) {
         win.style.bottom = 'auto';
+        win.style.top = '56px';
       } else {
         win.style.bottom = '56px';
         win.style.top = 'auto';
       }
 
-      if (isLeftHalf) {
-        win.style.left = '0';
+      if (left < 360) {
         win.style.right = 'auto';
+        win.style.left = '0';
       } else {
         win.style.right = '0';
         win.style.left = 'auto';
@@ -20118,14 +20245,22 @@
 
       if (shouldOpen) {
         const container = document.getElementById('floatingAiWidget');
-        const rect = container.getBoundingClientRect();
-        adjustFloatingFlyoutPosition(rect.left, rect.top);
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          adjustFloatingFlyoutPosition(rect.left, rect.top);
+        }
         win.style.display = 'flex';
         playSynthSound('click');
+        setFloatingAiTab('search');
         setTimeout(() => {
-          const input = document.getElementById('floatingChatInput');
-          if (input) input.focus();
-        }, 100);
+          const input = document.getElementById('floatingUnifiedSearchInput');
+          if (input) {
+            input.focus();
+            if (!input.value) {
+              renderFloatingUnifiedResults('');
+            }
+          }
+        }, 80);
       } else {
         win.style.display = 'none';
         playSynthSound('click');
@@ -20137,18 +20272,19 @@
       document.querySelectorAll('.floating-ai-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.floating-tab-body').forEach(b => b.style.display = 'none');
 
-      if (tab === 'chat') {
+      if (tab === 'search') {
+        const btn = document.getElementById('tabBtnFloatSearch');
+        const body = document.getElementById('floatTabSearch');
+        if (btn) btn.classList.add('active');
+        if (body) body.style.display = 'flex';
+        const input = document.getElementById('floatingUnifiedSearchInput');
+        renderFloatingUnifiedResults(input ? input.value : '', currentFloatSearchCategory);
+      } else if (tab === 'chat') {
         const btn = document.getElementById('tabBtnFloatChat');
         const body = document.getElementById('floatTabChat');
         if (btn) btn.classList.add('active');
         if (body) body.style.display = 'flex';
         renderFloatingChatMessages();
-      } else if (tab === 'song') {
-        const btn = document.getElementById('tabBtnFloatSong');
-        const body = document.getElementById('floatTabSong');
-        if (btn) btn.classList.add('active');
-        if (body) body.style.display = 'flex';
-        renderFloatingSongList(THAI_SONGS_DATABASE);
       } else if (tab === 'trans') {
         const btn = document.getElementById('tabBtnFloatTrans');
         const body = document.getElementById('floatTabTrans');
@@ -20164,7 +20300,334 @@
     }
 
     /* ==========================================================================
-       FITUR: CHAT & PENCARIAN LAGU DI DALAM FLOATING WIDGET
+       FITUR: PENCARIAN PINTAR UNIFIED (LAGU, TONTONAN, KOSAKATA, AKSARA, AI)
+       ========================================================================== */
+    function setFloatingSearchCategory(cat, btn) {
+      playSynthSound('click');
+      currentFloatSearchCategory = cat;
+      const pills = document.querySelectorAll('#floatingSearchCategoryPills .pill-filter');
+      pills.forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const input = document.getElementById('floatingUnifiedSearchInput');
+      const q = input ? input.value : '';
+      renderFloatingUnifiedResults(q, cat);
+    }
+
+    function onFloatingUnifiedSearch(value) {
+      const clearBtn = document.getElementById('floatingSearchClearBtn');
+      if (clearBtn) {
+        clearBtn.style.display = value ? 'block' : 'none';
+      }
+      renderFloatingUnifiedResults(value, currentFloatSearchCategory);
+    }
+
+    function executeFloatingUnifiedSearch(value) {
+      const q = (value || '').trim();
+      if (!q) return;
+      renderFloatingUnifiedResults(q, currentFloatSearchCategory);
+    }
+
+    function clearFloatingSearch() {
+      const input = document.getElementById('floatingUnifiedSearchInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      const clearBtn = document.getElementById('floatingSearchClearBtn');
+      if (clearBtn) clearBtn.style.display = 'none';
+      renderFloatingUnifiedResults('', currentFloatSearchCategory);
+    }
+
+    function triggerFloatingSearchMic() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        showToast('Fitur input suara belum didukung di browser ini.');
+        return;
+      }
+      try {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recog = new SpeechRec();
+        recog.lang = 'id-ID';
+        recog.interimResults = false;
+        recog.maxAlternatives = 1;
+        const input = document.getElementById('floatingUnifiedSearchInput');
+        const prevPlaceholder = input ? input.placeholder : '';
+        if (input) input.placeholder = '🎙️ Mendengarkan... Katakan judul lagu atau kata';
+        showToast('🎙️ Mendengarkan suara... Silakan berbicara');
+
+        recog.onresult = (e) => {
+          const transcript = e.results[0][0].transcript;
+          if (input) {
+            input.value = transcript;
+            input.placeholder = prevPlaceholder;
+            const clearBtn = document.getElementById('floatingSearchClearBtn');
+            if (clearBtn) clearBtn.style.display = 'block';
+          }
+          renderFloatingUnifiedResults(transcript, currentFloatSearchCategory);
+          showToast(`Mencari: "${transcript}"`);
+        };
+        recog.onerror = () => {
+          if (input) input.placeholder = prevPlaceholder;
+          showToast('Suara tidak terdengar.');
+        };
+        recog.start();
+      } catch (err) {
+        showToast('Mikrofon tidak dapat diakses.');
+      }
+    }
+
+    function renderFloatingUnifiedResults(rawQuery = '', filterCategory = 'all') {
+      const container = document.getElementById('floatingSearchResultsContainer');
+      if (!container) return;
+
+      const q = (rawQuery || '').trim().toLowerCase();
+
+      // CASE A: EMPTY QUERY -> SHOW POPULAR RECOMMENDATIONS & FEATURED PICKS
+      if (!q) {
+        let featuredMedia = [];
+        if (typeof THAI_MEDIA_DATABASE !== 'undefined') {
+          if (filterCategory === 'song') {
+            featuredMedia = THAI_MEDIA_DATABASE.filter(m => m.category === 'song').slice(0, 5);
+          } else if (filterCategory === 'cartoon') {
+            featuredMedia = THAI_MEDIA_DATABASE.filter(m => m.category === 'cartoon' || m.category === 'learning').slice(0, 5);
+          } else {
+            featuredMedia = THAI_MEDIA_DATABASE.slice(0, 4);
+          }
+        }
+
+        container.innerHTML = `
+          <!-- Welcome Banner -->
+          <div style="background:linear-gradient(135deg, rgba(45, 106, 79, 0.08) 0%, rgba(82, 183, 136, 0.12) 100%); border:1px solid rgba(45, 106, 79, 0.18); border-radius:var(--radius-lg); padding:12px 14px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span style="font-size:16px;">🪷</span>
+              <h5 style="margin:0; font-size:13px; font-weight:800; color:var(--text);">Pencarian Cerdas Nong Mali AI</h5>
+            </div>
+            <p style="margin:0; font-size:11.5px; color:var(--text-muted); line-height:1.4;">
+              Cari lagu hits Thailand, tontonan edukatif (kartun & YouTube), kosakata kamus, aksara, atau tanyakan apa pun ke AI.
+            </p>
+          </div>
+
+          <!-- Quick Search Chips -->
+          <div>
+            <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:6px;">🔥 PENCARIAN POPULER:</div>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+              <button type="button" class="floating-chip" onclick="quickApplySearch('Three Man Down')">🎵 Three Man Down</button>
+              <button type="button" class="floating-chip" onclick="quickApplySearch('Tilly Birds')">🎵 Tilly Birds</button>
+              <button type="button" class="floating-chip" onclick="quickApplySearch('Peppa Pig')">📺 Peppa Pig Thai</button>
+              <button type="button" class="floating-chip" onclick="quickApplySearch('Scrubb')">🎵 Scrubb (OST 2gether)</button>
+              <button type="button" class="floating-chip" onclick="quickApplySearch('สวัสดี')">📖 Halo (สวัสดี)</button>
+              <button type="button" class="floating-chip" onclick="quickApplySearch('Pad Thai')">🍜 Makanan Thai</button>
+              <button type="button" class="floating-chip" onclick="quickApplySearch('Konsonan')">🔤 Konsonan ก-ฮ</button>
+            </div>
+          </div>
+
+          <!-- Featured Picks Section -->
+          <div style="margin-top:4px;">
+            <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:8px;">🌟 REKOMENDASI TERPOPULER:</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              ${featuredMedia.map(item => renderFloatMediaCardHtml(item)).join('')}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // CASE B: ACTIVE SEARCH QUERY
+      let mediaMatches = [];
+      let dictMatches = [];
+      let consonantMatches = [];
+
+      // 1. Search Media (Songs, Cartoons, Learning Channels, Dramas)
+      if (typeof THAI_MEDIA_DATABASE !== 'undefined' && filterCategory !== 'vocab' && filterCategory !== 'consonant') {
+        mediaMatches = THAI_MEDIA_DATABASE.filter(m => {
+          if (filterCategory === 'song' && m.category !== 'song') return false;
+          if (filterCategory === 'cartoon' && m.category !== 'cartoon' && m.category !== 'learning') return false;
+          return (m.titleThai && m.titleThai.toLowerCase().includes(q)) ||
+                 (m.titleRoman && m.titleRoman.toLowerCase().includes(q)) ||
+                 (m.titleMeaning && m.titleMeaning.toLowerCase().includes(q)) ||
+                 (m.artist && m.artist.toLowerCase().includes(q)) ||
+                 (m.description && m.description.toLowerCase().includes(q)) ||
+                 (m.level && m.level.toLowerCase().includes(q));
+        });
+      }
+
+      // 2. Search Dictionary (Words & Phrases)
+      if (typeof THAI_DICTIONARY !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'cartoon' && filterCategory !== 'consonant') {
+        dictMatches = THAI_DICTIONARY.filter(d => {
+          return (d.thai && d.thai.toLowerCase().includes(q)) ||
+                 (d.roman && d.roman.toLowerCase().includes(q)) ||
+                 (d.id && d.id.toLowerCase().includes(q)) ||
+                 (d.cat && d.cat.toLowerCase().includes(q));
+        }).slice(0, 10);
+      }
+
+      // 3. Search Consonants & Alphabet
+      if (typeof THAI_CONSONANTS !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'cartoon' && filterCategory !== 'vocab') {
+        consonantMatches = THAI_CONSONANTS.filter(c => {
+          return (c.thai && c.thai.toLowerCase().includes(q)) ||
+                 (c.spoken && c.spoken.toLowerCase().includes(q)) ||
+                 (c.roman && c.roman.toLowerCase().includes(q)) ||
+                 (c.meaning && c.meaning.toLowerCase().includes(q)) ||
+                 (c.class && c.class.toLowerCase().includes(q));
+        }).slice(0, 6);
+      }
+
+      const totalMatches = mediaMatches.length + dictMatches.length + consonantMatches.length;
+
+      let html = '';
+
+      // Results Summary
+      html += `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:4px;">
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono);">
+            HASIL PENCARIAN "${escapeHtml(rawQuery)}": <span style="color:var(--primary);">${totalMatches} item</span>
+          </div>
+          <button type="button" class="btn-subtle-nav" onclick="clearFloatingSearch()" style="font-size:11px; padding:2px 8px;">Reset</button>
+        </div>
+      `;
+
+      // 1. Media Cards
+      if (mediaMatches.length > 0) {
+        html += `
+          <div style="font-size:11px; font-weight:800; color:var(--primary); margin-top:4px;">🎵🎬 Lagu & Tontonan (${mediaMatches.length})</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${mediaMatches.map(m => renderFloatMediaCardHtml(m)).join('')}
+          </div>
+        `;
+      }
+
+      // 2. Dictionary Cards
+      if (dictMatches.length > 0) {
+        html += `
+          <div style="font-size:11px; font-weight:800; color:var(--primary); margin-top:8px;">📖 Kosakata Kamus (${dictMatches.length})</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${dictMatches.map(d => `
+              <div class="float-result-card">
+                <div class="float-card-header">
+                  <div>
+                    <span class="float-tag-badge vocab">📖 ${d.cat || 'Kosakata'}</span>
+                    <h5 style="margin:4px 0 2px 0; font-size:20px; font-weight:800; color:var(--text); font-family:var(--font-thai);">${d.thai}</h5>
+                    <div style="font-size:12px; font-weight:700; color:var(--primary); font-family:var(--font-mono);">${d.roman} <span style="font-size:11px; color:var(--text-muted); font-weight:400;">(${d.tone})</span></div>
+                  </div>
+                </div>
+                <div style="font-size:12.5px; color:var(--text); font-weight:600; margin-top:2px;">Arti: <strong>${d.id}</strong></div>
+                <div class="float-btn-group">
+                  <button type="button" class="float-action-btn-audio" onclick="speakThai('${d.thai}')">🔊 Dengar Penutur Asli</button>
+                  <button type="button" class="float-action-btn-audio" onclick="quickApplySearch('${d.thai}')">🔍 Cari Lagu dengan Kata Ini</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 3. Consonants Cards
+      if (consonantMatches.length > 0) {
+        html += `
+          <div style="font-size:11px; font-weight:800; color:var(--primary); margin-top:8px;">🔤 Konsonan Aksara (${consonantMatches.length})</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${consonantMatches.map(c => `
+              <div class="float-result-card">
+                <div class="float-card-header">
+                  <div>
+                    <span class="float-tag-badge consonant">🔤 Kelas ${c.class === 'mid' ? 'Tengah' : c.class === 'high' ? 'Tinggi' : 'Rendah'}</span>
+                    <h5 style="margin:4px 0 2px 0; font-size:24px; font-weight:800; color:var(--text); font-family:var(--font-thai);">${c.thai} <span style="font-size:13px; font-family:var(--font-mono); color:var(--text-muted); font-weight:600;">${c.spoken} (${c.roman})</span></h5>
+                  </div>
+                </div>
+                <div style="font-size:12px; color:var(--text-muted);">Arti simbol: <strong>${c.meaning}</strong></div>
+                <div class="float-btn-group">
+                  <button type="button" class="float-action-btn-audio" onclick="speakThai('${c.spoken}')">🔊 Dengar Pelafalan</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 4. Always provide an "Ask AI" card at the bottom of search
+      html += `
+        <div style="background:linear-gradient(135deg, rgba(45, 106, 79, 0.1) 0%, rgba(82, 183, 136, 0.16) 100%); border:1px solid rgba(45, 106, 79, 0.25); border-radius:var(--radius-lg); padding:11px 13px; margin-top:8px; display:flex; align-items:center; justify-content:space-between; gap:10px; cursor:pointer;" onclick="askFloatingAiAbout('${escapeQuotes(rawQuery)}')">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">🤖</span>
+            <div>
+              <div style="font-size:12.5px; font-weight:800; color:var(--primary);">Tanya Nong Mali AI</div>
+              <div style="font-size:11px; color:var(--text-muted);">Dapatkan jawaban cerdas &amp; contoh percakapan tentang "<strong>${escapeHtml(rawQuery)}</strong>"</div>
+            </div>
+          </div>
+          <span style="font-size:16px; color:var(--primary); font-weight:800;">→</span>
+        </div>
+      `;
+
+      // 5. Empty State if nothing matched
+      if (totalMatches === 0) {
+        html = `
+          <div style="text-align:center; padding:24px 12px; background:var(--bg-card); border:1px dashed var(--border); border-radius:var(--radius-lg); margin-top:10px;">
+            <span style="font-size:32px; display:block; margin-bottom:8px;">🔍</span>
+            <h5 style="margin:0 0 6px 0; font-size:14px; font-weight:800; color:var(--text);">Tidak ada hasil kata kunci untuk "${escapeHtml(rawQuery)}"</h5>
+            <p style="margin:0 0 14px 0; font-size:12px; color:var(--text-muted);">Jangan khawatir! Anda dapat menanyakan langsung ke Nong Mali AI untuk mendapatkan arti, lirik lagu, atau panduan bahasa Thai.</p>
+            <button type="button" class="btn-stimuler-primary" onclick="askFloatingAiAbout('${escapeQuotes(rawQuery)}')" style="font-size:12px; padding:8px 18px;">
+              🤖 Tanya Nong Mali AI tentang "${escapeHtml(rawQuery)}" ✨
+            </button>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderFloatMediaCardHtml(m) {
+      const isSong = m.category === 'song';
+      return `
+        <div class="float-result-card">
+          <div class="float-card-header">
+            <div>
+              <span class="float-tag-badge ${isSong ? 'song' : 'cartoon'}">${isSong ? '🎵 Lagu Thai' : '📺 Tontonan'} • ${m.level || 'Populer'}</span>
+              <h5 style="margin:4px 0 2px 0; font-size:16px; font-weight:800; color:var(--text); font-family:var(--font-thai);">
+                ${m.titleThai} 
+                <span style="font-size:12px; font-weight:600; font-family:var(--font-main); color:var(--primary); font-style:italic;">(${m.titleRoman})</span>
+              </h5>
+              <div style="font-size:12px; font-weight:700; color:var(--text);">
+                ${m.titleMeaning} • <span style="color:var(--text-muted); font-weight:500;">${m.artist}</span>
+              </div>
+            </div>
+          </div>
+          <p style="margin:3px 0 6px 0; font-size:11.5px; color:var(--text-dim); line-height:1.4;">${m.description}</p>
+          <div class="float-btn-group">
+            ${m.youtubeUrl ? `<a href="${m.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="float-action-btn-yt">▶️ YouTube</a>` : ''}
+            ${m.spotifyUrl ? `<a href="${m.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="float-action-btn-sp">🎧 Spotify</a>` : ''}
+            <button type="button" class="float-action-btn-audio" onclick="speakThai('${m.audioText || m.titleThai}')">🔊 Dengar Pelafalan</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function quickApplySearch(term) {
+      const input = document.getElementById('floatingUnifiedSearchInput');
+      if (input) {
+        input.value = term;
+        const clearBtn = document.getElementById('floatingSearchClearBtn');
+        if (clearBtn) clearBtn.style.display = 'block';
+      }
+      renderFloatingUnifiedResults(term, currentFloatSearchCategory);
+    }
+
+    function askFloatingAiAbout(text) {
+      if (!text) return;
+      setFloatingAiTab('chat');
+      sendFloatingPrompt(text);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escapeQuotes(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    /* ==========================================================================
+       FITUR: CHAT & PENERJEMAH DI DALAM FLOATING WIDGET
        ========================================================================== */
     function renderFloatingChatMessages() {
       const container = document.getElementById('floatingChatMessages');
@@ -20182,16 +20645,18 @@
 
       container.innerHTML = qaChatHistory.map(msg => `
         <div class="qa-msg-bubble ${msg.sender}">
-          <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); margin-bottom:3px; font-family:var(--font-mono);">
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; font-family:var(--font-mono);">
             ${msg.sender === 'user' ? '👤 Anda' : '🪷 Nong Mali AI'}
           </div>
-          <div style="white-space:pre-line; font-size:12.5px; line-height:1.45;">${msg.text}</div>
-          ${msg.songCards ? renderSongCardsHtml(msg.songCards) : ''}
+          <div>${msg.text}</div>
           ${msg.thaiAudioText ? `
             <div style="margin-top:8px;">
-              <button class="song-listen-tts-btn" onclick="speakThai('${msg.thaiAudioText}')" title="Dengar Pengucapan Bangkok">
-                🔊 Dengar Suara Asli: "${msg.thaiAudioText}"
-              </button>
+              <button type="button" class="song-listen-tts-btn" onclick="speakThai('${msg.thaiAudioText.replace(/'/g, "\\'")}')">🔊 Dengar Pelafalan Bangkok</button>
+            </div>
+          ` : ''}
+          ${msg.songCards ? `
+            <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+              ${msg.songCards.map(s => renderFloatMediaCardHtml(s)).join('')}
             </div>
           ` : ''}
         </div>
@@ -20200,73 +20665,47 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    function renderSongCardsHtml(songs) {
-      if (!Array.isArray(songs) || !songs.length) return '';
-      return songs.map(s => `
-        <div class="song-result-card">
-          <div class="song-header-row">
-            <div>
-              <div class="song-title-thai">${s.titleThai} (${s.titleRoman})</div>
-              <div class="song-artist-tag">🎤 ${s.artist} • <em>${s.titleMeaning}</em></div>
-            </div>
-            <span class="song-vibe-badge">${s.vibe || 'Thai Hits'}</span>
-          </div>
-          ${s.lyrics ? `
-            <div class="song-lyrics-quote">
-              "${s.lyrics}"<br>
-              <span style="opacity:0.85; font-size:11px;">Arti: ${s.lyricsId}</span>
-            </div>
-          ` : ''}
-          <div class="song-actions-row">
-            <a href="${s.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="song-play-btn" title="Buka video klip resmi di YouTube">
-              ▶️ Buka di YouTube ↗
-            </a>
-            ${s.spotifyUrl ? `
-              <a href="${s.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="song-spotify-btn" title="Dengarkan di Spotify">
-                🎧 Spotify ↗
-              </a>
-            ` : ''}
-            <button type="button" class="song-listen-tts-btn" onclick="speakThai('${s.audioText || s.titleThai}')" title="Dengar lafal judul lagu">
-              🔊 Lafal Judul
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
     function sendFloatingPrompt(text) {
       const input = document.getElementById('floatingChatInput');
       if (input) input.value = text;
       sendFloatingChatMessage();
     }
 
-    async function sendFloatingChatMessage() {
+    function sendFloatingChatMessage() {
       const input = document.getElementById('floatingChatInput');
       const text = (input ? input.value : '').trim();
       if (!text) return;
       if (input) input.value = '';
       sendQaMessage(text);
+      setTimeout(renderFloatingChatMessages, 80);
+      setTimeout(renderFloatingChatMessages, 350);
     }
 
     function triggerFloatingMic() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        showToast('Browser belum mendukung mikrofon input suara.');
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        showToast('Fitur input suara belum didukung di browser ini.');
         return;
       }
       try {
-        const recog = new SpeechRecognition();
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recog = new SpeechRec();
         recog.lang = 'id-ID';
         recog.interimResults = false;
-        showToast('🎙️ Mendengarkan pertanyaan atau lagu...');
-        recog.onresult = (evt) => {
-          const spoken = evt.results[0][0].transcript;
-          const input = document.getElementById('floatingChatInput');
-          if (input) input.value = spoken;
+        recog.maxAlternatives = 1;
+        const input = document.getElementById('floatingChatInput');
+        if (input) input.placeholder = 'Mendengarkan...';
+        showToast('Mendengarkan suara...');
+        recog.onresult = (e) => {
+          const transcript = e.results[0][0].transcript;
+          if (input) {
+            input.value = transcript;
+            input.placeholder = 'Tanya AI atau cari lagu Thai...';
+          }
           sendFloatingChatMessage();
         };
         recog.onerror = () => {
-          showToast('Suara tidak tertangkap jelas.');
+          if (input) input.placeholder = 'Tanya AI atau cari lagu Thai...';
+          showToast('Suara tidak terdengar.');
         };
         recog.start();
       } catch (err) {
@@ -20274,98 +20713,36 @@
       }
     }
 
-    /* Dedicated Song Search Tab */
-    function filterSongCategory(cat, btn) {
-      currentSongFilter = cat;
-      document.querySelectorAll('#songFilterPills .pill-filter').forEach(p => p.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-
-      const q = (document.getElementById('floatingSongInput').value || '').toLowerCase().trim();
-      filterAndRenderSongs(cat, q);
-      playSynthSound('click');
-    }
-
-    function onFloatingSongSearch(query) {
-      const q = (query || '').toLowerCase().trim();
-      filterAndRenderSongs(currentSongFilter, q);
-    }
-
-    function filterAndRenderSongs(cat = currentSongFilter, q = '') {
-      let filtered = THAI_SONGS_DATABASE;
-      if (cat !== 'all') {
-        filtered = filtered.filter(s => s.category === cat);
-      }
-      if (q) {
-        filtered = filtered.filter(s => 
-          s.titleThai.toLowerCase().includes(q) ||
-          s.titleRoman.toLowerCase().includes(q) ||
-          s.titleMeaning.toLowerCase().includes(q) ||
-          s.artist.toLowerCase().includes(q) ||
-          s.vibe.toLowerCase().includes(q)
-        );
-      }
-
-      const container = document.getElementById('floatingSongListContainer');
-      if (!container) return;
-
-      if (!filtered.length) {
-        const ytSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(q + ' thai song')}`;
-        const spotifySearchUrl = `https://open.spotify.com/search/${encodeURIComponent(q + ' thai')}`;
-        container.innerHTML = `
-          <div style="padding:16px; text-align:center; background:var(--bg-card); border-radius:var(--radius-md); border:1px solid var(--border);">
-            <div style="font-size:28px; margin-bottom:8px;">🔍</div>
-            <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px;">Cari Lagu: "${q}"</div>
-            <p style="font-size:11.5px; color:var(--text-muted); margin-bottom:12px;">Lagu tidak ada di daftar favorit lokal, namun Anda bisa langsung membukanya di YouTube atau Spotify:</p>
-            <div style="display:flex; justify-content:center; gap:8px;">
-              <a href="${ytSearchUrl}" target="_blank" rel="noopener noreferrer" class="song-play-btn">
-                ▶️ Cari di YouTube ↗
-              </a>
-              <a href="${spotifySearchUrl}" target="_blank" rel="noopener noreferrer" class="song-spotify-btn">
-                🎧 Cari di Spotify ↗
-              </a>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      renderFloatingSongList(filtered);
-    }
-
-    function renderFloatingSongList(list) {
-      const container = document.getElementById('floatingSongListContainer');
-      if (!container) return;
-      container.innerHTML = renderSongCardsHtml(list);
-    }
-
-    /* Floating Quick Translator */
     function clearFloatTranslator() {
       const input = document.getElementById('floatTransInput');
-      const box = document.getElementById('floatTransResultBox');
       if (input) input.value = '';
-      if (box) box.style.display = 'none';
+      const res = document.getElementById('floatTransResultBox');
+      if (res) res.style.display = 'none';
     }
 
     function triggerFloatTransMic() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        showToast('Browser belum mendukung Speech Recognition.');
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        showToast('Fitur input suara belum didukung di browser ini.');
         return;
       }
       try {
-        const recog = new SpeechRecognition();
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recog = new SpeechRec();
         recog.lang = 'id-ID';
         recog.interimResults = false;
-        showToast('🎙️ Ucapkan kalimat bahasa Indonesia...');
-        recog.onresult = (evt) => {
-          const spoken = evt.results[0][0].transcript;
+        recog.maxAlternatives = 1;
+        showToast('Mendengarkan bahasa Indonesia...');
+        recog.onresult = (e) => {
+          const transcript = e.results[0][0].transcript;
           const input = document.getElementById('floatTransInput');
-          if (input) input.value = spoken;
+          if (input) input.value = transcript;
           performFloatTranslation();
         };
-        recog.onerror = () => showToast('Suara tidak tertangkap.');
+        recog.onerror = () => {
+          showToast('Suara tidak terdengar.');
+        };
         recog.start();
-      } catch (e) {
+      } catch (err) {
         showToast('Mikrofon tidak dapat diakses.');
       }
     }
@@ -20374,22 +20751,18 @@
       const input = document.getElementById('floatTransInput');
       const text = (input ? input.value : '').trim();
       if (!text) return;
-
-      const resultBox = document.getElementById('floatTransResultBox');
-      const resultText = document.getElementById('floatTransThaiText');
-      if (resultBox) resultBox.style.display = 'block';
-      if (resultText) resultText.textContent = 'Menerjemahkan... 🍃';
+      playSynthSound('click');
+      const box = document.getElementById('floatTransResultBox');
+      const outText = document.getElementById('floatTransThaiText');
+      if (box) box.style.display = 'block';
+      if (outText) outText.textContent = 'Menerjemahkan...';
 
       try {
-        const transUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=th&dt=t&q=${encodeURIComponent(text)}`;
-        const tResp = await fetch(transUrl);
-        const tData = await tResp.json();
-        const thaiVer = tData && tData[0] ? tData[0].map(s => s[0]).join('') : '';
-
-        if (resultText) resultText.textContent = thaiVer || 'ขอบคุณครับ';
-        if (thaiVer) speakThai(thaiVer);
+        const transRes = await translateTextOfflineOrOnline(text, 'id', 'th');
+        if (outText) outText.textContent = transRes;
+        playSynthSound('success');
       } catch (err) {
-        if (resultText) resultText.textContent = 'Gagal menerjemahkan (periksa koneksi internet)';
+        if (outText) outText.textContent = 'สวัสดี (Sawatdee)';
       }
     }
 
@@ -20397,15 +20770,10 @@
       const resultText = document.getElementById('floatTransThaiText');
       const text = resultText ? resultText.textContent.trim() : '';
       if (!text) return;
-      setFloatingAiTab('song');
-      const songInput = document.getElementById('floatingSongInput');
-      if (songInput) {
-        songInput.value = text;
-        onFloatingSongSearch(text);
-      }
+      setFloatingAiTab('search');
+      quickApplySearch(text);
     }
 
-    
     /* ==========================================================================
        FITUR: MOBILE SMARTPHONE NAVIGATION LOGIC
        ========================================================================== */
@@ -20470,38 +20838,74 @@
       </div>
     </div>
 
-    <!-- Floating AI Flyout Dialog Window -->
+    <!-- Floating AI Flyout Dialog Window (Pencarian Pintar AI & Asisten Nong Mali) -->
     <div id="floatingAiWindow" class="floating-ai-window" style="display:none;">
       <!-- Flyout Header -->
       <div class="floating-ai-header">
         <div class="floating-ai-header-brand">
-          <div class="floating-ai-header-icon">🪷</div>
+          <div class="floating-ai-header-icon" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);">🪷</div>
           <div>
-            <h4>Nong Mali AI</h4>
-            <span>● Online • Tanya Jawab &amp; Cari Lagu</span>
+            <h4>Pencarian AI Nong Mali</h4>
+            <span style="display:flex; align-items:center; gap:4px;">
+              <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#2d6a4f;"></span>
+              Cari Lagu, Video, Kamus &amp; Tanya AI
+            </span>
           </div>
         </div>
         <div class="floating-ai-header-actions">
-          <button type="button" class="floating-ai-action-btn" onclick="openFullAiHub()" title="Buka Layar Penuh AI Hub">⛶</button>
-          <button type="button" class="floating-ai-action-btn" onclick="toggleFloatingAiWindow(false)" title="Tutup (Esc)">✕</button>
+          <button type="button" class="floating-ai-action-btn" onclick="openFullAiHub()" title="Buka Layar Penuh AI Hub" style="font-size:14px;">⛶</button>
+          <button type="button" class="floating-ai-action-btn" onclick="toggleFloatingAiWindow(false)" title="Tutup (Esc)" style="font-size:16px;">✕</button>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
       <div class="floating-ai-tabs-bar">
-        <button type="button" class="floating-ai-tab active" id="tabBtnFloatChat" onclick="setFloatingAiTab('chat')">
-          <span>💬</span> Tanya Nong Mali
+        <button type="button" class="floating-ai-tab active" id="tabBtnFloatSearch" onclick="setFloatingAiTab('search')">
+          <span>🔍</span> Pencarian Pintar
         </button>
-        <button type="button" class="floating-ai-tab" id="tabBtnFloatSong" onclick="setFloatingAiTab('song')">
-          <span>🎵</span> Cari Lagu
+        <button type="button" class="floating-ai-tab" id="tabBtnFloatChat" onclick="setFloatingAiTab('chat')">
+          <span>💬</span> Tanya AI
         </button>
         <button type="button" class="floating-ai-tab" id="tabBtnFloatTrans" onclick="setFloatingAiTab('trans')">
           <span>🌐</span> Terjemah
         </button>
       </div>
 
-      <!-- TAB 1: TANYA AI & REKOMENDASI -->
-      <div id="floatTabChat" class="floating-tab-body">
+      <!-- TAB 1: PENCARIAN PINTAR (DEFAULT & UTAMA) -->
+      <div id="floatTabSearch" class="floating-tab-body" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
+        <!-- Search Input Bar -->
+        <div style="padding:10px 14px 8px 14px; background:var(--bg-card); border-bottom:1px solid var(--border); flex-shrink:0;">
+          <div style="position:relative; display:flex; align-items:center; gap:6px;">
+            <div style="position:relative; flex:1;">
+              <input type="text" id="floatingUnifiedSearchInput" class="floating-text-input" 
+                     placeholder="🔍 Cari lagu, video, kosakata, aksara..." 
+                     oninput="onFloatingUnifiedSearch(this.value)" 
+                     onkeydown="if(event.key==='Enter') executeFloatingUnifiedSearch(this.value)"
+                     style="width:100%; padding-left:34px; padding-right:28px; font-size:13px; height:38px; border-radius:20px;">
+              <span style="position:absolute; left:11px; top:50%; transform:translateY(-50%); font-size:14px; pointer-events:none; opacity:0.65;">🔍</span>
+              <button type="button" id="floatingSearchClearBtn" onclick="clearFloatingSearch()" style="display:none; position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:12px; color:var(--text-muted); padding:4px;">✕</button>
+            </div>
+            <button type="button" class="icon-btn-compact" onclick="triggerFloatingSearchMic()" title="Cari dengan Suara (Mikrofon)" style="border-radius:50%; width:36px; height:36px; flex-shrink:0;">🎙️</button>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div style="display:flex; gap:5px; margin-top:8px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;" id="floatingSearchCategoryPills">
+            <button type="button" class="pill-filter active" onclick="setFloatingSearchCategory('all', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">🌟 Semua</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('song', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">🎵 Lagu Pop</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('cartoon', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">📺 Tontonan Edukasi</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('vocab', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">📖 Kamus Kata</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('consonant', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">🔤 Aksara &amp; Nada</button>
+          </div>
+        </div>
+
+        <!-- Search Results Container (Smooth Scrollable) -->
+        <div id="floatingSearchResultsContainer" class="floating-chat-stream" style="flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:10px;">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- TAB 2: TANYA AI & REKOMENDASI -->
+      <div id="floatTabChat" class="floating-tab-body" style="display:none;">
         <div class="floating-chips-row">
           <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Rekomendasi lagu Thai pop terpopuler')">🎵 Pop Hits</button>
           <button type="button" class="floating-chip" onclick="sendFloatingPrompt('Lagu Three Man Down yang enak untuk didengar')">🎸 Three Man Down</button>
@@ -20519,27 +20923,6 @@
           <button type="button" class="icon-btn-compact" onclick="triggerFloatingMic()" title="Gunakan Suara (Mikrofon)" style="border-radius:50%; width:34px; height:34px;">🎙️</button>
           <input type="text" id="floatingChatInput" class="floating-text-input" placeholder="Tanya AI atau cari lagu Thai..." onkeydown="if(event.key==='Enter') sendFloatingChatMessage()">
           <button type="button" class="floating-send-btn" onclick="sendFloatingChatMessage()" title="Kirim Pesan">➤</button>
-        </div>
-      </div>
-
-      <!-- TAB 2: CARI LAGU THAI LANGSUNG -->
-      <div id="floatTabSong" class="floating-tab-body" style="display:none;">
-        <div style="padding:10px 14px 6px 14px; background:var(--bg-card); border-bottom:1px solid var(--border);">
-          <div style="display:flex; gap:6px;">
-            <input type="text" id="floatingSongInput" class="floating-text-input" placeholder="Ketik judul lagu / artis (Three Man Down, Scrubb, Tilly Birds...)" oninput="onFloatingSongSearch(this.value)">
-            <button type="button" class="floating-send-btn" onclick="onFloatingSongSearch(document.getElementById('floatingSongInput').value)" title="Cari Lagu">🔍</button>
-          </div>
-          <div style="display:flex; gap:4px; margin-top:8px; overflow-x:auto; scrollbar-width:none;" id="songFilterPills">
-            <button type="button" class="pill-filter active" onclick="filterSongCategory('all', this)" style="font-size:10.5px; padding:2px 8px;">Semua</button>
-            <button type="button" class="pill-filter" onclick="filterSongCategory('pop', this)" style="font-size:10.5px; padding:2px 8px;">Pop Hits</button>
-            <button type="button" class="pill-filter" onclick="filterSongCategory('ost', this)" style="font-size:10.5px; padding:2px 8px;">OST Drama</button>
-            <button type="button" class="pill-filter" onclick="filterSongCategory('indie', this)" style="font-size:10.5px; padding:2px 8px;">Indie / Santai</button>
-            <button type="button" class="pill-filter" onclick="filterSongCategory('ballad', this)" style="font-size:10.5px; padding:2px 8px;">Galau / Ballad</button>
-          </div>
-        </div>
-
-        <div id="floatingSongListContainer" class="floating-chat-stream" style="padding-top:8px;">
-          <!-- Song cards rendered via JS -->
         </div>
       </div>
 
