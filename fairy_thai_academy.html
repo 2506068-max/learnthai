@@ -5854,7 +5854,7 @@
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      z-index: 99995;
+      z-index: 100001 !important;
       animation: fadeInBackdrop 0.18s ease;
     }
 
@@ -5898,6 +5898,8 @@
         max-width: 100vw !important;
         overflow-x: hidden !important;
         display: block !important;
+        position: static !important;
+        z-index: auto !important;
       }
 
       /* Header compact styling - PRECISE & CLEAN MOBILE DESIGN */
@@ -5983,6 +5985,29 @@
         box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
       }
 
+      
+      /* Drawer & Menu Interactivity Fix */
+      .mobile-drawer-backdrop {
+        z-index: 100001 !important;
+      }
+      .stimuler-nav-rail {
+        z-index: 100005 !important;
+        pointer-events: auto !important;
+      }
+      .stimuler-nav-rail .nav-item-btn {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        position: relative !important;
+        z-index: 10 !important;
+      }
+      body.drawer-open .floating-ai-container,
+      .stimuler-nav-rail.mobile-open ~ .floating-ai-container {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0.8) !important;
+        transition: opacity 0.18s ease, transform 0.18s ease !important;
+      }
+
       /* Responsive Filter Pills */
       .filter-pills {
         flex-wrap: wrap !important;
@@ -6000,7 +6025,8 @@
         height: 100% !important;
         height: 100dvh !important;
         max-height: 100dvh !important;
-        z-index: 100000 !important;
+        z-index: 100005 !important;
+        pointer-events: auto !important;
         background: #fdfbf7 !important;
         transform: translateX(-100%) !important;
         transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -15814,6 +15840,7 @@
 
     function openLearningPortal() {
       try { playSynthSound('click'); } catch(e) {}
+      if (typeof toggleMobileDrawer === 'function') toggleMobileDrawer(false);
       const portal = document.getElementById('learningPortal');
       if (portal) {
         portal.style.display = 'flex';
@@ -20023,6 +20050,15 @@
     let floatActiveTab = 'search';
     let currentFloatSearchCategory = 'all';
     let floatLastTapHandled = 0;
+    let lastFlyoutToggleTime = 0;
+
+    function handleFloatingLotusClick(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      executeNongMaliActivation();
+    }
 
     function executeNongMaliActivation() {
       playSynthSound('click');
@@ -20135,9 +20171,12 @@
 
       // Close when clicking outside on desktop/mobile
       document.addEventListener('click', (e) => {
+        // Ignore clicks within 500ms of opening (prevents touch synthesis from auto-closing!)
+        if (Date.now() - lastFlyoutToggleTime < 500) return;
+
         const win = document.getElementById('floatingAiWindow');
         const trig = document.getElementById('floatingAiBtn');
-        if (win && win.style.display !== 'none') {
+        if (win && (win.style.display === 'flex' || win.classList.contains('open'))) {
           if (!win.contains(e.target) && !trig.contains(e.target)) {
             toggleFloatingAiWindow(false);
           }
@@ -20160,6 +20199,7 @@
     }
 
     function startFloatDrag(cx, cy) {
+      if (window.innerWidth <= 900) return; // Only drag on desktop screens! Keep mobile tap pure & instant
       const container = document.getElementById('floatingAiWidget');
       const rect = container.getBoundingClientRect();
       floatIsDragging = true;
@@ -20240,16 +20280,20 @@
       const win = document.getElementById('floatingAiWindow');
       if (!win) return;
 
-      const isCurrentlyOpen = win.style.display !== 'none';
+      const isCurrentlyOpen = (win.style.display === 'flex' || win.classList.contains('open'));
       const shouldOpen = typeof forceState === 'boolean' ? forceState : !isCurrentlyOpen;
 
       if (shouldOpen) {
+        lastFlyoutToggleTime = Date.now();
+        toggleMobileDrawer(false);
+
         const container = document.getElementById('floatingAiWidget');
-        if (container) {
+        if (container && window.innerWidth > 900) {
           const rect = container.getBoundingClientRect();
           adjustFloatingFlyoutPosition(rect.left, rect.top);
         }
         win.style.display = 'flex';
+        win.classList.add('open');
         playSynthSound('click');
         setFloatingAiTab('search');
         setTimeout(() => {
@@ -20263,6 +20307,7 @@
         }, 80);
       } else {
         win.style.display = 'none';
+        win.classList.remove('open');
         playSynthSound('click');
       }
     }
@@ -20783,6 +20828,7 @@
       if (!drawer) return;
       const shouldOpen = typeof open === 'boolean' ? open : !drawer.classList.contains('mobile-open');
       drawer.classList.toggle('mobile-open', shouldOpen);
+      document.body.classList.toggle('drawer-open', shouldOpen);
       if (backdrop) backdrop.style.display = shouldOpen ? 'block' : 'none';
       if (shouldOpen) {
         document.body.style.overflow = 'hidden';
@@ -20831,12 +20877,12 @@
        ========================================================================== -->
   <div id="floatingAiWidget" class="floating-ai-container">
     <!-- Floating Trigger Avatar (Draggable, Circular Nong Mali, Just the Lotus Logo) -->
-    <div id="floatingAiBtn" class="floating-ai-trigger" title="Nong Mali AI (Tahan &amp; geser untuk memindahkan posisi)" aria-label="Buka Asisten Nong Mali AI">
+    <button type="button" id="floatingAiBtn" class="floating-ai-trigger" onclick="handleFloatingLotusClick(event)" title="Pencarian AI Nong Mali" aria-label="Buka Pencarian AI Nong Mali">
       <div class="floating-ai-icon-box">
         <span class="floating-lotus-icon">🪷</span>
         <span class="floating-ai-online-ping"></span>
       </div>
-    </div>
+    </button>
 
     <!-- Floating AI Flyout Dialog Window (Pencarian Pintar AI & Asisten Nong Mali) -->
     <div id="floatingAiWindow" class="floating-ai-window" style="display:none;">

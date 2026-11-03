@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mali-thai-academy-v13';
+const CACHE_NAME = 'mali-thai-academy-v14';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
