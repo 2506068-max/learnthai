@@ -20744,6 +20744,183 @@
         #dashboardWelcomeCard { padding: 16px; }
         #dashboardWelcomeCard .btn-lanjutkan { width: 100%; justify-content: center; }
       }
+    
+      /* ===== Lotus Terjemah Tab — DeepL Style ===== */
+      .float-trans-dir-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+      }
+      .float-trans-lang-pill {
+        flex: 1;
+        padding: 8px 10px;
+        border: 2px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--bg);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s;
+        touch-action: manipulation;
+        min-height: 44px;
+      }
+      .float-trans-lang-pill.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .float-trans-swap-btn {
+        width: 38px;
+        height: 38px;
+        border: 2px solid var(--border);
+        border-radius: 50%;
+        background: var(--surface);
+        color: var(--primary);
+        font-size: 18px;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.18s;
+        touch-action: manipulation;
+        flex-shrink: 0;
+      }
+      .float-trans-swap-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: rotate(180deg); }
+      .float-trans-box {
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .float-trans-source { border-color: var(--primary); }
+      .float-trans-textarea {
+        width: 100%;
+        min-height: 90px;
+        max-height: 160px;
+        padding: 12px;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 15px;
+        color: var(--text);
+        font-family: var(--font-sans);
+        resize: vertical;
+        line-height: 1.55;
+        box-sizing: border-box;
+      }
+      .float-trans-box-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+      .float-trans-char-count { font-size: 11px; color: var(--text-muted); }
+      .float-trans-icon-btn {
+        width: 32px; height: 32px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.15s;
+        touch-action: manipulation;
+      }
+      .float-trans-icon-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .float-trans-submit-btn {
+        width: 100%;
+        padding: 12px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-md);
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        min-height: 48px;
+        touch-action: manipulation;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(45,106,79,0.3);
+      }
+      .float-trans-submit-btn:hover { background: #1e4d36; transform: translateY(-1px); }
+      .float-trans-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+      .float-trans-result {
+        background: #f0fdf4;
+        border-color: #86efac;
+      }
+      .float-trans-result-lang {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 8px 12px 4px;
+      }
+      .float-trans-result-thai {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a1a1a;
+        line-height: 1.6;
+        padding: 4px 12px 4px;
+        font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+      }
+      .float-trans-result-roman {
+        font-size: 13px;
+        color: var(--text-secondary);
+        font-style: italic;
+        padding: 0 12px 8px;
+      }
+      .float-trans-result-actions {
+        display: flex;
+        gap: 6px;
+        padding: 8px 10px;
+        border-top: 1px solid #bbf7d0;
+        flex-wrap: wrap;
+      }
+      .float-trans-action-btn {
+        flex: 1;
+        min-height: 36px;
+        padding: 6px 8px;
+        border: 1px solid #86efac;
+        border-radius: 8px;
+        background: #fff;
+        color: #15803d;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        touch-action: manipulation;
+        white-space: nowrap;
+      }
+      .float-trans-action-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .float-trans-gender-note {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .float-trans-gender-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+      }
+      .float-trans-gender-badge {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .float-trans-gender-badge.female { background: #fdf2f8; color: #9d174d; border: 1px solid #f9a8d4; }
+      .float-trans-gender-badge.male   { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+      .float-trans-gender-val { color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 14px; }
     </style>
           </head>
           <body onload="window.print(); window.close();">
@@ -23224,22 +23401,173 @@
       }
     }
 
+    /* ===== Lotus Translator State ===== */
+    let floatTransDir = 'id-to-th';
+    let floatTransLatestThai = '';
+    let floatTransLatestMale = '';
+    let floatTransLatestFemale = '';
+
+    function floatTransSetDir(dir) {
+      floatTransDir = dir;
+      const srcPill = document.getElementById('floatTransLangSrc');
+      const tgtPill = document.getElementById('floatTransLangTgt');
+      const ta = document.getElementById('floatTransInput');
+      if (dir === 'id-to-th') {
+        if (srcPill) { srcPill.textContent = '🇮🇩 Indonesia'; srcPill.classList.add('active'); }
+        if (tgtPill) { tgtPill.textContent = '🇹🇭 Thailand'; tgtPill.classList.remove('active'); }
+        if (ta) ta.placeholder = 'Ketik teks bahasa Indonesia di sini...';
+        const rl = document.getElementById('float-trans-result-lang');
+        if (rl) rl.textContent = '🇹🇭 Bahasa Thailand';
+      } else {
+        if (srcPill) { srcPill.textContent = '🇹🇭 Thailand'; srcPill.classList.remove('active'); }
+        if (tgtPill) { tgtPill.textContent = '🇮🇩 Indonesia'; tgtPill.classList.add('active'); }
+        if (ta) ta.placeholder = 'พิมพ์ข้อความภาษาไทยที่นี่...';
+        const rl = document.querySelector('.float-trans-result-lang');
+        if (rl) rl.textContent = '🇮🇩 Bahasa Indonesia';
+      }
+      // hide result on dir change
+      const box = document.getElementById('floatTransResultBox');
+      if (box) box.style.display = 'none';
+      const gn = document.getElementById('floatTransGenderNote');
+      if (gn) gn.style.display = 'none';
+    }
+
+    function floatTransSwapDir() {
+      const ta = document.getElementById('floatTransInput');
+      const currentText = ta ? ta.value.trim() : '';
+      // Swap direction
+      floatTransDir = floatTransDir === 'id-to-th' ? 'th-to-id' : 'id-to-th';
+      floatTransSetDir(floatTransDir);
+      // Put translated text back as input (if available)
+      if (floatTransLatestThai && currentText) {
+        if (ta) ta.value = floatTransLatestThai;
+        floatTransLatestThai = currentText;
+        performFloatTranslation();
+      }
+    }
+
+    function floatTransAutoDetect(val) {
+      const countEl = document.getElementById('floatTransCharCount');
+      if (countEl) countEl.textContent = `${val.length} / 500`;
+      if (val.length > 500) {
+        const ta = document.getElementById('floatTransInput');
+        if (ta) ta.value = val.slice(0, 500);
+      }
+    }
+
+    function floatTransClearAll() {
+      const ta = document.getElementById('floatTransInput');
+      if (ta) { ta.value = ''; ta.focus(); }
+      const box = document.getElementById('floatTransResultBox');
+      if (box) box.style.display = 'none';
+      const gn = document.getElementById('floatTransGenderNote');
+      if (gn) gn.style.display = 'none';
+      const cc = document.getElementById('floatTransCharCount');
+      if (cc) cc.textContent = '0 / 500';
+    }
+
+    function floatTransSpeak() {
+      const text = floatTransLatestThai;
+      if (!text) return;
+      try {
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = floatTransDir === 'id-to-th' ? 'th-TH' : 'id-ID';
+        utt.rate = 0.85;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utt);
+        playSynthSound && playSynthSound('success');
+      } catch(e) { showToast && showToast('TTS tidak tersedia.'); }
+    }
+
+    function floatTransCopy() {
+      const text = document.getElementById('floatTransThaiText');
+      if (!text) return;
+      navigator.clipboard.writeText(text.textContent).then(() => {
+        showToast && showToast('Terjemahan disalin! 📋');
+      });
+    }
+
     async function performFloatTranslation() {
       const input = document.getElementById('floatTransInput');
       const text = (input ? input.value : '').trim();
       if (!text) return;
-      playSynthSound('click');
+
+      const submitBtn = document.getElementById('floatTransSubmitBtn');
       const box = document.getElementById('floatTransResultBox');
-      const outText = document.getElementById('floatTransThaiText');
-      if (box) box.style.display = 'block';
-      if (outText) outText.textContent = 'Menerjemahkan...';
+      const outThai = document.getElementById('floatTransThaiText');
+      const outRoman = document.getElementById('floatTransRomanText');
+      const genderNote = document.getElementById('floatTransGenderNote');
+
+      if (submitBtn) { submitBtn.textContent = '⏳ Menerjemahkan...'; submitBtn.disabled = true; }
+      if (box) box.style.display = 'none';
+      if (genderNote) genderNote.style.display = 'none';
+
+      const sl = floatTransDir === 'id-to-th' ? 'auto' : 'th';
+      const tl = floatTransDir === 'id-to-th' ? 'th' : 'id';
 
       try {
-        const transRes = await translateTextOfflineOrOnline(text, 'id', 'th');
-        if (outText) outText.textContent = transRes;
-        playSynthSound('success');
+        // Use same Google Translate API as performLiveTranslation
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&dt=rm&q=${encodeURIComponent(text)}`;
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error('API Error ' + resp.status);
+
+        const data = await resp.json();
+        let translatedText = '';
+        let romanization = '';
+
+        if (data && data[0] && Array.isArray(data[0])) {
+          translatedText = data[0].map(seg => seg[0] || '').join('');
+          // Romanization is in data[0][i][3] for Thai output
+          const roman = data[0].map(seg => seg[3] || '').filter(Boolean).join(' ');
+          romanization = roman;
+        }
+
+        if (!translatedText) throw new Error('Empty response');
+
+        floatTransLatestThai = translatedText;
+
+        // Show result box
+        if (outThai) outThai.textContent = translatedText;
+        if (outRoman && romanization) {
+          outRoman.textContent = romanization;
+          outRoman.style.display = 'block';
+        } else if (outRoman) {
+          outRoman.style.display = 'none';
+        }
+        if (box) box.style.display = 'block';
+
+        // If translating to Thai, show gender variants
+        if (floatTransDir === 'id-to-th') {
+          const isQ = /[?？ไหม|มั้ย|หรือ|อะไร|ที่ไหน|เมื่อไหร่|เท่าไหร่|กี่|ใคร|ทำไม]/.test(translatedText) || text.includes('?');
+          const female = typeof formatThaiForGender === 'function' ? formatThaiForGender(translatedText, 'female') : translatedText + ' ค่ะ';
+          const male   = typeof formatThaiForGender === 'function' ? formatThaiForGender(translatedText, 'male')   : translatedText + ' ครับ';
+          floatTransLatestFemale = female;
+          floatTransLatestMale   = male;
+
+          const femEl = document.getElementById('floatTransFemaleText');
+          const malEl = document.getElementById('floatTransMaleText');
+          if (femEl) femEl.textContent = female;
+          if (malEl) malEl.textContent = male;
+          if (genderNote) genderNote.style.display = 'flex';
+
+          // Auto speak with preferred gender
+          const pref = (typeof appState !== 'undefined' && appState.speakerGender) || 'female';
+          setTimeout(() => floatTransSpeak(), 300);
+        }
+
+        playSynthSound && playSynthSound('success');
+        addXP && addXP(1);
+
       } catch (err) {
-        if (outText) outText.textContent = 'สวัสดี (Sawatdee)';
+        console.error('Float translate error:', err);
+        if (outThai) {
+          outThai.textContent = '❌ Gagal terhubung ke layanan terjemahan. Coba lagi.';
+          outThai.style.fontSize = '14px';
+        }
+        if (box) box.style.display = 'block';
+        showToast && showToast('Terjemahan gagal, periksa koneksi internet.');
+      } finally {
+        if (submitBtn) { submitBtn.textContent = 'Terjemahkan ✨'; submitBtn.disabled = false; }
       }
     }
 
@@ -23338,21 +23666,31 @@
     function setLotusTab(tab) {
       currentLotusTab = tab;
       const btnMenus = document.getElementById('tabBtnLotusMenus');
-      const btnAi = document.getElementById('tabBtnLotusAi');
+      const btnAi   = document.getElementById('tabBtnLotusAi');
+      const btnTrans = document.getElementById('tabBtnLotusTrans');
       const viewMenus = document.getElementById('lotusTabMenusView');
-      const viewAi = document.getElementById('lotusTabAiView');
+      const viewAi    = document.getElementById('lotusTabAiView');
+      const viewTrans = document.getElementById('lotusTabTransView');
+
+      // Reset all
+      [btnMenus, btnAi, btnTrans].forEach(b => b && b.classList.remove('active'));
+      [viewMenus, viewAi, viewTrans].forEach(v => v && (v.style.display = 'none'));
 
       if (tab === 'menus') {
         if (btnMenus) btnMenus.classList.add('active');
-        if (btnAi) btnAi.classList.remove('active');
         if (viewMenus) viewMenus.style.display = 'flex';
-        if (viewAi) viewAi.style.display = 'none';
         const input = document.getElementById('floatingUnifiedSearchInput');
         renderLotusMenuContent(input ? input.value : '');
+      } else if (tab === 'translate') {
+        if (btnTrans) btnTrans.classList.add('active');
+        if (viewTrans) viewTrans.style.display = 'flex';
+        // focus textarea
+        setTimeout(() => {
+          const ta = document.getElementById('floatTransInput');
+          if (ta) ta.focus();
+        }, 120);
       } else {
-        if (btnMenus) btnMenus.classList.remove('active');
         if (btnAi) btnAi.classList.add('active');
-        if (viewMenus) viewMenus.style.display = 'none';
         if (viewAi) viewAi.style.display = 'flex';
         renderFloatingChatMessages();
       }
@@ -23602,10 +23940,13 @@
       <!-- Navigation Tabs: 2 Simple Tabs -->
       <div class="lotus-nav-bar">
         <button type="button" class="lotus-nav-tab active" id="tabBtnLotusMenus" onclick="setLotusTab('menus')">
-          <span>📋</span> Semua Menu (16)
+          <span>📋</span> Menu
         </button>
         <button type="button" class="lotus-nav-tab" id="tabBtnLotusAi" onclick="setLotusTab('ai')">
-          <span>💬</span> Tanya AI Nong Mali
+          <span>💬</span> Tanya AI
+        </button>
+        <button type="button" class="lotus-nav-tab" id="tabBtnLotusTrans" onclick="setLotusTab('translate')">
+          <span>🌐</span> Terjemah
         </button>
       </div>
 
@@ -23649,6 +23990,80 @@
             </button>
           </div>
         </form>
+      </div>
+
+      <!-- TAB 3: PENERJEMAH DEEPL-STYLE -->
+      <div id="lotusTabTransView" class="floating-tab-body" style="display:none; flex-direction:column; flex:1; overflow:hidden; padding:0;">
+        <div style="flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:10px;">
+
+          <!-- Language Direction Bar -->
+          <div class="float-trans-dir-bar">
+            <button type="button" class="float-trans-lang-pill active" id="floatTransLangSrc" onclick="floatTransSetDir('id-to-th')">
+              🇮🇩 Indonesia
+            </button>
+            <button type="button" class="float-trans-swap-btn" onclick="floatTransSwapDir()" title="Tukar Bahasa">
+              ⇄
+            </button>
+            <button type="button" class="float-trans-lang-pill" id="floatTransLangTgt" onclick="floatTransSetDir('th-to-id')">
+              🇹🇭 Thailand
+            </button>
+          </div>
+
+          <!-- Source Input Box -->
+          <div class="float-trans-box float-trans-source">
+            <textarea
+              id="floatTransInput"
+              class="float-trans-textarea"
+              placeholder="Ketik teks bahasa Indonesia di sini..."
+              rows="4"
+              oninput="floatTransAutoDetect(this.value)"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();performFloatTranslation();}"
+            ></textarea>
+            <div class="float-trans-box-footer">
+              <span class="float-trans-char-count" id="floatTransCharCount">0 / 500</span>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button type="button" class="float-trans-icon-btn" onclick="floatTransClearAll()" title="Hapus teks">✕</button>
+                <button type="button" class="float-trans-icon-btn" onclick="triggerFloatTransMic()" title="Input Suara">🎙️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Translate Button -->
+          <button type="button" class="float-trans-submit-btn" id="floatTransSubmitBtn" onclick="performFloatTranslation()">
+            Terjemahkan ✨
+          </button>
+
+          <!-- Result Box (DeepL-style) -->
+          <div class="float-trans-box float-trans-result" id="floatTransResultBox" style="display:none;">
+            <div class="float-trans-result-lang">🇹🇭 Bahasa Thailand</div>
+            <div class="float-trans-result-thai" id="floatTransThaiText">—</div>
+            <div class="float-trans-result-roman" id="floatTransRomanText"></div>
+            <div class="float-trans-result-actions">
+              <button type="button" class="float-trans-action-btn" onclick="floatTransSpeak()" title="Dengar Penutur Asli">
+                🔊 Dengar
+              </button>
+              <button type="button" class="float-trans-action-btn" onclick="floatTransCopy()" title="Salin Terjemahan">
+                📋 Salin
+              </button>
+              <button type="button" class="float-trans-action-btn" onclick="searchSongFromTranslation()" title="Cari Lagu">
+                🎵 Cari Lagu
+              </button>
+            </div>
+          </div>
+
+          <!-- Gender Note (female/male polite particle) -->
+          <div class="float-trans-gender-note" id="floatTransGenderNote" style="display:none;">
+            <div class="float-trans-gender-row">
+              <span class="float-trans-gender-badge female">♀ Wanita (ค่ะ/คะ)</span>
+              <span class="float-trans-gender-val" id="floatTransFemaleText"></span>
+            </div>
+            <div class="float-trans-gender-row">
+              <span class="float-trans-gender-badge male">♂ Pria (ครับ)</span>
+              <span class="float-trans-gender-val" id="floatTransMaleText"></span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
