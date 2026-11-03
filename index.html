@@ -7614,6 +7614,31 @@
         </div>
       </div>
 
+      <!-- 5 PRIMARY NAVIGATION PILL TABS -->
+      <nav class="mali-top-pill-nav" id="maliTopPillNav" aria-label="Navigasi Utama Mali's Thai">
+        <button type="button" class="mali-top-nav-btn active" data-main-tab="roadmap" onclick="switchMainTab('roadmap')">
+          <span class="m-icon">🗺️</span>
+          <span class="m-text">Roadmap Belajar</span>
+        </button>
+        <button type="button" class="mali-top-nav-btn" data-main-tab="aihub" onclick="switchMainTab('aihub')">
+          <span class="m-icon">🎙️</span>
+          <span class="m-text">Speaking & AI Hub</span>
+        </button>
+        <button type="button" class="mali-top-nav-btn" data-main-tab="practice" onclick="switchMainTab('practice')">
+          <span class="m-icon">✍️</span>
+          <span class="m-text">Latihan Praktik</span>
+        </button>
+        <button type="button" class="mali-top-nav-btn" data-main-tab="dictionary" onclick="switchMainTab('dictionary')">
+          <span class="m-icon">📖</span>
+          <span class="m-text">Kamus & Audio</span>
+        </button>
+        <button type="button" class="mali-top-nav-btn" data-main-tab="exam" onclick="switchMainTab('exam')">
+          <span class="m-icon">🎓</span>
+          <span class="m-text">Ujian & Sertifikasi</span>
+        </button>
+      </nav>
+
+
       <div class="header-actions">
         <!-- User Profile Pill -->
         <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()"
@@ -7986,6 +8011,23 @@
 
         <!-- STUDIO BICARA TAB -->
         <section id="panel-studio" class="section-tab-panel">
+
+    <!-- SUB-NAV SPEAKING & AI HUB -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-ai-hub" onclick="switchSubNav('panel-ai-hub')">
+        <span>🤖 Nong Mali AI Hub</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-studio" onclick="switchSubNav('panel-studio')">
+        <span>🎙️ Studio Evaluasi Bicara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-roleplay" onclick="switchSubNav('panel-roleplay')">
+        <span>☕ Simulasi Roleplay Kafe</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-analytics" onclick="switchSubNav('panel-analytics')">
+        <span>📊 Analitik Kelancaran</span>
+      </button>
+    </div>
+
           <div class="studio-grid">
             <!-- Left: Practice Studio -->
             <div class="studio-panel">
@@ -8136,6 +8178,23 @@
 
         <!-- 2. SIMULASI ROLEPLAY TAB -->
         <section id="panel-roleplay" class="section-tab-panel">
+
+    <!-- SUB-NAV SPEAKING & AI HUB -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-ai-hub" onclick="switchSubNav('panel-ai-hub')">
+        <span>🤖 Nong Mali AI Hub</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-studio" onclick="switchSubNav('panel-studio')">
+        <span>🎙️ Studio Evaluasi Bicara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-roleplay" onclick="switchSubNav('panel-roleplay')">
+        <span>☕ Simulasi Roleplay Kafe</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-analytics" onclick="switchSubNav('panel-analytics')">
+        <span>📊 Analitik Kelancaran</span>
+      </button>
+    </div>
+
           <div class="roleplay-container">
             <!-- Scenario Picker -->
             <div class="scenario-sidebar">
@@ -8220,6 +8279,67 @@
 
         <!-- 3. KURIKULUM & ROADMAP TAB (12 Progressive Units / 48 Modules) -->
         <section id="panel-curriculum" class="section-tab-panel">
+
+    <!-- SUB-NAV ROADMAP BELAJAR -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-curriculum" onclick="switchSubNav('panel-curriculum')">
+        <span>🗺️ Unit Kurikulum (1-12)</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-alphabet" onclick="switchSubNav('panel-alphabet')">
+        <span>🔤 Aksara & 44 Konsonan</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-phonetics" onclick="switchSubNav('panel-phonetics')">
+        <span>🎵 5 Nada & Lab Suara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-vocabulary" onclick="switchSubNav('panel-vocabulary')">
+        <span>📚 Misi Harian Kosakata</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-jazmi-series" onclick="switchSubNav('panel-jazmi-series')">
+        <span>📖 Materi Tulis (01-90)</span>
+      </button>
+    </div>
+
+    <!-- MODERN HERO DASHBOARD BANNER -->
+    <div class="mali-hero-dashboard" id="maliHeroDashboard">
+      <div class="hero-left">
+        <div class="hero-badge">🌸 Mali's Thai Learning Hub</div>
+        <h2 class="hero-title" id="maliHeroGreeting">Sawatdee khrub! Selamat Datang Kembali</h2>
+        <p class="hero-subtitle">Terus tingkatkan kelancaran bicara, membaca aksara, dan kosakata harian Anda.</p>
+        <div class="hero-stats-row">
+          <div class="hero-stat-box">
+            <span class="stat-icon">🔥</span>
+            <div>
+              <strong id="heroDailyStreak">1 Hari</strong>
+              <small>Streak Belajar</small>
+            </div>
+          </div>
+          <div class="hero-stat-box">
+            <span class="stat-icon">⚡</span>
+            <div>
+              <strong id="heroTotalXP">65 XP</strong>
+              <small>Pengalaman (XP)</small>
+            </div>
+          </div>
+          <div class="hero-stat-box">
+            <span class="stat-icon">🎯</span>
+            <div>
+              <strong id="heroActiveModule">Unit 1</strong>
+              <small>Modul Aktif</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <button type="button" class="btn-hero-resume" onclick="resumeLastTab()">
+          <span>⚡ Lanjutkan Belajar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+
           <div class="curriculum-grid">
             <!-- Header with Title, Metrics & Controls -->
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px;">
@@ -8272,6 +8392,26 @@
 
         <!-- COMPLETE WRITTEN CURRICULUM (PARTS I - IV • 119 MODUL TERTULIS • MATERI 01-90) -->
         <section id="panel-jazmi-series" class="section-tab-panel">
+
+    <!-- SUB-NAV ROADMAP BELAJAR -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-curriculum" onclick="switchSubNav('panel-curriculum')">
+        <span>🗺️ Unit Kurikulum (1-12)</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-alphabet" onclick="switchSubNav('panel-alphabet')">
+        <span>🔤 Aksara & 44 Konsonan</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-phonetics" onclick="switchSubNav('panel-phonetics')">
+        <span>🎵 5 Nada & Lab Suara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-vocabulary" onclick="switchSubNav('panel-vocabulary')">
+        <span>📚 Misi Harian Kosakata</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-jazmi-series" onclick="switchSubNav('panel-jazmi-series')">
+        <span>📖 Materi Tulis (01-90)</span>
+      </button>
+    </div>
+
           <!-- Top Hero Card with Drive PDF downloads -->
           <div class="jazmi-banner-card"
             style="padding:22px 24px; background:linear-gradient(135deg, rgba(45,106,79,0.22) 0%, rgba(13,20,16,0.92) 100%); border:1px solid var(--border-bright); border-radius:var(--radius-xl); margin-bottom:24px;">
@@ -8374,6 +8514,26 @@
 
         <!-- 1. MATERI AKSARA & ALFABET THAI (SEPARATE DEDICATED MATERIAL) -->
         <section id="panel-alphabet" class="section-tab-panel active">
+
+    <!-- SUB-NAV ROADMAP BELAJAR -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-curriculum" onclick="switchSubNav('panel-curriculum')">
+        <span>🗺️ Unit Kurikulum (1-12)</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-alphabet" onclick="switchSubNav('panel-alphabet')">
+        <span>🔤 Aksara & 44 Konsonan</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-phonetics" onclick="switchSubNav('panel-phonetics')">
+        <span>🎵 5 Nada & Lab Suara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-vocabulary" onclick="switchSubNav('panel-vocabulary')">
+        <span>📚 Misi Harian Kosakata</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-jazmi-series" onclick="switchSubNav('panel-jazmi-series')">
+        <span>📖 Materi Tulis (01-90)</span>
+      </button>
+    </div>
+
           
           <!-- Dashboard Welcome Card (shown when user is logged in) -->
           <div id="dashboardWelcomeCard" style="display:none;">
@@ -8567,6 +8727,23 @@
              FITUR 1: KANVAS LATIHAN MENULIS AKSARA THAI (DIGITAL STROKE TRACING)
              ========================================================================== -->
         <section id="panel-writing" class="section-tab-panel">
+
+    <!-- SUB-NAV LATIHAN PRAKTIK -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-writing" onclick="switchSubNav('panel-writing')">
+        <span>✍️ Tracing Canvas</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-typing" onclick="switchSubNav('panel-typing')">
+        <span>⌨️ Kedmanee Typing Tutor</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-flashcards" onclick="switchSubNav('panel-flashcards')">
+        <span>🎴 Flashcard SRS</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-speed-drill" onclick="switchSubNav('panel-speed-drill')">
+        <span>⚡ Speed Drill 60 Detik</span>
+      </button>
+    </div>
+
           <div
             style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
             <div>
@@ -8740,6 +8917,23 @@
              FITUR 2: 3D FLASHCARD PINTAR (SPACED REPETITION)
              ========================================================================== -->
         <section id="panel-flashcards" class="section-tab-panel">
+
+    <!-- SUB-NAV LATIHAN PRAKTIK -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-writing" onclick="switchSubNav('panel-writing')">
+        <span>✍️ Tracing Canvas</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-typing" onclick="switchSubNav('panel-typing')">
+        <span>⌨️ Kedmanee Typing Tutor</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-flashcards" onclick="switchSubNav('panel-flashcards')">
+        <span>🎴 Flashcard SRS</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-speed-drill" onclick="switchSubNav('panel-speed-drill')">
+        <span>⚡ Speed Drill 60 Detik</span>
+      </button>
+    </div>
+
           <div style="text-align:center; max-width:680px; margin:0 auto 20px auto;">
             <div
               style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -8873,6 +9067,23 @@
              FITUR 2: GAME TANTANGAN CEPAT (60-SECOND SPEED DRILL)
              ========================================================================== -->
         <section id="panel-speed-drill" class="section-tab-panel">
+
+    <!-- SUB-NAV LATIHAN PRAKTIK -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-writing" onclick="switchSubNav('panel-writing')">
+        <span>✍️ Tracing Canvas</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-typing" onclick="switchSubNav('panel-typing')">
+        <span>⌨️ Kedmanee Typing Tutor</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-flashcards" onclick="switchSubNav('panel-flashcards')">
+        <span>🎴 Flashcard SRS</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-speed-drill" onclick="switchSubNav('panel-speed-drill')">
+        <span>⚡ Speed Drill 60 Detik</span>
+      </button>
+    </div>
+
           <div style="text-align:center; max-width:680px; margin:0 auto 24px auto;">
             <div
               style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#ec4899; padding:3px 10px; background:rgba(236,72,153,0.12); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -9010,6 +9221,23 @@
              FITUR: PAPAN KETIK VIRTUAL & TYPING TUTOR (KEDMANEE LAYOUT)
              ========================================================================== -->
         <section id="panel-typing" class="section-tab-panel">
+
+    <!-- SUB-NAV LATIHAN PRAKTIK -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-writing" onclick="switchSubNav('panel-writing')">
+        <span>✍️ Tracing Canvas</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-typing" onclick="switchSubNav('panel-typing')">
+        <span>⌨️ Kedmanee Typing Tutor</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-flashcards" onclick="switchSubNav('panel-flashcards')">
+        <span>🎴 Flashcard SRS</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-speed-drill" onclick="switchSubNav('panel-speed-drill')">
+        <span>⚡ Speed Drill 60 Detik</span>
+      </button>
+    </div>
+
           <div style="text-align:center; max-width:680px; margin:0 auto 20px auto;">
             <div
               style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#0ea5e9; padding:3px 10px; background:rgba(14,165,233,0.12); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -9141,6 +9369,17 @@
              FITUR: SISTEM MEDALI & TROFI PRESTASI BELAJAR (12 PENCAPAIAN)
              ========================================================================== -->
         <section id="panel-achievements" class="section-tab-panel">
+
+    <!-- SUB-NAV UJIAN & SERTIFIKASI -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-certificate" onclick="switchSubNav('panel-certificate')">
+        <span>🎓 Ujian & Sertifikat Digital</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-achievements" onclick="switchSubNav('panel-achievements')">
+        <span>🏆 Galeri Medali & Trofi</span>
+      </button>
+    </div>
+
           <div style="text-align:center; max-width:680px; margin:0 auto 24px auto;">
             <div
               style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#f59e0b; padding:3px 10px; background:rgba(245,158,11,0.12); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -9163,6 +9402,17 @@
              FITUR 4: UJIAN KOMPREHENSIF & SERTIFIKAT KELULUSAN RESMI
              ========================================================================== -->
         <section id="panel-certificate" class="section-tab-panel">
+
+    <!-- SUB-NAV UJIAN & SERTIFIKASI -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-certificate" onclick="switchSubNav('panel-certificate')">
+        <span>🎓 Ujian & Sertifikat Digital</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-achievements" onclick="switchSubNav('panel-achievements')">
+        <span>🏆 Galeri Medali & Trofi</span>
+      </button>
+    </div>
+
           <div style="text-align:center; max-width:680px; margin:0 auto 24px auto;">
             <div
               style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -9256,6 +9506,26 @@
 
         <!-- 5. LABORATORIUM SUARA & 5 NADA (FOCUSED ON AUDIO & TONES) -->
         <section id="panel-phonetics" class="section-tab-panel">
+
+    <!-- SUB-NAV ROADMAP BELAJAR -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-curriculum" onclick="switchSubNav('panel-curriculum')">
+        <span>🗺️ Unit Kurikulum (1-12)</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-alphabet" onclick="switchSubNav('panel-alphabet')">
+        <span>🔤 Aksara & 44 Konsonan</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-phonetics" onclick="switchSubNav('panel-phonetics')">
+        <span>🎵 5 Nada & Lab Suara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-vocabulary" onclick="switchSubNav('panel-vocabulary')">
+        <span>📚 Misi Harian Kosakata</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-jazmi-series" onclick="switchSubNav('panel-jazmi-series')">
+        <span>📖 Materi Tulis (01-90)</span>
+      </button>
+    </div>
+
           <div style="margin-bottom:24px;">
             <div
               style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--primary); padding:3px 10px; background:var(--primary-light); border-radius:var(--radius-pill); margin-bottom:8px;">
@@ -9321,6 +9591,26 @@
 
         <!-- 3. KOSAKATA & MISI HARIAN TAB (VOCABULARY & 10-WORD DAILY QUEST) -->
         <section id="panel-vocabulary" class="section-tab-panel">
+
+    <!-- SUB-NAV ROADMAP BELAJAR -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-curriculum" onclick="switchSubNav('panel-curriculum')">
+        <span>🗺️ Unit Kurikulum (1-12)</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-alphabet" onclick="switchSubNav('panel-alphabet')">
+        <span>🔤 Aksara & 44 Konsonan</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-phonetics" onclick="switchSubNav('panel-phonetics')">
+        <span>🎵 5 Nada & Lab Suara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-vocabulary" onclick="switchSubNav('panel-vocabulary')">
+        <span>📚 Misi Harian Kosakata</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-jazmi-series" onclick="switchSubNav('panel-jazmi-series')">
+        <span>📖 Materi Tulis (01-90)</span>
+      </button>
+    </div>
+
           <!-- TOP BENTO: DAILY MISSION HERO BANNER -->
           <div class="vocab-daily-banner">
             <div class="daily-banner-glow"></div>
@@ -9498,6 +9788,23 @@
 
         <!-- 5. ANALITIK KELANCARAN TAB -->
         <section id="panel-analytics" class="section-tab-panel">
+
+    <!-- SUB-NAV SPEAKING & AI HUB -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-ai-hub" onclick="switchSubNav('panel-ai-hub')">
+        <span>🤖 Nong Mali AI Hub</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-studio" onclick="switchSubNav('panel-studio')">
+        <span>🎙️ Studio Evaluasi Bicara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-roleplay" onclick="switchSubNav('panel-roleplay')">
+        <span>☕ Simulasi Roleplay Kafe</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-analytics" onclick="switchSubNav('panel-analytics')">
+        <span>📊 Analitik Kelancaran</span>
+      </button>
+    </div>
+
           <div style="margin-bottom:28px;">
             <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">Dashboard Analitik Berbicara</h2>
             <p style="font-size:14px; color:var(--text-muted);">Laporan detail akurasi, waktu bicara, dan rekomendasi AI
@@ -9564,6 +9871,23 @@
 
         <!-- 6. AI THAILAND HUB: SEARCH, TRANSLATE & Q&A -->
         <section id="panel-ai-hub" class="section-tab-panel">
+
+    <!-- SUB-NAV SPEAKING & AI HUB -->
+    <div class="mali-subnav-bar">
+      <button class="mali-subnav-btn active" data-sub-target="panel-ai-hub" onclick="switchSubNav('panel-ai-hub')">
+        <span>🤖 Nong Mali AI Hub</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-studio" onclick="switchSubNav('panel-studio')">
+        <span>🎙️ Studio Evaluasi Bicara</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-roleplay" onclick="switchSubNav('panel-roleplay')">
+        <span>☕ Simulasi Roleplay Kafe</span>
+      </button>
+      <button class="mali-subnav-btn" data-sub-target="panel-analytics" onclick="switchSubNav('panel-analytics')">
+        <span>📊 Analitik Kelancaran</span>
+      </button>
+    </div>
+
           <div class="ai-hub-container">
             <!-- Header & Mode Switcher -->
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
@@ -20921,7 +21245,255 @@
       .float-trans-gender-badge.female { background: #fdf2f8; color: #9d174d; border: 1px solid #f9a8d4; }
       .float-trans-gender-badge.male   { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
       .float-trans-gender-val { color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 14px; }
-    </style>
+    
+
+/* ==========================================================================
+   MALI'S THAI REFACTORED 5-PILLAR NAVIGATION & MOBILE POLISH
+   ========================================================================== */
+
+/* Top Pill Navigation in Header */
+.mali-top-pill-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(45, 106, 79, 0.08);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(45, 106, 79, 0.14);
+}
+
+.mali-top-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.mali-top-nav-btn:hover {
+  color: var(--primary);
+  background: rgba(45, 106, 79, 0.08);
+}
+
+.mali-top-nav-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.3);
+}
+
+/* Sub-Navigation Bar inside Panels */
+.mali-subnav-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mali-subnav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.mali-subnav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1.5px solid transparent;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  min-height: 42px;
+}
+
+.mali-subnav-btn:hover {
+  background: rgba(45, 106, 79, 0.06);
+  color: var(--primary);
+  border-color: rgba(45, 106, 79, 0.2);
+}
+
+.mali-subnav-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);
+}
+
+/* Hero Dashboard Banner */
+.mali-hero-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%);
+  color: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 28px rgba(45, 106, 79, 0.22);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mali-hero-dashboard::after {
+  content: '🌸';
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-size: 120px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  color: #b7e4c7;
+}
+
+.hero-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: #ffffff;
+}
+
+.hero-subtitle {
+  font-size: 13.5px;
+  color: #d8f3dc;
+  margin: 0 0 18px 0;
+  max-width: 580px;
+  line-height: 1.5;
+}
+
+.hero-stats-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-stat-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-stat-box .stat-icon {
+  font-size: 22px;
+}
+
+.hero-stat-box strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hero-stat-box small {
+  font-size: 10.5px;
+  color: #b7e4c7;
+}
+
+.btn-hero-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f59e0b;
+  color: #1a1a1a;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 26px;
+  font-size: 14.5px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 48px;
+  white-space: nowrap;
+}
+
+.btn-hero-resume:hover {
+  background: #d97706;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.5);
+}
+
+.btn-hero-resume:active {
+  transform: scale(0.97);
+}
+
+/* Touch target minimum 44x44px for accessibility */
+.btn-audio-listen,
+.icon-btn-compact,
+.mic-btn,
+.pill-filter,
+.mobile-nav-btn {
+  min-height: 44px;
+}
+
+/* Mobile responsiveness adjustments */
+@media (max-width: 900px) {
+  .mali-top-pill-nav {
+    display: none; /* Handled smoothly by bottom nav */
+  }
+  .mali-hero-dashboard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 18px;
+  }
+  .btn-hero-resume {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .writing-canvas-wrap {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: 320px !important;
+  }
+  .kb-key {
+    height: 44px !important;
+  }
+}
+
+</style>
           </head>
           <body onload="window.print(); window.close();">
             <img src="${dataUrl}"/>
@@ -23900,6 +24472,132 @@
 
       container.innerHTML = html;
     }
+
+
+// ==========================================================================
+// MALI'S THAI 5-PILLAR ARCHITECTURE CONTROLLER
+// ==========================================================================
+
+const MALI_PILLAR_MAP = {
+  roadmap: ['panel-curriculum', 'panel-alphabet', 'panel-phonetics', 'panel-vocabulary', 'panel-jazmi-series'],
+  aihub: ['panel-ai-hub', 'panel-studio', 'panel-roleplay', 'panel-analytics'],
+  practice: ['panel-writing', 'panel-typing', 'panel-flashcards', 'panel-speed-drill'],
+  dictionary: ['panel-dictionary'],
+  exam: ['panel-certificate', 'panel-achievements']
+};
+
+let currentMainPillar = 'roadmap';
+
+function switchMainTab(pillarKey, targetSubPanel = null) {
+  if (!MALI_PILLAR_MAP[pillarKey]) pillarKey = 'roadmap';
+  currentMainPillar = pillarKey;
+  
+  // Highlight top pill buttons
+  document.querySelectorAll('.mali-top-nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-main-tab') === pillarKey);
+  });
+  
+  // Highlight mobile bottom nav
+  document.querySelectorAll('.mobile-bottom-nav .mobile-nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-main-tab') === pillarKey);
+  });
+  
+  // Pick active sub-panel
+  const defaultSub = MALI_PILLAR_MAP[pillarKey][0];
+  const targetId = targetSubPanel || defaultSub;
+  const targetKey = targetId.replace('panel-', '');
+  
+  // Execute existing switchNavTab
+  switchNavTab(targetKey);
+  
+  // Update subnav active buttons
+  updateSubNavState(targetId);
+  updateHeroDashboardStats();
+}
+
+function switchSubNav(panelId) {
+  const tabKey = panelId.replace('panel-', '');
+  switchNavTab(tabKey);
+  updateSubNavState(panelId);
+}
+
+function updateSubNavState(activePanelId) {
+  document.querySelectorAll('.mali-subnav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-sub-target') === activePanelId);
+  });
+}
+
+function updateHeroDashboardStats() {
+  const streakEl = document.getElementById('heroDailyStreak');
+  const xpEl = document.getElementById('heroTotalXP');
+  const greetingEl = document.getElementById('maliHeroGreeting');
+  const activeModEl = document.getElementById('heroActiveModule');
+  
+  const student = (typeof appState !== 'undefined' && appState.studentName) ? appState.studentName : (localStorage.getItem('mali_student_name') || 'Pembelajar');
+  if (greetingEl) greetingEl.textContent = `Sawatdee khrub, ${student}! Selamat Datang Kembali`;
+  
+  const streak = (typeof appState !== 'undefined' && appState.streakDays) ? appState.streakDays : (localStorage.getItem('mali_streak_days') || '1');
+  if (streakEl) streakEl.textContent = `${streak} Hari`;
+  
+  const xp = (typeof appState !== 'undefined' && appState.totalXp) ? appState.totalXp : (localStorage.getItem('mali_total_xp') || '65');
+  if (xpEl) xpEl.textContent = `${xp} XP`;
+  
+  const lastTab = localStorage.getItem('mali_last_tab') || 'curriculum';
+  const labelMap = {
+    'curriculum': 'Unit Kurikulum',
+    'alphabet': 'Aksara & Konsonan',
+    'writing': 'Tracing Canvas',
+    'typing': 'Kedmanee Typing',
+    'ai-hub': 'Nong Mali AI',
+    'dictionary': 'Kamus Audio',
+    'certificate': 'Ujian Sertifikasi'
+  };
+  if (activeModEl) activeModEl.textContent = labelMap[lastTab] || 'Unit 1';
+}
+
+// Hook into existing switchNavTab to keep 5 pillars synchronized
+const originalSwitchNavTab = window.switchNavTab;
+window.switchNavTab = function(tabKey) {
+  const panelId = `panel-${tabKey}`;
+  let foundPillar = null;
+  for (const [pillar, panels] of Object.entries(MALI_PILLAR_MAP)) {
+    if (panels.includes(panelId)) {
+      foundPillar = pillar;
+      break;
+    }
+  }
+  if (foundPillar) {
+    document.querySelectorAll('.mali-top-nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-main-tab') === foundPillar);
+    });
+    document.querySelectorAll('.mobile-bottom-nav .mobile-nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-main-tab') === foundPillar);
+    });
+    updateSubNavState(panelId);
+  }
+  
+  if (typeof originalSwitchNavTab === 'function') {
+    originalSwitchNavTab(tabKey);
+  }
+  setTimeout(updateHeroDashboardStats, 50);
+};
+
+// Initial sync on window load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    updateHeroDashboardStats();
+    const lastTab = localStorage.getItem('mali_last_tab') || 'curriculum';
+    let initPillar = 'roadmap';
+    for (const [pillar, panels] of Object.entries(MALI_PILLAR_MAP)) {
+      if (panels.includes(`panel-${lastTab}`)) {
+        initPillar = pillar;
+        break;
+      }
+    }
+    switchMainTab(initPillar, `panel-${lastTab}`);
+  }, 100);
+});
+
 </script>
 
   <!-- ==========================================================================
@@ -24075,27 +24773,30 @@
   <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="toggleMobileDrawer(false)"></div>
 
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
-    <button type="button" class="mobile-nav-btn active" data-tab="alphabet"
-      onclick="switchNavTabMobile('alphabet', this)">
-      <span class="m-icon">🔤</span>
-      <span class="m-label">Aksara</span>
+    <button type="button" class="mobile-nav-btn active" data-main-tab="roadmap"
+      onclick="switchMainTab('roadmap')">
+      <span class="m-icon">🗺️</span>
+      <span class="m-label">Roadmap</span>
     </button>
-    <button type="button" class="mobile-nav-btn" data-tab="phonetics" onclick="switchNavTabMobile('phonetics', this)">
-      <span class="m-icon">🎵</span>
-      <span class="m-label">5 Nada</span>
+    <button type="button" class="mobile-nav-btn" data-main-tab="aihub"
+      onclick="switchMainTab('aihub')">
+      <span class="m-icon">🎙️</span>
+      <span class="m-label">Speaking</span>
     </button>
-    <button type="button" class="mobile-nav-btn" data-tab="jazmi-series"
-      onclick="switchNavTabMobile('jazmi-series', this)">
-      <span class="m-icon">📚</span>
-      <span class="m-label">Materi</span>
-    </button>
-    <button type="button" class="mobile-nav-btn" data-tab="writing" onclick="switchNavTabMobile('writing', this)">
+    <button type="button" class="mobile-nav-btn" data-main-tab="practice"
+      onclick="switchMainTab('practice')">
       <span class="m-icon">✍️</span>
-      <span class="m-label">Tulis</span>
+      <span class="m-label">Praktik</span>
     </button>
-    <button type="button" class="mobile-nav-btn" onclick="toggleMobileDrawer(true)">
-      <span class="m-icon">☰</span>
-      <span class="m-label">Menu</span>
+    <button type="button" class="mobile-nav-btn" data-main-tab="dictionary"
+      onclick="switchMainTab('dictionary')">
+      <span class="m-icon">📖</span>
+      <span class="m-label">Kamus</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-main-tab="exam"
+      onclick="switchMainTab('exam')">
+      <span class="m-icon">🎓</span>
+      <span class="m-label">Ujian</span>
     </button>
   </nav>
 
