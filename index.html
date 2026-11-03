@@ -5013,8 +5013,19 @@
 
     @media (max-width: 440px) {
       .writing-canvas-wrap {
-        width: 320px;
-        height: 320px;
+        width: min(340px, 90vw);
+        height: min(340px, 90vw);
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      #thaiWritingCanvas {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        display: block;
+        width: 100%;
+        height: 100%;
       }
     }
 
@@ -8363,7 +8374,22 @@
 
         <!-- 1. MATERI AKSARA & ALFABET THAI (SEPARATE DEDICATED MATERIAL) -->
         <section id="panel-alphabet" class="section-tab-panel active">
-          <div
+          
+          <!-- Dashboard Welcome Card (shown when user is logged in) -->
+          <div id="dashboardWelcomeCard" style="display:none;">
+            <div class="welcome-info">
+              <div class="welcome-name" id="welcomeUserName">Halo, Pelajar! 🌸</div>
+              <div class="welcome-stats">
+                <span class="welcome-stat">🔥 <span id="welcomeStreak">0</span> Hari</span>
+                <span class="welcome-stat">⚡ <span id="welcomeXP">0</span> XP</span>
+                <span class="welcome-stat">📚 <span id="welcomeLevel">Level 1</span></span>
+              </div>
+            </div>
+            <button class="btn-lanjutkan" onclick="resumeLastTab()">
+              Lanjutkan Belajar →
+            </button>
+          </div>
+        <div
             style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
             <div>
               <div
@@ -9048,6 +9074,14 @@
                 <span>Lewati Kata ⏭️</span>
               </button>
             </div>
+            <div id="typingMobileQuiz">
+              <div class="tap-quiz-prompt" id="tapQuizChar">ก</div>
+              <div class="tap-quiz-label" id="tapQuizLabel">Tekan karakter yang benar</div>
+              <div class="tap-quiz-choices" id="tapQuizChoices">
+                <!-- Populated by JS -->
+              </div>
+              <div class="tap-quiz-progress" id="tapQuizProgress"></div>
+            </div>
           </div>
         </section>
 
@@ -9137,7 +9171,7 @@
             <h2 style="font-size:26px; font-weight:800; margin-bottom:6px;">Ujian Akhir &amp; Sertifikat Kelulusan</h2>
             <p style="font-size:14px; color:var(--text-muted); margin:0;">
               Selesaikan 20 pertanyaan ujian evaluasi kurikulum untuk meraih Sertifikat Kelulusan Resmi Digital dari
-              Fairy Thai Academy.
+              Mali's Thai.
             </p>
           </div>
 
@@ -16927,7 +16961,7 @@
               },
               {
                 "thai": "สถาบันภาษา",
-                "label": "Akademi Bahasa Fairy Thai"
+                "label": "Mali's Thai"
               }
             ],
             "explain": "SELAMAT! Anda telah menuntaskan seluruh 12 Unit Kurikulum Komprehensif (48 Modul Interaktif) Bahasa Thai!"
@@ -17579,6 +17613,7 @@
     }
 
     function initLearningPortal() {
+        showDashboardCard();
       syncUserProfileUI();
       updateGenderControls();
       const portal = document.getElementById('learningPortal');
@@ -17604,6 +17639,7 @@
 
     /* 8. NAVIGATION, THEME & UI HELPERS */
     function switchNavTab(tabKey) {
+      saveLastTab(tabKey);
       playSynthSound('click');
       toggleMobileDrawer(false);
       const portal = document.getElementById('learningPortal');
@@ -20435,7 +20471,7 @@
       ctx.textAlign = 'center';
       ctx.fillStyle = '#fbbf24';
       ctx.font = 'bold 36px serif';
-      ctx.fillText('สถาบันภาษาไทยมะลิ • FAIRY THAI ACADEMY', w / 2, 130);
+      ctx.fillText('สถาบันภาษาไทยมะลิ • MALI\'S THAI', w / 2, 130);
 
       // Main Certificate Title
       ctx.font = '800 52px "Cinzel", "Times New Roman", serif';
@@ -20524,13 +20560,13 @@
       ctx.font = '28px sans-serif';
       ctx.fillText('🇹🇭', 0, 4);
       ctx.font = '700 11px sans-serif';
-      ctx.fillText('FAIRY THAI ACADEMY', 0, 36);
+      ctx.fillText('MALI\'S THAI', 0, 36);
       ctx.restore();
 
       // Signature 1
       ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#f8fafc';
-      ctx.fillText('Mali & Tim Fairy Thai Academy', w / 2, 940);
+      ctx.fillText('Mali \u0026 Tim Mali\u2019s Thai', w / 2, 940);
       ctx.font = '400 16px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#94a3b8';
       ctx.fillText('Dewan Instruktur & Kurikulum Digital', w / 2, 970);
@@ -20563,12 +20599,152 @@
       win.document.write(`
         <html>
           <head>
-            <title>Cetak Sertifikat - Fairy Thai Academy</title>
+            <title>Cetak Sertifikat - Mali's Thai</title>
             <style>
               @page { size: landscape; margin: 0; }
               body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #000; }
               img { max-width: 100%; max-height: 100%; object-fit: contain; }
-            </style>
+            
+      /* ========= Typing Tutor Mobile Tap-Quiz Mode ========= */
+      @media (max-width: 640px) {
+        .thai-keyboard-section {
+          display: none !important;
+        }
+        #typingMobileQuiz {
+          display: block !important;
+        }
+      }
+      #typingMobileQuiz {
+        display: none;
+        padding: 16px;
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--border);
+        text-align: center;
+        margin-top: 16px;
+      }
+      .tap-quiz-prompt {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
+        letter-spacing: 2px;
+      }
+      .tap-quiz-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+      }
+      .tap-quiz-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .tap-quiz-choice {
+        min-height: 56px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: 2px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--bg);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.15s;
+        padding: 8px;
+        touch-action: manipulation;
+      }
+      .tap-quiz-choice:active { transform: scale(0.96); }
+      .tap-quiz-choice.correct { background: #d1fae5; border-color: #10b981; color: #065f46; }
+      .tap-quiz-choice.wrong   { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+      .tap-quiz-progress {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-top: 14px;
+      }
+    
+      /* ===== Accessibility: 44x44px minimum touch targets ===== */
+      .audio-play-btn,
+      .mic-btn,
+      [onclick*="speakThai"],
+      [onclick*="playAudio"],
+      [onclick*="triggerMic"],
+      [onclick*="startSpeech"],
+      [onclick*="playPortalGreeting"],
+      .speak-btn,
+      .play-audio-btn,
+      .pronunciation-btn {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
+      }
+      /* Mic button specific styling */
+      #voiceRecordBtn,
+      #mainMicBtn,
+      .mic-record-btn,
+      [id*="MicBtn"],
+      [id*="micBtn"] {
+        min-width: 48px;
+        min-height: 48px;
+        touch-action: manipulation;
+      }
+    
+      /* ===== Dashboard Welcome Card ===== */
+      #dashboardWelcomeCard {
+        background: linear-gradient(135deg, var(--primary) 0%, #52b788 100%);
+        color: #fff;
+        border-radius: var(--radius-lg);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 4px 20px rgba(45,106,79,0.25);
+        animation: fadeInDown 0.4s ease;
+      }
+      @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      #dashboardWelcomeCard .welcome-info { flex: 1; min-width: 180px; }
+      #dashboardWelcomeCard .welcome-name {
+        font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;
+      }
+      #dashboardWelcomeCard .welcome-stats {
+        display: flex; gap: 14px; font-size: 0.9rem; opacity: 0.92; flex-wrap: wrap;
+      }
+      #dashboardWelcomeCard .welcome-stat {
+        display: flex; align-items: center; gap: 4px; font-weight: 600;
+      }
+      #dashboardWelcomeCard .btn-lanjutkan {
+        background: #fff;
+        color: var(--primary);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        min-height: 44px;
+        touch-action: manipulation;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      }
+      #dashboardWelcomeCard .btn-lanjutkan:hover {
+        background: #f0fdf4; transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      }
+      @media (max-width: 480px) {
+        #dashboardWelcomeCard { padding: 16px; }
+        #dashboardWelcomeCard .btn-lanjutkan { width: 100%; justify-content: center; }
+      }
+    </style>
           </head>
           <body onload="window.print(); window.close();">
             <img src="${dataUrl}"/>
@@ -20691,7 +20867,120 @@
     let typingCorrectKeystrokes = 0;
     let typingStartTime = null;
 
-    function renderVirtualKeyboard() {
+    
+      
+      /* ===== Dashboard Welcome Card ===== */
+      function showDashboardCard() {
+        const card = document.getElementById('dashboardWelcomeCard');
+        if (!card) return;
+        const profile = JSON.parse(localStorage.getItem('studentProfile') || '{}');
+        const name = profile.name || profile.username || 'Pelajar';
+        const streak = parseInt(localStorage.getItem('currentStreak') || '0');
+        const xp = parseInt(localStorage.getItem('totalXP') || localStorage.getItem('xpPoints') || '0');
+        const level = profile.level || Math.max(1, Math.floor(xp / 200) + 1);
+
+        const el = id => document.getElementById(id);
+        if (el('welcomeUserName')) el('welcomeUserName').textContent = `Halo, ${name}! 🌸`;
+        if (el('welcomeStreak'))  el('welcomeStreak').textContent  = streak;
+        if (el('welcomeXP'))      el('welcomeXP').textContent      = xp;
+        if (el('welcomeLevel'))   el('welcomeLevel').textContent   = `Level ${level}`;
+        card.style.display = 'flex';
+      }
+
+      function hideDashboardCard() {
+        const card = document.getElementById('dashboardWelcomeCard');
+        if (card) card.style.display = 'none';
+      }
+
+      function resumeLastTab() {
+        const lastTab = localStorage.getItem('mali_last_tab') || 'alphabet';
+        switchNavTab(lastTab);
+      }
+
+      function saveLastTab(tabKey) {
+        try { localStorage.setItem('mali_last_tab', tabKey); } catch(e) {}
+      }
+
+      /* ===== Mobile Tap-Quiz for Typing Tutor (<640px) ===== */
+      let tapQuizWords = [];
+      let tapQuizIndex = 0;
+      let tapQuizScore = 0;
+
+      function isMobileTyping() {
+        return window.innerWidth < 640;
+      }
+
+      function buildTapQuizWords() {
+        const levels = {
+          1: ['ก', 'ข', 'ค', 'ง', 'จ', 'ช', 'ซ', 'ญ', 'ด', 'ต'],
+          2: ['ถ', 'ท', 'น', 'บ', 'ป', 'ผ', 'พ', 'ฝ', 'ฟ', 'ม'],
+          3: ['ย', 'ร', 'ล', 'ว', 'ส', 'ห', 'อ', 'ฮ', 'ฉ', 'ฑ'],
+          4: ['กา', 'ขา', 'คา', 'งา', 'จา', 'ชา', 'ซา', 'ดา', 'ตา', 'นา'],
+          5: ['สวัสดี', 'ขอบคุณ', 'ใช่', 'ไม่', 'กิน', 'นอน', 'ไป', 'มา', 'ดี', 'แล้ว']
+        };
+        const lvl = typingCurrentLevel || 1;
+        return (levels[lvl] || levels[1]).sort(() => Math.random() - 0.5);
+      }
+
+      function buildChoicesFor(answer, pool) {
+        const others = pool.filter(w => w !== answer).sort(() => Math.random() - 0.5).slice(0, 3);
+        const choices = [answer, ...others].sort(() => Math.random() - 0.5);
+        return choices;
+      }
+
+      function renderTapQuiz() {
+        const quizDiv = document.getElementById('typingMobileQuiz');
+        if (!quizDiv) return;
+        if (tapQuizIndex >= tapQuizWords.length) {
+          document.getElementById('tapQuizChar').textContent = '🎉';
+          document.getElementById('tapQuizLabel').textContent = `Selesai! Skor: ${tapQuizScore}/${tapQuizWords.length}`;
+          document.getElementById('tapQuizChoices').innerHTML = `<button class="tap-quiz-choice correct" onclick="startTapQuiz()" style="grid-column:span 2">Main Lagi 🔄</button>`;
+          document.getElementById('tapQuizProgress').textContent = '';
+          return;
+        }
+        const word = tapQuizWords[tapQuizIndex];
+        document.getElementById('tapQuizChar').textContent = word;
+        document.getElementById('tapQuizLabel').textContent = 'Pilih arti / romanisasi yang benar';
+        document.getElementById('tapQuizProgress').textContent = `${tapQuizIndex + 1} / ${tapQuizWords.length} · Benar: ${tapQuizScore}`;
+        const choices = buildChoicesFor(word, tapQuizWords);
+        document.getElementById('tapQuizChoices').innerHTML = choices.map(c =>
+          `<button class="tap-quiz-choice" onclick="checkTapChoice(this,'${c.replace(/'/g,"\'")}','${word.replace(/'/g,"\'")}')">
+            ${c}
+          </button>`
+        ).join('');
+      }
+
+      function checkTapChoice(btn, chosen, correct) {
+        const btns = document.querySelectorAll('.tap-quiz-choice');
+        btns.forEach(b => b.disabled = true);
+        if (chosen === correct) {
+          btn.classList.add('correct');
+          tapQuizScore++;
+          addXP && addXP(2);
+        } else {
+          btn.classList.add('wrong');
+          btns.forEach(b => { if (b.textContent.trim() === correct) b.classList.add('correct'); });
+        }
+        setTimeout(() => {
+          tapQuizIndex++;
+          renderTapQuiz();
+        }, 700);
+      }
+
+      function startTapQuiz() {
+        tapQuizWords = buildTapQuizWords();
+        tapQuizIndex = 0;
+        tapQuizScore = 0;
+        renderTapQuiz();
+      }
+
+      function initTypingMobileMode() {
+        if (isMobileTyping()) {
+          startTapQuiz();
+        }
+      }
+
+      function renderVirtualKeyboard() {
       const container = document.getElementById('thaiVirtualKeyboard');
       if (!container) return;
 
@@ -20718,6 +21007,7 @@
 
     function setTypingLevel(lvl, btn) {
       typingCurrentLevel = lvl;
+      if (isMobileTyping()) { setTimeout(initTypingMobileMode, 100); }
       typingWordIndex = 0;
       typingCharIndex = 0;
       typingTotalKeystrokes = 0;
