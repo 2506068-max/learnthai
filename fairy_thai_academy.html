@@ -139,12 +139,11 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: -1;
     }
 
     .app-shell {
       position: relative;
-      z-index: 1;
     }
 
     h1, h2, h3, .panel-badge, .prompt-thai, .brand-titles h1, .unit-card-bento h3, .quiz-title-h2 {
@@ -5854,7 +5853,7 @@
       background: rgba(0, 0, 0, 0.32);
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      z-index: 100001 !important;
+      z-index: 99990 !important;
       animation: fadeInBackdrop 0.18s ease;
     }
 
@@ -5988,23 +5987,28 @@
       
       /* Drawer & Menu Interactivity Fix */
       .mobile-drawer-backdrop {
-        z-index: 100001 !important;
+        z-index: 99990 !important;
+        pointer-events: auto !important;
       }
       .stimuler-nav-rail {
-        z-index: 100005 !important;
+        z-index: 99995 !important;
         pointer-events: auto !important;
       }
       .stimuler-nav-rail .nav-item-btn {
         pointer-events: auto !important;
         cursor: pointer !important;
         position: relative !important;
-        z-index: 10 !important;
+        z-index: 2 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(45, 106, 79, 0.25) !important;
       }
       body.drawer-open .floating-ai-container,
+      body.in-portal-mode .floating-ai-container,
       .stimuler-nav-rail.mobile-open ~ .floating-ai-container {
         opacity: 0 !important;
         pointer-events: none !important;
         transform: scale(0.8) !important;
+        visibility: hidden !important;
         transition: opacity 0.18s ease, transform 0.18s ease !important;
       }
 
@@ -6572,7 +6576,7 @@
 
           <!-- Action Buttons (Foto 5: Skip button removed) -->
           <div class="portal-login-actions">
-            <button type="submit" class="portal-main-cta-btn" onclick="handleStudentLogin()" style="width:100%; justify-content:center; padding:15px; cursor:pointer;">
+            <button type="submit" id="portalSubmitLoginBtn" class="portal-main-cta-btn" style="width:100%; justify-content:center; padding:15px; cursor:pointer;">
               <span>✨ Masuk &amp; Simpan Data Belajar</span>
               <span class="cta-arrow">→</span>
             </button>
@@ -15914,7 +15918,13 @@
       localStorage.setItem('stimuler_thai_accounts', JSON.stringify(accounts));
     }
 
-    function handleStudentLogin() {
+    let isStudentLoggingIn = false;
+    function handleStudentLogin(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (isStudentLoggingIn) return;
+      isStudentLoggingIn = true;
+      setTimeout(() => { isStudentLoggingIn = false; }, 800);
+
       try {
         const nameInput = document.getElementById('portalInputName');
         const pinInput = document.getElementById('portalInputPin');
@@ -16182,6 +16192,9 @@
         document.body.classList.remove('in-portal-mode');
       }
       document.querySelectorAll('.stimuler-nav-rail .nav-item-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabKey);
+      });
+      document.querySelectorAll('.mobile-bottom-nav .mobile-nav-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-tab') === tabKey);
       });
       document.querySelectorAll('.section-tab-panel').forEach(panel => {
@@ -20294,6 +20307,7 @@
     let floatLastTapHandled = 0;
     let lastFlyoutToggleTime = 0;
 
+    let lastNongMaliActivationTime = 0;
     function handleFloatingLotusClick(e) {
       if (e) {
         e.preventDefault();
@@ -20303,7 +20317,13 @@
     }
 
     function executeNongMaliActivation() {
-      playSynthSound('click');
+      const now = Date.now();
+      if (now - lastNongMaliActivationTime < 450) {
+        return; // Prevent duplicate rapid activation from touch/click dual-events
+      }
+      lastNongMaliActivationTime = now;
+
+      try { playSynthSound('click'); } catch(e) {}
 
       // Dismiss learning portal if open
       const portal = document.getElementById('learningPortal');
