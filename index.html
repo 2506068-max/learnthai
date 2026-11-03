@@ -6235,6 +6235,248 @@
       background: var(--primary-light);
     }
 
+
+    /* ==========================================================================
+       GOOGLE-LIKE UNIVERSAL SEARCH ENGINE STYLES
+       ========================================================================== */
+    .google-search-container {
+      position: relative;
+      width: 100%;
+    }
+    .google-search-wrap {
+      position: relative;
+      background: #ffffff;
+      border: 1.5px solid #dadce0;
+      border-radius: 28px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.12);
+      transition: all 0.2s ease;
+    }
+    .google-search-wrap:focus-within {
+      border-color: #2d6a4f;
+      box-shadow: 0 3px 14px rgba(45, 106, 79, 0.22);
+    }
+    .google-search-input {
+      flex: 1;
+      height: 40px;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13.5px;
+      color: #202124;
+      font-family: var(--font-main);
+    }
+    .google-action-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      color: #5f6368;
+      padding: 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease, color 0.15s ease;
+      flex-shrink: 0;
+    }
+    .google-action-icon:hover {
+      background: #f1f3f4;
+      color: #202124;
+    }
+
+    /* Google-style Autocomplete Suggestion Dropdown */
+    .google-autocomplete-box {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(32, 33, 36, 0.18);
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      z-index: 100010;
+      overflow: hidden;
+      display: none;
+    }
+    .google-autocomplete-item {
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #202124;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.12s ease;
+    }
+    .google-autocomplete-item:hover {
+      background: #f1f3f4;
+      color: #2d6a4f;
+    }
+
+    /* Google-style Featured Snippet / Knowledge OneBox */
+    .google-onebox-card {
+      background: #ffffff;
+      border: 1.5px solid rgba(45, 106, 79, 0.25);
+      border-left: 4.5px solid #2d6a4f;
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      box-shadow: 0 4px 18px rgba(45, 106, 79, 0.08);
+      margin-bottom: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .google-onebox-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #2d6a4f;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Google-style Snippet Card */
+    .google-snippet-card {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: var(--radius-lg);
+      padding: 13px 15px;
+      transition: all 0.16s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .google-snippet-card:hover {
+      border-color: #2d6a4f;
+      box-shadow: 0 4px 16px rgba(45, 106, 79, 0.12);
+      transform: translateY(-1px);
+    }
+    .google-breadcrumb {
+      font-size: 11px;
+      color: #5f6368;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .google-snippet-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #1a0dab;
+      text-decoration: none;
+      cursor: pointer;
+      line-height: 1.35;
+    }
+    .google-snippet-title:hover {
+      text-decoration: underline;
+    }
+    .google-snippet-desc {
+      font-size: 12px;
+      color: #4d5156;
+      line-height: 1.45;
+    }
+
+    /* Google-style Related Searches */
+    .google-related-wrap {
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px solid #dadce0;
+    }
+    .google-related-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #202124;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .google-related-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .google-related-chip {
+      background: #f1f3f4;
+      border: 1px solid #dadce0;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #202124;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .google-related-chip:hover {
+      background: #e8eaed;
+      border-color: #2d6a4f;
+      color: #2d6a4f;
+    }
+
+    .google-stats-bar {
+      font-size: 11px;
+      color: #70757a;
+      font-family: var(--font-mono);
+      padding: 2px 2px 6px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .google-action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .google-btn-action {
+      background: #f8f9fa;
+      border: 1px solid #dadce0;
+      border-radius: 16px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #3c4043;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .google-btn-action:hover {
+      background: #f1f3f4;
+      border-color: #2d6a4f;
+      color: #2d6a4f;
+    }
+    .google-btn-action.primary {
+      background: rgba(45, 106, 79, 0.08);
+      border-color: #2d6a4f;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .google-btn-action.primary:hover {
+      background: #2d6a4f;
+      color: #ffffff;
+    }
+    .google-highlight {
+      background: #fff3b0;
+      color: #202124;
+      padding: 1px 3px;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+
+
 </style>
   <script src="thai_dictionary_data.js"></script>
 </head>
@@ -20169,6 +20411,17 @@
         }
       });
 
+      // Close autocomplete when clicking outside
+      document.addEventListener('click', (e) => {
+        const box = document.getElementById('googleAutocompleteBox');
+        const input = document.getElementById('floatingUnifiedSearchInput');
+        if (box && box.style.display !== 'none') {
+          if (!box.contains(e.target) && e.target !== input) {
+            hideGoogleAutocomplete();
+          }
+        }
+      });
+
       // Close when clicking outside on desktop/mobile
       document.addEventListener('click', (e) => {
         // Ignore clicks within 500ms of opening (prevents touch synthesis from auto-closing!)
@@ -20345,10 +20598,12 @@
     }
 
     /* ==========================================================================
-       FITUR: PENCARIAN PINTAR UNIFIED (LAGU, TONTONAN, KOSAKATA, AKSARA, AI)
+       FITUR: PENCARIAN PINTAR GOOGLE-STYLE UNIVERSAL (LAGU, TONTONAN, 119 BAB, KAMUS, BUDAYA, AI)
        ========================================================================== */
+    let googleSearchDebounceTimer = null;
+
     function setFloatingSearchCategory(cat, btn) {
-      playSynthSound('click');
+      if (typeof playSynthSound === 'function') playSynthSound('click');
       currentFloatSearchCategory = cat;
       const pills = document.querySelectorAll('#floatingSearchCategoryPills .pill-filter');
       pills.forEach(p => p.classList.remove('active'));
@@ -20358,18 +20613,45 @@
       renderFloatingUnifiedResults(q, cat);
     }
 
-    function onFloatingUnifiedSearch(value) {
+    function onGoogleUniversalSearchInput(value) {
       const clearBtn = document.getElementById('floatingSearchClearBtn');
       if (clearBtn) {
-        clearBtn.style.display = value ? 'block' : 'none';
+        clearBtn.style.display = value ? 'flex' : 'none';
       }
-      renderFloatingUnifiedResults(value, currentFloatSearchCategory);
+      renderGoogleAutocomplete(value);
+      clearTimeout(googleSearchDebounceTimer);
+      googleSearchDebounceTimer = setTimeout(() => {
+        renderFloatingUnifiedResults(value, currentFloatSearchCategory);
+      }, 120);
+    }
+
+    // Alias for backwards compatibility
+    function onFloatingUnifiedSearch(value) {
+      onGoogleUniversalSearchInput(value);
+    }
+
+    function onGoogleUniversalSearchKeydown(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        hideGoogleAutocomplete();
+        const input = document.getElementById('floatingUnifiedSearchInput');
+        const q = input ? input.value : '';
+        renderFloatingUnifiedResults(q, currentFloatSearchCategory);
+      } else if (event.key === 'Escape') {
+        hideGoogleAutocomplete();
+      }
     }
 
     function executeFloatingUnifiedSearch(value) {
-      const q = (value || '').trim();
-      if (!q) return;
-      renderFloatingUnifiedResults(q, currentFloatSearchCategory);
+      hideGoogleAutocomplete();
+      renderFloatingUnifiedResults(value, currentFloatSearchCategory);
+    }
+
+    function onGoogleSearchFocus() {
+      const input = document.getElementById('floatingUnifiedSearchInput');
+      if (input && input.value.trim()) {
+        renderGoogleAutocomplete(input.value);
+      }
     }
 
     function clearFloatingSearch() {
@@ -20380,7 +20662,114 @@
       }
       const clearBtn = document.getElementById('floatingSearchClearBtn');
       if (clearBtn) clearBtn.style.display = 'none';
+      hideGoogleAutocomplete();
       renderFloatingUnifiedResults('', currentFloatSearchCategory);
+    }
+
+    function selectGoogleAutocomplete(term) {
+      const input = document.getElementById('floatingUnifiedSearchInput');
+      if (input) input.value = term;
+      hideGoogleAutocomplete();
+      const clearBtn = document.getElementById('floatingSearchClearBtn');
+      if (clearBtn) clearBtn.style.display = 'flex';
+      renderFloatingUnifiedResults(term, currentFloatSearchCategory);
+    }
+
+    function hideGoogleAutocomplete() {
+      const box = document.getElementById('googleAutocompleteBox');
+      if (box) {
+        box.style.display = 'none';
+        box.innerHTML = '';
+      }
+    }
+
+    function renderGoogleAutocomplete(rawQuery) {
+      const box = document.getElementById('googleAutocompleteBox');
+      if (!box) return;
+      const q = (rawQuery || '').trim().toLowerCase();
+      if (!q || q.length < 1) {
+        box.style.display = 'none';
+        box.innerHTML = '';
+        return;
+      }
+
+      const suggestions = [];
+
+      // 1. Media match (songs & artists)
+      if (typeof THAI_MEDIA_DATABASE !== 'undefined') {
+        for (const m of THAI_MEDIA_DATABASE) {
+          if ((m.titleRoman && m.titleRoman.toLowerCase().includes(q)) || 
+              (m.titleThai && m.titleThai.toLowerCase().includes(q)) || 
+              (m.artist && m.artist.toLowerCase().includes(q))) {
+            suggestions.push({
+              type: '🎵',
+              text: `${m.titleRoman} - ${m.artist}`,
+              search: m.titleRoman
+            });
+          }
+          if (suggestions.length >= 2) break;
+        }
+      }
+
+      // 2. 119 Jazmi Lessons
+      if (typeof getAllJazmiLessonsFlat === 'function') {
+        const allL = getAllJazmiLessonsFlat();
+        for (const l of allL) {
+          if (l.title && (l.title.toLowerCase().includes(q) || `bab ${l.lessonNumber}`.includes(q))) {
+            suggestions.push({
+              type: '📚',
+              text: `Bab ${l.lessonNumber}: ${l.title}`,
+              search: l.title
+            });
+          }
+          if (suggestions.length >= 4) break;
+        }
+      }
+
+      // 3. Dictionary
+      if (typeof THAI_DICTIONARY !== 'undefined') {
+        for (const d of THAI_DICTIONARY) {
+          if ((d.thai && d.thai.toLowerCase().includes(q)) || 
+              (d.roman && d.roman.toLowerCase().includes(q)) || 
+              (d.id && d.id.toLowerCase().includes(q))) {
+            suggestions.push({
+              type: '📖',
+              text: `${d.thai} (${d.roman}) - ${d.id}`,
+              search: d.thai
+            });
+          }
+          if (suggestions.length >= 6) break;
+        }
+      }
+
+      // 4. Encyclopedia
+      if (typeof THAILAND_ENCYCLOPEDIA !== 'undefined') {
+        for (const e of THAILAND_ENCYCLOPEDIA) {
+          if (e.title && (e.title.toLowerCase().includes(q) || (e.thai && e.thai.toLowerCase().includes(q)))) {
+            suggestions.push({
+              type: '🏛️',
+              text: e.title,
+              search: e.title
+            });
+          }
+          if (suggestions.length >= 7) break;
+        }
+      }
+
+      if (suggestions.length === 0) {
+        box.style.display = 'none';
+        box.innerHTML = '';
+        return;
+      }
+
+      box.innerHTML = suggestions.slice(0, 6).map(s => `
+        <div class="google-autocomplete-item" onclick="selectGoogleAutocomplete('${escapeQuotes(s.search)}')">
+          <span style="opacity:0.6; font-size:13px;">${s.type}</span>
+          <span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(s.text)}</span>
+          <span style="font-size:11px; opacity:0.4;">↖</span>
+        </div>
+      `).join('');
+      box.style.display = 'block';
     }
 
     function triggerFloatingSearchMic() {
@@ -20396,7 +20785,7 @@
         recog.maxAlternatives = 1;
         const input = document.getElementById('floatingUnifiedSearchInput');
         const prevPlaceholder = input ? input.placeholder : '';
-        if (input) input.placeholder = '🎙️ Mendengarkan... Katakan judul lagu atau kata';
+        if (input) input.placeholder = '🎙️ Mendengarkan... Katakan judul lagu, bab, atau kata';
         showToast('🎙️ Mendengarkan suara... Silakan berbicara');
 
         recog.onresult = (e) => {
@@ -20405,7 +20794,7 @@
             input.value = transcript;
             input.placeholder = prevPlaceholder;
             const clearBtn = document.getElementById('floatingSearchClearBtn');
-            if (clearBtn) clearBtn.style.display = 'block';
+            if (clearBtn) clearBtn.style.display = 'flex';
           }
           renderFloatingUnifiedResults(transcript, currentFloatSearchCategory);
           showToast(`Mencari: "${transcript}"`);
@@ -20426,50 +20815,58 @@
 
       const q = (rawQuery || '').trim().toLowerCase();
 
-      // CASE A: EMPTY QUERY -> SHOW POPULAR RECOMMENDATIONS & FEATURED PICKS
+      // CASE A: EMPTY QUERY -> SHOW POPULAR PICKS & GOOGLE WELCOME
       if (!q) {
-        let featuredMedia = [];
+        let popularMedia = [];
         if (typeof THAI_MEDIA_DATABASE !== 'undefined') {
           if (filterCategory === 'song') {
-            featuredMedia = THAI_MEDIA_DATABASE.filter(m => m.category === 'song').slice(0, 5);
-          } else if (filterCategory === 'cartoon') {
-            featuredMedia = THAI_MEDIA_DATABASE.filter(m => m.category === 'cartoon' || m.category === 'learning').slice(0, 5);
+            popularMedia = THAI_MEDIA_DATABASE.filter(m => m.category === 'song').slice(0, 5);
+          } else if (filterCategory === 'video') {
+            popularMedia = THAI_MEDIA_DATABASE.filter(m => m.category === 'cartoon' || m.category === 'learning').slice(0, 5);
           } else {
-            featuredMedia = THAI_MEDIA_DATABASE.slice(0, 4);
+            popularMedia = THAI_MEDIA_DATABASE.slice(0, 4);
           }
         }
 
         container.innerHTML = `
-          <!-- Welcome Banner -->
-          <div style="background:linear-gradient(135deg, rgba(45, 106, 79, 0.08) 0%, rgba(82, 183, 136, 0.12) 100%); border:1px solid rgba(45, 106, 79, 0.18); border-radius:var(--radius-lg); padding:12px 14px;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-              <span style="font-size:16px;">🪷</span>
-              <h5 style="margin:0; font-size:13px; font-weight:800; color:var(--text);">Pencarian Cerdas Nong Mali AI</h5>
+          <!-- Google-Style Header Banner -->
+          <div style="background:#ffffff; border:1px solid #dadce0; border-radius:var(--radius-lg); padding:14px; box-shadow:0 1px 6px rgba(32,33,36,0.08);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span style="font-size:18px;">🪷</span>
+              <div style="font-size:14px; font-weight:800; color:#202124;">
+                <span style="color:#2d6a4f;">Nong Mali</span> <span style="color:#1a73e8;">Universal Search</span>
+              </div>
             </div>
-            <p style="margin:0; font-size:11.5px; color:var(--text-muted); line-height:1.4;">
-              Cari lagu hits Thailand, tontonan edukatif (kartun & YouTube), kosakata kamus, aksara, atau tanyakan apa pun ke AI.
+            <p style="margin:0; font-size:11.8px; color:#5f6368; line-height:1.45;">
+              Cari lagu Thai hits, tontonan edukatif anak & pemula, 119 bab kurikulum tulis materi 01-90, 148+ kosakata kamus, budaya & wisata, atau tanyakan apa saja ke AI layaknya Google!
             </p>
           </div>
 
-          <!-- Quick Search Chips -->
-          <div>
-            <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:6px;">🔥 PENCARIAN POPULER:</div>
-            <div style="display:flex; flex-wrap:wrap; gap:5px;">
-              <button type="button" class="floating-chip" onclick="quickApplySearch('Three Man Down')">🎵 Three Man Down</button>
-              <button type="button" class="floating-chip" onclick="quickApplySearch('Tilly Birds')">🎵 Tilly Birds</button>
-              <button type="button" class="floating-chip" onclick="quickApplySearch('Peppa Pig')">📺 Peppa Pig Thai</button>
-              <button type="button" class="floating-chip" onclick="quickApplySearch('Scrubb')">🎵 Scrubb (OST 2gether)</button>
-              <button type="button" class="floating-chip" onclick="quickApplySearch('สวัสดี')">📖 Halo (สวัสดี)</button>
-              <button type="button" class="floating-chip" onclick="quickApplySearch('Pad Thai')">🍜 Makanan Thai</button>
-              <button type="button" class="floating-chip" onclick="quickApplySearch('Konsonan')">🔤 Konsonan ก-ฮ</button>
+          <!-- Quick Trending Searches -->
+          <div style="background:#ffffff; border:1px solid #dadce0; border-radius:var(--radius-lg); padding:12px 14px;">
+            <div style="font-size:11px; font-weight:800; color:#202124; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+              <span style="color:#ea4335;">🔥</span> TREN PENELUSURAN POPULER:
+            </div>
+            <div class="google-related-chips">
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Three Man Down')">🎵 Three Man Down</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Tilly Birds')">🎵 Tilly Birds</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Peppa Pig')">📺 Peppa Pig Thai</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Bab 01 Konsonan')">📚 Bab 01: Konsonan Dasar</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('สวัสดี')">📖 Halo (สวัสดี)</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Pad Thai')">🍜 Pad Thai &amp; Kuliner</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Aturan Pakaian Kuil')">🛕 Etika Pakaian Kuil</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('5 Nada Bahasa Thai')">🎵 5 Nada Suara</button>
+              <button type="button" class="google-related-chip" onclick="quickApplySearch('Transportasi BTS')">🚆 Kereta BTS &amp; MRT</button>
             </div>
           </div>
 
-          <!-- Featured Picks Section -->
-          <div style="margin-top:4px;">
-            <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:8px;">🌟 REKOMENDASI TERPOPULER:</div>
+          <!-- Featured Snippets & Media Section -->
+          <div>
+            <div style="font-size:11px; font-weight:800; color:#70757a; font-family:var(--font-mono); margin:4px 0 8px 2px;">
+              🌟 REKOMENDASI TERPOPULER:
+            </div>
             <div style="display:flex; flex-direction:column; gap:8px;">
-              ${featuredMedia.map(item => renderFloatMediaCardHtml(item)).join('')}
+              ${popularMedia.map(item => renderGoogleSnippetMediaHtml(item)).join('')}
             </div>
           </div>
         `;
@@ -20477,26 +20874,73 @@
       }
 
       // CASE B: ACTIVE SEARCH QUERY
+      const searchTime = (0.01 + Math.random() * 0.02).toFixed(2);
+
+      let oneBoxMatch = null;
       let mediaMatches = [];
+      let jazmiMatches = [];
       let dictMatches = [];
+      let encycloMatches = [];
       let consonantMatches = [];
 
-      // 1. Search Media (Songs, Cartoons, Learning Channels, Dramas)
-      if (typeof THAI_MEDIA_DATABASE !== 'undefined' && filterCategory !== 'vocab' && filterCategory !== 'consonant') {
+      // 1. OneBox Knowledge Graph (Featured Snippet) Search
+      if (typeof QA_KNOWLEDGE_BASE !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'video' && filterCategory !== 'vocab') {
+        let bestScore = 0;
+        for (const item of QA_KNOWLEDGE_BASE) {
+          let score = 0;
+          if (item.patterns && Array.isArray(item.patterns)) {
+            for (const pat of item.patterns) {
+              if (q.includes(pat.toLowerCase())) score += 3;
+            }
+          }
+          if (item.title && item.title.toLowerCase().includes(q)) score += 4;
+          if (item.response && item.response.toLowerCase().includes(q)) score += 1;
+          if (score > bestScore) {
+            bestScore = score;
+            oneBoxMatch = item;
+          }
+        }
+        if (bestScore < 2) {
+          oneBoxMatch = null;
+        }
+      }
+
+      // 2. Media Database (Songs, Educational Shows, Cartoons)
+      if (typeof THAI_MEDIA_DATABASE !== 'undefined' && filterCategory !== 'vocab' && filterCategory !== 'curriculum' && filterCategory !== 'culture' && filterCategory !== 'consonant') {
         mediaMatches = THAI_MEDIA_DATABASE.filter(m => {
           if (filterCategory === 'song' && m.category !== 'song') return false;
-          if (filterCategory === 'cartoon' && m.category !== 'cartoon' && m.category !== 'learning') return false;
+          if (filterCategory === 'video' && m.category !== 'cartoon' && m.category !== 'learning') return false;
           return (m.titleThai && m.titleThai.toLowerCase().includes(q)) ||
                  (m.titleRoman && m.titleRoman.toLowerCase().includes(q)) ||
                  (m.titleMeaning && m.titleMeaning.toLowerCase().includes(q)) ||
                  (m.artist && m.artist.toLowerCase().includes(q)) ||
                  (m.description && m.description.toLowerCase().includes(q)) ||
-                 (m.level && m.level.toLowerCase().includes(q));
+                 (m.level && m.level.toLowerCase().includes(q)) ||
+                 (m.category && m.category.toLowerCase().includes(q));
         });
       }
 
-      // 2. Search Dictionary (Words & Phrases)
-      if (typeof THAI_DICTIONARY !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'cartoon' && filterCategory !== 'consonant') {
+      // 3. 119 Jazmi Written Curriculum Lessons
+      if (typeof getAllJazmiLessonsFlat === 'function' && filterCategory !== 'song' && filterCategory !== 'video' && filterCategory !== 'vocab' && filterCategory !== 'culture') {
+        const allLessons = getAllJazmiLessonsFlat();
+        jazmiMatches = allLessons.filter(l => {
+          const numStr = String(l.lessonNumber || '');
+          const padNum = numStr.padStart(2, '0');
+          return (l.title && l.title.toLowerCase().includes(q)) ||
+                 (l.summary && l.summary.toLowerCase().includes(q)) ||
+                 (l.partTitle && l.partTitle.toLowerCase().includes(q)) ||
+                 (l.tag && l.tag.toLowerCase().includes(q)) ||
+                 q.includes(`bab ${numStr}`) ||
+                 q.includes(`bab ${padNum}`) ||
+                 q.includes(`materi ${numStr}`) ||
+                 q.includes(`materi ${padNum}`) ||
+                 (`bab ${numStr}`).includes(q) ||
+                 (`bab ${padNum}`).includes(q);
+        }).slice(0, 10);
+      }
+
+      // 4. Dictionary (Words & Sentences)
+      if (typeof THAI_DICTIONARY !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'video' && filterCategory !== 'curriculum' && filterCategory !== 'culture') {
         dictMatches = THAI_DICTIONARY.filter(d => {
           return (d.thai && d.thai.toLowerCase().includes(q)) ||
                  (d.roman && d.roman.toLowerCase().includes(q)) ||
@@ -20505,8 +20949,21 @@
         }).slice(0, 10);
       }
 
-      // 3. Search Consonants & Alphabet
-      if (typeof THAI_CONSONANTS !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'cartoon' && filterCategory !== 'vocab') {
+      // 5. Thailand Encyclopedia (Travel, Culture, Places, Tips)
+      if (typeof THAILAND_ENCYCLOPEDIA !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'video' && filterCategory !== 'curriculum' && filterCategory !== 'consonant') {
+        encycloMatches = THAILAND_ENCYCLOPEDIA.filter(e => {
+          return (e.title && e.title.toLowerCase().includes(q)) ||
+                 (e.thai && e.thai.toLowerCase().includes(q)) ||
+                 (e.phonetic && e.phonetic.toLowerCase().includes(q)) ||
+                 (e.summary && e.summary.toLowerCase().includes(q)) ||
+                 (e.tips && e.tips.toLowerCase().includes(q)) ||
+                 (e.category && e.category.toLowerCase().includes(q)) ||
+                 (e.categoryLabel && e.categoryLabel.toLowerCase().includes(q));
+        }).slice(0, 8);
+      }
+
+      // 6. Consonants & Phonetics
+      if (typeof THAI_CONSONANTS !== 'undefined' && filterCategory !== 'song' && filterCategory !== 'video' && filterCategory !== 'curriculum' && filterCategory !== 'culture') {
         consonantMatches = THAI_CONSONANTS.filter(c => {
           return (c.thai && c.thai.toLowerCase().includes(q)) ||
                  (c.spoken && c.spoken.toLowerCase().includes(q)) ||
@@ -20516,102 +20973,264 @@
         }).slice(0, 6);
       }
 
-      const totalMatches = mediaMatches.length + dictMatches.length + consonantMatches.length;
+      const totalMatches = (oneBoxMatch ? 1 : 0) + mediaMatches.length + jazmiMatches.length + dictMatches.length + encycloMatches.length + consonantMatches.length;
 
       let html = '';
 
-      // Results Summary
+      // Google Stats Bar
       html += `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:4px;">
-          <div style="font-size:11px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono);">
-            HASIL PENCARIAN "${escapeHtml(rawQuery)}": <span style="color:var(--primary);">${totalMatches} item</span>
-          </div>
-          <button type="button" class="btn-subtle-nav" onclick="clearFloatingSearch()" style="font-size:11px; padding:2px 8px;">Reset</button>
+        <div class="google-stats-bar">
+          <span>Ditemukan sekitar <strong>${totalMatches}</strong> hasil (${searchTime} detik)</span>
+          <button type="button" class="btn-subtle-nav" onclick="clearFloatingSearch()" style="font-size:10.5px; padding:2px 8px;">✕ Reset</button>
         </div>
       `;
 
-      // 1. Media Cards
-      if (mediaMatches.length > 0) {
+      // 1. ONEBOX / FEATURED SNIPPET (KNOWLEDGE GRAPH)
+      if (oneBoxMatch) {
         html += `
-          <div style="font-size:11px; font-weight:800; color:var(--primary); margin-top:4px;">🎵🎬 Lagu & Tontonan (${mediaMatches.length})</div>
-          <div style="display:flex; flex-direction:column; gap:8px;">
-            ${mediaMatches.map(m => renderFloatMediaCardHtml(m)).join('')}
-          </div>
-        `;
-      }
-
-      // 2. Dictionary Cards
-      if (dictMatches.length > 0) {
-        html += `
-          <div style="font-size:11px; font-weight:800; color:var(--primary); margin-top:8px;">📖 Kosakata Kamus (${dictMatches.length})</div>
-          <div style="display:flex; flex-direction:column; gap:8px;">
-            ${dictMatches.map(d => `
-              <div class="float-result-card">
-                <div class="float-card-header">
-                  <div>
-                    <span class="float-tag-badge vocab">📖 ${d.cat || 'Kosakata'}</span>
-                    <h5 style="margin:4px 0 2px 0; font-size:20px; font-weight:800; color:var(--text); font-family:var(--font-thai);">${d.thai}</h5>
-                    <div style="font-size:12px; font-weight:700; color:var(--primary); font-family:var(--font-mono);">${d.roman} <span style="font-size:11px; color:var(--text-muted); font-weight:400;">(${d.tone})</span></div>
-                  </div>
-                </div>
-                <div style="font-size:12.5px; color:var(--text); font-weight:600; margin-top:2px;">Arti: <strong>${d.id}</strong></div>
-                <div class="float-btn-group">
-                  <button type="button" class="float-action-btn-audio" onclick="speakThai('${d.thai}')">🔊 Dengar Penutur Asli</button>
-                  <button type="button" class="float-action-btn-audio" onclick="quickApplySearch('${d.thai}')">🔍 Cari Lagu dengan Kata Ini</button>
-                </div>
+          <div class="google-onebox-card">
+            <div class="google-onebox-badge">
+              <span>💡</span> JAWABAN LANGSUNG NONG MALI AI (FEATURED SNIPPET)
+            </div>
+            <div class="google-snippet-title" style="font-size:16px;" onclick="speakThai('${escapeQuotes(oneBoxMatch.thaiKey || oneBoxMatch.title)}')">
+              ${highlightGoogleMatch(oneBoxMatch.title, q)}
+            </div>
+            ${oneBoxMatch.thaiKey ? `
+              <div style="font-size:15px; font-weight:700; color:#2d6a4f; font-family:var(--font-thai);">
+                ${oneBoxMatch.thaiKey} <span style="font-size:11.5px; font-family:var(--font-mono); color:#5f6368; font-weight:500;">(${oneBoxMatch.thaiPhonetic || ''})</span>
               </div>
-            `).join('')}
-          </div>
-        `;
-      }
-
-      // 3. Consonants Cards
-      if (consonantMatches.length > 0) {
-        html += `
-          <div style="font-size:11px; font-weight:800; color:var(--primary); margin-top:8px;">🔤 Konsonan Aksara (${consonantMatches.length})</div>
-          <div style="display:flex; flex-direction:column; gap:8px;">
-            ${consonantMatches.map(c => `
-              <div class="float-result-card">
-                <div class="float-card-header">
-                  <div>
-                    <span class="float-tag-badge consonant">🔤 Kelas ${c.class === 'mid' ? 'Tengah' : c.class === 'high' ? 'Tinggi' : 'Rendah'}</span>
-                    <h5 style="margin:4px 0 2px 0; font-size:24px; font-weight:800; color:var(--text); font-family:var(--font-thai);">${c.thai} <span style="font-size:13px; font-family:var(--font-mono); color:var(--text-muted); font-weight:600;">${c.spoken} (${c.roman})</span></h5>
-                  </div>
-                </div>
-                <div style="font-size:12px; color:var(--text-muted);">Arti simbol: <strong>${c.meaning}</strong></div>
-                <div class="float-btn-group">
-                  <button type="button" class="float-action-btn-audio" onclick="speakThai('${c.spoken}')">🔊 Dengar Pelafalan</button>
-                </div>
+            ` : ''}
+            <div class="google-snippet-desc" style="font-size:12.5px; line-height:1.5; color:#3c4043; white-space:pre-line;">
+              ${highlightGoogleMatch(oneBoxMatch.response.substring(0, 320) + (oneBoxMatch.response.length > 320 ? '...' : ''), q)}
+            </div>
+            ${oneBoxMatch.tips ? `
+              <div style="background:#f1f8f4; border-left:3px solid #2d6a4f; padding:6px 10px; border-radius:4px; font-size:11.5px; color:#1b4332; margin-top:2px;">
+                💡 <strong>Tips:</strong> ${oneBoxMatch.tips}
               </div>
-            `).join('')}
-          </div>
-        `;
-      }
-
-      // 4. Always provide an "Ask AI" card at the bottom of search
-      html += `
-        <div style="background:linear-gradient(135deg, rgba(45, 106, 79, 0.1) 0%, rgba(82, 183, 136, 0.16) 100%); border:1px solid rgba(45, 106, 79, 0.25); border-radius:var(--radius-lg); padding:11px 13px; margin-top:8px; display:flex; align-items:center; justify-content:space-between; gap:10px; cursor:pointer;" onclick="askFloatingAiAbout('${escapeQuotes(rawQuery)}')">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:22px;">🤖</span>
-            <div>
-              <div style="font-size:12.5px; font-weight:800; color:var(--primary);">Tanya Nong Mali AI</div>
-              <div style="font-size:11px; color:var(--text-muted);">Dapatkan jawaban cerdas &amp; contoh percakapan tentang "<strong>${escapeHtml(rawQuery)}</strong>"</div>
+            ` : ''}
+            <div class="google-action-buttons">
+              ${oneBoxMatch.thaiKey ? `
+                <button type="button" class="google-btn-action primary" onclick="speakThai('${escapeQuotes(oneBoxMatch.thaiKey)}')">
+                  🔊 Dengar Pelafalan Bangkok
+                </button>
+              ` : ''}
+              <button type="button" class="google-btn-action" onclick="askFloatingAiAbout('${escapeQuotes(rawQuery)}')">
+                💬 Tanya Lebih Detail ke AI
+              </button>
             </div>
           </div>
-          <span style="font-size:16px; color:var(--primary); font-weight:800;">→</span>
-        </div>
-      `;
+        `;
+      }
 
-      // 5. Empty State if nothing matched
+      // 2. 119 JAZMI CURRICULUM LESSONS (MATERI 01-90)
+      if (jazmiMatches.length > 0) {
+        html += `
+          <div style="font-size:11.5px; font-weight:800; color:#2d6a4f; margin-top:4px; display:flex; align-items:center; gap:6px;">
+            <span>📚</span> MATERI 119 BAB KURIKULUM (${jazmiMatches.length})
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${jazmiMatches.map(l => `
+              <div class="google-snippet-card">
+                <div class="google-breadcrumb">
+                  <span>learnthai.app</span>
+                  <span>›</span>
+                  <span>kurikulum</span>
+                  <span>›</span>
+                  <span>bab-${l.lessonNumber}</span>
+                </div>
+                <div class="google-snippet-title" onclick="openJazmiLessonFromSearch('${l.id}')">
+                  📖 Bab ${l.lessonNumber}: ${highlightGoogleMatch(l.title, q)}
+                </div>
+                <div class="google-snippet-desc">
+                  ${highlightGoogleMatch(l.summary || l.desc || 'Pelajari materi aksara, tata bahasa, dan cara penulisan pada bab ini.', q)}
+                </div>
+                <div class="google-action-buttons">
+                  <button type="button" class="google-btn-action primary" onclick="openJazmiLessonFromSearch('${l.id}')">
+                    📖 Buka &amp; Pelajari Bab Ini →
+                  </button>
+                  ${l.thaiSample ? `
+                    <button type="button" class="google-btn-action" onclick="speakThai('${escapeQuotes(l.thaiSample.thai)}')">
+                      🔊 Contoh: ${l.thaiSample.thai}
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 3. MEDIA (SONGS & EDUCATIONAL VIDEOS)
+      if (mediaMatches.length > 0) {
+        html += `
+          <div style="font-size:11.5px; font-weight:800; color:#2d6a4f; margin-top:6px; display:flex; align-items:center; gap:6px;">
+            <span>🎵</span> LAGU &amp; TONTONAN EDUKATIF (${mediaMatches.length})
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${mediaMatches.map(m => renderGoogleSnippetMediaHtml(m, q)).join('')}
+          </div>
+        `;
+      }
+
+      // 4. DICTIONARY (KOSAKATA KAMUS)
+      if (dictMatches.length > 0) {
+        html += `
+          <div style="font-size:11.5px; font-weight:800; color:#2d6a4f; margin-top:6px; display:flex; align-items:center; gap:6px;">
+            <span>📖</span> KOSAKATA KAMUS (${dictMatches.length})
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${dictMatches.map(d => `
+              <div class="google-snippet-card">
+                <div class="google-breadcrumb">
+                  <span>learnthai.app</span>
+                  <span>›</span>
+                  <span>kamus</span>
+                  <span>›</span>
+                  <span>${d.cat || 'kosakata'}</span>
+                </div>
+                <div class="google-snippet-title" onclick="speakThai('${escapeQuotes(d.thai)}')">
+                  <span style="font-family:var(--font-thai); font-size:18px;">${d.thai}</span>
+                  <span style="color:#2d6a4f; font-size:13px; font-family:var(--font-mono); margin-left:6px;">(${d.roman})</span>
+                  — Arti: ${highlightGoogleMatch(d.id, q)}
+                </div>
+                <div class="google-snippet-desc">
+                  Kategori: <strong>${d.cat || 'Umum'}</strong> • Nada: <strong>${d.tone || 'Normal'}</strong> • Pelafalan fonetik: <em>${d.roman}</em>
+                </div>
+                <div class="google-action-buttons">
+                  <button type="button" class="google-btn-action primary" onclick="speakThai('${escapeQuotes(d.thai)}')">
+                    🔊 Dengar Penutur Asli
+                  </button>
+                  <button type="button" class="google-btn-action" onclick="quickApplySearch('${escapeQuotes(d.thai)}')">
+                    🔍 Cari Lagu Berisi Kata Ini
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 5. ENCYCLOPEDIA (WISATA & BUDAYA)
+      if (encycloMatches.length > 0) {
+        html += `
+          <div style="font-size:11.5px; font-weight:800; color:#2d6a4f; margin-top:6px; display:flex; align-items:center; gap:6px;">
+            <span>🏛️</span> WISATA, KULINER &amp; BUDAYA (${encycloMatches.length})
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${encycloMatches.map(e => `
+              <div class="google-snippet-card">
+                <div class="google-breadcrumb">
+                  <span>learnthai.app</span>
+                  <span>›</span>
+                  <span>wisata-budaya</span>
+                  <span>›</span>
+                  <span>${e.category}</span>
+                </div>
+                <div class="google-snippet-title" onclick="openEncyclopediaFromSearch('${e.id}')">
+                  ${e.icon || '📌'} ${highlightGoogleMatch(e.title, q)}
+                </div>
+                ${e.thai ? `
+                  <div style="font-size:13px; font-weight:700; color:#2d6a4f; font-family:var(--font-thai);">
+                    ${e.thai} <span style="font-size:11px; font-family:var(--font-mono); color:#5f6368;">(${e.phonetic || ''})</span>
+                  </div>
+                ` : ''}
+                <div class="google-snippet-desc">
+                  ${highlightGoogleMatch(e.summary || '', q)}
+                </div>
+                <div class="google-action-buttons">
+                  <button type="button" class="google-btn-action primary" onclick="openEncyclopediaFromSearch('${e.id}')">
+                    🏛️ Buka Panduan Budaya Lengkap →
+                  </button>
+                  ${e.thai ? `
+                    <button type="button" class="google-btn-action" onclick="speakThai('${escapeQuotes(e.thai)}')">
+                      🔊 Sebutan Bahasa Thai
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 6. CONSONANTS & PHONETICS
+      if (consonantMatches.length > 0) {
+        html += `
+          <div style="font-size:11.5px; font-weight:800; color:#2d6a4f; margin-top:6px; display:flex; align-items:center; gap:6px;">
+            <span>🔤</span> AKSARA &amp; KONSONAN THAI (${consonantMatches.length})
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            ${consonantMatches.map(c => `
+              <div class="google-snippet-card">
+                <div class="google-breadcrumb">
+                  <span>learnthai.app</span>
+                  <span>›</span>
+                  <span>aksara</span>
+                  <span>›</span>
+                  <span>konsonan-${c.class}</span>
+                </div>
+                <div class="google-snippet-title" onclick="speakThai('${escapeQuotes(c.spoken)}')">
+                  <span style="font-family:var(--font-thai); font-size:22px; font-weight:800;">${c.thai}</span>
+                  <span style="font-size:14px; font-weight:700; color:#2d6a4f; margin-left:6px;">${c.spoken} (${c.roman})</span>
+                </div>
+                <div class="google-snippet-desc">
+                  Kelas konsonan: <strong>${c.class === 'mid' ? 'Tengah (อักษรกลาง)' : c.class === 'high' ? 'Tinggi (อักษรสูง)' : 'Rendah (อักษรต่ำ)'}</strong> • Arti lambang benda: <strong>${c.meaning}</strong>
+                </div>
+                <div class="google-action-buttons">
+                  <button type="button" class="google-btn-action primary" onclick="speakThai('${escapeQuotes(c.spoken)}')">
+                    🔊 Dengar Pelafalan
+                  </button>
+                  <button type="button" class="google-btn-action" onclick="openWritingCharFromSearch('${escapeQuotes(c.thai)}')">
+                    ✍️ Latihan Tulis Huruf Ini →
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 7. ZERO RESULTS OR UNIVERSAL AI FALLBACK CARD
       if (totalMatches === 0) {
-        html = `
-          <div style="text-align:center; padding:24px 12px; background:var(--bg-card); border:1px dashed var(--border); border-radius:var(--radius-lg); margin-top:10px;">
-            <span style="font-size:32px; display:block; margin-bottom:8px;">🔍</span>
-            <h5 style="margin:0 0 6px 0; font-size:14px; font-weight:800; color:var(--text);">Tidak ada hasil kata kunci untuk "${escapeHtml(rawQuery)}"</h5>
-            <p style="margin:0 0 14px 0; font-size:12px; color:var(--text-muted);">Jangan khawatir! Anda dapat menanyakan langsung ke Nong Mali AI untuk mendapatkan arti, lirik lagu, atau panduan bahasa Thai.</p>
-            <button type="button" class="btn-stimuler-primary" onclick="askFloatingAiAbout('${escapeQuotes(rawQuery)}')" style="font-size:12px; padding:8px 18px;">
-              🤖 Tanya Nong Mali AI tentang "${escapeHtml(rawQuery)}" ✨
-            </button>
+        html += `
+          <div class="google-onebox-card" style="border-left-color:#1a73e8;">
+            <div class="google-onebox-badge" style="color:#1a73e8;">
+              <span>🤖</span> JAWABAN UNIVERSAL NONG MALI AI (GEMINI GOOGLE SEARCH)
+            </div>
+            <div class="google-snippet-title" style="color:#202124; font-size:15px;">
+              Informasi Cerdas Mengenai: "<strong>${escapeHtml(rawQuery)}</strong>"
+            </div>
+            <div class="google-snippet-desc" style="font-size:12.5px; line-height:1.5; color:#3c4043;">
+              Nong Mali AI siap membantu menjawab pertanyaan Anda seputar arti kalimat, lirik lagu, rekomendasi tontonan, tata bahasa, dan panduan wisata Thailand secara instan!
+            </div>
+            <div class="google-action-buttons">
+              <button type="button" class="google-btn-action primary" onclick="askFloatingAiAbout('${escapeQuotes(rawQuery)}')">
+                ✨ Minta Jawaban Lengkap Nong Mali AI →
+              </button>
+              <button type="button" class="google-btn-action" onclick="quickApplySearch('Materi [01]')">
+                📚 Jelajahi 119 Bab Kurikulum
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // 8. GOOGLE-STYLE "PENELUSURAN TERKAIT" (PEOPLE ALSO ASK)
+      const relatedTerms = generateRelatedSearchTerms(rawQuery);
+      if (relatedTerms.length > 0) {
+        html += `
+          <div class="google-related-wrap">
+            <div class="google-related-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#5f6368"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              Penelusuran Terkait:
+            </div>
+            <div class="google-related-chips">
+              ${relatedTerms.map(t => `
+                <button type="button" class="google-related-chip" onclick="quickApplySearch('${escapeQuotes(t)}')">
+                  🔍 ${escapeHtml(t)}
+                </button>
+              `).join('')}
+            </div>
           </div>
         `;
       }
@@ -20619,30 +21238,103 @@
       container.innerHTML = html;
     }
 
-    function renderFloatMediaCardHtml(m) {
+    function renderGoogleSnippetMediaHtml(m, q = '') {
       const isSong = m.category === 'song';
       return `
-        <div class="float-result-card">
-          <div class="float-card-header">
-            <div>
-              <span class="float-tag-badge ${isSong ? 'song' : 'cartoon'}">${isSong ? '🎵 Lagu Thai' : '📺 Tontonan'} • ${m.level || 'Populer'}</span>
-              <h5 style="margin:4px 0 2px 0; font-size:16px; font-weight:800; color:var(--text); font-family:var(--font-thai);">
-                ${m.titleThai} 
-                <span style="font-size:12px; font-weight:600; font-family:var(--font-main); color:var(--primary); font-style:italic;">(${m.titleRoman})</span>
-              </h5>
-              <div style="font-size:12px; font-weight:700; color:var(--text);">
-                ${m.titleMeaning} • <span style="color:var(--text-muted); font-weight:500;">${m.artist}</span>
-              </div>
-            </div>
+        <div class="google-snippet-card">
+          <div class="google-breadcrumb">
+            <span>learnthai.app</span>
+            <span>›</span>
+            <span>${isSong ? 'musik' : 'video-edukasi'}</span>
+            <span>›</span>
+            <span>${m.level ? m.level.toLowerCase().replace(/\s+/g, '-') : 'populer'}</span>
           </div>
-          <p style="margin:3px 0 6px 0; font-size:11.5px; color:var(--text-dim); line-height:1.4;">${m.description}</p>
-          <div class="float-btn-group">
-            ${m.youtubeUrl ? `<a href="${m.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="float-action-btn-yt">▶️ YouTube</a>` : ''}
-            ${m.spotifyUrl ? `<a href="${m.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="float-action-btn-sp">🎧 Spotify</a>` : ''}
-            <button type="button" class="float-action-btn-audio" onclick="speakThai('${m.audioText || m.titleThai}')">🔊 Dengar Pelafalan</button>
+          <div class="google-snippet-title" onclick="speakThai('${escapeQuotes(m.audioText || m.titleThai)}')">
+            <span style="font-family:var(--font-thai); font-size:16px;">${m.titleThai}</span>
+            <span style="font-size:13px; font-weight:700; color:#2d6a4f;">(${m.titleRoman})</span>
+            — ${highlightGoogleMatch(m.artist, q)}
+          </div>
+          <div class="google-snippet-desc">
+            <strong>Arti:</strong> ${highlightGoogleMatch(m.titleMeaning, q)}. ${highlightGoogleMatch(m.description, q)}
+          </div>
+          <div class="google-action-buttons">
+            ${m.youtubeUrl ? `<a href="${m.youtubeUrl}" target="_blank" rel="noopener noreferrer" class="google-btn-action primary">▶️ Tonton YouTube</a>` : ''}
+            ${m.spotifyUrl ? `<a href="${m.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="google-btn-action">🎧 Buka Spotify</a>` : ''}
+            <button type="button" class="google-btn-action" onclick="speakThai('${escapeQuotes(m.audioText || m.titleThai)}')">
+              🔊 Dengar Pelafalan Bangkok
+            </button>
           </div>
         </div>
       `;
+    }
+
+    function renderFloatMediaCardHtml(m) {
+      return renderGoogleSnippetMediaHtml(m, '');
+    }
+
+    function highlightGoogleMatch(text, query) {
+      if (!text) return '';
+      if (!query || query.length < 2) return escapeHtml(text);
+      try {
+        const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+        return escapeHtml(text).replace(regex, '<span class="google-highlight">$1</span>');
+      } catch (e) {
+        return escapeHtml(text);
+      }
+    }
+
+    function generateRelatedSearchTerms(query) {
+      const q = (query || '').toLowerCase();
+      if (!q) return [];
+      if (q.includes('lagu') || q.includes('musik') || q.includes('song')) {
+        return ['Three Man Down playlist', 'Tilly Birds hits', 'Lagu galau Thailand', 'Scrubb OST 2gether', 'Lirik lagu Thai latin'];
+      }
+      if (q.includes('bab') || q.includes('materi') || q.includes('kurikulum')) {
+        return ['Bab 01 Konsonan Dasar', 'Bab 05 Vokal Panjang', 'Bab 12 Aturan 5 Nada', 'Latihan menulis aksara', 'Worksheet PDF'];
+      }
+      if (q.includes('kuil') || q.includes('wisata') || q.includes('bangkok')) {
+        return ['Etika berpakaian di kuil', 'Wat Arun tiket & perahu', 'Transportasi BTS Bangkok', 'Kuliner halal di Phaya Thai', 'Tourist SIM Card 5G'];
+      }
+      if (q.includes('makan') || q.includes('pedas') || q.includes('kuliner')) {
+        return ['Cara pesan tidak pedas (Mai Phet)', 'Pad Thai terenak Bangkok', 'Tom Yum Goong halal', 'Street food Chatuchak'];
+      }
+      if (q.includes('nada') || q.includes('konsonan') || q.includes('aksara')) {
+        return ['5 Nada bahasa Thailand', 'Konsonan kelas tengah', 'Huruf O Aang (อ)', 'Latihan pelafalan suara'];
+      }
+      return [`${query} bahasa Thai`, `Lagu Thailand tentang ${query}`, `Bab kurikulum terkait ${query}`, 'Frasa percakapan sehari-hari'];
+    }
+
+    function openJazmiLessonFromSearch(lessonId) {
+      toggleFloatingAiWindow(false);
+      switchNavTab('jazmi-series');
+      setTimeout(() => {
+        if (typeof openJazmiLesson === 'function') {
+          openJazmiLesson(lessonId);
+        }
+      }, 100);
+    }
+
+    function openEncyclopediaFromSearch(topicId) {
+      toggleFloatingAiWindow(false);
+      switchNavTab('ai-hub');
+      setTimeout(() => {
+        const el = document.getElementById('ecard-' + topicId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.style.boxShadow = '0 0 0 3px #2d6a4f';
+          setTimeout(() => { el.style.boxShadow = ''; }, 2000);
+        }
+      }, 120);
+    }
+
+    function openWritingCharFromSearch(thaiChar) {
+      toggleFloatingAiWindow(false);
+      switchNavTab('writing');
+      setTimeout(() => {
+        if (typeof selectWritingChar === 'function') {
+          selectWritingChar(thaiChar);
+        }
+      }, 120);
     }
 
     function quickApplySearch(term) {
@@ -20650,7 +21342,7 @@
       if (input) {
         input.value = term;
         const clearBtn = document.getElementById('floatingSearchClearBtn');
-        if (clearBtn) clearBtn.style.display = 'block';
+        if (clearBtn) clearBtn.style.display = 'flex';
       }
       renderFloatingUnifiedResults(term, currentFloatSearchCategory);
     }
@@ -20891,10 +21583,12 @@
         <div class="floating-ai-header-brand">
           <div class="floating-ai-header-icon" style="background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);">🪷</div>
           <div>
-            <h4>Pencarian AI Nong Mali</h4>
-            <span style="display:flex; align-items:center; gap:4px;">
+            <h4 style="margin:0; font-size:13.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:6px;">
+              Pencarian AI Nong Mali <span style="font-size:10px; font-weight:700; color:#1a73e8; background:rgba(26,115,232,0.1); padding:1px 6px; border-radius:10px;">Universal</span>
+            </h4>
+            <span style="display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text-muted);">
               <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#2d6a4f;"></span>
-              Cari Lagu, Video, Kamus &amp; Tanya AI
+              Cari Lagu, Video, 119 Bab, Kamus &amp; AI
             </span>
           </div>
         </div>
@@ -20917,35 +21611,44 @@
         </button>
       </div>
 
-      <!-- TAB 1: PENCARIAN PINTAR (DEFAULT & UTAMA) -->
+      <!-- TAB 1: PENCARIAN PINTAR (GOOGLE-STYLE UNIVERSAL SEARCH) -->
       <div id="floatTabSearch" class="floating-tab-body" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
-        <!-- Search Input Bar -->
-        <div style="padding:10px 14px 8px 14px; background:var(--bg-card); border-bottom:1px solid var(--border); flex-shrink:0;">
-          <div style="position:relative; display:flex; align-items:center; gap:6px;">
-            <div style="position:relative; flex:1;">
-              <input type="text" id="floatingUnifiedSearchInput" class="floating-text-input" 
-                     placeholder="🔍 Cari lagu, video, kosakata, aksara..." 
-                     oninput="onFloatingUnifiedSearch(this.value)" 
-                     onkeydown="if(event.key==='Enter') executeFloatingUnifiedSearch(this.value)"
-                     style="width:100%; padding-left:34px; padding-right:28px; font-size:13px; height:38px; border-radius:20px;">
-              <span style="position:absolute; left:11px; top:50%; transform:translateY(-50%); font-size:14px; pointer-events:none; opacity:0.65;">🔍</span>
-              <button type="button" id="floatingSearchClearBtn" onclick="clearFloatingSearch()" style="display:none; position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:12px; color:var(--text-muted); padding:4px;">✕</button>
+        <!-- Google Search Input Bar -->
+        <div style="padding:10px 12px 8px 12px; background:#ffffff; border-bottom:1px solid #ebebeb; flex-shrink:0;">
+          <div class="google-search-container">
+            <div class="google-search-wrap">
+              <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#9aa0a6" style="flex-shrink:0;">
+                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              </svg>
+              <input type="text" id="floatingUnifiedSearchInput" class="google-search-input" 
+                     placeholder="Telusuri apa saja... lagu, video, bab 1-90, kata, budaya" 
+                     autocomplete="off"
+                     oninput="onGoogleUniversalSearchInput(this.value)" 
+                     onkeydown="onGoogleUniversalSearchKeydown(event)"
+                     onfocus="onGoogleSearchFocus()">
+              <button type="button" id="floatingSearchClearBtn" class="google-action-icon" onclick="clearFloatingSearch()" title="Hapus teks" style="display:none;">✕</button>
+              <div style="width:1px; height:20px; background:#dadce0; margin:0 2px;"></div>
+              <button type="button" class="google-action-icon" onclick="triggerFloatingSearchMic()" title="Telusuri dengan suara" style="color:#2d6a4f;">🎙️</button>
             </div>
-            <button type="button" class="icon-btn-compact" onclick="triggerFloatingSearchMic()" title="Cari dengan Suara (Mikrofon)" style="border-radius:50%; width:36px; height:36px; flex-shrink:0;">🎙️</button>
+            <!-- Live Google Autocomplete Suggestions Dropdown -->
+            <div id="googleAutocompleteBox" class="google-autocomplete-box"></div>
           </div>
 
-          <!-- Category Filter Pills -->
+          <!-- Google-Style Category Filter Chips -->
           <div style="display:flex; gap:5px; margin-top:8px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;" id="floatingSearchCategoryPills">
-            <button type="button" class="pill-filter active" onclick="setFloatingSearchCategory('all', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">🌟 Semua</button>
-            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('song', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">🎵 Lagu Pop</button>
-            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('cartoon', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">📺 Tontonan Edukasi</button>
-            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('vocab', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">📖 Kamus Kata</button>
-            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('consonant', this)" style="font-size:11px; padding:3px 10px; white-space:nowrap;">🔤 Aksara &amp; Nada</button>
+            <button type="button" class="pill-filter active" onclick="setFloatingSearchCategory('all', this)">🌟 Semua</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('song', this)">🎵 Musik &amp; Lagu</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('video', this)">📺 Video &amp; Tontonan</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('vocab', this)">📖 Kamus Kata</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('curriculum', this)">📚 Materi 119 Bab</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('culture', this)">🏛️ Wisata &amp; Budaya</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('consonant', this)">🔤 Aksara &amp; Nada</button>
+            <button type="button" class="pill-filter" onclick="setFloatingSearchCategory('ai', this)">🤖 Tanya AI</button>
           </div>
         </div>
 
         <!-- Search Results Container (Smooth Scrollable) -->
-        <div id="floatingSearchResultsContainer" class="floating-chat-stream" style="flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:10px;">
+        <div id="floatingSearchResultsContainer" class="floating-chat-stream" style="flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:10px; background:#f8f9fa;">
           <!-- Dynamically populated via JS -->
         </div>
       </div>
