@@ -8260,15 +8260,7 @@
    ========================================================================== */
 
 /* Top Pill Navigation in Header */
-.mali-top-pill-nav {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(45, 106, 79, 0.08);
-  padding: 4px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(45, 106, 79, 0.14);
-}
+.mali-top-pill-nav { display: none !important; }
 
 .mali-top-nav-btn {
   display: inline-flex;
@@ -8646,32 +8638,7 @@
         </div>
       </div>
 
-      <!-- 5 PRIMARY NAVIGATION PILL TABS -->
-      <nav class="mali-top-pill-nav" id="maliTopPillNav" aria-label="Navigasi Utama Mali's Thai">
-        <button type="button" class="mali-top-nav-btn active" data-main-tab="roadmap" onclick="switchMainTab('roadmap')">
-          <span class="m-icon">🗺️</span>
-          <span class="m-text">Roadmap Belajar</span>
-        </button>
-        <button type="button" class="mali-top-nav-btn" data-main-tab="aihub" onclick="switchMainTab('aihub')">
-          <span class="m-icon">🎙️</span>
-          <span class="m-text">Speaking & AI Hub</span>
-        </button>
-        <button type="button" class="mali-top-nav-btn" data-main-tab="practice" onclick="switchMainTab('practice')">
-          <span class="m-icon">✍️</span>
-          <span class="m-text">Latihan Praktik</span>
-        </button>
-        <button type="button" class="mali-top-nav-btn" data-main-tab="dictionary" onclick="switchMainTab('dictionary')">
-          <span class="m-icon">📖</span>
-          <span class="m-text">Kamus & Audio</span>
-        </button>
-        <button type="button" class="mali-top-nav-btn" data-main-tab="exam" onclick="switchMainTab('exam')">
-          <span class="m-icon">🎓</span>
-          <span class="m-text">Ujian & Sertifikasi</span>
-        </button>
-      </nav>
-
-
-      <div class="header-actions">
+<div class="header-actions">
 <!-- User Profile Pill -->
         <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()"
           title="Profil Akun Pembelajar (Klik untuk ganti akun)">
