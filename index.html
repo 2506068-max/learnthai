@@ -7934,6 +7934,573 @@
       color: #ffffff;
     }
 
+
+
+    /* ===== RESTORED SUBNAV & DASHBOARD WELCOME CARD STYLING ===== */
+/* ========= Typing Tutor Mobile Tap-Quiz Mode ========= */
+      @media (max-width: 640px) {
+        .thai-keyboard-section {
+          display: none !important;
+        }
+        #typingMobileQuiz {
+          display: block !important;
+        }
+      }
+      #typingMobileQuiz {
+        display: none;
+        padding: 16px;
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--border);
+        text-align: center;
+        margin-top: 16px;
+      }
+      .tap-quiz-prompt {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
+        letter-spacing: 2px;
+      }
+      .tap-quiz-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+      }
+      .tap-quiz-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .tap-quiz-choice {
+        min-height: 56px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: 2px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--bg);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.15s;
+        padding: 8px;
+        touch-action: manipulation;
+      }
+      .tap-quiz-choice:active { transform: scale(0.96); }
+      .tap-quiz-choice.correct { background: #d1fae5; border-color: #10b981; color: #065f46; }
+      .tap-quiz-choice.wrong   { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+      .tap-quiz-progress {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-top: 14px;
+      }
+    
+      /* ===== Accessibility: 44x44px minimum touch targets ===== */
+      .audio-play-btn,
+      .mic-btn,
+      [onclick*="speakThai"],
+      [onclick*="playAudio"],
+      [onclick*="triggerMic"],
+      [onclick*="startSpeech"],
+      [onclick*="playPortalGreeting"],
+      .speak-btn,
+      .play-audio-btn,
+      .pronunciation-btn {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
+      }
+      /* Mic button specific styling */
+      #voiceRecordBtn,
+      #mainMicBtn,
+      .mic-record-btn,
+      [id*="MicBtn"],
+      [id*="micBtn"] {
+        min-width: 48px;
+        min-height: 48px;
+        touch-action: manipulation;
+      }
+    
+      /* ===== Dashboard Welcome Card ===== */
+      #dashboardWelcomeCard {
+        background: linear-gradient(135deg, var(--primary) 0%, #52b788 100%);
+        color: #fff;
+        border-radius: var(--radius-lg);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 4px 20px rgba(45,106,79,0.25);
+        animation: fadeInDown 0.4s ease;
+      }
+      @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      #dashboardWelcomeCard .welcome-info { flex: 1; min-width: 180px; }
+      #dashboardWelcomeCard .welcome-name {
+        font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;
+      }
+      #dashboardWelcomeCard .welcome-stats {
+        display: flex; gap: 14px; font-size: 0.9rem; opacity: 0.92; flex-wrap: wrap;
+      }
+      #dashboardWelcomeCard .welcome-stat {
+        display: flex; align-items: center; gap: 4px; font-weight: 600;
+      }
+      #dashboardWelcomeCard .btn-lanjutkan {
+        background: #fff;
+        color: var(--primary);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        min-height: 44px;
+        touch-action: manipulation;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      }
+      #dashboardWelcomeCard .btn-lanjutkan:hover {
+        background: #f0fdf4; transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      }
+      @media (max-width: 480px) {
+        #dashboardWelcomeCard { padding: 16px; }
+        #dashboardWelcomeCard .btn-lanjutkan { width: 100%; justify-content: center; }
+      }
+    
+      /* ===== Lotus Terjemah Tab — DeepL Style ===== */
+      .float-trans-dir-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+      }
+      .float-trans-lang-pill {
+        flex: 1;
+        padding: 8px 10px;
+        border: 2px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--bg);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s;
+        touch-action: manipulation;
+        min-height: 44px;
+      }
+      .float-trans-lang-pill.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .float-trans-swap-btn {
+        width: 38px;
+        height: 38px;
+        border: 2px solid var(--border);
+        border-radius: 50%;
+        background: var(--surface);
+        color: var(--primary);
+        font-size: 18px;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.18s;
+        touch-action: manipulation;
+        flex-shrink: 0;
+      }
+      .float-trans-swap-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: rotate(180deg); }
+      .float-trans-box {
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .float-trans-source { border-color: var(--primary); }
+      .float-trans-textarea {
+        width: 100%;
+        min-height: 90px;
+        max-height: 160px;
+        padding: 12px;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 15px;
+        color: var(--text);
+        font-family: var(--font-sans);
+        resize: vertical;
+        line-height: 1.55;
+        box-sizing: border-box;
+      }
+      .float-trans-box-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+      .float-trans-char-count { font-size: 11px; color: var(--text-muted); }
+      .float-trans-icon-btn {
+        width: 32px; height: 32px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.15s;
+        touch-action: manipulation;
+      }
+      .float-trans-icon-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .float-trans-submit-btn {
+        width: 100%;
+        padding: 12px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-md);
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        min-height: 48px;
+        touch-action: manipulation;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(45,106,79,0.3);
+      }
+      .float-trans-submit-btn:hover { background: #1e4d36; transform: translateY(-1px); }
+      .float-trans-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+      .float-trans-result {
+        background: #f0fdf4;
+        border-color: #86efac;
+      }
+      .float-trans-result-lang {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 8px 12px 4px;
+      }
+      .float-trans-result-thai {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a1a1a;
+        line-height: 1.6;
+        padding: 4px 12px 4px;
+        font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+      }
+      .float-trans-result-roman {
+        font-size: 13px;
+        color: var(--text-secondary);
+        font-style: italic;
+        padding: 0 12px 8px;
+      }
+      .float-trans-result-actions {
+        display: flex;
+        gap: 6px;
+        padding: 8px 10px;
+        border-top: 1px solid #bbf7d0;
+        flex-wrap: wrap;
+      }
+      .float-trans-action-btn {
+        flex: 1;
+        min-height: 36px;
+        padding: 6px 8px;
+        border: 1px solid #86efac;
+        border-radius: 8px;
+        background: #fff;
+        color: #15803d;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        touch-action: manipulation;
+        white-space: nowrap;
+      }
+      .float-trans-action-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .float-trans-gender-note {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .float-trans-gender-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+      }
+      .float-trans-gender-badge {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .float-trans-gender-badge.female { background: #fdf2f8; color: #9d174d; border: 1px solid #f9a8d4; }
+      .float-trans-gender-badge.male   { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+      .float-trans-gender-val { color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 14px; }
+    
+
+/* ==========================================================================
+   MALI'S THAI REFACTORED 5-PILLAR NAVIGATION & MOBILE POLISH
+   ========================================================================== */
+
+/* Top Pill Navigation in Header */
+.mali-top-pill-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(45, 106, 79, 0.08);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(45, 106, 79, 0.14);
+}
+
+.mali-top-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.mali-top-nav-btn:hover {
+  color: var(--primary);
+  background: rgba(45, 106, 79, 0.08);
+}
+
+.mali-top-nav-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.3);
+}
+
+/* Sub-Navigation Bar inside Panels */
+.mali-subnav-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mali-subnav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.mali-subnav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1.5px solid transparent;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  min-height: 42px;
+}
+
+.mali-subnav-btn:hover {
+  background: rgba(45, 106, 79, 0.06);
+  color: var(--primary);
+  border-color: rgba(45, 106, 79, 0.2);
+}
+
+.mali-subnav-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);
+}
+
+/* Hero Dashboard Banner */
+.mali-hero-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%);
+  color: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 28px rgba(45, 106, 79, 0.22);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mali-hero-dashboard::after {
+  content: '🌸';
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-size: 120px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  color: #b7e4c7;
+}
+
+.hero-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: #ffffff;
+}
+
+.hero-subtitle {
+  font-size: 13.5px;
+  color: #d8f3dc;
+  margin: 0 0 18px 0;
+  max-width: 580px;
+  line-height: 1.5;
+}
+
+.hero-stats-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-stat-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-stat-box .stat-icon {
+  font-size: 22px;
+}
+
+.hero-stat-box strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hero-stat-box small {
+  font-size: 10.5px;
+  color: #b7e4c7;
+}
+
+.btn-hero-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f59e0b;
+  color: #1a1a1a;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 26px;
+  font-size: 14.5px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 48px;
+  white-space: nowrap;
+}
+
+.btn-hero-resume:hover {
+  background: #d97706;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.5);
+}
+
+.btn-hero-resume:active {
+  transform: scale(0.97);
+}
+
+/* Touch target minimum 44x44px for accessibility */
+.btn-audio-listen,
+.icon-btn-compact,
+.mic-btn,
+.pill-filter,
+.mobile-nav-btn {
+  min-height: 44px;
+}
+
+/* Mobile responsiveness adjustments */
+@media (max-width: 900px) {
+  .mali-top-pill-nav {
+    display: none; /* Handled smoothly by bottom nav */
+  }
+  .mali-hero-dashboard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 18px;
+  }
+  .btn-hero-resume {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .writing-canvas-wrap {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: 320px !important;
+  }
+  .kb-key {
+    height: 44px !important;
+  }
+}
+
 </style>
   <script src="thai_dictionary_data.js"></script>
 </head>
@@ -8105,15 +8672,7 @@
 
 
       <div class="header-actions">
-
-        <!-- Mode Romanisasi Switcher (RTGS vs Lidah Indonesia) -->
-        <div class="mali-roman-toggle-wrap" id="headerRomanToggleWrap" title="Klik untuk ganti: Standar Internasional (RTGS) vs Panduan Lidah Indonesia">
-          <button type="button" class="mali-roman-btn" id="headerRomanBtn" onclick="toggleRomanMode()">
-            <span class="mali-roman-badge" id="headerRomanBadge">🇮🇩 LIDAH INDO</span>
-          </button>
-        </div>
-
-        <!-- User Profile Pill -->
+<!-- User Profile Pill -->
         <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()"
           title="Profil Akun Pembelajar (Klik untuk ganti akun)">
           <span class="profile-badge-avatar" id="headerUserAvatar">🍃</span>
@@ -8207,6 +8766,19 @@
               <button class="script-mode-pill" id="btnModeScriptNative" onclick="setAppThaiScriptMode('native')"
                 title="Sembunyikan bantuan latin untuk menguji kemampuan membaca huruf asli">
                 🇹🇭 Hanya Thai Asli
+              </button>
+            </div>
+
+            <div class="thai-font-divider"></div>
+            <div class="thai-font-dropdown-title">GAYA ROMANISASI (TRANSLITERASI)</div>
+            <div class="thai-script-mode-row">
+              <button class="script-mode-pill active" id="btnRomanModeIndo" onclick="setAppRomanMode('indo')"
+                title="Mode Lidah Indonesia: lafal mudah dieja (th ➔ t, ph ➔ p, kh ➔ k)">
+                🇮🇩 Lidah Indonesia
+              </button>
+              <button class="script-mode-pill" id="btnRomanModeRtgs" onclick="setAppRomanMode('rtgs')"
+                title="Mode Standar Internasional RTGS (th, ph, kh)">
+                🌐 Standar RTGS
               </button>
             </div>
           </div>
@@ -13128,7 +13700,7 @@
               <span class="variant-chip font-var-hand" style="font-family:var(--font-thai-handwritten);" title="Tulisan Tangan Santai (Mali)">${c.thai}</span>
             </div>
             <div class="glyph-spoken">${c.spoken || ''}</div>
-            <div class="glyph-roman">${c.roman}</div>
+            <div class="glyph-roman">${(localStorage.getItem('mali_roman_mode') || 'indo') === 'indo' ? convertToIndonesianLafal(c.roman) : c.roman}</div>
             <div class="glyph-meaning">${c.meaning}</div>
           </div>
         `;
@@ -21642,572 +22214,7 @@
               @page { size: landscape; margin: 0; }
               body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #000; }
               img { max-width: 100%; max-height: 100%; object-fit: contain; }
-            
-      /* ========= Typing Tutor Mobile Tap-Quiz Mode ========= */
-      @media (max-width: 640px) {
-        .thai-keyboard-section {
-          display: none !important;
-        }
-        #typingMobileQuiz {
-          display: block !important;
-        }
-      }
-      #typingMobileQuiz {
-        display: none;
-        padding: 16px;
-        background: var(--surface);
-        border-radius: var(--radius-lg);
-        border: 2px solid var(--border);
-        text-align: center;
-        margin-top: 16px;
-      }
-      .tap-quiz-prompt {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--primary);
-        margin-bottom: 8px;
-        letter-spacing: 2px;
-      }
-      .tap-quiz-label {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        margin-bottom: 20px;
-      }
-      .tap-quiz-choices {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        max-width: 320px;
-        margin: 0 auto;
-      }
-      .tap-quiz-choice {
-        min-height: 56px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border: 2px solid var(--border);
-        border-radius: var(--radius-md);
-        background: var(--bg);
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.15s;
-        padding: 8px;
-        touch-action: manipulation;
-      }
-      .tap-quiz-choice:active { transform: scale(0.96); }
-      .tap-quiz-choice.correct { background: #d1fae5; border-color: #10b981; color: #065f46; }
-      .tap-quiz-choice.wrong   { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
-      .tap-quiz-progress {
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        margin-top: 14px;
-      }
-    
-      /* ===== Accessibility: 44x44px minimum touch targets ===== */
-      .audio-play-btn,
-      .mic-btn,
-      [onclick*="speakThai"],
-      [onclick*="playAudio"],
-      [onclick*="triggerMic"],
-      [onclick*="startSpeech"],
-      [onclick*="playPortalGreeting"],
-      .speak-btn,
-      .play-audio-btn,
-      .pronunciation-btn {
-        min-width: 44px;
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        touch-action: manipulation;
-      }
-      /* Mic button specific styling */
-      #voiceRecordBtn,
-      #mainMicBtn,
-      .mic-record-btn,
-      [id*="MicBtn"],
-      [id*="micBtn"] {
-        min-width: 48px;
-        min-height: 48px;
-        touch-action: manipulation;
-      }
-    
-      /* ===== Dashboard Welcome Card ===== */
-      #dashboardWelcomeCard {
-        background: linear-gradient(135deg, var(--primary) 0%, #52b788 100%);
-        color: #fff;
-        border-radius: var(--radius-lg);
-        padding: 20px 24px;
-        margin-bottom: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 16px;
-        box-shadow: 0 4px 20px rgba(45,106,79,0.25);
-        animation: fadeInDown 0.4s ease;
-      }
-      @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      #dashboardWelcomeCard .welcome-info { flex: 1; min-width: 180px; }
-      #dashboardWelcomeCard .welcome-name {
-        font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;
-      }
-      #dashboardWelcomeCard .welcome-stats {
-        display: flex; gap: 14px; font-size: 0.9rem; opacity: 0.92; flex-wrap: wrap;
-      }
-      #dashboardWelcomeCard .welcome-stat {
-        display: flex; align-items: center; gap: 4px; font-weight: 600;
-      }
-      #dashboardWelcomeCard .btn-lanjutkan {
-        background: #fff;
-        color: var(--primary);
-        border: none;
-        border-radius: var(--radius-md);
-        padding: 12px 20px;
-        font-size: 0.95rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s;
-        white-space: nowrap;
-        min-height: 44px;
-        touch-action: manipulation;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      }
-      #dashboardWelcomeCard .btn-lanjutkan:hover {
-        background: #f0fdf4; transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-      }
-      @media (max-width: 480px) {
-        #dashboardWelcomeCard { padding: 16px; }
-        #dashboardWelcomeCard .btn-lanjutkan { width: 100%; justify-content: center; }
-      }
-    
-      /* ===== Lotus Terjemah Tab — DeepL Style ===== */
-      .float-trans-dir-bar {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        justify-content: center;
-      }
-      .float-trans-lang-pill {
-        flex: 1;
-        padding: 8px 10px;
-        border: 2px solid var(--border);
-        border-radius: var(--radius-md);
-        background: var(--bg);
-        color: var(--text);
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.18s;
-        touch-action: manipulation;
-        min-height: 44px;
-      }
-      .float-trans-lang-pill.active {
-        background: var(--primary);
-        color: #fff;
-        border-color: var(--primary);
-      }
-      .float-trans-swap-btn {
-        width: 38px;
-        height: 38px;
-        border: 2px solid var(--border);
-        border-radius: 50%;
-        background: var(--surface);
-        color: var(--primary);
-        font-size: 18px;
-        cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        transition: all 0.18s;
-        touch-action: manipulation;
-        flex-shrink: 0;
-      }
-      .float-trans-swap-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: rotate(180deg); }
-      .float-trans-box {
-        border: 1.5px solid var(--border);
-        border-radius: var(--radius-lg);
-        background: var(--bg);
-        overflow: hidden;
-      }
-      .float-trans-source { border-color: var(--primary); }
-      .float-trans-textarea {
-        width: 100%;
-        min-height: 90px;
-        max-height: 160px;
-        padding: 12px;
-        border: none;
-        outline: none;
-        background: transparent;
-        font-size: 15px;
-        color: var(--text);
-        font-family: var(--font-sans);
-        resize: vertical;
-        line-height: 1.55;
-        box-sizing: border-box;
-      }
-      .float-trans-box-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 10px;
-        border-top: 1px solid var(--border);
-        background: var(--surface);
-      }
-      .float-trans-char-count { font-size: 11px; color: var(--text-muted); }
-      .float-trans-icon-btn {
-        width: 32px; height: 32px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background: transparent;
-        cursor: pointer;
-        font-size: 14px;
-        display: flex; align-items: center; justify-content: center;
-        transition: all 0.15s;
-        touch-action: manipulation;
-      }
-      .float-trans-icon-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-      .float-trans-submit-btn {
-        width: 100%;
-        padding: 12px;
-        background: var(--primary);
-        color: #fff;
-        border: none;
-        border-radius: var(--radius-md);
-        font-size: 15px;
-        font-weight: 700;
-        cursor: pointer;
-        min-height: 48px;
-        touch-action: manipulation;
-        transition: all 0.2s;
-        box-shadow: 0 2px 8px rgba(45,106,79,0.3);
-      }
-      .float-trans-submit-btn:hover { background: #1e4d36; transform: translateY(-1px); }
-      .float-trans-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-      .float-trans-result {
-        background: #f0fdf4;
-        border-color: #86efac;
-      }
-      .float-trans-result-lang {
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--primary);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        padding: 8px 12px 4px;
-      }
-      .float-trans-result-thai {
-        font-size: 22px;
-        font-weight: 700;
-        color: #1a1a1a;
-        line-height: 1.6;
-        padding: 4px 12px 4px;
-        font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
-      }
-      .float-trans-result-roman {
-        font-size: 13px;
-        color: var(--text-secondary);
-        font-style: italic;
-        padding: 0 12px 8px;
-      }
-      .float-trans-result-actions {
-        display: flex;
-        gap: 6px;
-        padding: 8px 10px;
-        border-top: 1px solid #bbf7d0;
-        flex-wrap: wrap;
-      }
-      .float-trans-action-btn {
-        flex: 1;
-        min-height: 36px;
-        padding: 6px 8px;
-        border: 1px solid #86efac;
-        border-radius: 8px;
-        background: #fff;
-        color: #15803d;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.15s;
-        touch-action: manipulation;
-        white-space: nowrap;
-      }
-      .float-trans-action-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-      .float-trans-gender-note {
-        background: var(--surface);
-        border: 1.5px solid var(--border);
-        border-radius: var(--radius-md);
-        padding: 10px 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .float-trans-gender-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 13px;
-      }
-      .float-trans-gender-badge {
-        font-size: 11px;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 20px;
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-      .float-trans-gender-badge.female { background: #fdf2f8; color: #9d174d; border: 1px solid #f9a8d4; }
-      .float-trans-gender-badge.male   { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
-      .float-trans-gender-val { color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 14px; }
-    
-
-/* ==========================================================================
-   MALI'S THAI REFACTORED 5-PILLAR NAVIGATION & MOBILE POLISH
-   ========================================================================== */
-
-/* Top Pill Navigation in Header */
-.mali-top-pill-nav {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(45, 106, 79, 0.08);
-  padding: 4px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(45, 106, 79, 0.14);
-}
-
-.mali-top-nav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 40px;
-  white-space: nowrap;
-}
-
-.mali-top-nav-btn:hover {
-  color: var(--primary);
-  background: rgba(45, 106, 79, 0.08);
-}
-
-.mali-top-nav-btn.active {
-  background: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.3);
-}
-
-/* Sub-Navigation Bar inside Panels */
-.mali-subnav-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  margin-bottom: 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.mali-subnav-bar::-webkit-scrollbar {
-  display: none;
-}
-
-.mali-subnav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border: 1.5px solid transparent;
-  background: var(--bg-surface);
-  color: var(--text-muted);
-  border-radius: var(--radius-pill);
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s ease;
-  min-height: 42px;
-}
-
-.mali-subnav-btn:hover {
-  background: rgba(45, 106, 79, 0.06);
-  color: var(--primary);
-  border-color: rgba(45, 106, 79, 0.2);
-}
-
-.mali-subnav-btn.active {
-  background: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
-  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);
-}
-
-/* Hero Dashboard Banner */
-.mali-hero-dashboard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%);
-  color: #ffffff;
-  border-radius: var(--radius-xl);
-  padding: 24px 28px;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 28px rgba(45, 106, 79, 0.22);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.mali-hero-dashboard::after {
-  content: '🌸';
-  position: absolute;
-  right: -10px;
-  bottom: -20px;
-  font-size: 120px;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(8px);
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  margin-bottom: 10px;
-  color: #b7e4c7;
-}
-
-.hero-title {
-  font-size: 24px;
-  font-weight: 800;
-  margin: 0 0 6px 0;
-  color: #ffffff;
-}
-
-.hero-subtitle {
-  font-size: 13.5px;
-  color: #d8f3dc;
-  margin: 0 0 18px 0;
-  max-width: 580px;
-  line-height: 1.5;
-}
-
-.hero-stats-row {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.hero-stat-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 8px 14px;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.hero-stat-box .stat-icon {
-  font-size: 22px;
-}
-
-.hero-stat-box strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-.hero-stat-box small {
-  font-size: 10.5px;
-  color: #b7e4c7;
-}
-
-.btn-hero-resume {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #f59e0b;
-  color: #1a1a1a;
-  border: none;
-  border-radius: var(--radius-pill);
-  padding: 14px 26px;
-  font-size: 14.5px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 48px;
-  white-space: nowrap;
-}
-
-.btn-hero-resume:hover {
-  background: #d97706;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.5);
-}
-
-.btn-hero-resume:active {
-  transform: scale(0.97);
-}
-
-/* Touch target minimum 44x44px for accessibility */
-.btn-audio-listen,
-.icon-btn-compact,
-.mic-btn,
-.pill-filter,
-.mobile-nav-btn {
-  min-height: 44px;
-}
-
-/* Mobile responsiveness adjustments */
-@media (max-width: 900px) {
-  .mali-top-pill-nav {
-    display: none; /* Handled smoothly by bottom nav */
-  }
-  .mali-hero-dashboard {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    padding: 18px;
-  }
-  .btn-hero-resume {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 640px) {
-  .writing-canvas-wrap {
-    width: 100% !important;
-    max-width: 320px !important;
-    height: 320px !important;
-  }
-  .kb-key {
-    height: 44px !important;
-  }
-}
-
-</style>
+            </style>
           </head>
           <body onload="window.print(); window.close();">
             <img src="${dataUrl}"/>
@@ -25811,6 +25818,25 @@ window.addEventListener('DOMContentLoaded', () => {
       res = res.replace(/oe/gi, 'e');
       res = res.replace(/ae/gi, 'è');
       return res;
+    }
+
+    function setAppRomanMode(mode) {
+      localStorage.setItem('mali_roman_mode', mode);
+      const btnIndo = document.getElementById('btnRomanModeIndo');
+      const btnRtgs = document.getElementById('btnRomanModeRtgs');
+      if (btnIndo) btnIndo.classList.toggle('active', mode === 'indo');
+      if (btnRtgs) btnRtgs.classList.toggle('active', mode === 'rtgs');
+
+      if (typeof renderAlphabetMatrix === 'function') {
+        renderAlphabetMatrix();
+      }
+      if (typeof selectSpacingPreset === 'function') {
+        selectSpacingPreset(currentSpacingPresetIdx);
+      }
+      showToast(mode === 'indo'
+        ? '🇮🇩 Mode Transliterasi: Panduan Lidah Indonesia aktif!'
+        : '🌐 Mode Transliterasi: Standar RTGS Internasional aktif!'
+      );
     }
 
     function toggleRomanMode() {
