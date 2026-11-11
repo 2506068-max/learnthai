@@ -10826,6 +10826,8 @@
 
     function playSynthSound(type) {
       if (!appState.soundEnabled) return;
+      // Hilangkan suara saat menyentuh / mengklik tombol agar interaksi senyap dan tenang
+      if (type === 'click' || type === 'tap') return;
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
@@ -18187,29 +18189,8 @@
     }
 
     function playTypewriterSound(isCorrect) {
-      try {
-        const actx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = actx.createOscillator();
-        const gain = actx.createGain();
-        osc.connect(gain);
-        gain.connect(actx.destination);
-
-        if (isCorrect) {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(600, actx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(800, actx.currentTime + 0.05);
-          gain.gain.setValueAtTime(0.12, actx.currentTime);
-          gain.gain.linearRampToValueAtTime(0, actx.currentTime + 0.05);
-        } else {
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(180, actx.currentTime);
-          gain.gain.setValueAtTime(0.18, actx.currentTime);
-          gain.gain.linearRampToValueAtTime(0, actx.currentTime + 0.1);
-        }
-
-        osc.start();
-        osc.stop(actx.currentTime + 0.1);
-      } catch (_) { }
+      // Hilangkan suara tuts keyboard saat menyentuh
+      return;
     }
 
     function updateTypingMetrics() {
