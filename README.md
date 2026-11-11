@@ -1,88 +1,260 @@
-# 🪷 Mali's Thai (สวนไทยของมะลิ)
+# 🍃 Mali's Thai Garden (สวนไทยของมะลิ)
 ### *Ghibli-Themed AI Speaking & Fluency Coach for the Thai Language*
 
-[![HTML5](https://img.shields.io/badge/HTML5-Lightweight_171KB-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/Vanilla_CSS3-Modular-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/Vanilla_CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![Web Speech API](https://img.shields.io/badge/Web_Speech_API-th--TH-2d6a4f?style=flat)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
-[![PWA Ready](https://img.shields.io/badge/PWA-Offline_Ready-3b82f6?style=flat)](service-worker.js)
 [![Theme](https://img.shields.io/badge/Theme-Studio_Ghibli_Aesthetic-52b788?style=flat)](#-desain--tema-studio-ghibli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg)](LICENSE)
 
-**Mali's Thai** adalah aplikasi web interaktif komprehensif untuk mempelajari aksara, kosakata, intonasi nada, dan melatih kelancaran berbicara bahasa Thailand (*Thai speaking fluency*) secara mandiri. Menggabungkan arsitektur *voice-first*, evaluasi pengucapan instan, kanvas tulis aksara, tutor mengetik Kedmanee, dan simulasi roleplay dengan estetika visual **Studio Ghibli** (nuansa hutan cedar, kertas perkamen cat air hangat, dan palet warna earthy yang menenangkan).
+**Mali's Thai Garden** adalah aplikasi web interaktif untuk melatih kelancaran berbicara bahasa Thailand (*Thai speaking fluency*) secara mandiri. Aplikasi ini menggabungkan paradigma **Stimuler AI Speaking Coach** (interaksi *voice-first*, evaluasi pengucapan instan, dan simulasi roleplay) dengan kehangatan estetika visual **Studio Ghibli** (warna hutan kamper, kertas perkamen cat air, dan pendar kunang-kunang malam).
 
 ---
 
-## 🏛️ Arsitektur Navigasi Utama (5 Slot Interaktif)
+## ✨ Fitur Utama
 
-Untuk memfasilitasi alur belajar yang seimbang dan berorientasi aksi langsung, aplikasi mengadopsi 5 slot navigasi utama:
+### 0. 🍃 Portal Gerbang Pembelajaran & Menu Login (Learning Gateway, Emblem & Student Login)
+* **Layar Pembuka & Menu Login di Awal**: Saat pertama kali membuka website, pengguna disambut oleh portal belajar terpusat yang tenang dengan formulir **Masuk / Login Akun Pembelajar** tanpa langsung dijejali menu atau materi bahan ajar yang padat.
+* **Ikon Belajar Ghibli Eksklusif**: Menampilkan lambang belajar animasi halus (*floating emblem*) berupa buku suci ilmu pengetahuan, aksara pertama abjad Thailand **ก (Ko Kai)**, dan pucuk daun melati (*jasmine leaf*).
+* **Multi-Profil Pembelajar & Avatar**: Pengguna dapat memasukkan nama pembelajar (misal: *Nesya* / *Zaldy*), PIN opsional, serta memilih 6 avatar Ghibli/Thailand unik (🍃 *Mali*, 🐘 *Chang Noi*, 🛺 *Somchai*, 🌸 *Dok Bua*, 🐯 *Sua Noi*, 🦉 *Nok Hook*). Kemajuan materi (XP, streak, modul selesai) disimpan terpisah per profil di `localStorage`.
+* **Penyambutan Pengguna Berulang (*Returning User Card*)**: Pengguna yang sudah masuk disambut dengan kartu profil aktif dan tombol *Lanjutkan Belajar* instan serta opsi *Ganti Akun*.
+* **Mode Tamu Cepat (*Guest Mode*)**: Tombol masuk instan sekali klik tanpa harus membuat akun terlebih dahulu.
+* **Badge Profil & Logout di Header/Sidebar**: Profil pembelajar aktif tampil di pojok kanan atas dan bilah navigasi kiri, lengkap dengan tombol keluar (*logout*) `🚪` untuk beralih akun kapan saja.
+* **Fokus Penuh pada Akun & Sapaan**: Halaman portal pembuka dirancang bersih dan tenang, berfokus murni pada lambang belajar dan akun pengguna tanpa membanjiri layar dengan menu atau bahan ajar di awal.
 
-1. **📚 Teori & Materi (`theory`)**
-   - Roadmap Kurikulum Berjenjang (Unit 1-12)
-   - Aksara 44 Konsonan & Aturan 5 Nada Intonasi
-   - 119 Modul Tulis & Panduan Kaidah Fonetik
-2. **⚡ Arena Praktik / Gym (`practice`)**
-   - **Kanvas Tulis (Tracing Canvas)** dengan gesture guard & touch-action guard
-   - **Kedmanee Typing Tutor** dengan pendeteksi perangkat HP & mode kuis pilihan ganda
-   - **Flashcards SRS** (Spaced Repetition System)
-   - **Speed Drill 60s** (Tantangan ketangkasan fonetik & aksara)
-3. **🎙️ Speaking AI (`speaking`)**
-   - Voice Challenge & Pitch Scoring Evaluator
-   - Simulasi Percakapan Realistis Kafe & Situasi Sehari-hari
-   - Nong Mali AI Hub dwi-gender (*khrap* / *kha*)
-4. **📖 Kamus (`dictionary`)**
-   - Kamus Cepat Audio Thai - Indonesia & Lembar Kosakata
-5. **☰ Menu Lotus (`lotus`)**
-   - Pencarian Pintar Universal (Aksara, Modul, Lagu, Kosakata)
-   - Dashboard Analytics Pembelajar & XP Streak
-   - Medali Penghargaan & Generator Sertifikat Kelulusan Resmi
+### 1. 🎙️ Studio Bicara Real-Time (Voice-First Studio)
+* **Perekaman Suara Interaktif**: Tombol mikrofon terpusat dengan efek *pulsating talisman* saat merekam suara pengguna.
+* **Canvas Waveform Dinamis**: Visualisasi gelombang audio real-time yang beranimasi saat pengguna berbicara maupun saat mendengarkan penutur asli.
+* **Pengenalan Suara (*Speech Recognition*)**: Menggunakan Web Speech API dengan dukungan bahasa Thailand (`th-TH`) serta mode *simulasi evaluasi instan*.
+* **Scorecard Kelancaran AI**: Menampilkan metrik komprehensif setelah setiap latihan:
+  * Skor Kelancaran Keseluruhan (*Overall Fluency Score %*)
+  * Akurasi Konsonan (*Consonant Precision*)
+  * Ketepatan Nada (*Tone Pitch Match*)
+  * Kecepatan Artikulasi (*Words Per Minute / WPM*)
+
+### 2. ⚡ 60-Second Speaking Challenge
+Tantangan spontan khas Stimuler untuk melatih keberanian berbicara tanpa jeda ragu. Jawab pertanyaan pemantik dalam 60 detik penuh untuk menguji ketangkasan fonetik Anda.
+
+### 3. 💬 Simulasi Percakapan Roleplay (20 Skenario Nyata Bangkok)
+Simulasi dialog dua arah interaktif dengan penutur asli Thailand dalam berbagai konteks kehidupan dan perjalanan nyata di Bangkok, lengkap dengan filter kategori (`Semua (20)`, `🍜 Kuliner`, `🛍️ Belanja`, `🛺 Transport`, `🏨 Wisata`, `💆 Layanan`) dan pencarian instan:
+* 🍜 **Pesan Makanan di Kafe Sukhumvit** *(Pelayan Kafe Khun Da 👩)*: Memesan Pad Thai udang segar, minta air es, menu rekomendasi, dan bayar tagihan via QR.
+* 🛍️ **Tawar-Menawar di Pasar Chatuchak** *(Penjual Pasar Pii Somchai 👨)*: Menanyakan harga baju (*thâo-rài*), menawar diskon ramah, dan cek ketersediaan warna.
+* 🛺 **Naik Tuk-Tuk Keliling Kota** *(Sopir Tuk-Tuk Bang Somrak 👨)*: Sepakat tarif ke Wat Arun, mengarahkan belok kiri/kanan, dan minta berhenti.
+* 🏨 **Check-In Hotel di Sukhumvit** *(Resepsionis Hotel Khun Ploy 👩)*: Konfirmasi reservasi kamar, jadwal sarapan pagi, dan minta password WiFi hotel.
+* 🧋 **Kedai Cha Yen & Thai Tea** *(Barista Kedai Nong Fern 👩)*: Pesan Cha Yen dingin rendah gula (หวานน้อย 25%), es lemon tea, dan bungkus take-away.
+* 💆‍♀️ **Spa & Pijat Tradisional Nuad Thai** *(Terapis Pijat Mae Pranom 👩)*: Pesan pijat tradisional 2 jam, minta tekanan lebih santai atau urai urat pundak kaku.
+* ✈️ **Imigrasi Bandara Suvarnabhumi** *(Petugas Bandara Khun Arthit 👨)*: Menjawab pertanyaan durasi wisata, menyebut hotel tempat menginap, dan cap paspor.
+* 🏪 **Belanja Cepat di 7-Eleven Thailand** *(Kasir Nong Best 👨)*: Minta panaskan sandwich panggang keju, tolak kantong plastik, dan bayar tunai.
+* 🏥 **Apotek & Konsultasi Obat** *(Apoteker Khun Mor Vipada 👩)*: Menjelaskan gejala pusing demam (*bpùat hǔa*), sakit perut diare, dan aturan minum obat.
+* 🚊 **Stasiun Kereta BTS Skytrain** *(Petugas Loket Khun Nat 👨)*: Membeli tiket ke stasiun Siam, top up kartu Rabbit, dan petunjuk stasiun transit.
+* 🥭 **Beli Buah Tropis di Pasar Malam** *(Penjual Buah Mae Somjit 👩)*: Beli mangga manis Nam Dok Mai, minta dipotongkan dalam boks, dan kelapa muda wangi.
+
+### 4. 📚 Buku Pembelajaran Tertulis Lengkap (Jazmi Nara • 119 Modul Tulis & Latihan Part I - IV)
+Integrasi kurikulum tertulis murni dari seri **"Learning Thai from Zero"** berjenjang, mencakup 119 modul materi tertulis dari Materi [01] sampai [90] lengkap dengan tombol audio pengucapan kata asli, rumus tata bahasa, tabel acuan, latihan kuis mandiri, dan lembar kerja menulis aksara (tanpa video YouTube):
+* **Part I: Mengenal Aksara dan Ketentuan Bacanya (31 Modul • Materi 01-12)**:
+  * 44 Konsonan, konsonan aktif/pasif, tips menghafal, 5 versi latihan tebak konsonan.
+  * Aksara vokal, posisi penulisan, 2 latihan melatinkan kata (Easy).
+  * Perubahan bunyi konsonan akhir (Mae Kok, Kot, Kop, Kon, dll) & latihan tebak bunyi.
+  * Perubahan bentuk vokal (Mai Han-Akat, dll) & latihan melatinkan kata (Medium/Hard).
+  * Konsonan gabung / klaster sejati & semu, vokal kompleks, penggunaan spasi, pemisahan suku kata.
+* **Part II: Nada dan Ketentuan Tambahan Lainnya (23 Modul • Materi 13-25)**:
+  * 5 Nada bahasa Thai (Mid, Low, Falling, High, Rising) & panduan tangga nada audio.
+  * 4 Latihan tebak nada suara pria & wanita.
+  * Nada khusus vokal pendek & penentuan nada suku kata tanpa tanda nada (Kham Bpen / Kham Taai) vs dengan tanda nada (Mai Ek, Mai Tho, Mai Tri, Mai Chattawa).
+  * Aksara peredam Ho Hip (ห) dan O Aang (อ) senyap, tanda peredam bunyi Mai Thanthakhaat ` ์ `.
+  * Tanda baca khas: `ๆ` (pengulang kata), `ฯ` (singkatan), `ฯลฯ` (dan lain-lain), serta aturan tanda tanya.
+  * Panduan lengkap mengetik keyboard Thai di komputer dan HP.
+* **Part III: Ilmu Dasar Bahasa Thai (37 Modul • Materi 26-62)**:
+  * 20 kata wajib pemula, partikel kesopanan (*khrap/kha*), berhitung 1-99, perkenalan diri formal & santai.
+  * Kosakata pekerjaan, benda sekitar, status hubungan, dan tempat.
+  * Kata tunjuk benda (*nii/nan/noon*), kata tunjuk lokasi (*thii-nii/thii-nan*), kepemilikan (*khaawng*).
+  * Kata tanya *mai / chai mai / roo / reuu plao*, kata ganti orang (*phom, chan, khun, slang gua/mueng*).
+  * Tata bahasa SVO (Subjek-Predikat-Objek), kata kerja dasar, perbedaan fatal *ao* (ambil) vs *yaak* (ingin).
+  * Menyatakan kebisaan (*dai / mai dai*), konjungsi (*dan, tapi, atau, jika*), menyatakan "bersama" (*gap, duuay gan, gan*).
+  * Menyatakan sudah (*laeo*) vs belum (*yang / yang mai*), serta 4 sesi bedah terjemahan kalimat nyata.
+* **Part IV: Ceritakan Aktivitasmu! (28 Modul • Materi 63-90)**:
+  * Nama-nama 7 hari sepekan & filosofi warna harian Thailand.
+  * 3 Tenses: Lampau (*khoei*), Sekarang (*gam-lang*), Masa Depan (*ja*).
+  * Menanyakan "Sedang apa?", kalender (hari, tanggal, minggu, bulan, tahun), dan kata tanya "Kapan?".
+  * Pembagian waktu 24 jam & adverb frekuensi (sering vs jarang).
+  * Perbedaan Harus (*dtawng*), Butuh (*dtawng-gaan*), Perlu (*jam-bpen*).
+  * Menyatakan selesai tuntas (*set laeo*), "Setelah..." (*lang-jaak*), menanyakan durasi "Berapa lama?" & titik awal "Sejak kapan?".
+  * Sistem waktu 6 jam tradisional (*Mong Chao, Bai, Thum, Thiang*) & tips praktis menghafal jam.
+  * Menggabungkan keterangan waktu lengkap & menceritakan rutinitas harian dari bangun tidur sampai malam.
+  * Kosakata emosi/mental, memberikan alasan (*karena / karena itu*), pertanyaan 5W 1H lengkap, kata penjelas "Yang...", hingga menceritakan aktivitas mandiri secara lancar.
+* **📁 Berkas Lembar Latihan Menulis (Unduhan Langsung)**:
+  * 📄 [`materials/lembar_menulis_konsonan_thai.pdf`](file:///d:/LearnThai/materials/lembar_menulis_konsonan_thai.pdf) (2.4 MB) — Lembar petunjuk grid garis tulis 44 konsonan resmi.
+  * 📄 [`materials/lembar_menulis_vokal_thai.pdf`](file:///d:/LearnThai/materials/lembar_menulis_vokal_thai.pdf) (2.0 MB) — Lembar petunjuk grid garis tulis vokal Thai.
+* **📖 Modal Pembaca Materi Interaktif (E-Book Reader)**: Setiap materi dibuka dalam tampilan buku bacaan fokus yang elegan, lengkap dengan audio pelafalan aksara/kata/kalimat interaktif, tip catatan emas, evaluasi mandiri tersembunyi, navigasi *Sebelumnya / Selanjutnya*, serta tombol centang selesai (+15 XP). Tanpa video YouTube maupun iklan eksternal.
+* 📸 **Kenalan & Minta Tolong Foto di Wat Arun** *(Mahasiswa Lokal Nong Chai 👨)*: Minta tolong foto di depan pagoda kuil, bertukar asal negara, dan rekomendasi wisata lokal.
+* 🚕 **Naik Taksi Meter Bangkok** *(Sopir Taksi Lung Wichai 👨)*: Minta nyalakan argo meter (*bpə̀ət mí-dtə̂ə*), tolak jalan tol macet, dan turun di halte bus.
+* 🚤 **Perahu Cepat Chao Phraya Express** *(Petugas Dermaga Pii Orn 👩)*: Tiket perahu bendera oranye ke Grand Palace Tha Chang (16 Baht), kapal Iconsiam, jam operasional.
+* 📱 **Beli Tourist SIM Card 5G** *(Staf AIS Nong May 👩)*: Beli paket internet 5G unlimited 8 hari (299 Baht), registrasi paspor asli, dan aktivasi langsung.
+* 🛒 **Belanja Oleh-Oleh di Big C Rajdamri** *(Staf Big C Khun Keng 👨)*: Beli Cha Yen bubuk & rumput laut, fasilitas packing kardus pesawat, dan dokumen Tax Refund.
+* 🛕 **Masuk Kuil Wat Pho & Sewa Sarung** *(Petugas Kuil Mae Buppha 👩)*: Tiket masuk patung Buddha tidur (200 Baht), sewa kain sarung penutup kaki sopan, dan aturan foto.
+* 🧺 **Cuci Pakaian Kiloan di Laundry** *(Pemilik Laundry Pii Wan 👩)*: Cuci dan keringkan pakaian harian (50 Baht/kg), jam pengambilan sore, dan wangi pelembut melati.
+* 💱 **Tukar Uang di SuperRich Exchange** *(Teller SuperRich Khun Thanat 👨)*: Tukar mata uang Rupiah ke Baht, cek kurs harian, serahkan paspor, dan minta pecahan kecil.
+* 🎬 **Nonton Bioskop di Paragon Cineplex** *(Staf Tiket Nong Praew 👩)*: Pesan kursi bioskop baris tengah, cek subtitle bahasa Inggris, dan etika lagu penghormatan kerajaan.
+* **Fitur Percakapan Interaktif**: *Quick-response speech chips*, respon balasan AI kontekstual bercabang, tombol dengarkan sebelum kirim, dan tombol suara asli ganda di setiap balon obrolan.
+
+### 4. 🔊 100% Penutur Asli Bangkok (Universal Native Thai Audio Engine)
+* **Seluruh Kata Berpenutur Asli**: Setiap kata, frasa, konsonan, vokal, pilihan jawaban kuis, dan token kalimat disuarakan langsung oleh penutur asli (*Bangkok Central Standard Thai*).
+* **👫 Dual-Gender Voice Engine (2 Versi Gaya Bicara: Perempuan & Laki-laki)**:
+  * **Versi Perempuan (Wanita):** Menggunakan partikel pernyataan **ค่ะ (khà - nada jatuh)**, partikel pertanyaan **คะ (khá - nada tinggi)**, dan kata ganti **ฉัน (chǎn)**, disuarakan dengan timbre vokal jernih dan melodis (*pitch 1.18*).
+  * **Versi Laki-laki (Pria):** Menggunakan partikel kesopanan universal **ครับ (khráp)** dan kata ganti **ผม (phǒm)**, disuarakan dengan resonansi vokal dada maskulin yang mantap (*pitch 0.80*).
+  * **Toggle Global & Komparasi Instan**: Tombol cepat di header navigasi atas (`👩 Wanita (ค่ะ)` ⇄ `👨 Pria (ครับ)`), tombol pendengaran komparatif di Studio Bicara, kartu perbandingan ganda di Buku Frasa, respon adaptif di Simulasi Roleplay, serta kartu hasil ganda di Penerjemah AI.
+* **Dual-Source Neural Audio Streaming**: Menggunakan redundansi ganda streaming audio beresolusi tinggi dengan nol jeda *buffering* dan pengamanan *fallback* ketat (tidak akan pernah beralih ke aksen bahasa Inggris kaku).
+* **Kontrol Kecepatan Bicara (Speed Toggle)**: Pilihan kecepatan **1.0x (Alami Percakapan Bangkok)** atau **0.8x (Santai & Artikulasi Jelas untuk Pemula)**.
+* **Nomenklatur Resmi Huruf**: Pengucapan konsonan tunggal otomatis melafalkan nama tradisional lengkapnya (misal: `ก` dilafalkan *กอ ไก่ / Ko Kai*, `ข` dilafalkan *ขอ ไข่ / Kho Khai*).
+
+### 5. 🔤 Materi Aksara & 44 Konsonan Thai (อักษรไทย - Modul Mandiri)
+* **Materi Terpisah & Terstruktur**: Modul khusus aksara Thai yang dipisahkan dari laboratorium suara agar pembelajar dapat fokus mendalami sistem tulisan Thailand secara sistematis.
+* **Matriks 44 Konsonan Resmi**: Seluruh 44 konsonan dilengkapi sebutan nama tradisional (misal: *กอ ไก่ / Ko Kai*), romanisasi fonetik, arti bahasa Indonesia, dan audio asli penutur Bangkok.
+* **Panduan 3 Kelas Nada Konsonan (Bento Guide)**:
+  * **Kelas Tengah (อักษรกลาง - 9 Konsonan)**: *ก จ ฎ ฏ ด ต บ ป อ* (nada dasar datar/mid).
+  * **Kelas Tinggi (อักษรสูง - 11 Konsonan)**: *ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห* (nada dasar naik/rising).
+  * **Kelas Rendah (อักษรต่ำ - 24 Konsonan)**: *ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ* (responsif terhadap tanda nada Mai Ek & Mai Tho).
+* **14 Vokal & Diftong Inti**: Vokal pendek, panjang, dan diftong majemuk.
+* **4 Tanda Nada (วรรณยุกต์)** & **10 Angka Thai (ตัวเลขไทย)**: Pengenalan tanda *Mai Ek, Mai Tho, Mai Tri, Mai Chattawa* dan angka tradisional `๐` - `๙`.
+* **4 Ragam Gaya Tulisan Thai yang Dapat Dipilih Bebas (Thai Typography Switcher)**:
+  * 🏫 **Standar Berloop (Formal / Buku Teks)** — *Noto Sans Thai / Sarabun*: Memiliki lingkaran kepala (loop/หัว), standar kurikulum sekolah dan sangat mudah dikenali pemula.
+  * 🏙️ **Modern Tanpa Loop (BTS & Urban Bangkok)** — *Kanit / Prompt*: Gaya minimalis modern tanpa lingkaran kepala (loopless), font yang digunakan pada 90% papan penunjuk jalan, stasiun BTS/MRT Skytrain, kafe modern, dan iklan di Thailand.
+  * ✍️ **Tulisan Tangan Santai (Mali / Ghibli Style)** — *Mali*: Gaya kasual berkarakter seperti tulisan kapur pada papan menu warung makan jalanan (*street food*) dan kafe Bangkok.
+  * 📜 **Klasik Berbingkai (Serif Formal)** — *Noto Serif Thai*: Gaya berserif dengan wibawa formal elegan khas naskah sastra, surat kabar, dan piagam kerajaan.
+* **Komparasi 3 Ragam Huruf Langsung di Kartu Matriks**: Setiap kartu konsonan menampilkan strip perbandingan langsung bentuk huruf dalam versi Berloop, Tanpa Loop, dan Tulisan Tangan untuk memudahkan identifikasi bentuk huruf di dunia nyata.
+* **Mode Bantuan Baca Latin**: Opsi beralih antara Mode Lengkap (Aksara + Latin Fonetik) dan Mode Aksara Murni (Native Thai Only dengan efek *blur-peek* untuk menguji kemahiran membaca mandiri).
+* **Pencarian Cepat & Filter Multikategori**: Filter instan kelas huruf atau cari berdasarkan nama/romanisasi/arti.
+* **Kuis Kilat Memori Huruf**: Latihan interaktif menebak nama sebutan aksara Thai dengan reward +5 XP.
+
+### 6. 🎵 Laboratorium Suara & 5 Nada (Akustik & Intonasi Tonal)
+* **Uji 5 Nada Tonal**: Visualisasi kurva kontur SVG untuk *Mid (สามัญ), Low (เอก), Falling (โท), High (ตรี),* dan *Rising (จัตวา)*, dilengkapi audio synthesizer pitch sweep dan 3 kata contoh penutur asli di setiap nada.
+* **Jembatan Akses Cepat**: Kartu pintasan interaktif menuju materi aksara mandiri.
+* **🍃 Buku Frasa Audio Dual-Gender (Phrasebook)**: Koleksi 25+ frasa penting Thailand (Salam, Restoran & Kafe, Tawar-menawar Pasar, Arah & Taksi) yang menyajikan **versi pria (ครับ)** dan **versi wanita (ค่ะ/คะ)** berdampingan dengan tombol audio penutur asli untuk masing-masing versi.
+
+### 7. 🗺️ Roadmap Kurikulum Komprehensif (12 Unit • 48 Modul Interaktif)
+Kurikulum terstruktur berjenjang lengkap dari level **A1 Pemula**, **A2 Menengah**, hingga **B1 Percakapan Mandiri**:
+* **🌱 Level A1 (Unit 1 - 4): Pondasi Bangkok & Bertahan Hidup**
+  * **Unit 1: Langkah Pertama di Bangkok 🇹🇭** *(Salam, Konsonan Tengah, 5 Nada, Wai)*
+  * **Unit 2: Di Kafe & Restoran Thai 🍜** *(Pad Thai, Tom Yum, Tingkat Pedas, Cha Yen, Minta Bon)*
+  * **Unit 3: Belanja di Pasar Chatuchak 🛍️** *(Angka 1-1.000, Menawar Harga, Warna, Ukuran Pakaian)*
+  * **Unit 4: Transportasi & Navigasi Kota 🛺** *(Taksi Meter, Tuk-Tuk, BTS Skytrain, Arah Belok)*
+* **🌿 Level A2 (Unit 5 - 8): Kehidupan Sehari-hari & Wisata**
+  * **Unit 5: Waktu, Hari & Janji Temu ⏰** *(Jam, Menit, Hari, Kapan, Janji Temu Esok Hari)*
+  * **Unit 6: Menginap di Hotel & Resor 🏨** *(Check-in/out, Paspor, AC, Fasilitas Kolam, Password WiFi)*
+  * **Unit 7: Etika Kuil & Budaya Tradisional 🛕** *(Wat Pho/Arun, Aturan Pakaian, Minta Tolong Foto, Songkran)*
+  * **Unit 8: Kesehatan, Gejala & Apotek 🏥** *(Pusing, Sakit Perut, Apotek, Petunjuk Minum Obat)*
+* **🌳 Level B1 (Unit 9 - 12): Kelancaran Sosial & Percakapan Mandiri**
+  * **Unit 9: Cuaca, Pantai & Kepulauan Tropis 🏖️** *(Musim Panas/Hujan, Wisata Phuket/Krabi, Snorkeling)*
+  * **Unit 10: Hobi, Minat & Waktu Luang 🎨** *(Musik, Fotografi, Muay Thai, Olahraga, Mengungkapkan Alasan)*
+  * **Unit 11: Emosi, Perasaan & Filosofi Sosial 💖** *(Bahagia, Lelah, Rindu, Nilai Jai Yen & Kreng Jai)*
+  * **Unit 12: Kenalan, Asal Negara & Perpisahan 🌏** *(Bercerita Asal Indonesia, Kesan Thailand, Salam Selamat Jalan)*
+* **Fitur Interaktif Canggih:**
+  * **Filter Level (Semua, A1, A2, B1)** & **Mesin Pencari Materi Real-Time** (cari materi berdasarkan topik: angka, kuil, obat, dll.)
+  * **Tombol Buka Semua Modul (Unlock All)**: Membuka kebebasan bagi pembelajar untuk langsung melompat ke unit yang diminati tanpa harus menyelesaikan modul secara linear.
+  * **Ujian Boss Tantangan Akhir Unit (🏆 Boss Challenges)** untuk menguji penguasaan terintegrasi di akhir setiap unit.
+  * Dilengkapi audio penutur asli ganda (*NiwatNeural & PremwadeeNeural*), pilihan ganda, mencocokkan kartu (*matching pairs*), dan penyusun kalimat (*sentence builder*).
+  * Status kemajuan (*progress*, skor XP, streak, dan modul selesai) tersimpan otomatis di `localStorage`.
+
+### 8. 🤖 Pusat AI Cerdas Thailand (AI Thailand Hub: Searching, Translating & Culture Q&A)
+Pusat kecerdasan buatan lengkap yang mengintegrasikan tiga kapabilitas utama dalam satu tab interaktif:
+* **🌐 Penerjemah Pintar Real-Time (Live Translator)**:
+  * Terjemahan instan dua arah: **Indonesia ⇄ Thailand**.
+  * Dilengkapi **Transliterasi Fonetik Latin** untuk membantu membaca nada dan vokal.
+  * **Audio Penutur Asli 1-Klik**: Dengarkan langsung hasil terjemahan dalam suara asli penutur Bangkok beresolusi tinggi.
+  * Tombol mikrofon untuk mendiktekan kalimat secara langsung (*Speech-to-Text*) dan tombol salin teks ke clipboard.
+  * *Preset Chips* frasa populer wisatawan (menawar harga, minta jangan pedas, arah toilet, pesan makanan).
+  * Redundansi ganda: terhubung ke jaringan saraf terjemahan publik dengan pengamanan *kamus cerdas offline bawaan*.
+* **🔍 Ensiklopedia & Wisata Thailand (Smart Search)**:
+  * Mesin pencari instan untuk destinasi wisata, kuil, etika, kuliner jalanan, dan transportasi.
+  * Dilengkapi 20+ artikel kurasi mendalam (Wat Arun, Grand Palace, Wat Pho, Chatuchak, Yaowarat Chinatown, Pad Thai, Tom Yum, Mango Sticky Rice, BTS Skytrain, Tuk-Tuk).
+  * **Pencarian Real-Time Tanpa Batas**: Otomatis melakukan *query* ke **Wikipedia REST API** jika pengguna mencari topik tambahan di luar database lokal, lengkap dengan ringkasan artikel dan foto.
+  * Filter kategori praktis (*Semua, Destinasi & Kuil, Kuliner & Street Food, Budaya & Etika, Transportasi*).
+* **💬 Tanya Jawab Budaya & Wisata (Q&A with Nong Mali AI)**:
+  * Asisten AI cerdas berbasis pengetahuan mendalam seputar Thailand.
+  * Menjawab pertanyaan seputar:
+    * Aturan pakaian dan etika sakral berkunjung ke kuil Buddha.
+    * 3 tingkatan salam Wai dan cara membalasnya.
+    * Frasa memesan makanan tidak pedas (*Mai Phet*) dan panduan kuliner halal di Bangkok.
+    * Estimasi biaya makan harian dan kurs mata uang Baht.
+    * Panduan transportasi bebas macet (BTS, MRT, perahu sungai, taksi berargo).
+    * Makna 5 nada bahasa Thai beserta contoh kasusnya.
+    * Etika menghormati institusi kerajaan dan aturan lagu kebangsaan.
+    * Waspada trik penipuan (*scam*) supir tuk-tuk umum.
+  * Setiap respon dilengkapi **tombol audio penutur asli** untuk mendengarkan lafal kata/frasa Thai yang relevan.
 
 ---
 
-## ⚡ Pembaruan Modular & Optimasi Performa
+## 🎨 Desain & Tema Studio Ghibli
 
-1. **Modularisasi Kode & Restrukturisasi Aset**
-   - File HTML monolithic (~890 KB) telah dipangkas drastis menjadi **~171 KB** (penurunan beban DOM ~78%).
-   - CSS diekstrak secara bersih ke `css/style.css`.
-   - Logika JavaScript dipisahkan modular di folder `js/`:
-     * `js/audio-synth.js` (Web Audio API & Synthesizer audio engine)
-     * `js/canvas-handler.js` (Kanvas penulisan aksara & Digital Certificate PNG generator)
-     * `js/speech-coach.js` (Speech recognition `th-TH` & pitch evaluation)
-     * `js/navigation.js` (Lotus Floating Menu & tab routing)
-     * `js/app.js` (State management, Kedmanee typing, flashcards, dan initializers)
-   - Semua skrip dimuat dengan atribut `defer` untuk parsing DOM instan tanpa render-blocking.
-
-2. **Data-Store & Asynchronous Lazy Loading**
-   - Data statis besar dipisahkan ke `data/alphabet.json`, `data/curriculum.json`, dan `data/dictionary.json`.
-   - Dimuat secara asinkron dengan skeleton loader animasi saat panel pertama kali diakses.
-
-3. **PWA Full Offline Capability (`service-worker.js`)**
-   - **Cache-First**: Digunakan untuk Google Fonts (*Kanit, Fraunces, JetBrains Mono, Sarabun*) dan pustaka audio penutur asli (*native audio*).
-   - **Stale-While-Revalidate**: Digunakan untuk HTML, CSS, modul JS, dan file data JSON lokal.
-
-4. **Digital Certificate Engine (`#thaiCertificateCanvas`)**
-   - Render kanvas sertifikat 1600x1130px diintegrasikan dengan `document.fonts.ready` agar seluruh custom web font termuat sempurna sebelum gambar dicetak/diunduh, mencegah teks nama pembelajar terdegradasi ke font sistem bawaan.
-
-5. **Interaksi Mobile Senyap (Silent Touch)**
-   - Bunyi sentuhan/klik sintetis dinonaktifkan demi kenyamanan belajar mandiri yang tenang, sementara audio pelafalan asli bahasa Thai tetap bersuara jernih saat tombol penutur ditekan.
+Aplikasi ini dirancang mengikuti panduan antarmuka humanis (*Anti-AI Slop Standards*):
+* **🏮 Suasana Hutan Berbintang (Mode Gelap)**: Nuansa malam hutan cedar (*Totoro Midnight Cedar* `#0d1410`), batu lumut (`#18261f`), pendar daun zamrud (`#52b788`), dan cahaya kuning kunang-kunang (`#f59e0b`).
+* **🍃 Suasana Padang Rumput (Mode Terang)**: Nuansa kertas perkamen cat air hangat (*Miyazaki Meadow* `#f6f3eb`), hijau kamper tua (`#2d6a4f`), dan amber lentera tradisional (`#d97706`).
+* **Tipografi Buku Cerita**: Judul utama menggunakan font serif klasik **Fraunces**, dipadukan dengan **Noto Sans Thai**, **Plus Jakarta Sans**, dan **JetBrains Mono** untuk data teknis.
+* **Animasi Kunang-kunang**: Partikel pendar kunang-kunang halus (*ambient fireflies*) yang melayang di latar belakang menggunakan canvas HTML5.
 
 ---
 
-## 🚀 Menjalankan Secara Lokal
+## 🚀 Cara Menjalankan Aplikasi Secara Lokal
 
-### Menggunakan Python Server:
-```bash
-python server.py
+### Prasyarat
+* Browser modern berbasis Chromium (Google Chrome, Brave, atau Microsoft Edge).
+* Python 3 (opsional, untuk server lokal).
+
+### Opsi A: Jalankan Melalui VS Code / Antigravity IDE (Rekomendasi)
+Proyek ini sudah dilengkapi konfigurasi otomatis di direktori `.vscode/`:
+1. Buka folder proyek di editor.
+2. Tekan tombol **F5** pada keyboard (atau buka menu **Run & Debug** ▶ pilih **Launch Stimuler Thai (Local Server)**).
+3. Web server lokal otomatis berjalan di port `3000` dan browser langsung terbuka.
+
+### Opsi B: Jalankan Melalui Python Neural TTS Server (Rekomendasi untuk Suara Pria & Wanita Terbaik)
+1. Buka terminal di direktori proyek:
+   ```bash
+   cd /path/to/learnthai
+   ```
+2. Jalankan server neural bawaan:
+   ```bash
+   python3 server.py
+   ```
+   *Server ini melayani file statis sekaligus endpoint `/api/tts` berbasis suara neural asli (Niwat untuk Pria & Premwadee untuk Wanita).*
+3. Buka browser dan akses:
+   [http://localhost:3000](http://localhost:3000)
+
+### Opsi C: Buka File Langsung / GitHub Pages
+Anda juga dapat langsung membuka file [index.html](index.html) atau [fairy_thai_academy.html](fairy_thai_academy.html) menggunakan browser Anda (`double-click` atau `Open with Chrome`) atau mengaksesnya via hosting statis GitHub Pages. Aplikasi otomatis memanfaatkan pustaka audio pre-rendered di folder `audio/` serta engine sintesis adaptif.
+
+---
+
+## 📁 Struktur Direktori
+
+```text
+learnthai/
+├── .vscode/
+│   ├── launch.json          # Konfigurasi Run & Debug Chrome ke port 3000
+│   └── tasks.json           # Background task otomatis untuk Python server
+├── audio/                   # Pustaka audio pre-rendered suara asli penutur Bangkok
+│   ├── male/                # Suara asli penutur pria (th-TH-NiwatNeural)
+│   └── female/              # Suara asli penutur wanita (th-TH-PremwadeeNeural)
+├── server.py                # Server HTTP Python dengan real-time Neural TTS engine
+├── generate_voices.py       # Generator pustaka audio otomatis untuk frasa Thailand
+├── fairy_thai_academy.html  # Kode aplikasi utama (HTML, CSS Ghibli, dan JavaScript)
+├── index.html               # Symlink entry-point ke fairy_thai_academy.html
+└── README.md                # Dokumentasi proyek
 ```
-Akses di browser: `http://localhost:3001` (atau port yang tertera).
 
-### Menggunakan Node / Static Server:
-```bash
-npx serve .
-# atau
-python -m http.server 8000
-```
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+* **Frontend**: HTML5 Semantik, Vanilla CSS3 (CSS Variables, Flexbox, CSS Grid).
+* **Audio Synthesis & Audio FX**: Web Audio API (`AudioContext`, `OscillatorNode`, `GainNode`).
+* **Speech Engine**: Web Speech API (`SpeechRecognition`, `SpeechSynthesis`), Google Neural Thai Audio Endpoint.
+* **Canvas Rendering**: HTML5 2D Canvas Context (Real-time Audio Waveform & Ambient Firefly Particles).
+* **Storage**: Browser LocalStorage API (State & Gamification persistence).
+* **Typography**: Google Fonts (*Fraunces, Plus Jakarta Sans, Noto Sans Thai, JetBrains Mono*).
 
 ---
 
 ## 📄 Lisensi
-Dirilis di bawah [MIT License](LICENSE).
+Proyek ini dilisensikan di bawah lisensi **MIT License**. Silakan gunakan, kembangkan, dan bagikan untuk tujuan pembelajaran.
+
+*Selamat belajar! ขอให้โชคดีกับการเรียนภาษาไทยนะคะ ✨ (Semoga sukses belajar bahasa Thailand!)*
