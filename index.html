@@ -7469,6 +7469,471 @@
       color: var(--primary);
       flex-shrink: 0;
     }
+
+    /* ==========================================================================
+       FITUR ESENSIAL PEMULA TOTAL (ZERO-KNOWLEDGE LEARNER)
+       ========================================================================== */
+
+    /* --- Feature 4: Romanization Mode Switcher in Header --- */
+    .mali-roman-toggle-wrap {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 6px;
+    }
+    .mali-roman-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+      min-height: 38px;
+    }
+    .mali-roman-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+    .mali-roman-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* --- Feature 1: Modul 0 - Loop & Lookalike Anatomy Guide --- */
+    .modul0-wrap {
+      background: linear-gradient(135deg, #ffffff 0%, #fbf9f4 100%);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(45, 106, 79, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .modul0-wrap::before {
+      content: "🌱";
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      font-size: 100px;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    .modul0-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.12);
+      padding-bottom: 16px;
+    }
+    .modul0-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.04em;
+    }
+    .modul0-principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .modul0-principle-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: all 0.2s ease;
+    }
+    .modul0-principle-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(45, 106, 79, 0.08);
+    }
+    .modul0-p-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+    }
+    .twin-pairs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+    }
+    .twin-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .twin-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 6px 18px rgba(45, 106, 79, 0.1);
+    }
+    .twin-card-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 8px;
+    }
+    .twin-letters-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .twin-letter-box {
+      flex: 1;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .twin-letter-box:hover, .twin-letter-box.active {
+      background: #f0fdf4;
+      border-color: var(--primary);
+      transform: scale(1.02);
+    }
+    .twin-glyph {
+      font-size: 44px;
+      font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 4px;
+      position: relative;
+      display: inline-block;
+    }
+    .twin-glyph-pulse {
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(220, 38, 38, 0.3);
+      border: 2px solid #dc2626;
+      animation: loopPulse 1.5s infinite;
+      display: none;
+      pointer-events: none;
+    }
+    .twin-letter-box.active .twin-glyph-pulse {
+      display: block;
+    }
+    @keyframes loopPulse {
+      0% { transform: translateX(-50%) scale(0.9); opacity: 0.9; }
+      50% { transform: translateX(-50%) scale(1.4); opacity: 0.3; }
+      100% { transform: translateX(-50%) scale(0.9); opacity: 0.9; }
+    }
+    .twin-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .twin-mean {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .twin-loop-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+      background: #e2e8f0;
+      color: #334155;
+    }
+    .twin-letter-box:hover .twin-loop-tag,
+    .twin-letter-box.active .twin-loop-tag {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .twin-mnemonic-box {
+      background: rgba(45, 106, 79, 0.05);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    /* --- Feature 2: Kalkulator Penentu 5 Nada Otomatis --- */
+    .tone-calc-wrap {
+      background: linear-gradient(135deg, #ffffff 0%, #f6f8f5 100%);
+      border: 2px solid rgba(45, 106, 79, 0.2);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      margin: 28px 0;
+      box-shadow: 0 6px 24px rgba(45, 106, 79, 0.08);
+    }
+    .tone-calc-header {
+      margin-bottom: 20px;
+    }
+    .tone-calc-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .tone-calc-grid { grid-template-columns: 1fr; }
+    }
+    .tone-step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+    .tone-step-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tone-pill-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tone-pill-opt {
+      padding: 8px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .tone-pill-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .tone-pill-opt.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);
+    }
+    .tone-output-card {
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      text-align: center;
+      position: sticky;
+      top: 90px;
+      box-shadow: 0 8px 26px rgba(45, 106, 79, 0.12);
+    }
+    .tone-output-badge {
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .tone-output-badge.mid     { background: #dcfce7; color: #166534; }
+    .tone-output-badge.low     { background: #e0f2fe; color: #075985; }
+    .tone-output-badge.falling { background: #ffedd5; color: #9a3412; }
+    .tone-output-badge.high    { background: #fee2e2; color: #991b1b; }
+    .tone-output-badge.rising  { background: #f3e8ff; color: #6b21a8; }
+    .tone-output-badge.invalid { background: #f1f5f9; color: #475569; }
+
+    .pitch-graph-box {
+      width: 100%;
+      height: 110px;
+      background: #faf9f6;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin: 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .tone-audio-test-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border: none;
+      border-radius: var(--radius-pill);
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+      min-height: 44px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 10px rgba(45, 106, 79, 0.28);
+    }
+    .tone-audio-test-btn:hover {
+      background: #1e4d36;
+      transform: translateY(-1px);
+    }
+    .tone-rule-explainer {
+      background: rgba(45, 106, 79, 0.06);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    /* --- Feature 3: Visualisasi Pemisah Kata (Spacing Assistant) --- */
+    .spacing-assist-wrap {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      margin: 28px 0;
+      box-shadow: 0 4px 18px rgba(45, 106, 79, 0.06);
+    }
+    .spacing-assist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .thai-word-capsule-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+      align-items: center;
+    }
+    .thai-word-chip {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: var(--radius-lg);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      touch-action: manipulation;
+      user-select: none;
+      position: relative;
+    }
+    .thai-word-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .thai-word-chip.color-1 { background: #ecfdf5; border-color: #a7f3d0; color: #065f46; }
+    .thai-word-chip.color-2 { background: #f0f9ff; border-color: #bae6fd; color: #075985; }
+    .thai-word-chip.color-3 { background: #fefce8; border-color: #fef08a; color: #854d0e; }
+    .thai-word-chip.color-4 { background: #fdf2f8; border-color: #fbcfe8; color: #9d174d; }
+    .thai-word-chip.color-5 { background: #f5f3ff; border-color: #ddd6fe; color: #5b21b6; }
+
+    .chip-thai {
+      font-size: 26px;
+      font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .chip-roman {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      opacity: 0.85;
+      letter-spacing: 0.02em;
+    }
+    .chip-mean {
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .spacing-presets-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 0 12px 0;
+      margin-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .spacing-preset-btn {
+      white-space: nowrap;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .spacing-preset-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .spacing-preset-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
 </style>
   <script src="thai_dictionary_data.js"></script>
 </head>
@@ -7640,6 +8105,14 @@
 
 
       <div class="header-actions">
+
+        <!-- Mode Romanisasi Switcher (RTGS vs Lidah Indonesia) -->
+        <div class="mali-roman-toggle-wrap" id="headerRomanToggleWrap" title="Klik untuk ganti: Standar Internasional (RTGS) vs Panduan Lidah Indonesia">
+          <button type="button" class="mali-roman-btn" id="headerRomanBtn" onclick="toggleRomanMode()">
+            <span class="mali-roman-badge" id="headerRomanBadge">🇮🇩 LIDAH INDO</span>
+          </button>
+        </div>
+
         <!-- User Profile Pill -->
         <div class="user-profile-badge" id="headerUserProfileBadge" onclick="openLearningPortal()"
           title="Profil Akun Pembelajar (Klik untuk ganti akun)">
@@ -8571,6 +9044,76 @@
               <span class="stat-chip" style="color:var(--amber);">🎵 4 Nada</span>
             </div>
           </div>
+
+          
+          <!-- ==========================================================================
+               FITUR 1: MODUL 0 • ANATOMI & LOGIKA AKSARA THAI (LOOP & LOOKALIKE GUIDE)
+               ========================================================================== -->
+          <div class="modul0-wrap" id="modul0LoopGuide">
+            <div class="modul0-header">
+              <div>
+                <span class="modul0-tag">🌱 MODUL 0 • PANDUAN PEMULA TOTAL (ZERO-KNOWLEDGE)</span>
+                <h3 style="font-size:22px; font-weight:800; margin:8px 0 4px; color:var(--text);">
+                  Anatomi &amp; Rahasia Kepala Lingkaran Aksara (Loop Guide)
+                </h3>
+                <p style="font-size:13.5px; color:var(--text-muted); margin:0; max-width:760px;">
+                  Huruf Thai tampak rumit karena mirip satu sama lain. Kunci membacanya dengan mudah adalah memahami
+                  <strong>arah lingkaran kepala (loop/head)</strong> dan lekukan garisnya.
+                </p>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button type="button" class="pill-filter" onclick="speakThai('กอ ไก่, ขอ ไข่, คอ ควาย')" title="Dengar Pengucapan">
+                  🔊 Dengarkan Audio
+                </button>
+              </div>
+            </div>
+
+            <!-- PRINSIP EMAS PENULISAN -->
+            <div class="modul0-principles-grid">
+              <div class="modul0-principle-card">
+                <div class="modul0-p-icon">⭕</div>
+                <div>
+                  <div style="font-weight:800; font-size:14px; color:var(--primary); margin-bottom:4px;">1. Mulai Dari Kepala</div>
+                  <div style="font-size:12.5px; color:var(--text-muted); line-height:1.45;">
+                    Huruf Thai <strong>selalu ditulis mulai dari lingkaran kecilnya</strong> tanpa mengangkat pena sampai selesai.
+                  </div>
+                </div>
+              </div>
+
+              <div class="modul0-principle-card">
+                <div class="modul0-p-icon">🧭</div>
+                <div>
+                  <div style="font-weight:800; font-size:14px; color:var(--primary); margin-bottom:4px;">2. Arah Lingkaran</div>
+                  <div style="font-size:12.5px; color:var(--text-muted); line-height:1.45;">
+                    Lingkaran <strong>menghadap ke dalam</strong> (seperti ด / ถ) vs <strong>menghadap ke luar</strong> (seperti ภ / พ) adalah huruf yang berbeda.
+                  </div>
+                </div>
+              </div>
+
+              <div class="modul0-principle-card">
+                <div class="modul0-p-icon">⭐</div>
+                <div>
+                  <div style="font-weight:800; font-size:14px; color:var(--primary); margin-bottom:4px;">3. Huruf Tanpa Kepala</div>
+                  <div style="font-size:12.5px; color:var(--text-muted); line-height:1.45;">
+                    Hanya ada <strong>2 huruf dari 44 konsonan</strong> yang tidak punya kepala: <strong>ก (Ko Kai)</strong> dan <strong>ธ (Tho Thong)</strong>!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PASANGAN HURUF KEMBAR -->
+            <div style="margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size:16px; font-weight:800; margin:0; color:var(--text);">
+                Pasangan Huruf Kembar yang Sering Tertukar (Klik untuk Sorot &amp; Dengar)
+              </h4>
+              <span style="font-size:12px; color:var(--text-muted);">Sentuh huruf untuk melihat lingkaran kepala</span>
+            </div>
+
+            <div class="twin-pairs-grid" id="twinPairsContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
 
           <!-- BENTO PEDAGOGICAL GUIDE: 3 CONSONANT CLASSES -->
           <div class="class-guide-grid">
@@ -9537,6 +10080,123 @@
               mengubah makna kata sepenuhnya.</p>
           </div>
 
+          
+          <!-- ==========================================================================
+               FITUR 2: KALKULATOR PENENTU 5 NADA OTOMATIS (INTERACTIVE TONE RULE VISUALIZER)
+               ========================================================================== -->
+          <div class="tone-calc-wrap" id="toneCalculatorSection">
+            <div class="tone-calc-header">
+              <span class="modul0-tag" style="background:#e0f2fe; color:#0369a1;">⚡ INTERACTIVE TOOL</span>
+              <h3 style="font-size:22px; font-weight:800; margin:8px 0 4px; color:var(--text);">
+                Kalkulator Penentu 5 Nada Otomatis (Tone Visualizer)
+              </h3>
+              <p style="font-size:13.5px; color:var(--text-muted); margin:0;">
+                Aturan nada bahasa Thai menggabungkan <strong>Kelas Konsonan</strong>, <strong>Jenis Suku Kata</strong>, dan <strong>Tanda Nada</strong>. Pilih 3 variabel di bawah untuk melihat hasil nada dan rumus penentunya secara instan.
+              </p>
+            </div>
+
+            <div class="tone-calc-grid">
+              <!-- Selectors Column -->
+              <div>
+                <!-- Langkah 1: Konsonan Awal -->
+                <div class="tone-step-card">
+                  <div class="tone-step-title">
+                    <span>1️⃣ Kelas Konsonan Awal</span>
+                  </div>
+                  <div class="tone-pill-options" id="toneClassSelector">
+                    <button type="button" class="tone-pill-opt active" data-class="mid" onclick="setToneCalcParam('cClass', 'mid', this)">
+                      Tengah (ก, จ, ด, ต, บ, ป, อ)
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-class="high" onclick="setToneCalcParam('cClass', 'high', this)">
+                      Tinggi (ข, ฉ, ถ, ผ, ฝ, ส, ห)
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-class="low" onclick="setToneCalcParam('cClass', 'low', this)">
+                      Rendah (ค, ง, ช, ท, น, พ, ม...)
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Langkah 2: Jenis Suku Kata & Vokal -->
+                <div class="tone-step-card">
+                  <div class="tone-step-title">
+                    <span>2️⃣ Jenis Suku Kata &amp; Vokal</span>
+                  </div>
+                  <div class="tone-pill-options" id="toneSyllableSelector">
+                    <button type="button" class="tone-pill-opt active" data-syl="live" onclick="setToneCalcParam('sylType', 'live', this)">
+                      🍃 Suku Kata Hidup (คำเป็น: Vokal Panjang / -m, -n, -ng, -w, -y)
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-syl="dead_short" onclick="setToneCalcParam('sylType', 'dead_short', this)">
+                      🛑 Suku Kata Mati (คำตาย): Vokal Pendek / -k, -t, -p
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-syl="dead_long" onclick="setToneCalcParam('sylType', 'dead_long', this)">
+                      🛑 Suku Kata Mati (คำตาย): Vokal Panjang / -k, -t, -p
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Langkah 3: Tanda Nada (Wannayuk) -->
+                <div class="tone-step-card">
+                  <div class="tone-step-title">
+                    <span>3️⃣ Tanda Nada (Jika Ada)</span>
+                  </div>
+                  <div class="tone-pill-options" id="toneMarkSelector">
+                    <button type="button" class="tone-pill-opt active" data-mark="none" onclick="setToneCalcParam('toneMark', 'none', this)">
+                      (Tanpa Tanda)
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-mark="mai_ek" onclick="setToneCalcParam('toneMark', 'mai_ek', this)">
+                      ่ Mai Ek
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-mark="mai_tho" onclick="setToneCalcParam('toneMark', 'mai_tho', this)">
+                      ้ Mai Tho
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-mark="mai_tri" onclick="setToneCalcParam('toneMark', 'mai_tri', this)">
+                      ๊ Mai Tri
+                    </button>
+                    <button type="button" class="tone-pill-opt" data-mark="mai_chattawa" onclick="setToneCalcParam('toneMark', 'mai_chattawa', this)">
+                      ๋ Mai Chattawa
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Output Box Column -->
+              <div class="tone-output-card" id="toneOutputCard">
+                <div style="font-size:12px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px;">
+                  Hasil Perhitungan Nada:
+                </div>
+                <div class="tone-output-badge mid" id="toneResultBadge">
+                  NADA DATAR (MID TONE ⎯)
+                </div>
+
+                <!-- Kontur Pitch SVG Interaktif -->
+                <div class="pitch-graph-box" id="pitchGraphBox">
+                  <svg id="pitchGraphSvg" width="220" height="90" viewBox="0 0 220 90" style="overflow:visible;">
+                    <!-- Base guidelines -->
+                    <line x1="20" y1="15" x2="200" y2="15" stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1.5" />
+                    <line x1="20" y1="45" x2="200" y2="45" stroke="#cbd5e1" stroke-dasharray="3,3" stroke-width="1.5" />
+                    <line x1="20" y1="75" x2="200" y2="75" stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1.5" />
+                    <text x="5" y="18" font-size="9" fill="#94a3b8" font-family="monospace">5</text>
+                    <text x="5" y="48" font-size="9" fill="#94a3b8" font-family="monospace">3</text>
+                    <text x="5" y="78" font-size="9" fill="#94a3b8" font-family="monospace">1</text>
+                    <!-- Active Wave Curve -->
+                    <path id="pitchCurvePath" d="M 30 45 L 190 45" fill="none" stroke="#2d6a4f" stroke-width="4.5" stroke-linecap="round" />
+                  </svg>
+                </div>
+
+                <!-- Tombol Audio Penutur Asli -->
+                <button type="button" class="tone-audio-test-btn" id="toneAudioBtn" onclick="playToneCalcAudio()">
+                  🔊 Dengarkan Contoh: <span id="toneAudioExampleText" style="font-family:'Sarabun',sans-serif; font-size:16px;">กา (kaa)</span>
+                </button>
+
+                <!-- Kotak Penjelasan Rumus -->
+                <div class="tone-rule-explainer" id="toneRuleText">
+                  <strong>Rumus:</strong> Konsonan Tengah + Suku Kata Hidup (Tanpa Tanda) = <strong>Nada Datar (Mid Tone ⎯)</strong>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <!-- 5 TONES GRID -->
           <div class="tones-grid" id="tonesContainer">
             <!-- Rendered dynamically -->
@@ -9563,6 +10223,58 @@
               <span>→</span>
             </button>
           </div>
+
+          
+          <!-- ==========================================================================
+               FITUR 3: VISUALISASI PEMISAH KATA (THAI SENTENCE SPACING ASSISTANT)
+               ========================================================================== -->
+          <div class="spacing-assist-wrap" id="spacingAssistSection">
+            <div class="spacing-assist-header">
+              <div>
+                <span class="modul0-tag" style="background:#fef3c7; color:#92400e;">🧩 SPACING ASSISTANT</span>
+                <h3 style="font-size:20px; font-weight:800; margin:6px 0 2px; color:var(--text);">
+                  Visualisasi Pemecah Kata Kalimat Thai (Spacing Assist)
+                </h3>
+                <p style="font-size:13px; color:var(--text-muted); margin:0;">
+                  Bahasa Thai ditulis menyambung tanpa spasi antar kata. Klik tombol di bawah untuk membedah kalimat menjadi kapsul kata berwarna beserta arti per kata!
+                </p>
+              </div>
+            </div>
+
+            <!-- Presets Buttons -->
+            <div class="spacing-presets-row" id="spacingPresetsRow">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Sentence Display Area -->
+            <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:var(--radius-lg); padding:20px; text-align:center;">
+              <div style="font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">
+                Kalimat Asli (Tanpa Spasi):
+              </div>
+              <div id="spacingRawSentence" style="font-size:28px; font-family:'Sarabun',sans-serif; font-weight:700; color:var(--text); margin-bottom:16px; letter-spacing:0.5px;">
+                กินข้าวแล้วหรือยัง
+              </div>
+
+              <div style="display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;">
+                <button type="button" class="pill-filter" id="spacingPlayAudioBtn" onclick="playSpacingCurrentAudio()" style="background:var(--primary); color:#ffffff; border-color:var(--primary);">
+                  🔊 Dengar Seluruh Kalimat
+                </button>
+              </div>
+
+              <div style="font-size:12px; font-weight:800; color:var(--primary); margin-bottom:10px; text-transform:uppercase;">
+                Hasil Pemecahan Blok Kata (Klik kata untuk mendengar &amp; pelajari artinya):
+              </div>
+              <div class="thai-word-capsule-row" id="spacingCapsulesContainer" style="justify-content:center;">
+                <!-- Word Capsules rendered via JS -->
+              </div>
+
+              <!-- Full Sentence Translation -->
+              <div style="margin-top:16px; padding-top:14px; border-top:1px dashed var(--border); font-size:15px; font-weight:600; color:var(--text);">
+                Arti Kalimat: <span id="spacingFullMeaning" style="color:var(--primary); font-weight:700;">"Sudah makan belum?"</span>
+              </div>
+            </div>
+          </div>
+
 
           <!-- NATIVE AUDIO PHRASEBOOK (BUKU FRASA PENUTUR ASLI) -->
           <div class="phrasebook-section" style="margin-top:24px;">
@@ -24578,6 +25290,560 @@ window.addEventListener('DOMContentLoaded', () => {
     switchMainTab(initPillar, `panel-${lastTab}`);
   }, 100);
 });
+
+  // Inisialisasi Fitur Pemula Total
+  initBeginnerFeatures();
+
+
+
+    /* ==========================================================================
+       LOGIKA FITUR ESENSIAL PEMULA TOTAL (ZERO-KNOWLEDGE LEARNER)
+       ========================================================================== */
+
+    // 1. DATA PASANGAN HURUF KEMBAR (MODUL 0)
+    const THAI_TWIN_PAIRS = [
+      {
+        id: 'do-to',
+        title: 'ด (Do Dek) vs ต (To Tao)',
+        note: 'Sama-sama kepala masuk ke dalam. Pembedanya: ต memiliki puncak bergelombang/retak.',
+        letters: [
+          {
+            char: 'ด',
+            name: 'Do Dek',
+            mean: 'Dek (Anak kecil)',
+            loop: 'Kepala bulat mulus',
+            mnemonic: 'Anak penurut berkepala bulat mulus.',
+            speak: 'ดอ เด็ก'
+          },
+          {
+            char: 'ต',
+            name: 'To Tao',
+            mean: 'Tao (Kura-kura)',
+            loop: 'Kepala retak / berlekuk',
+            mnemonic: 'Kura-kura bertempurung retak/bergelombang di atas.',
+            speak: 'ตอ เต่า'
+          }
+        ]
+      },
+      {
+        id: 'kho-cho-so',
+        title: 'ข (Kho Khai) vs ช (Cho Chang) vs ซ (So So)',
+        note: 'Bentuk dasar mirip telur (ข). ช punya ekor mencuat ke atas, ซ berkepala takik bergelombang.',
+        letters: [
+          {
+            char: 'ข',
+            name: 'Kho Khai',
+            mean: 'Khai (Telur)',
+            loop: 'Kepala bulat biasa',
+            mnemonic: 'Telur ayam bulat tanpa ekor mencuat.',
+            speak: 'ขอ ไข่'
+          },
+          {
+            char: 'ช',
+            name: 'Cho Chang',
+            mean: 'Chang (Gajah)',
+            loop: 'Kepala bulat + ekor',
+            mnemonic: 'Gajah berbelalai / berekor panjang ke atas.',
+            speak: 'ชอ ช้าง'
+          },
+          {
+            char: 'ซ',
+            name: 'So So',
+            mean: 'So (Rantai)',
+            loop: 'Kepala retak + ekor',
+            mnemonic: 'Rantai besi yang kepalanya berlekuk dan berekor.',
+            speak: 'ซอ โซ่'
+          }
+        ]
+      },
+      {
+        id: 'no-mo',
+        title: 'น (No Nu) vs ม (Mo Ma)',
+        note: 'Keduanya punya dua lingkaran. Pembedanya: posisi lingkaran kedua berada di DEPAN atau BELAKANG.',
+        letters: [
+          {
+            char: 'น',
+            name: 'No Nu',
+            mean: 'Nu (Tikus)',
+            loop: 'Lingkaran di BELAKANG',
+            mnemonic: 'Tikus berlari kencang, ekor melingkar di belakang.',
+            speak: 'นอ หนู'
+          },
+          {
+            char: 'ม',
+            name: 'Mo Ma',
+            mean: 'Ma (Kuda)',
+            loop: 'Lingkaran di DEPAN',
+            mnemonic: 'Kuda gagah, dada melingkar membusung di depan.',
+            speak: 'มอ ม้า'
+          }
+        ]
+      },
+      {
+        id: 'pho-tho-ko',
+        title: 'ภ (Pho Samphao) vs ถ (Tho Thung) vs ก (Ko Kai)',
+        note: 'ภ kepala ke LUAR, ถ kepala ke DALAM, sedangkan ก TANPA KEPALA sama sekali.',
+        letters: [
+          {
+            char: 'ภ',
+            name: 'Pho Samphao',
+            mean: 'Samphao (Kapal Layar)',
+            loop: 'Kepala keluar (Kiri)',
+            mnemonic: 'Layar kapal mengembang keluar tertiup angin laut.',
+            speak: 'ภอ สำเภา'
+          },
+          {
+            char: 'ถ',
+            name: 'Tho Thung',
+            mean: 'Thung (Kantong / Tas)',
+            loop: 'Kepala masuk (Kanan)',
+            mnemonic: 'Kantong belanja tertutup rapi menghadap ke dalam.',
+            speak: 'ถอ ถุง'
+          },
+          {
+            char: 'ก',
+            name: 'Ko Kai',
+            mean: 'Kai (Ayam)',
+            loop: 'TANPA KEPALA',
+            mnemonic: 'Hanya ada paruh ayam tegak tanpa lingkaran kepala.',
+            speak: 'กอ ไก่'
+          }
+        ]
+      },
+      {
+        id: 'bo-po',
+        title: 'บ (Bo Baimai) vs ป (Po Pla)',
+        note: 'Bentuk kotak U sama. Pembedanya: tiang kanan ป menjulang tinggi melampaui garis atas.',
+        letters: [
+          {
+            char: 'บ',
+            name: 'Bo Baimai',
+            mean: 'Baimai (Daun)',
+            loop: 'Tiang kanan rata',
+            mnemonic: 'Daun lebar dengan tiang samping rata.',
+            speak: 'บอ ใบไม้'
+          },
+          {
+            char: 'ป',
+            name: 'Po Pla',
+            mean: 'Pla (Ikan)',
+            loop: 'Tiang kanan tinggi',
+            mnemonic: 'Ekor ikan melompat tinggi melampaui air.',
+            speak: 'ปอ ปลา'
+          }
+        ]
+      },
+      {
+        id: 'phueng-fa-phan-fan',
+        title: 'ผ (Phueng) vs ฝ (Fa) vs พ (Phan) vs ฟ (Fan)',
+        note: 'ผ & ฝ kepala ke DALAM. พ & ฟ kepala ke LUAR. Huruf kedua selalu berekor panjang menjulang.',
+        letters: [
+          {
+            char: 'ผ',
+            name: 'Pho Phueng',
+            mean: 'Phueng (Lebah)',
+            loop: 'Kepala DALAM, ekor pendek',
+            mnemonic: 'Sengat lebah tersimpan ke dalam.',
+            speak: 'ผอ ผึ้ง'
+          },
+          {
+            char: 'ฝ',
+            name: 'Fo Fa',
+            mean: 'Fa (Tutup Panci)',
+            loop: 'Kepala DALAM, ekor tinggi',
+            mnemonic: 'Gagang tutup panci menjulang tinggi.',
+            speak: 'ฝอ ฝา'
+          },
+          {
+            char: 'พ',
+            name: 'Pho Phan',
+            mean: 'Phan (Nampan Sesaji)',
+            loop: 'Kepala LUAR, ekor pendek',
+            mnemonic: 'Nampan sesaji terbuka ke luar.',
+            speak: 'พอ พาน'
+          },
+          {
+            char: 'ฟ',
+            name: 'Fo Fan',
+            mean: 'Fan (Gigi Taring)',
+            loop: 'Kepala LUAR, ekor tinggi',
+            mnemonic: 'Gigi taring mencuat tinggi ke atas.',
+            speak: 'ฟอ ฟัน'
+          }
+        ]
+      }
+    ];
+
+    function renderTwinPairs() {
+      const container = document.getElementById('twinPairsContainer');
+      if (!container) return;
+
+      container.innerHTML = THAI_TWIN_PAIRS.map(pair => `
+        <div class="twin-card">
+          <div class="twin-card-title">
+            <span>${pair.title}</span>
+            <span style="font-size:11px; opacity:0.75;">Klik huruf</span>
+          </div>
+          <div class="twin-letters-row">
+            ${pair.letters.map((letObj, idx) => `
+              <div class="twin-letter-box ${idx === 0 ? 'active' : ''}" 
+                   onclick="selectTwinLetter(this, '${letObj.char}', '${letObj.speak}', '${escapeHtml(letObj.mnemonic)}')">
+                <div class="twin-glyph">
+                  ${letObj.char}
+                  <div class="twin-glyph-pulse"></div>
+                </div>
+                <div class="twin-name">${letObj.name}</div>
+                <div class="twin-mean">${letObj.mean}</div>
+                <div class="twin-loop-tag">${letObj.loop}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="twin-mnemonic-box">
+            💡 <strong>Kunci Ingat:</strong> <span class="twin-active-mnemonic">${pair.letters[0].mnemonic}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectTwinLetter(el, char, speakText, mnemonic) {
+      const card = el.closest('.twin-card');
+      if (card) {
+        card.querySelectorAll('.twin-letter-box').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        const mnemEl = card.querySelector('.twin-active-mnemonic');
+        if (mnemEl) mnemEl.textContent = mnemonic;
+      }
+      speakThai(speakText);
+    }
+
+    // 2. LOGIKA KALKULATOR PENENTU 5 NADA OTOMATIS
+    const toneCalcState = {
+      cClass: 'mid',
+      sylType: 'live',
+      toneMark: 'none'
+    };
+
+    const TONE_AUDIO_EXAMPLES = {
+      mid: { thai: 'กา', roman: 'kaa', speak: 'กา' },
+      low: { thai: 'ก่า', roman: 'kàa', speak: 'ก่า' },
+      falling: { thai: 'ก้า', roman: 'kâa', speak: 'ก้า' },
+      high: { thai: 'ก๊า', roman: 'káa', speak: 'ก๊า' },
+      rising: { thai: 'ก๋า', roman: 'kǎa', speak: 'ก๋า' },
+      invalid: { thai: '—', roman: '—', speak: 'กา' }
+    };
+
+    function setToneCalcParam(param, val, btnEl) {
+      toneCalcState[param] = val;
+      const parent = btnEl.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.tone-pill-opt').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+      }
+      calculateAndRenderTone();
+    }
+
+    function calculateAndRenderTone() {
+      const { cClass, sylType, toneMark } = toneCalcState;
+      let toneKey = 'mid';
+      let toneLabel = 'NADA DATAR (MID TONE ⎯)';
+      let ruleText = '';
+      let curvePath = 'M 30 45 L 190 45'; // flat mid
+      let strokeColor = '#2d6a4f';
+
+      // 1. With Tone Mark
+      if (toneMark !== 'none') {
+        if (cClass === 'mid') {
+          if (toneMark === 'mai_ek') {
+            toneKey = 'low'; toneLabel = 'NADA RENDAH (LOW TONE ˍ)';
+            ruleText = 'Konsonan Tengah + Tanda Mai Ek (่) = NADA RENDAH (Low Tone). Nada datar turun ke dasar.';
+            curvePath = 'M 30 75 L 190 75'; strokeColor = '#0284c7';
+          } else if (toneMark === 'mai_tho') {
+            toneKey = 'falling'; toneLabel = 'NADA JATUH (FALLING TONE ⌃)';
+            ruleText = 'Konsonan Tengah + Tanda Mai Tho (้) = NADA JATUH (Falling Tone). Suara tinggi lalu menukik tajam.';
+            curvePath = 'M 30 20 Q 90 15 190 80'; strokeColor = '#d97706';
+          } else if (toneMark === 'mai_tri') {
+            toneKey = 'high'; toneLabel = 'NADA TINGGI (HIGH TONE ˆ)';
+            ruleText = 'Konsonan Tengah + Tanda Mai Tri (๊) = NADA TINGGI (High Tone). Suara stabil tinggi di atas.';
+            curvePath = 'M 30 20 L 190 20'; strokeColor = '#dc2626';
+          } else if (toneMark === 'mai_chattawa') {
+            toneKey = 'rising'; toneLabel = 'NADA NAIK (RISING TONE ˏ)';
+            ruleText = 'Konsonan Tengah + Tanda Mai Chattawa (๋) = NADA NAIK (Rising Tone). Suara dari bawah melengkung naik tinggi.';
+            curvePath = 'M 30 75 Q 110 80 190 20'; strokeColor = '#7c3aed';
+          }
+        } else if (cClass === 'high') {
+          if (toneMark === 'mai_ek') {
+            toneKey = 'low'; toneLabel = 'NADA RENDAH (LOW TONE ˍ)';
+            ruleText = 'Konsonan Tinggi + Tanda Mai Ek (่) = NADA RENDAH (Low Tone).';
+            curvePath = 'M 30 75 L 190 75'; strokeColor = '#0284c7';
+          } else if (toneMark === 'mai_tho') {
+            toneKey = 'falling'; toneLabel = 'NADA JATUH (FALLING TONE ⌃)';
+            ruleText = 'Konsonan Tinggi + Tanda Mai Tho (้) = NADA JATUH (Falling Tone).';
+            curvePath = 'M 30 20 Q 90 15 190 80'; strokeColor = '#d97706';
+          } else {
+            toneKey = 'invalid'; toneLabel = 'KOMBINASI TIDAK LAZIM';
+            ruleText = 'Konsonan Tinggi secara alami tidak menggunakan tanda Mai Tri (๊) atau Chattawa (๋).';
+            curvePath = 'M 30 45 L 190 45'; strokeColor = '#64748b';
+          }
+        } else if (cClass === 'low') {
+          if (toneMark === 'mai_ek') {
+            toneKey = 'falling'; toneLabel = 'NADA JATUH (FALLING TONE ⌃)';
+            ruleText = '⭐ <strong>Aturan Khusus Konsonan Rendah:</strong> Diberi tanda Mai Ek (่) hasilnya bergeser naik 1 tingkat menjadi <strong>NADA JATUH</strong>!';
+            curvePath = 'M 30 20 Q 90 15 190 80'; strokeColor = '#d97706';
+          } else if (toneMark === 'mai_tho') {
+            toneKey = 'high'; toneLabel = 'NADA TINGGI (HIGH TONE ˆ)';
+            ruleText = '⭐ <strong>Aturan Khusus Konsonan Rendah:</strong> Diberi tanda Mai Tho (้) hasilnya bergeser naik 1 tingkat menjadi <strong>NADA TINGGI</strong>!';
+            curvePath = 'M 30 20 L 190 20'; strokeColor = '#dc2626';
+          } else {
+            toneKey = 'invalid'; toneLabel = 'KOMBINASI TIDAK LAZIM';
+            ruleText = 'Konsonan Rendah umumnya hanya dipasangkan dengan tanda Mai Ek dan Mai Tho dalam ejaan resmi.';
+            curvePath = 'M 30 45 L 190 45'; strokeColor = '#64748b';
+          }
+        }
+      } else {
+        // 2. Without Tone Mark (Syllable Rule)
+        if (sylType === 'live') {
+          if (cClass === 'mid') {
+            toneKey = 'mid'; toneLabel = 'NADA DATAR (MID TONE ⎯)';
+            ruleText = 'Konsonan Tengah + Suku Kata Hidup (Tanpa Tanda) = <strong>NADA DATAR</strong> (Mid Tone).';
+            curvePath = 'M 30 45 L 190 45'; strokeColor = '#2d6a4f';
+          } else if (cClass === 'high') {
+            toneKey = 'rising'; toneLabel = 'NADA NAIK (RISING TONE ˏ)';
+            ruleText = '⭐ <strong>Konsonan Tinggi:</strong> Secara alami bernada <strong>NAIK (Rising Tone)</strong> jika berada pada suku kata hidup tanpa tanda!';
+            curvePath = 'M 30 75 Q 110 80 190 20'; strokeColor = '#7c3aed';
+          } else if (cClass === 'low') {
+            toneKey = 'mid'; toneLabel = 'NADA DATAR (MID TONE ⎯)';
+            ruleText = 'Konsonan Rendah + Suku Kata Hidup (Tanpa Tanda) = <strong>NADA DATAR</strong> (Mid Tone).';
+            curvePath = 'M 30 45 L 190 45'; strokeColor = '#2d6a4f';
+          }
+        } else {
+          // Dead Syllable
+          if (cClass === 'mid' || cClass === 'high') {
+            toneKey = 'low'; toneLabel = 'NADA RENDAH (LOW TONE ˍ)';
+            ruleText = `${cClass === 'mid' ? 'Konsonan Tengah' : 'Konsonan Tinggi'} + Suku Kata Mati (คำตาย) = <strong>NADA RENDAH</strong> (baik vokal pendek maupun panjang).`;
+            curvePath = 'M 30 75 L 190 75'; strokeColor = '#0284c7';
+          } else if (cClass === 'low') {
+            if (sylType === 'dead_short') {
+              toneKey = 'high'; toneLabel = 'NADA TINGGI (HIGH TONE ˆ)';
+              ruleText = 'Konsonan Rendah + Suku Kata Mati Vokal Pendek (คำตายสั้น) = <strong>NADA TINGGI</strong>.';
+              curvePath = 'M 30 20 L 190 20'; strokeColor = '#dc2626';
+            } else {
+              toneKey = 'falling'; toneLabel = 'NADA JATUH (FALLING TONE ⌃)';
+              ruleText = 'Konsonan Rendah + Suku Kata Mati Vokal Panjang (คำตายยาว) = <strong>NADA JATUH</strong>.';
+              curvePath = 'M 30 20 Q 90 15 190 80'; strokeColor = '#d97706';
+            }
+          }
+        }
+      }
+
+      // Update DOM
+      const badge = document.getElementById('toneResultBadge');
+      if (badge) {
+        badge.className = `tone-output-badge ${toneKey}`;
+        badge.textContent = toneLabel;
+      }
+
+      const path = document.getElementById('pitchCurvePath');
+      if (path) {
+        path.setAttribute('d', curvePath);
+        path.setAttribute('stroke', strokeColor);
+      }
+
+      const ruleEl = document.getElementById('toneRuleText');
+      if (ruleEl) ruleEl.innerHTML = ruleText;
+
+      const audioEx = TONE_AUDIO_EXAMPLES[toneKey] || TONE_AUDIO_EXAMPLES.mid;
+      const audioTextEl = document.getElementById('toneAudioExampleText');
+      if (audioTextEl) {
+        audioTextEl.textContent = `${audioEx.thai} (${audioEx.roman})`;
+      }
+    }
+
+    function playToneCalcAudio() {
+      const badge = document.getElementById('toneResultBadge');
+      const toneKey = badge ? badge.className.replace('tone-output-badge', '').trim() : 'mid';
+      const audioEx = TONE_AUDIO_EXAMPLES[toneKey] || TONE_AUDIO_EXAMPLES.mid;
+      speakThai(audioEx.speak);
+    }
+
+    // 3. LOGIKA VISUALISASI PEMISAH KATA (SPACING ASSISTANT)
+    const SPACING_SENTENCE_PRESETS = [
+      {
+        id: 's1',
+        title: 'Makan',
+        raw: 'กินข้าวแล้วหรือยัง',
+        mean: 'Sudah makan belum?',
+        tokens: [
+          { thai: 'กิน', roman: 'kin', mean: 'Makan' },
+          { thai: 'ข้าว', roman: 'khâao', mean: 'Nasi / Makanan' },
+          { thai: 'แล้ว', roman: 'lɛ́ɛo', mean: 'Sudah' },
+          { thai: 'หรือยัง', roman: 'rʉ̌ʉ-yang', mean: 'Belum?' }
+        ]
+      },
+      {
+        id: 's2',
+        title: 'Salam Kenal',
+        raw: 'ยินดีที่ได้รู้จักครับ',
+        mean: 'Senang berkenalan dengan Anda.',
+        tokens: [
+          { thai: 'ยินดี', roman: 'yin-dii', mean: 'Senang / Bahagia' },
+          { thai: 'ที่ได้', roman: 'thîi-dâi', mean: 'Dapat / Bisa' },
+          { thai: 'รู้จัก', roman: 'rúu-jàk', mean: 'Mengenal' },
+          { thai: 'ครับ', roman: 'khráp', mean: 'Partikel Sopan (Pria)' }
+        ]
+      },
+      {
+        id: 's3',
+        title: 'Tanya Toilet',
+        raw: 'ห้องน้ำอยู่ที่ไหนคะ',
+        mean: 'Toilet berada di mana ya?',
+        tokens: [
+          { thai: 'ห้องน้ำ', roman: 'hɔ̂ng-nám', mean: 'Toilet / WC' },
+          { thai: 'อยู่', roman: 'yùu', mean: 'Berada di' },
+          { thai: 'ที่ไหน', roman: 'thîi-nǎi', mean: 'Di mana?' },
+          { thai: 'คะ', roman: 'khá', mean: 'Partikel Tanya (Wanita)' }
+        ]
+      },
+      {
+        id: 's4',
+        title: 'Terima Kasih',
+        raw: 'ขอบคุณมากนะครับ',
+        mean: 'Terima kasih banyak ya!',
+        tokens: [
+          { thai: 'ขอบคุณ', roman: 'khɔ̀ɔp-khun', mean: 'Terima Kasih' },
+          { thai: 'มาก', roman: 'mâak', mean: 'Sangat / Sekali' },
+          { thai: 'นะ', roman: 'ná', mean: 'Ya / Dong' },
+          { thai: 'ครับ', roman: 'khráp', mean: 'Partikel Sopan (Pria)' }
+        ]
+      },
+      {
+        id: 's5',
+        title: 'Tanya Harga',
+        raw: 'อันนี้ราคาเท่าไหร่',
+        mean: 'Yang ini harganya berapa?',
+        tokens: [
+          { thai: 'อันนี้', roman: 'an-níi', mean: 'Yang ini' },
+          { thai: 'ราคา', roman: 'raa-khaa', mean: 'Harga' },
+          { thai: 'เท่าไหร่', roman: 'thâo-rài', mean: 'Berapa?' }
+        ]
+      },
+      {
+        id: 's6',
+        title: 'Suka Makanan',
+        raw: 'ฉันชอบอาหารไทยมาก',
+        mean: 'Saya sangat suka masakan Thailand.',
+        tokens: [
+          { thai: 'ฉัน', roman: 'chǎn', mean: 'Saya' },
+          { thai: 'ชอบ', roman: 'chɔ̂ɔp', mean: 'Suka' },
+          { thai: 'อาหารไทย', roman: 'aa-hǎan-thai', mean: 'Makanan Thai' },
+          { thai: 'มาก', roman: 'mâak', mean: 'Sangat' }
+        ]
+      }
+    ];
+
+    let currentSpacingPresetIdx = 0;
+
+    function renderSpacingPresets() {
+      const row = document.getElementById('spacingPresetsRow');
+      if (!row) return;
+
+      row.innerHTML = SPACING_SENTENCE_PRESETS.map((p, idx) => `
+        <button type="button" class="spacing-preset-btn ${idx === currentSpacingPresetIdx ? 'active' : ''}" 
+                onclick="selectSpacingPreset(${idx})">
+          ${p.title}: ${p.raw.substring(0, 8)}...
+        </button>
+      `).join('');
+    }
+
+    function selectSpacingPreset(idx) {
+      currentSpacingPresetIdx = idx;
+      renderSpacingPresets();
+      const p = SPACING_SENTENCE_PRESETS[idx];
+      if (!p) return;
+
+      const rawEl = document.getElementById('spacingRawSentence');
+      if (rawEl) rawEl.textContent = p.raw;
+
+      const meanEl = document.getElementById('spacingFullMeaning');
+      if (meanEl) meanEl.textContent = `"${p.mean}"`;
+
+      const container = document.getElementById('spacingCapsulesContainer');
+      if (!container) return;
+
+      const isIndo = (localStorage.getItem('mali_roman_mode') || 'indo') === 'indo';
+
+      container.innerHTML = p.tokens.map((tok, tIdx) => {
+        const colorClass = `color-${(tIdx % 5) + 1}`;
+        const displayRoman = isIndo ? convertToIndonesianLafal(tok.roman) : tok.roman;
+        return `
+          <div class="thai-word-chip ${colorClass}" onclick="speakThai('${tok.thai}')" title="Klik untuk mendengar pelafalan">
+            <span class="chip-thai">${tok.thai}</span>
+            <span class="chip-roman">${displayRoman}</span>
+            <span class="chip-mean">${tok.mean}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function playSpacingCurrentAudio() {
+      const p = SPACING_SENTENCE_PRESETS[currentSpacingPresetIdx];
+      if (p) speakThai(p.raw);
+    }
+
+    // 4. LOGIKA MODE ROMANISASI (RTGS VS LAFAL INDONESIA)
+    function convertToIndonesianLafal(str) {
+      if (!str) return '';
+      let res = str;
+      // Specific word replacements
+      res = res.replace(/\bPhuket\b/gi, 'Puu-ket');
+      res = res.replace(/\bPhad Thai\b/gi, 'Pad-tai');
+      res = res.replace(/\bKhop khun\b/gi, 'Kop-kun');
+      res = res.replace(/\bSawasdee\b/gi, 'Sa-wat-dii');
+      // Aspirated stops into clean Indonesian phonetics
+      res = res.replace(/\bTh/g, 'T').replace(/\bth/g, 't');
+      res = res.replace(/([a-zA-Z])th/gi, '$1-t');
+      res = res.replace(/\bPh/g, 'P').replace(/\bph/g, 'p');
+      res = res.replace(/([a-zA-Z])ph/gi, '$1-p');
+      res = res.replace(/\bKh/g, 'K').replace(/\bkh/g, 'k');
+      res = res.replace(/([a-zA-Z])kh/gi, '$1-k');
+      res = res.replace(/\bCh/g, 'C').replace(/\bch/g, 'c');
+      // Common vowels mapping
+      res = res.replace(/ue/gi, 'eu');
+      res = res.replace(/oe/gi, 'e');
+      res = res.replace(/ae/gi, 'è');
+      return res;
+    }
+
+    function toggleRomanMode() {
+      const current = localStorage.getItem('mali_roman_mode') || 'indo';
+      const next = current === 'indo' ? 'rtgs' : 'indo';
+      localStorage.setItem('mali_roman_mode', next);
+      updateRomanModeUI(next);
+      showToast(next === 'indo' ? '🇮🇩 Mode Transliterasi: Panduan Lidah Indonesia aktif!' : '🌐 Mode Transliterasi: Standar RTGS Internasional aktif!');
+      // Re-render sentence spacing capsules if visible
+      selectSpacingPreset(currentSpacingPresetIdx);
+    }
+
+    function updateRomanModeUI(mode) {
+      const badge = document.getElementById('headerRomanBadge');
+      if (badge) {
+        if (mode === 'indo') {
+          badge.innerHTML = '🇮🇩 LIDAH INDO';
+          badge.title = 'Mode Lidah Indonesia: Menampilkan lafal yang mudah dieja lidah orang Indonesia (contoh: th -> t, ph -> p, kh -> k)';
+        } else {
+          badge.innerHTML = '🌐 STANDAR RTGS';
+          badge.title = 'Mode RTGS: Royal Thai General System of Transcription internasional';
+        }
+      }
+    }
+
+    function initBeginnerFeatures() {
+      renderTwinPairs();
+      calculateAndRenderTone();
+      renderSpacingPresets();
+      selectSpacingPreset(0);
+      const savedMode = localStorage.getItem('mali_roman_mode') || 'indo';
+      updateRomanModeUI(savedMode);
+    }
 
 </script>
 

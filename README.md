@@ -13,6 +13,31 @@
 
 ## ✨ Fitur Utama
 
+### 🌱 Fitur Esensial Pemula Total (Zero-Knowledge Learner)
+1. **Modul 0: "Anatomi & Logika Aksara Thai" (Interactive Loop Guide)**
+   - Mengupas prinsip emas penulisan: *"Huruf Thai selalu ditulis mulai dari lingkaran kepalanya (loop)."*
+   - Membedah 6 pasangan huruf kembar yang sering tertukar:
+     * ด (Do Dek) vs ต (To Tao)
+     * ข (Kho Khai) vs ช (Cho Chang) vs ซ (So So)
+     * น (No Nu) vs ม (Mo Ma)
+     * ภ (Pho Samphao) vs ถ (Tho Thung) vs ก (Ko Kai)
+     * บ (Bo Baimai) vs ป (Po Pla)
+     * ผ (Pho Phueng) vs ฝ (Fo Fa) vs พ (Pho Phan) vs ฟ (Fo Fan)
+   - Disertai sorotan animasi lingkaran kepala dan audio saat huruf disentuh.
+
+2. **Kalkulator Penentu 5 Nada Otomatis (Interactive Tone Rule Visualizer)**
+   - Mini-tool interaktif 3 langkah: `[Kelas Konsonan Awal]` + `[Jenis Suku Kata/Vokal]` + `[Tanda Nada]`.
+   - Output instan: Hasil nada (*Datar / Rendah / Jatuh / Tinggi / Naik*), visualisasi kontur gelombang suara (SVG pitch wave), tombol audio penutur asli, dan rumus aturan logisnya.
+
+3. **Visualisasi Pemisah Kata (Thai Sentence Spacing Assistant)**
+   - Membedah kalimat Thai yang bersambung tanpa spasi menjadi kapsul-kapsul kata berwarna berselang-seling.
+   - Dilengkapi arti perkata, transliterasi lafal, dan audio penutur asli per kata saat disentuh.
+
+4. **Dua Mode Romanisasi: Standar RTGS vs Panduan Lidah Indonesia**
+   - Switcher preferensi langsung di Top Bar (`🇮🇩 LIDAH INDO` vs `🌐 STANDAR RTGS`).
+   - Mode Lidah Indonesia menampilkan ejaan fonetis yang mudah dieja lidah Indonesia (contoh: *th* -> *t*, *ph* -> *p*, *kh* -> *k*, *ch* -> *c*, *ue* -> *eu*).
+
+
 ### 0. 🍃 Portal Gerbang Pembelajaran & Menu Login (Learning Gateway, Emblem & Student Login)
 * **Layar Pembuka & Menu Login di Awal**: Saat pertama kali membuka website, pengguna disambut oleh portal belajar terpusat yang tenang dengan formulir **Masuk / Login Akun Pembelajar** tanpa langsung dijejali menu atau materi bahan ajar yang padat.
 * **Ikon Belajar Ghibli Eksklusif**: Menampilkan lambang belajar animasi halus (*floating emblem*) berupa buku suci ilmu pengetahuan, aksara pertama abjad Thailand **ก (Ko Kai)**, dan pucuk daun melati (*jasmine leaf*).
