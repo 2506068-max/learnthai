@@ -1,0 +1,627 @@
+{
+  "consonants": [
+    {
+      "thai": "ก",
+      "spoken": "กอ ไก่",
+      "roman": "ko kai",
+      "meaning": "ayam",
+      "class": "mid"
+    },
+    {
+      "thai": "จ",
+      "spoken": "จอ จาน",
+      "roman": "cho chan",
+      "meaning": "piring",
+      "class": "mid"
+    },
+    {
+      "thai": "ฎ",
+      "spoken": "ฎอ ชฎา",
+      "roman": "do chada",
+      "meaning": "mahkota",
+      "class": "mid"
+    },
+    {
+      "thai": "ฏ",
+      "spoken": "ฏอ ปฏัก",
+      "roman": "to patak",
+      "meaning": "tombak",
+      "class": "mid"
+    },
+    {
+      "thai": "ด",
+      "spoken": "ดอ เด็ก",
+      "roman": "do dek",
+      "meaning": "anak",
+      "class": "mid"
+    },
+    {
+      "thai": "ต",
+      "spoken": "ตอ เต่า",
+      "roman": "to tao",
+      "meaning": "kura-kura",
+      "class": "mid"
+    },
+    {
+      "thai": "บ",
+      "spoken": "บอ ใบไม้",
+      "roman": "bo baimai",
+      "meaning": "daun",
+      "class": "mid"
+    },
+    {
+      "thai": "ป",
+      "spoken": "ปอ ปลา",
+      "roman": "po pla",
+      "meaning": "ikan",
+      "class": "mid"
+    },
+    {
+      "thai": "อ",
+      "spoken": "ออ อ่าง",
+      "roman": "o ang",
+      "meaning": "baskom",
+      "class": "mid"
+    },
+    {
+      "thai": "ข",
+      "spoken": "ขอ ไข่",
+      "roman": "kho khai",
+      "meaning": "telur",
+      "class": "high"
+    },
+    {
+      "thai": "ฃ",
+      "spoken": "ฃอ ขวด",
+      "roman": "kho khuat",
+      "meaning": "botol",
+      "class": "high"
+    },
+    {
+      "thai": "ฉ",
+      "spoken": "ฉอ ฉิ่ง",
+      "roman": "cho ching",
+      "meaning": "simbal",
+      "class": "high"
+    },
+    {
+      "thai": "ฐ",
+      "spoken": "ฐอ ฐาน",
+      "roman": "tho than",
+      "meaning": "alas/tatakan",
+      "class": "high"
+    },
+    {
+      "thai": "ถ",
+      "spoken": "ถอ ถุง",
+      "roman": "tho thung",
+      "meaning": "karung/tas",
+      "class": "high"
+    },
+    {
+      "thai": "ผ",
+      "spoken": "ผอ ผึ้ง",
+      "roman": "pho phueng",
+      "meaning": "lebah",
+      "class": "high"
+    },
+    {
+      "thai": "ฝ",
+      "spoken": "ฝอ ฝา",
+      "roman": "fo fa",
+      "meaning": "tutup wadah",
+      "class": "high"
+    },
+    {
+      "thai": "ศ",
+      "spoken": "ศอ ศาลา",
+      "roman": "so sala",
+      "meaning": "pendopo",
+      "class": "high"
+    },
+    {
+      "thai": "ษ",
+      "spoken": "ษอ ฤๅษี",
+      "roman": "so ruesi",
+      "meaning": "pertapa",
+      "class": "high"
+    },
+    {
+      "thai": "ส",
+      "spoken": "สอ เสือ",
+      "roman": "so suea",
+      "meaning": "harimau",
+      "class": "high"
+    },
+    {
+      "thai": "ห",
+      "spoken": "หอ หีบ",
+      "roman": "ho hip",
+      "meaning": "peti simpanan",
+      "class": "high"
+    },
+    {
+      "thai": "ค",
+      "spoken": "คอ ควาย",
+      "roman": "kho khwai",
+      "meaning": "kerbau",
+      "class": "low"
+    },
+    {
+      "thai": "ฅ",
+      "spoken": "ฅอ คน",
+      "roman": "kho khon",
+      "meaning": "orang",
+      "class": "low"
+    },
+    {
+      "thai": "ฆ",
+      "spoken": "ฆอ ระฆัง",
+      "roman": "kho rakhang",
+      "meaning": "lonceng kuil",
+      "class": "low"
+    },
+    {
+      "thai": "ง",
+      "spoken": "งอ งู",
+      "roman": "ngo ngu",
+      "meaning": "ular",
+      "class": "low"
+    },
+    {
+      "thai": "ช",
+      "spoken": "ชอ ช้าง",
+      "roman": "cho chang",
+      "meaning": "gajah",
+      "class": "low"
+    },
+    {
+      "thai": "ซ",
+      "spoken": "ซอ โซ่",
+      "roman": "so so",
+      "meaning": "rantai",
+      "class": "low"
+    },
+    {
+      "thai": "ฌ",
+      "spoken": "ฌอ เฌอ",
+      "roman": "cho choe",
+      "meaning": "pepohonan",
+      "class": "low"
+    },
+    {
+      "thai": "ญ",
+      "spoken": "ญอ หญิง",
+      "roman": "yo ying",
+      "meaning": "wanita",
+      "class": "low"
+    },
+    {
+      "thai": "ฑ",
+      "spoken": "ฑอ มณโฑ",
+      "roman": "tho montho",
+      "meaning": "Ratu Montho",
+      "class": "low"
+    },
+    {
+      "thai": "ฒ",
+      "spoken": "ฒอ ผู้เฒ่า",
+      "roman": "tho phuthao",
+      "meaning": "orang tua",
+      "class": "low"
+    },
+    {
+      "thai": "ณ",
+      "spoken": "ณอ เณร",
+      "roman": "no nen",
+      "meaning": "biksu cilik",
+      "class": "low"
+    },
+    {
+      "thai": "ท",
+      "spoken": "ทอ ทหาร",
+      "roman": "tho thahan",
+      "meaning": "tentara",
+      "class": "low"
+    },
+    {
+      "thai": "ธ",
+      "spoken": "ธอ ธง",
+      "roman": "tho thong",
+      "meaning": "bendera",
+      "class": "low"
+    },
+    {
+      "thai": "น",
+      "spoken": "นอ หนู",
+      "roman": "no nu",
+      "meaning": "tikus",
+      "class": "low"
+    },
+    {
+      "thai": "พ",
+      "spoken": "พอ พาน",
+      "roman": "pho phan",
+      "meaning": "nampan sesaji",
+      "class": "low"
+    },
+    {
+      "thai": "ฟ",
+      "spoken": "ฟอ ฟัน",
+      "roman": "fo fan",
+      "meaning": "gigi",
+      "class": "low"
+    },
+    {
+      "thai": "ภ",
+      "spoken": "ภอ สำเภา",
+      "roman": "pho samphao",
+      "meaning": "kapal layar",
+      "class": "low"
+    },
+    {
+      "thai": "ม",
+      "spoken": "มอ ม้า",
+      "roman": "mo ma",
+      "meaning": "kuda",
+      "class": "low"
+    },
+    {
+      "thai": "ย",
+      "spoken": "ยอ ยักษ์",
+      "roman": "yo yak",
+      "meaning": "raksasa",
+      "class": "low"
+    },
+    {
+      "thai": "ร",
+      "spoken": "รอ เรือ",
+      "roman": "ro ruea",
+      "meaning": "perahu",
+      "class": "low"
+    },
+    {
+      "thai": "ล",
+      "spoken": "ลอ ลิง",
+      "roman": "lo ling",
+      "meaning": "monyet",
+      "class": "low"
+    },
+    {
+      "thai": "ว",
+      "spoken": "วอ แหวน",
+      "roman": "wo waen",
+      "meaning": "cincin emas",
+      "class": "low"
+    },
+    {
+      "thai": "ฬ",
+      "spoken": "ฬอ จุฬา",
+      "roman": "lo chula",
+      "meaning": "layang-layang",
+      "class": "low"
+    },
+    {
+      "thai": "ฮ",
+      "spoken": "ฮอ นกฮูก",
+      "roman": "ho nok-huk",
+      "meaning": "burung hantu",
+      "class": "low"
+    }
+  ],
+  "vowels": [
+    {
+      "thai": "-ะ",
+      "spoken": "สระอะ",
+      "roman": "sara a (pendek)",
+      "meaning": "vokal a pendek",
+      "class": "vowel"
+    },
+    {
+      "thai": "-า",
+      "spoken": "สระอา",
+      "roman": "sara aa (panjang)",
+      "meaning": "vokal aa panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "-ิ",
+      "spoken": "สระอิ",
+      "roman": "sara i (pendek)",
+      "meaning": "vokal i pendek",
+      "class": "vowel"
+    },
+    {
+      "thai": "-ี",
+      "spoken": "สระอี",
+      "roman": "sara ii (panjang)",
+      "meaning": "vokal ii panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "-ึ",
+      "spoken": "สระอึ",
+      "roman": "sara ue (pendek)",
+      "meaning": "vokal ue pendek",
+      "class": "vowel"
+    },
+    {
+      "thai": "-ื",
+      "spoken": "สระอือ",
+      "roman": "sara uee (panjang)",
+      "meaning": "vokal uee panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "-ุ",
+      "spoken": "สระอุ",
+      "roman": "sara u (pendek)",
+      "meaning": "vokal u pendek",
+      "class": "vowel"
+    },
+    {
+      "thai": "-ู",
+      "spoken": "สระอู",
+      "roman": "sara uu (panjang)",
+      "meaning": "vokal uu panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "เ-",
+      "spoken": "สระเอ",
+      "roman": "sara e (panjang)",
+      "meaning": "vokal e panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "แ-",
+      "spoken": "สระแอ",
+      "roman": "sara ae (panjang)",
+      "meaning": "vokal ae panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "โ-",
+      "spoken": "สระโอ",
+      "roman": "sara o (panjang)",
+      "meaning": "vokal o panjang",
+      "class": "vowel"
+    },
+    {
+      "thai": "เ-าะ",
+      "spoken": "สระเอาะ",
+      "roman": "sara aw (pendek)",
+      "meaning": "vokal aw pendek",
+      "class": "vowel"
+    },
+    {
+      "thai": "เ-ีย",
+      "spoken": "สระเอีย",
+      "roman": "sara ia (diftong)",
+      "meaning": "diftong ia",
+      "class": "vowel"
+    },
+    {
+      "thai": "เ-ือ",
+      "spoken": "สระเอือ",
+      "roman": "sara uea (diftong)",
+      "meaning": "diftong uea",
+      "class": "vowel"
+    }
+  ],
+  "tones": [
+    {
+      "name": "Nada Tengah (Mid)",
+      "thai": "สามัญ",
+      "desc": "Datar netral tanpa naik/turun intonasi (Pitch datar stabil).",
+      "freq": "M 5 25 L 95 25",
+      "examples": [
+        {
+          "word": "กา",
+          "roman": "gaa (gagak)"
+        },
+        {
+          "word": "ตา",
+          "roman": "dtaa (mata)"
+        },
+        {
+          "word": "มา",
+          "roman": "maa (datang)"
+        }
+      ],
+      "pitch": 260
+    },
+    {
+      "name": "Nada Rendah (Low)",
+      "thai": "เอก ( ่ )",
+      "desc": "Suara dada rendah mendatar stabil di register bawah.",
+      "freq": "M 5 40 L 95 40",
+      "examples": [
+        {
+          "word": "ไข่",
+          "roman": "khài (telur)"
+        },
+        {
+          "word": "ไก่",
+          "roman": "gài (ayam)"
+        },
+        {
+          "word": "ป่า",
+          "roman": "bpàa (hutan)"
+        }
+      ],
+      "pitch": 190
+    },
+    {
+      "name": "Nada Jatuh (Falling)",
+      "thai": "โท ( ้ )",
+      "desc": "Mulai tinggi lalu meluncur curam ke bawah seperti menegur.",
+      "freq": "M 5 10 Q 30 8 95 45",
+      "examples": [
+        {
+          "word": "ข้าว",
+          "roman": "khâao (nasi)"
+        },
+        {
+          "word": "บ้าน",
+          "roman": "bâan (rumah)"
+        },
+        {
+          "word": "น้ำ",
+          "roman": "náam (air)"
+        }
+      ],
+      "pitch": 320,
+      "endPitch": 180
+    },
+    {
+      "name": "Nada Tinggi (High)",
+      "thai": "ตรี ( ๊ )",
+      "desc": "Melengking tinggi di register atas seperti nada heran.",
+      "freq": "M 5 12 L 95 12",
+      "examples": [
+        {
+          "word": "ม้า",
+          "roman": "máa (kuda)"
+        },
+        {
+          "word": "โต๊ะ",
+          "roman": "dó (meja)"
+        },
+        {
+          "word": "ร้อน",
+          "roman": "rɔ́ɔn (panas)"
+        }
+      ],
+      "pitch": 340
+    },
+    {
+      "name": "Nada Naik (Rising)",
+      "thai": "จัตวา ( ๋ )",
+      "desc": "Mulai bawah lalu meliuk naik tinggi seperti terkejut.",
+      "freq": "M 5 45 Q 35 48 95 12",
+      "examples": [
+        {
+          "word": "หมา",
+          "roman": "mǎa (anjing)"
+        },
+        {
+          "word": "สวย",
+          "roman": "sǔay (cantik)"
+        },
+        {
+          "word": "ขาว",
+          "roman": "khǎao (putih)"
+        }
+      ],
+      "pitch": 200,
+      "endPitch": 330
+    }
+  ],
+  "toneMarks": [
+    {
+      "thai": " ่ ",
+      "markName": "ไม้เอก",
+      "spoken": "ไม้เอก",
+      "roman": "mái èek",
+      "meaning": "Tanda Nada 1 (Rendah / Jatuh)",
+      "class": "tone-mark"
+    },
+    {
+      "thai": " ้ ",
+      "markName": "ไม้โท",
+      "spoken": "ไม้โท",
+      "roman": "mái thoo",
+      "meaning": "Tanda Nada 2 (Jatuh / Tinggi)",
+      "class": "tone-mark"
+    },
+    {
+      "thai": " ๊ ",
+      "markName": "ไม้ตรี",
+      "spoken": "ไม้ตรี",
+      "roman": "mái trii",
+      "meaning": "Tanda Nada 3 (Tinggi)",
+      "class": "tone-mark"
+    },
+    {
+      "thai": " ๋ ",
+      "markName": "ไม้จัตวา",
+      "spoken": "ไม้จัตวา",
+      "roman": "mái jàt-dtà-waa",
+      "meaning": "Tanda Nada 4 (Naik)",
+      "class": "tone-mark"
+    }
+  ],
+  "numerals": [
+    {
+      "thai": "๐",
+      "spoken": "ศูนย์",
+      "roman": "sǔun",
+      "meaning": "Angka Nol (0)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๑",
+      "spoken": "หนึ่ง",
+      "roman": "nèung",
+      "meaning": "Angka Satu (1)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๒",
+      "spoken": "สอง",
+      "roman": "sɔ̌ɔng",
+      "meaning": "Angka Dua (2)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๓",
+      "spoken": "สาม",
+      "roman": "sǎam",
+      "meaning": "Angka Tiga (3)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๔",
+      "spoken": "สี่",
+      "roman": "sìi",
+      "meaning": "Angka Empat (4)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๕",
+      "spoken": "ห้า",
+      "roman": "hâa",
+      "meaning": "Angka Lima (5)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๖",
+      "spoken": "หก",
+      "roman": "hòk",
+      "meaning": "Angka Enam (6)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๗",
+      "spoken": "เจ็ด",
+      "roman": "jèt",
+      "meaning": "Angka Tujuh (7)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๘",
+      "spoken": "แปด",
+      "roman": "bpàet",
+      "meaning": "Angka Delapan (8)",
+      "class": "numeral"
+    },
+    {
+      "thai": "๙",
+      "spoken": "เก้า",
+      "roman": "gâao",
+      "meaning": "Angka Sembilan (9)",
+      "class": "numeral"
+    }
+  ]
+}

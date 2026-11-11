@@ -1,10 +1,14 @@
-const CACHE_NAME = 'mali-thai-academy-v20';
+const CACHE_NAME = 'mali-thai-academy-v21';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/fairy_thai_academy.html',
   '/manifest.json',
-  '/icon.svg'
+  '/icon.svg',
+  '/data-store.js',
+  '/data/alphabet.json',
+  '/data/dictionary.json',
+  '/data/curriculum.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -68,7 +72,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Stale-while-revalidate for static assets
+  // Stale-while-revalidate for static assets (including JSON data & data-store.js)
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request).then((networkResponse) => {
